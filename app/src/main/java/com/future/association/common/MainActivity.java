@@ -15,6 +15,7 @@ import com.future.association.questionnaire.QuestionnaireFragment;
 import com.future.association.supervice.SuperviceFragment;
 import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.adapter.FragmentAdapter;
+import com.future.baselib.utils.StatusUtils;
 import com.future.baselib.view.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
+        StatusUtils.setStatusbarColor(this, getResources().getColor(R.color.colorPrimary));
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
     }
@@ -46,7 +48,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         fragmentList.add(new QuestionnaireFragment());
         fragmentList.add(new SuperviceFragment());
         fragmentList.add(new CommunityFragment());
-        fragmentList.add(new PersonalFragment());
+        fragmentList.add(PersonalFragment.newInstance(4));
 
         adapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList);
         viewPager.setAdapter(adapter);

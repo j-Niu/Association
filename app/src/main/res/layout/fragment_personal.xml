@@ -4,10 +4,12 @@
     android:layout_height="match_parent"
     tools:context="com.future.association.personal.PersonalFragment">
 
+    <include layout="@layout/layout_toolbar" />
+
     <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="登录"
-        />
+        android:layout_marginTop="80dp"
+        android:text="登录" />
 </FrameLayout>
