@@ -1,21 +1,23 @@
 package com.future.association.personal;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.future.association.R;
-import com.future.association.login.LoginActivity;
+import com.future.baselib.view.ActionSheetDialog;
 
 /**
+ * https://github.com/j-Niu/Association
  * A simple {@link Fragment} subclass.
  */
 public class PersonalFragment extends Fragment {
 
+    ActionSheetDialog sheetDialog;
 
     public PersonalFragment() {
         // Required empty public constructor
@@ -31,7 +33,22 @@ public class PersonalFragment extends Fragment {
         view.findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), LoginActivity.class));
+//                startActivity(new Intent(getContext(), LoginActivity.class));
+                sheetDialog = new ActionSheetDialog(getActivity());
+                sheetDialog.builder().setTitle("选取图片")
+                        .addSheetItem("拍照", ActionSheetDialog.SheetItemColor.Red, new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                Toast.makeText(getActivity(), "拍照" + which, Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addSheetItem("相册", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                Toast.makeText(getActivity(), "相册" + which, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                sheetDialog.show();
             }
         });
 
