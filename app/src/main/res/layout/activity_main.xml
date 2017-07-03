@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.future.association.common.MainActivity">
+
+    <com.future.baselib.view.NoScrollViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <RadioGroup
+        android:id="@+id/rg_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/rb_zx"
+            style="@style/homeBottomRadioButton"
+            android:text="资讯"
+            android:drawableTop="@drawable/ic_tab_news_bg"
+            />
+        <RadioButton
+            android:id="@+id/rb_wj"
+            style="@style/homeBottomRadioButton"
+            android:text="问卷"
+            android:drawableTop="@drawable/ic_tab_wenjuan_bg"
+            />
+        <RadioButton
+            android:id="@+id/rb_jd"
+            style="@style/homeBottomRadioButton"
+            android:drawableTop="@drawable/ic_tab_jiandu_bg"
+            android:text="监督"
+            />
+        <RadioButton
+            android:id="@+id/rb_sq"
+            style="@style/homeBottomRadioButton"
+            android:text="社区"
+            android:drawableTop="@drawable/ic_tab_shequ_bg"
+
+            />
+        <RadioButton
+            android:id="@+id/rb_wd"
+            style="@style/homeBottomRadioButton"
+            android:text="我的"
+            android:drawableTop="@drawable/ic_tab_wd_bg"
+            />
+    </RadioGroup>
+</LinearLayout>
