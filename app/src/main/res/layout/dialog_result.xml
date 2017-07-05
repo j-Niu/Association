@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="isSuccess"
+            type="boolean"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        >
+        <TextView
+            android:layout_width="280px"
+            android:layout_height="176px"
+            android:layout_centerInParent="true"
+            android:paddingTop="30px"
+            android:background="@drawable/shape_result_dialog"
+            android:gravity="center"
+            android:textSize="28px"
+            android:drawablePadding="20px"
+            android:textColor="#ffffff"
+            android:paddingBottom="30px"
+            android:drawableTop="@drawable/ic_success"
+            android:text="操作成功"
+            />
+        
+    </RelativeLayout>
+    
+</layout>
