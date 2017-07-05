@@ -85,15 +85,19 @@ public abstract class BaseFragment extends Fragment {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
             initTitle(view);
         }
-        initView(inflater, container, savedInstanceState);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(view,savedInstanceState);
     }
 
     /**
      * 初始化view
      */
-    protected abstract void initView(LayoutInflater inflater, @Nullable ViewGroup container,
-                                     @Nullable Bundle savedInstanceState);
+    protected abstract void initView(View view,@Nullable Bundle savedInstanceState);
 
     public void onMsgObtain(Message msg) {
     }
