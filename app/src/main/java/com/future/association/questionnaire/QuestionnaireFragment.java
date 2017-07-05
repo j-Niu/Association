@@ -2,17 +2,20 @@ package com.future.association.questionnaire;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.future.association.R;
+import com.future.baselib.activity.BaseFragment;
+import com.future.baselib.adapter.ViewPageFragmentAdapter;
+import com.future.baselib.view.PagerSlidingTabStrip;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class QuestionnaireFragment extends Fragment {
+public class QuestionnaireFragment extends BaseFragment {
 
 
     public QuestionnaireFragment() {
@@ -21,10 +24,28 @@ public class QuestionnaireFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_questionnaire, container, false);
+    protected void getBundleExtras(Bundle extras) {
+
+    }
+
+    @Nullable
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.fragment_questionnaire;
+    }
+
+
+    @Override
+    protected void initView(View view, @Nullable Bundle savedInstanceState) {
+        PagerSlidingTabStrip slidingTabStrip = (PagerSlidingTabStrip) view.findViewById(R.id.psts_tabs);
+        ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
+        ViewPageFragmentAdapter mTabsAdapter = new ViewPageFragmentAdapter(getActivity().getSupportFragmentManager(), slidingTabStrip, viewPager);
+
+        mTabsAdapter.addTab(getString(R.string.hot_questionnaire),"HotQuestionnaireFragment",HotQuestionnaireFragment.class,null);
+        mTabsAdapter.addTab(getString(R.string.hot_questionnaire),"MyQuestionnaireFragment",MyQuestionnaireFragment.class,null);
+
+        mTabsAdapter.notifyDataSetChanged();
+//        viewPager.setOffscreenPageLimit(2);
     }
 
 }
