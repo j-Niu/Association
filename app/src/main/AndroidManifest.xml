@@ -11,13 +11,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!--<meta-data-->
+            <!--android:name="design_width"-->
+            <!--android:value="750" />-->
+
+        <!--<meta-data-->
+            <!--android:name="design_height"-->
+            <!--android:value="1334" />-->
         <meta-data
             android:name="design_width"
-            android:value="750" />
+            android:value="720" />
 
         <meta-data
             android:name="design_height"
-            android:value="1334" />
+            android:value="1280" />
 
         <activity android:name=".common.MainActivity">
             <intent-filter>
@@ -27,6 +34,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.LoginActivity"></activity>
+        <!--社区模块-->
+        <activity android:name=".community.view.NotifyDetailActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".community.view.BannerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".community.view.SendTieActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".community.view.TieDetailActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" android:screenOrientation="portrait"/>
+        <activity android:name=".community.view.WeiGuiActivity"
+            android:screenOrientation="portrait"/>
+        <!--社区模块-->
     </application>
 
 </manifest>
