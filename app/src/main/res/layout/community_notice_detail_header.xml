@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/normal_padding">
+
+    <ImageView
+        android:id="@+id/head_img_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="张三"
+        android:layout_marginLeft="@dimen/normal_padding"
+        android:layout_toRightOf="@id/head_img_iv"/>
+
+    <TextView
+        android:id="@+id/unit_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_tv"
+        android:text="XX研究中心"
+        android:layout_marginLeft="@dimen/normal_padding"
+        android:layout_marginTop="@dimen/normal_padding"
+        android:layout_toRightOf="@id/head_img_iv"/>
+
+    <TextView
+        android:id="@+id/identity_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/yellow_shape"
+        android:padding="2dp"
+        android:text="楼主"
+        android:textColor="@color/yellow"/>
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/head_img_iv"
+        android:text="的感觉而OK给你了收款功能蓝思科技天空翁拉克丝让您购物功能我就佛完工文化购物"
+        android:layout_marginTop="@dimen/normal_padding"/>
+
+    <TextView
+        android:id="@+id/time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_tv"
+        android:text="2017-06-21 17:00"
+        android:layout_marginTop="@dimen/normal_padding"/>
+
+    <TextView
+        android:id="@+id/type_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_tv"
+        android:text="普通帖"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/normal_padding"/>
+
+    <TextView
+        android:id="@+id/content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_padding"
+        android:layout_below="@id/time_tv"
+        android:text="啊啊啊啊啊啊啊啊啊啊啊啊 啊啊 啊啊啊啊 啊啊啊啊啊啊 啊啊啊啊啊 啊 啊 啊啊啊啊啊啊啊 啊啊啊啊 啊啊 啊啊啊啊 啊啊啊啊 啊啊啊啊 啊"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/comment_rv"
+        android:layout_below="@id/content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_padding"/>
+
+</RelativeLayout>

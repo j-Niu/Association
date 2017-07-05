@@ -44,4 +44,6 @@ dependencies {
     compile 'com.zhy:autolayout:1.4.5'
     //gson
     compile 'com.google.code.gson:gson:2.7'
+    //RecyclerView
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
 }
