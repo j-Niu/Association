@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.future.association">
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".common.MyApp"
@@ -32,6 +34,7 @@
         <activity android:name=".login.RegisterActivity" />
         <activity android:name=".login.PerfectInformationActivity" />
         <activity android:name=".login.RegisterSuccessActivity" />
+        <activity android:name=".questionnaire.QuestionnaireWebActivity"/>
     </application>
 
 </manifest>
