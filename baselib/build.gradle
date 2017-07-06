@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -44,4 +44,6 @@ dependencies {
     compile 'com.zhy:autolayout:1.4.5'
     //gson
     compile 'com.google.code.gson:gson:2.7'
+    //RecyclerView
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
 }

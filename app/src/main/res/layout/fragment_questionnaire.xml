@@ -1,13 +1,30 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.future.association.questionnaire.QuestionnaireFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+             tools:context="com.future.association.questionnaire.QuestionnaireFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="问卷页" />
+    <com.future.baselib.view.PagerSlidingTabStrip
+        android:id="@+id/psts_tabs"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/normal_padding"
+        app:allowWidthFull="true"
+        app:slidingStrokeShape="@drawable/rect_green_shape"
+        app:slidingStrokeColor="@color/basic_color"/>
+    <!--app:sliding_left="@drawable/sliding_left"-->
+    <!--app:sliding_middle="@drawable/sliding_mid"-->
+    <!--app:sliding_right="@drawable/sliding_right"-->
 
-</FrameLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+</LinearLayout>

@@ -3,6 +3,7 @@ package com.future.baselib.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class FragmentAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments;
 
-    public FragmentAdapter(FragmentManager fm , List<Fragment> fragments) {
+    public FragmentAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
     }
@@ -25,6 +26,11 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return fragments!=null ? fragments.size() : 0;
+        return fragments != null ? fragments.size() : 0;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+//        super.destroyItem(container, position, object);
     }
 }

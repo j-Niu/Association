@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -45,12 +43,7 @@ public class PersonalFragment extends MyBaseFragment {
     }
 
     @Override
-    protected void initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_personal, container, false);
-//        if (mToolbar != null) {
-//            mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//        }
+    protected void initView(View view, @Nullable Bundle savedInstanceState) {
         setTitle("我的");
         Button button = (Button) view.findViewById(R.id.btn_login);
         button.setOnClickListener(new View.OnClickListener() {
@@ -75,4 +68,5 @@ public class PersonalFragment extends MyBaseFragment {
             }
         });
     }
+
 }

@@ -1,26 +1,17 @@
-package com.future.association.community;
-
+package com.future.association.questionnaire;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.future.association.R;
 import com.future.baselib.activity.BaseFragment;
 
 /**
- * 社区Fragment
- * A simple {@link Fragment} subclass.
+ * Created by rain on 2017/7/5.
  */
-public class CommunityFragment extends BaseFragment {
 
-
-    public CommunityFragment() {
-        // Required empty public constructor
-    }
-
-
+public class HotQuestionnaireFragment extends BaseFragment {
     @Override
     protected void getBundleExtras(Bundle extras) {
 
@@ -29,13 +20,11 @@ public class CommunityFragment extends BaseFragment {
     @Nullable
     @Override
     protected int getLayoutResId() {
-        return R.layout.fragment_community;
+        return R.layout.fragment_hot_questionnaire;
     }
-
 
     @Override
     protected void initView(View view, @Nullable Bundle savedInstanceState) {
 
     }
-
 }

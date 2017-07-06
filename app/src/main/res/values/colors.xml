@@ -7,6 +7,9 @@
     <color name="color_444444">#444444</color>
     <color name="color_26A16E">#26A16E</color>
     <color name="color_00000000">#00000000</color>
+
+    <color name="yellow">#faa701</color>
+    //log register
     <color name="color_999999">#999999</color>
     <color name="color_f8f8f8">#f8f8f8</color>
     <color name="color_333333">#333333</color>

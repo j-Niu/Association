@@ -3,6 +3,7 @@
 
     <color name="trans">#00000000</color>
     <color name="black">#000000</color>
+    <color name="basic_color">#26a16e</color>
     <color name="alertdialog_line">#c6c6c6</color>
     <color name="actionsheet_blue">#037BFF</color>
     <color name="actionsheet_red">#FD4A2E</color>
@@ -14,4 +15,13 @@
     <color name="black3">#999999</color>
     <color name="black2">#666666</color>
     <color name="black1">#333333</color>
+    <color name="text_color_gray">#ff666666</color>
+    <color name="line_divider">#ffe3e4e5</color>
+    <color name="server_background">#fff1f2f3</color>
+    <color name="divider_line_color">#ffe3e4e5</color>
+    <color name="text_color_m_gray">#ff999999</color>
+    <color name="slide_color_gray">#ffe1e1e1</color>
+    <color name="dialog_title_black">#313131</color>
+    <color name="blank_divider">#f6f6f6</color>
+    <color name="basic_text_gray">#666666</color>
 </resources>
