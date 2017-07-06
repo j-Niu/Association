@@ -5,6 +5,9 @@
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener"/>
+        <variable
+            name="replyContent"
+            type="String"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -151,6 +154,7 @@
                 android:layout_height="66px"
                 android:background="@drawable/shape_edit"
                 android:hint="回复帖子"
+                android:text="@={replyContent}"
                 android:paddingLeft="20px"
                 android:textSize="28px"
                 android:textColorHint="#999999"

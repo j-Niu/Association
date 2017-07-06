@@ -9,10 +9,11 @@
         >
         <include layout="@layout/layout_title_right_tv"
             android:id="@+id/layout_title_right_tv"/>
+
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv_tie"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/rcv_tie"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </layout>

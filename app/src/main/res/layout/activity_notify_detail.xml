@@ -8,6 +8,9 @@
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener"/>
+        <variable
+            name="talkContent"
+            type="String"/>
 
     </data>
 
@@ -92,6 +95,7 @@
                 android:background="@drawable/shape_edit"
                 android:hint="评论内容"
                 android:paddingLeft="20px"
+                android:text="@={talkContent}"
                 android:textSize="28px"
                 android:textColorHint="#999999"
                 android:layout_weight="1"/>
