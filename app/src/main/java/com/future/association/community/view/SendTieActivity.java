@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.future.association.R;
 import com.future.association.community.base.BaseActivity;
+import com.future.association.community.contract.SendTieContract;
+import com.future.association.community.presenter.SendTiePresenter;
 import com.future.association.community.utils.DialogUtils;
 import com.future.association.databinding.ActivitySendTieBinding;
 
@@ -13,8 +15,10 @@ import com.future.association.databinding.ActivitySendTieBinding;
  * Created by HX·罗 on 2017/7/4.
  */
 
-public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> {
+public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implements SendTieContract.IView{
     private String[] types={"论坛版块", "其他版块1", "其他版块2", "其他版块3", "其他版块4", "其他版块5"};
+    private SendTieContract.IPresenter presenter;
+
     @Override
     public int setContentView() {
         return R.layout.activity_send_tie;
@@ -28,6 +32,7 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> {
     public void initData() {
         viewBinding.layoutTitle.setTitle("发布帖子");
         viewBinding.setTypeName(types[0]);
+        presenter = new SendTiePresenter(this);
     }
 
     @Override
@@ -62,6 +67,7 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> {
                 finish();
                 break;
             case R.id.btn_send:
+                presenter.sendTie();
                 break;
             case R.id.tv_type:
                 DialogUtils.showSelectDialog(context, "请选择板块", types, new DialogUtils.ItemSelectedListener() {
@@ -71,6 +77,30 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> {
                     }
                 });
                 break;
+        }
+    }
+
+    @Override
+    public String getTieTitle() {
+        return viewBinding.getTitle();
+    }
+
+    @Override
+    public String getTieContent() {
+        return viewBinding.getContent();
+    }
+
+    @Override
+    public String geTietType() {
+        return viewBinding.getTypeName();
+    }
+
+    @Override
+    public void sendResult(boolean isSuccess) {
+        if(isSuccess){
+            showShortToast("发帖成功");
+        }else{
+            showShortToast("发帖失败，请稍候再试");
         }
     }
 }
