@@ -13,7 +13,10 @@ import android.widget.AdapterView;
 import com.future.association.R;
 import com.future.association.community.adapter.GridViewAdapter;
 import com.future.association.community.adapter.MsgNotifyAdapter;
+import com.future.association.community.base.EndlessRecyclerOnScrollListener;
+import com.future.association.community.contract.CommunityContract;
 import com.future.association.community.model.MsgNotifyInfo;
+import com.future.association.community.presenter.CommunityPresenter;
 import com.future.association.community.utils.ActivityUtils;
 import com.future.association.community.view.BannerActivity;
 import com.future.association.community.view.NotifyDetailActivity;
@@ -25,11 +28,14 @@ import java.util.ArrayList;
  * 社区Fragment
  * A simple {@link Fragment} subclass.
  */
-public class CommunityFragment extends Fragment {
+public class CommunityFragment extends Fragment implements CommunityContract.IView{
 
 
     private FragmentCommunityBinding viewBinding;
     private MsgNotifyAdapter notifyAdapter;
+    private ArrayList<MsgNotifyInfo> notifyInfos;
+    private CommunityContract.IPresenter presenter;
+    private LinearLayoutManager linearLayoutManager;
 
     public CommunityFragment() {
         // Required empty public constructor
@@ -54,27 +60,27 @@ public class CommunityFragment extends Fragment {
 
     private void initView() {
         viewBinding.layoutTitle.ivBack.setVisibility(View.GONE);
-        viewBinding.rcvMsg.setLayoutManager(new LinearLayoutManager(getContext()));
+        linearLayoutManager = new LinearLayoutManager(getContext()) ;
+        viewBinding.rcvMsg.setLayoutManager(linearLayoutManager);
     }
 
     private void initData(Bundle arguments) {
-        ArrayList<MsgNotifyInfo> notifyInfos = new ArrayList<>() ;
+        notifyInfos = new ArrayList<>();
         viewBinding.layoutTitle.setTitle("社区");
         GridViewAdapter adapter = new GridViewAdapter(getContext()) ;
         viewBinding.gv.setAdapter(adapter);
-        notifyAdapter = new MsgNotifyAdapter(getContext(),notifyInfos);
+        notifyAdapter = new MsgNotifyAdapter(getContext(), notifyInfos);
         viewBinding.rcvMsg.setAdapter(notifyAdapter);
-        notifyInfos.add(new MsgNotifyInfo("1","消息通知消息通知消息通知消息通知消息通知消息通知消息通知消息通知","发布来源",7)) ;
-        notifyInfos.add(new MsgNotifyInfo("1","消息通知消息通知消息通知消息通知消息通知消息通知消息通知消息通知","发布来源",7)) ;
-        notifyInfos.add(new MsgNotifyInfo("1","消息通知消息通知消息通知消息通知消息通知消息通知消息通知消息通知","发布来源",7)) ;
-        notifyInfos.add(new MsgNotifyInfo("1","消息通知消息通知消息通知消息通知消息通知消息通知消息通知消息通知","发布来源",7)) ;
-        notifyInfos.add(new MsgNotifyInfo("1","消息通知消息通知消息通知消息通知消息通知消息通知消息通知消息通知","发布来源",7)) ;
-        notifyInfos.add(new MsgNotifyInfo("1","消息通知消息通知消息通知消息通知消息通知消息通知消息通知消息通知","发布来源",7)) ;
-        notifyInfos.add(new MsgNotifyInfo("1","消息通知消息通知消息通知消息通知消息通知消息通知消息通知消息通知","发布来源",7)) ;
-        notifyInfos.add(new MsgNotifyInfo("1","消息通知消息通知消息通知消息通知消息通知消息通知消息通知消息通知","发布来源",7)) ;
-        notifyAdapter.notifyDataSetChanged();
+        presenter = new CommunityPresenter(this);
+        presenter.getData(1);
     }
     public void initListener() {
+        viewBinding.rcvMsg.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                presenter.getData(currentPage);
+            }
+        });
         viewBinding.gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -89,4 +95,9 @@ public class CommunityFragment extends Fragment {
         });
     }
 
+    @Override
+    public void setData(ArrayList<MsgNotifyInfo> notifyInfos) {
+        this.notifyInfos.addAll(notifyInfos);
+        notifyAdapter.notifyDataSetChanged();
+    }
 }

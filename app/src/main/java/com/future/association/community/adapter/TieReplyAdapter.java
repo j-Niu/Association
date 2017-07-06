@@ -130,23 +130,25 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
             }
         }
         private void showPopupWindow() {
-            popupWindow = new PopupWindow(context);
-            popupWindow.setContentView(view);
-            popupWindow.setFocusable(true);
-            popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-            popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+            if (popupWindow == null) {
+                popupWindow = new PopupWindow(context);
+                popupWindow.setContentView(view);
+                popupWindow.setFocusable(true);
+                popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 
-            popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-            popupWindow.setTouchable(true);
-            popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+                popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                popupWindow.setTouchable(true);
+                popupWindow.setTouchInterceptor(new View.OnTouchListener() {
 
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return false;
-                }
-            });
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return false;
+                    }
+                });
 
-            popupWindow.setBackgroundDrawable(new BitmapDrawable());
+                popupWindow.setBackgroundDrawable(new BitmapDrawable());
+            }
             popupWindow.showAsDropDown(binding.ivMore,0,10);
         }
     }
