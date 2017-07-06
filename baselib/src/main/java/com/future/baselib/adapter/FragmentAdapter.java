@@ -27,4 +27,8 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return fragments!=null ? fragments.size() : 0;
     }
+        @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+//        super.destroyItem(container, position, object);
+    }
 }
