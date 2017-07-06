@@ -27,6 +27,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.LoginActivity"></activity>
+        <activity android:name=".login.FindPwdVerifyActivity" />
+        <activity android:name=".login.FindPwdResetActivity" />
+        <activity android:name=".login.RegisterActivity" />
+        <activity android:name=".login.PerfectInformationActivity" />
+        <activity android:name=".login.RegisterSuccessActivity" />
     </application>
 
 </manifest>

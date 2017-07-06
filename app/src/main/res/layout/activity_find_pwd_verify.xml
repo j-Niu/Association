@@ -2,19 +2,17 @@
 <layout>
 
     <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="loginViewModel"
-            type="com.future.association.login.LoginViewModel" />
+        <import type="android.view.View"/>
+       <variable
+           name="findPwdVerifyViewModel"
+           type="com.future.association.login.FindPwdVerifyViewModel"/>
     </data>
 
     <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_f8f8f8"
+        android:background="#f8f8f8"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
         tools:context="com.future.association.login.LoginActivity">
@@ -36,7 +34,7 @@
                 android:layout_height="88px">
 
                 <TextView
-                    android:id="@+id/login_title_phonenumber"
+                    android:id="@+id/find_pwd_title_phonenumber"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -45,25 +43,25 @@
                     android:textSize="30px" />
 
                 <EditText
-                    android:id="@+id/login_phonenumber"
+                    android:id="@+id/find_pwd_phonenumber"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="60px"
-                    android:layout_toRightOf="@id/login_title_phonenumber"
+                    android:layout_marginLeft="30px"
+                    android:layout_toRightOf="@id/find_pwd_title_phonenumber"
                     android:background="@null"
                     android:hint="请输入手机号"
                     android:inputType="number"
-                    android:text="@={loginViewModel.phoneNumber}"
                     android:textColorHint="#999999"
+                    android:text="@={findPwdVerifyViewModel.phoneNumber}"
                     android:textSize="30px" />
 
                 <ImageView
-                    android:id="@+id/login_clear_phonenumber"
+                    android:id="@+id/find_pwd_clear_phonenumber"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:src="@drawable/login_del"
-                    android:visibility="@{loginViewModel.clearPhonenumberFlag?View.VISIBLE:View.GONE}" />
+                    android:visibility="@{findPwdVerifyViewModel.clearPhonenumberFlag?View.VISIBLE:View.GONE}" />
             </com.zhy.autolayout.AutoRelativeLayout>
 
             <View
@@ -77,28 +75,35 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/login_title_password"
+                    android:id="@+id/find_pwd_title_verify"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="登录密码"
+                    android:text="验证码"
                     android:textColor="#333333"
                     android:textSize="30px" />
 
                 <EditText
-                    android:id="@+id/login_password"
+                    android:id="@+id/find_pwd_verify_code"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="30px"
-                    android:layout_toRightOf="@id/login_title_password"
+                    android:layout_toRightOf="@id/find_pwd_title_verify"
                     android:background="@null"
-                    android:hint="请输入登录密码"
-                    android:inputType="textPassword"
-                    android:text="@={loginViewModel.password}"
+                    android:inputType="number"
                     android:textColorHint="#999999"
+                    android:text="@={findPwdVerifyViewModel.smsCode}"
                     android:textSize="30px" />
 
-
+                <TextView
+                    android:id="@+id/find_pwd_send_verify_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:text="获取验证码"
+                    android:textColor="@color/color_26A16E"
+                    android:textSize="30px" />
             </com.zhy.autolayout.AutoRelativeLayout>
 
         </com.zhy.autolayout.AutoLinearLayout>
@@ -110,48 +115,20 @@
             android:layout_height="80px"
             android:layout_marginLeft="30px"
             android:paddingTop="38px"
-            android:text="@={loginViewModel.errorMessage}"
             android:textColor="@color/actionsheet_red"
-            android:textSize="24px"/>
+            android:text="@{findPwdVerifyViewModel.errorMessage}"
+            android:textSize="24px" />
 
-        <com.zhy.autolayout.AutoRelativeLayout
+        <Button
+            android:id="@+id/find_pwd_next"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
             android:layout_marginLeft="30px"
-            android:layout_marginRight="30px">
-
-            <Button
-                android:id="@+id/login_commit"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:background="@drawable/login_commit_selector"
-                android:gravity="center"
-                android:text="登录"
-                android:textColor="#ffffff"
-                android:textSize="34px" />
-
-
-            <TextView
-                android:id="@+id/login_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@id/login_commit"
-                android:layout_marginTop="30px"
-                android:text="立即注册"
-                android:textColor="#2c80df"
-                android:textSize="24px" />
-            <TextView
-                android:id="@+id/login_forget_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/login_commit"
-                android:layout_marginTop="30px"
-                android:text="忘记密码？"
-                android:textColor="#2c80df"
-                android:textSize="24px" />
-        </com.zhy.autolayout.AutoRelativeLayout>
-
+            android:layout_marginRight="30px"
+            android:background="@drawable/login_commit_selector"
+            android:gravity="center"
+            android:text="下一步"
+            android:textColor="#ffffff"
+            android:textSize="34px" />
     </com.zhy.autolayout.AutoLinearLayout>
 </layout>

@@ -9,6 +9,8 @@ import android.widget.RadioGroup;
 
 import com.future.association.R;
 import com.future.association.community.CommunityFragment;
+import com.future.association.login.LoginActivity;
+import com.future.association.login.PerfectInformationActivity;
 import com.future.association.news.NewsFragment;
 import com.future.association.personal.PersonalFragment;
 import com.future.association.questionnaire.QuestionnaireFragment;
@@ -39,6 +41,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         StatusUtils.setStatusbarColor(this, getResources().getColor(R.color.colorPrimary));
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        startActivity(LoginActivity.class);
     }
 
     @Override

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="findPwdResetViewModel"
+            type="com.future.association.login.FindPwdResetViewModel" />
+    </data>
+
+    <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f8f8f8"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        tools:context="com.future.association.login.LoginActivity">
+
+
+        <include layout="@layout/layout_toolbar" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:layout_marginTop="30px"
+            android:background="#ffffffff"
+            android:orientation="vertical"
+            android:paddingLeft="30px"
+            android:paddingRight="30px">
+
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="88px">
+
+                <TextView
+                    android:id="@+id/reset_pwd_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="登录密码"
+                    android:textColor="#333333"
+                    android:textSize="30px" />
+
+                <EditText
+                    android:id="@+id/reset_pwd_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="60px"
+                    android:layout_toRightOf="@id/reset_pwd_title"
+                    android:background="@null"
+                    android:hint="请输入6-16位数字和字母密码"
+                    android:text="@={findPwdResetViewModel.password}"
+                    android:textColorHint="#999999"
+                    android:textSize="30px" />
+
+                <ImageView
+                    android:id="@+id/reset_pwd_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/login_del"
+                    android:visibility="gone" />
+            </com.zhy.autolayout.AutoRelativeLayout>
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+
+        <TextView
+            android:id="@+id/reset_pwd_error"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:layout_marginLeft="30px"
+            android:paddingTop="38px"
+            android:textColor="@color/actionsheet_red"
+            android:textSize="24px"
+            android:text="@{findPwdResetViewModel.errorMessage}"/>
+
+        <Button
+            android:id="@+id/reset_pwd_commit"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:background="@drawable/login_commit_selector"
+            android:gravity="center"
+            android:text="确认"
+            android:textColor="#ffffff"
+            android:textSize="34px" />
+    </com.zhy.autolayout.AutoLinearLayout>
+</layout>
