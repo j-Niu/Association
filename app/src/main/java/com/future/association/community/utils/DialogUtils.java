@@ -127,6 +127,7 @@ public class DialogUtils {
         View view = View.inflate(context,R.layout.dialog_result,null) ;
         DialogResultBinding binding = DataBindingUtil.bind(view) ;
         final AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setCancelable(false);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Window dialogWindow = dialog.getWindow();
         WindowManager.LayoutParams params = dialogWindow.getAttributes() ;

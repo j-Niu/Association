@@ -4,6 +4,8 @@ import android.view.View;
 
 import com.future.association.R;
 import com.future.association.community.base.BaseActivity;
+import com.future.association.community.contract.WeiguiContract;
+import com.future.association.community.presenter.WeiguiPresenter;
 import com.future.association.community.utils.DialogUtils;
 import com.future.association.databinding.ActivityWeiguiBinding;
 
@@ -12,10 +14,11 @@ import com.future.association.databinding.ActivityWeiguiBinding;
  * Created by HX·罗 on 2017/7/4.
  */
 
-public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> {
+public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> implements WeiguiContract.IView{
 
     private String[] causes;
     private String[] typeNames;
+    private WeiguiContract.IPresenter presenter;
 
     @Override
     public int setContentView() {
@@ -34,6 +37,7 @@ public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> {
         viewBinding.setCause(causes[0]);
         viewBinding.setTypeName(typeNames[0]);
         viewBinding.layoutTitle.setTitle("违规操作");
+        presenter = new WeiguiPresenter(this);
     }
 
     @Override
@@ -67,8 +71,25 @@ public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> {
                 });
                 break;
             case R.id.btn_sure:
-                DialogUtils.showResultDialog(context,true);
+                presenter.doOperation();
                 break;
+        }
+    }
+
+    @Override
+    public String getWGCause() {
+        return viewBinding.getCause();
+    }
+
+    @Override
+    public String getDealType() {
+        return viewBinding.getTypeName();
+    }
+
+    @Override
+    public void dealResult(boolean isSuccess) {
+        if (isSuccess) {
+            DialogUtils.showResultDialog(context,true);
         }
     }
 }
