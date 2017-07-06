@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 滑动导航条item -->
+<TextView
+    style="@style/text_slidingTabTitle"/>
