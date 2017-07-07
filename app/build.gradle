@@ -6,7 +6,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.future.association"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -21,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -28,7 +32,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     compile project(':baselib')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -36,4 +39,11 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    //rxbinding
+    //rxjava扩展
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    compile 'com.trello.rxlifecycle2:rxlifecycle:2.1.0'
+    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
+//    compile project(':pickerview')
+    compile 'com.contrarywind:Android-PickerView:3.2.5'
 }

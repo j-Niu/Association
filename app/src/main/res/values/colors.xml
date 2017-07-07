@@ -9,5 +9,12 @@
     <color name="color_00000000">#00000000</color>
 
     <color name="yellow">#faa701</color>
-
+    //log register
+    <color name="color_999999">#999999</color>
+    <color name="color_f8f8f8">#f8f8f8</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_dcdcdc">#dcdcdc</color>
+    <color name="color_ffffff">#ffffff</color>
+    <color name="color_007aff">#007aff</color>
+    <color name="color_000000">#000000</color>
 </resources>
