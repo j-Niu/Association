@@ -19,5 +19,23 @@
         <item name="android:textSize">10sp</item>
         <item name="android:textColor">@color/home_bottom_text_color</item>
     </style>
+    <!--社区模块添加 start-->
+    <style name="appGreyLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">#DEDEDE</item>
+    </style>
+
+    <style name="styleNormalButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">88px</item>
+        <item name="android:layout_marginLeft">30px</item>
+        <item name="android:layout_marginRight">30px</item>
+        <item name="android:background">@drawable/selector_normal_button</item>
+        <item name="android:textSize">34px</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <!--社区模块添加 end-->
 
 </resources>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="cause"
+            type="String"/>
+        <variable
+            name="typeName"
+            type="String"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        >
+
+        <include layout="@layout/layout_title"
+            android:id="@+id/layout_title"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:id="@+id/tv_cause"
+            android:background="@drawable/selector_grid_item"
+            android:drawableRight="@drawable/ic_list_more"
+            android:gravity="center_vertical"
+            android:onClick="@{clickListener}"
+            android:textColor="#333333"
+            android:textSize="30px"
+            android:paddingLeft="30px"
+            android:paddingRight="30px"
+            android:text="@{cause}" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#DCDCDC" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:id="@+id/tv_type"
+            android:background="@drawable/selector_grid_item"
+            android:drawableRight="@drawable/ic_list_more"
+            android:gravity="center_vertical"
+            android:onClick="@{clickListener}"
+            android:textColor="#333333"
+            android:textSize="30px"
+            android:paddingLeft="30px"
+            android:paddingRight="30px"
+            android:text="@{typeName}" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#DCDCDC" />
+        <Button style="@style/styleNormalButton"
+            android:layout_marginTop="70px"
+            android:onClick="@{clickListener}"
+            android:id="@+id/btn_sure"
+            android:text="确定"
+            />
+
+    </LinearLayout>
+
+</layout>

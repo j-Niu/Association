@@ -14,6 +14,8 @@ import java.util.List;
  * Created by jniu on 2017/5/19.
  */
 public class CommonUtils {
+    private static long lastClickTime;
+
     /**
      * 获取 base字符串
      * @param imgPath
@@ -62,5 +64,20 @@ public class CommonUtils {
             e.printStackTrace();
         }
         return bytes;
+    }
+
+    /**
+     * 检测快速点击的工具
+     *
+     * @return
+     */
+    public static boolean isFastDoubleClick() {
+        long time = System.currentTimeMillis();
+        long timeD = time - lastClickTime;
+        if (0 < timeD && timeD < 800) {
+            return true;
+        }
+        lastClickTime = time;
+        return false;
     }
 }

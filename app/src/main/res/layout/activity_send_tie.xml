@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="title"
+            type="String"/>
+        <variable
+            name="content"
+            type="String"/>
+        <variable
+            name="typeName"
+            type="String"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/layout_title"
+            layout="@layout/layout_title" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:id="@+id/tv_type"
+            android:background="@drawable/selector_grid_item"
+            android:drawableRight="@drawable/ic_list_more"
+            android:gravity="center_vertical"
+            android:onClick="@{clickListener}"
+            android:textColor="#333333"
+            android:textSize="30px"
+            android:paddingLeft="30px"
+            android:paddingRight="30px"
+            android:text="@{typeName}" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#DCDCDC" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:gravity="center_vertical"
+            android:paddingLeft="30px"
+            android:paddingRight="30px">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:textSize="30px"
+                android:text="标题"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:textSize="30px"
+                android:textColorHint="#999999"
+                android:id="@+id/et_title"
+                android:text="@={title}"
+                android:hint="请输入标题，40字以内"
+                android:layout_marginLeft="90px"
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#DCDCDC" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:paddingTop="30px"
+            android:paddingBottom="30px"
+            android:paddingLeft="30px"
+            android:paddingRight="30px">
+            <TextView
+                android:layout_width="wrap_content"
+                android:gravity="top"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:textSize="30px"
+                android:text="内容"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:background="@null"
+                android:textSize="30px"
+                android:minLines="10"
+                android:maxLines="10"
+                android:text="@={content}"
+                android:textColorHint="#999999"
+                android:hint="请输入帖子内容"
+                android:layout_marginLeft="90px"
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#DCDCDC" />
+        <Button style="@style/styleNormalButton"
+            android:id="@+id/btn_send"
+            android:layout_marginTop="432px"
+            android:text="发布"
+            android:onClick="@{clickListener}"
+            />
+    </LinearLayout>
+
+</layout>

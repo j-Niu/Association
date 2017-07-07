@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewClickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="title"
+            type="String"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:background="@color/color_26A16E">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="90px"
+            android:paddingRight="30px"
+            android:paddingLeft="30px"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:onClick="@{viewClickListener}"
+            android:id="@+id/iv_back"
+            android:src="@drawable/ic_back"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_centerInParent="true"
+            android:textSize="36px"
+            android:text="@{title}"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="90px"
+            android:paddingLeft="30px"
+            android:paddingRight="30px"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:onClick="@{viewClickListener}"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_title_right_img"
+            />
+
+    </RelativeLayout>
+
+</layout>

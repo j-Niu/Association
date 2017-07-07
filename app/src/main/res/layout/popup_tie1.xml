@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10px"
+            android:background="@drawable/ic_popup1"
+            android:divider="@drawable/inset_white_divider"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <TextView
+                android:id="@+id/tv_del"
+                android:layout_width="wrap_content"
+                android:layout_height="88px"
+                android:drawableLeft="@drawable/ic_tie_del"
+                android:drawablePadding="50px"
+                android:gravity="center_vertical"
+                android:onClick="@{clickListener}"
+                android:paddingLeft="32px"
+                android:paddingRight="64px"
+                android:text="删除"
+                android:textColor="#FFFFFF"
+                android:textSize="30px" />
+
+            <TextView
+                android:id="@+id/tv_weigui"
+                android:layout_width="wrap_content"
+                android:layout_height="88px"
+                android:drawableLeft="@drawable/ic_tie_weigui"
+                android:drawablePadding="50px"
+                android:gravity="center_vertical"
+                android:onClick="@{clickListener}"
+                android:paddingLeft="32px"
+                android:paddingRight="64px"
+                android:text="违规处理"
+                android:textColor="#FFFFFF"
+                android:textSize="30px" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</layout>
