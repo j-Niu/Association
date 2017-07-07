@@ -21,6 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
+import static com.future.association.login.util.CommonUtil.mobilePattern;
 import static com.future.association.login.util.CommonUtil.passwordPattern;
 
 /**
@@ -63,19 +64,13 @@ public class FindPwdResetViewModel {
 
         RxTextView
                 .textChangeEvents(binding.resetPwdPassword)
-                .debounce(600, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<TextViewTextChangeEvent>() {
                     @Override
                     public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
-                        String password = textViewTextChangeEvent.text().toString();
-                        if (!TextUtils.isEmpty(password)) {
-                            //执行匹配
-                            if (!passwordPattern(password)) {
-                                errorMessage.set("请输入正确密码");
-                            } else {
-                                errorMessage.set("");
-                            }
+                        String pwd = textViewTextChangeEvent.text().toString();
+                        if (!TextUtils.isEmpty(pwd) && !passwordPattern(pwd)) {
+                            errorMessage.set("请输入正确密码");
                         } else {
                             errorMessage.set("");
                         }
