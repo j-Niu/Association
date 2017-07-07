@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.future.association">
-    
+
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -29,6 +29,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.LoginActivity"></activity>
+        <!--社区模块-->
+        <activity android:name=".community.view.NotifyDetailActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".community.view.BannerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".community.view.SendTieActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".community.view.TieDetailActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" android:screenOrientation="portrait"/>
+        <activity android:name=".community.view.WeiGuiActivity"
+            android:screenOrientation="portrait"/>
+        <!--社区模块-->
         <activity android:name=".login.FindPwdVerifyActivity" />
         <activity android:name=".login.FindPwdResetActivity" />
         <activity android:name=".login.RegisterActivity" />
