@@ -32,6 +32,7 @@ import io.reactivex.functions.Consumer;
 
 import static com.future.association.login.util.CommonUtil.mobilePattern;
 import static com.future.association.login.util.CommonUtil.passwordPattern;
+import static com.future.association.login.util.CommonUtil.verifyPattern;
 
 /**
  * Created by Administrator on 2017/7/3.
@@ -85,53 +86,33 @@ public class LoginViewModel {
         //输入电话实现清除按钮的显示
         RxTextView
                 .textChangeEvents(binding.loginPhonenumber)
-                .debounce(600, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<TextViewTextChangeEvent>() {
                     @Override
                     public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
                         String inputNumber = textViewTextChangeEvent.text().toString();
-                        if (!TextUtils.isEmpty(inputNumber)) {
-                            clearPhonenumberFlag.set(true);
-                            //执行匹配
-                            if (!mobilePattern(inputNumber)) {
-                                errorMessage.set("请输入正确电话号码");
-                            } else {
-                                //检测密码是否输入
-                                String pwd = password.get();
-                                if (!TextUtils.isEmpty(pwd) && !passwordPattern(pwd)) {
-                                    errorMessage.set("请输入正确密码");
-                                } else {
-                                    errorMessage.set("");
-                                }
-                            }
+                        clearPhonenumberFlag.set(!TextUtils.isEmpty(inputNumber));
+                        if (!TextUtils.isEmpty(inputNumber) && !mobilePattern(inputNumber)) {
+                            errorMessage.set("请输入正确电话号码");
+                        } else if (!TextUtils.isEmpty(password.get()) && !passwordPattern(password.get())) {
+                            errorMessage.set("请输入正确密码");
                         } else {
-                            clearPhonenumberFlag.set(false);
+                            errorMessage.set("");
                         }
                     }
                 });
 
         RxTextView
                 .textChangeEvents(binding.loginPassword)
-                .debounce(600, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<TextViewTextChangeEvent>() {
                     @Override
                     public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
-                        String password = textViewTextChangeEvent.text().toString();
-                        if (!TextUtils.isEmpty(password)) {
-                            //执行匹配
-                            if (!passwordPattern(password)) {
-                                errorMessage.set("请输入正确密码");
-                            } else {
-                                //检测电话号码输入是否正确
-                                String inputNumber = phoneNumber.get();
-                                if (!TextUtils.isEmpty(inputNumber) && !mobilePattern(inputNumber)) {
-                                    errorMessage.set("请输入正确电话号码");
-                                } else {
-                                    errorMessage.set("");
-                                }
-                            }
+                        String pwd = textViewTextChangeEvent.text().toString();
+                        if (!TextUtils.isEmpty(pwd) && !passwordPattern(pwd)) {
+                            errorMessage.set("请输入正确密码");
+                        } else if (!TextUtils.isEmpty(phoneNumber.get()) && !mobilePattern(phoneNumber.get())) {
+                            errorMessage.set("请输入正确电话号码");
                         } else {
                             errorMessage.set("");
                         }
@@ -145,6 +126,7 @@ public class LoginViewModel {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
                         phoneNumber.set("");
+                        clearPhonenumberFlag.set(false);
                     }
                 });
         //忘记密码执行跳转

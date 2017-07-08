@@ -43,32 +43,40 @@ public class FindPwdVerifyViewModel {
         toastUtils = new ToastUtils(activity);
     }
 
+    private void checkPhoneMessage(String phoneNumber, String password, String smsCode) {
+        if (!TextUtils.isEmpty(phoneNumber) && !mobilePattern(phoneNumber)) {
+            errorMessage.set("请输入正确电话号码");
+            return;
+        }
+
+        if (!TextUtils.isEmpty(password) && !mobilePattern(password)) {
+            errorMessage.set("请输入正确密码");
+            return;
+        }
+
+        if (!TextUtils.isEmpty(smsCode) && !verifyPattern(smsCode)) {
+            errorMessage.set("请输入正确验证码");
+            return;
+        }
+        errorMessage.set("");
+    }
+
     //region 监听事件
     public void initLinstener() {
         RxTextView
                 .textChangeEvents(binding.findPwdPhonenumber)
-                .debounce(600, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<TextViewTextChangeEvent>() {
                     @Override
                     public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
                         String inputNumber = textViewTextChangeEvent.text().toString();
-                        if (!TextUtils.isEmpty(inputNumber)) {
-                            clearPhonenumberFlag.set(true);
-                            //执行匹配
-                            if (!mobilePattern(inputNumber)) {
-                                errorMessage.set("请输入正确电话号码");
-                            } else {
-                                //检测密码是否输入
-                                String code = smsCode.get();
-                                if (!TextUtils.isEmpty(code) && !verifyPattern(code)) {
-                                    errorMessage.set("请输入正确验证码");
-                                } else {
-                                    errorMessage.set("");
-                                }
-                            }
+                        clearPhonenumberFlag.set(!TextUtils.isEmpty(inputNumber) );
+                        if (!TextUtils.isEmpty(inputNumber) && !mobilePattern(inputNumber)) {
+                            errorMessage.set("请输入正确电话号码");
+                        } else if (!TextUtils.isEmpty(smsCode.get()) && !verifyPattern(smsCode.get())) {
+                            errorMessage.set("请输入正确验证码");
                         } else {
-                            clearPhonenumberFlag.set(false);
+                            errorMessage.set("");
                         }
                     }
                 });
@@ -76,25 +84,15 @@ public class FindPwdVerifyViewModel {
 
         RxTextView
                 .textChangeEvents(binding.findPwdVerifyCode)
-                .debounce(600, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<TextViewTextChangeEvent>() {
                     @Override
                     public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
                         String code = textViewTextChangeEvent.text().toString();
-                        if (!TextUtils.isEmpty(code)) {
-                            //执行匹配
-                            if (!verifyPattern(code)) {
-                                errorMessage.set("请输入正确验证码");
-                            } else {
-                                //检测电话号码输入是否正确
-                                String inputNumber = phoneNumber.get();
-                                if (!TextUtils.isEmpty(inputNumber) && !mobilePattern(inputNumber)) {
-                                    errorMessage.set("请输入正确电话号码");
-                                } else {
-                                    errorMessage.set("");
-                                }
-                            }
+                        if (!TextUtils.isEmpty(code) && !verifyPattern(code)) {
+                            errorMessage.set("请输入正确验证码");
+                        } else if (!TextUtils.isEmpty(phoneNumber.get()) && !mobilePattern(phoneNumber.get())) {
+                            errorMessage.set("请输入正确电话号码");
                         } else {
                             errorMessage.set("");
                         }
@@ -110,10 +108,10 @@ public class FindPwdVerifyViewModel {
                         if (PatternUtils.mobilePattern(toastUtils, phoneNumber.get())) {
                             if (phoneNumber.get().equals("13547804180")) {
                                 //正确输入密码.执行输入电话号码是否注册检测
-                                MyToast.makeText(activity, "改手机号未注册", Toast.LENGTH_SHORT,0).show();
+                                MyToast.makeText(activity, "改手机号未注册", Toast.LENGTH_SHORT, 0).show();
                             } else {
                                 CommonUtil.getVerify(binding.findPwdSendVerifyCode, activity);
-                                CommonUtil.testVerifyDown(activity,0);
+                                CommonUtil.testVerifyDown(activity, 0);
                             }
                         }
                     }
@@ -140,6 +138,7 @@ public class FindPwdVerifyViewModel {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
                         phoneNumber.set("");
+                        clearPhonenumberFlag.set(false);
                     }
                 });
     }

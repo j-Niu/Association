@@ -50,99 +50,63 @@ public class RegisterViewModel {
     public void initLinstener() {
         RxTextView
                 .textChangeEvents(binding.registerPhonenumber)
-                .debounce(600, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<TextViewTextChangeEvent>() {
                     @Override
                     public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
                         String inputNumber = textViewTextChangeEvent.text().toString();
-                        if (!TextUtils.isEmpty(inputNumber)) {
-                            clearPhonenumberFlag.set(true);
-                            //执行匹配
-                            if (!mobilePattern(inputNumber)) {
-                                errorMessage.set("请输入正确电话号码");
-                            } else {
-                                //检测密码是否输入
-                                String code = smsCode.get();
-                                if (!TextUtils.isEmpty(code) && !passwordPattern(code)) {
-                                    errorMessage.set("请输入正确验证码");
-                                } else {
-                                    String pwd = password.get();
-                                    if (!TextUtils.isEmpty(pwd) && !passwordPattern(pwd)) {
-                                        errorMessage.set("请输入正确密码");
-                                    } else {
-                                        errorMessage.set("");
-                                    }
-                                }
-                            }
+                        clearPhonenumberFlag.set(!TextUtils.isEmpty(inputNumber));
+                        if (!TextUtils.isEmpty(inputNumber) && !mobilePattern(inputNumber)) {
+                            errorMessage.set("请输入正确电话号码");
+                        } else if (!TextUtils.isEmpty(smsCode.get()) && !verifyPattern(smsCode.get())) {
+                            errorMessage.set("请输入正确验证码");
+                        } else if (!TextUtils.isEmpty(password.get()) && !passwordPattern(password.get())) {
+                            errorMessage.set("请输入正确密码");
                         } else {
-                            clearPhonenumberFlag.set(false);
+                            errorMessage.set("");
                         }
                     }
                 });
 
         RxTextView
                 .textChangeEvents(binding.registerPassword)
-                .debounce(600, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<TextViewTextChangeEvent>() {
                     @Override
                     public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
                         String password = textViewTextChangeEvent.text().toString();
-                        if (!TextUtils.isEmpty(password)) {
-                            //执行匹配
-                            if (!passwordPattern(password)) {
-                                errorMessage.set("请输入正确密码");
-                            } else {
-                                //检测电话号码输入是否正确
-                                String inputNumber = phoneNumber.get();
-                                if (!TextUtils.isEmpty(inputNumber) && !mobilePattern(inputNumber)) {
-                                    errorMessage.set("请输入正确电话号码");
-                                } else {
-                                    String code = smsCode.get();
-                                    if (!TextUtils.isEmpty(code) && !verifyPattern(code)) {
-                                        errorMessage.set("请输入正确验证码");
-                                    } else {
-                                        errorMessage.set("");
-                                    }
-                                }
-                            }
+
+                        if (!TextUtils.isEmpty(password) && !passwordPattern(password)) {
+                            errorMessage.set("请输入正确密码");
+                        } else if (!TextUtils.isEmpty(phoneNumber.get()) && !mobilePattern(phoneNumber.get())) {
+                            errorMessage.set("请输入正确电话号码");
+                        } else if (!TextUtils.isEmpty(smsCode.get()) && !verifyPattern(smsCode.get())) {
+                            errorMessage.set("请输入正确验证码");
                         } else {
                             errorMessage.set("");
                         }
                     }
                 });
+
         RxTextView
                 .textChangeEvents(binding.registerVerifyCode)
-                .debounce(600, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<TextViewTextChangeEvent>() {
                     @Override
                     public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
                         String code = textViewTextChangeEvent.text().toString();
-                        if (!TextUtils.isEmpty(code)) {
-                            //执行匹配
-                            if (!verifyPattern(code)) {
-                                errorMessage.set("请输入正确验证码");
-                            } else {
-                                //检测电话号码输入是否正确
-                                String inputNumber = phoneNumber.get();
-                                if (!TextUtils.isEmpty(inputNumber) && !mobilePattern(inputNumber)) {
-                                    errorMessage.set("请输入正确电话号码");
-                                } else {
-                                    String pwd = password.get();
-                                    if (!TextUtils.isEmpty(pwd) && !passwordPattern(pwd)) {
-                                        errorMessage.set("请输入正确密码");
-                                    } else {
-                                        errorMessage.set("");
-                                    }
-                                }
-                            }
+                        if (!TextUtils.isEmpty(code) && !verifyPattern(code)) {
+                            errorMessage.set("请输入正确验证码");
+                        } else if (!TextUtils.isEmpty(phoneNumber.get()) && !mobilePattern(phoneNumber.get())) {
+                            errorMessage.set("请输入正确电话号码");
+                        } else if (!TextUtils.isEmpty(password.get()) && !passwordPattern(password.get())) {
+                            errorMessage.set("请输入正确密码");
                         } else {
                             errorMessage.set("");
                         }
                     }
                 });
+
         RxView
                 .clicks(binding.registerSendVerifyCode)
                 .throttleFirst(1, TimeUnit.SECONDS)
@@ -152,10 +116,10 @@ public class RegisterViewModel {
                         if (PatternUtils.mobilePattern(toastUtils, phoneNumber.get())) {
                             if (phoneNumber.get().equals("13547804180")) {
                                 //模拟测试
-                                MyToast.makeText(activity, "手机号码已经注册", Toast.LENGTH_SHORT,50).show();
+                                MyToast.makeText(activity, "手机号码已经注册", Toast.LENGTH_SHORT, 50).show();
                             } else {
                                 CommonUtil.getVerify(binding.registerSendVerifyCode, activity);
-                                CommonUtil.testVerifyDown(activity,50);
+                                CommonUtil.testVerifyDown(activity, 50);
                             }
                         }
 
@@ -185,9 +149,9 @@ public class RegisterViewModel {
                     }
                 });
     }
-    //endregion
+//endregion
 
-    //region get set method
+//region get set method
 
     public ObservableField<String> getPhoneNumber() {
         return phoneNumber;
