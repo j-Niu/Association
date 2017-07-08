@@ -50,6 +50,7 @@
         <activity android:name=".questionnaire.QuestionnaireWebActivity"/>
         <activity android:name=".questionnaire.QuestionnaireEndActivity"/>
         <activity android:name=".supervice.SuperviceDetailActivity"/>
+        <activity android:name=".supervice.SuperviceApplyActivity"/>
     </application>
 
 </manifest>

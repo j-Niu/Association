@@ -47,7 +47,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
+                    android:layout_weight="3"
                     android:text="网游"/>
 
             </LinearLayout>
@@ -69,7 +69,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
+                    android:layout_weight="3"
                     android:text="的广东省广东省工商"/>
 
             </LinearLayout>
@@ -91,7 +91,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
+                    android:layout_weight="3"
                     android:text="的广东都是个三个是公司公司个三个是三个是是个十多个是的公司的个是的但是公司的是的 省广东省工商"/>
 
             </LinearLayout>
@@ -114,7 +114,7 @@
                     android:id="@+id/iv_ll"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
+                    android:layout_weight="3"
                     android:orientation="vertical">
 
                     <ImageView
