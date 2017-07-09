@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <solid android:color="#ffffff" />//确定AlertDialog背景颜色
+
+    <corners android:radius="20dp" />//确定AlertDialog四个角的圆角度为多大，数字越大，角度越圆
+
+</shape>

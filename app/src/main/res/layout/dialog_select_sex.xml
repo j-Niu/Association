@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_ffffff">
+
+        <TextView
+            android:id="@+id/sex_man"
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:gravity="center"
+            android:textSize="34px"
+            android:textColor="@color/color_333333"
+            android:text="男"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_dcdcdc"/>
+
+        <TextView
+            android:id="@+id/sex_woman"
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:gravity="center"
+            android:textSize="34px"
+            android:textColor="@color/color_333333"
+            android:text="女"/>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+</layout>

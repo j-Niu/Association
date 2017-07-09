@@ -4,4 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hot_questionnaire">热门问卷</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
+    <string name="questionnaire_end">感谢参与，问卷《问卷标题问卷标题问卷标题问卷标题》已提交，问卷结果将会反馈给发布者。</string>
 </resources>

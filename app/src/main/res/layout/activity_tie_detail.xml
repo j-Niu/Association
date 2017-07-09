@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="replyContent"
+            type="String"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        >
+
+        <include layout="@layout/layout_title"
+            android:id="@+id/layout_title"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="30px"
+            android:paddingLeft="30px"
+            android:paddingTop="20px"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rl_base_info"
+                >
+
+                <com.future.association.community.custom.CircleImageView
+                    android:id="@+id/civ_head"
+                    android:layout_width="90px"
+                    android:layout_height="90px"
+                    android:src="@drawable/ic_demo" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginTop="10px"
+                    android:layout_toRightOf="@id/civ_head"
+                    android:text="发帖人"
+                    android:textColor="#333333"
+                    android:textSize="30px" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10px"
+                    android:paddingLeft="10px"
+                    android:paddingRight="10px"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/shape_lanlord"
+                    android:text="楼主"
+                    android:textColor="#faa701"
+                    android:textSize="30px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_name"
+                    android:id="@+id/tv_class"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginTop="10px"
+                    android:layout_toRightOf="@id/civ_head"
+                    android:text="v1"
+                    android:textColor="#666666"
+                    android:textSize="24px" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_name"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginTop="10px"
+                    android:layout_toRightOf="@id/tv_class"
+                    android:text="浙江省杭州市西湖区"
+                    android:textColor="#666666"
+                    android:textSize="24px" />
+            </RelativeLayout>
+            <View style="@style/appGreyLine"
+                android:layout_below="@id/rl_base_info"
+                android:layout_marginTop="10px"
+                android:id="@+id/line"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="20px"
+                android:layout_marginTop="30px"
+                android:text="帖子标题帖子标题帖子标题帖子标题帖子标题帖子标题帖子标题帖子标题帖子标题"
+                android:textSize="30px"
+                android:id="@+id/tv_title"
+                android:layout_below="@id/line"
+                android:textColor="#333333"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017-07-04 15:25"
+                android:textColor="#999999"
+                android:id="@+id/tv_date"
+                android:layout_below="@id/tv_title"
+                android:layout_marginTop="20px"
+                android:textSize="24px"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="普通帖"
+                android:textColor="#999999"
+                android:layout_below="@id/tv_title"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20px"
+                android:textSize="24px"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文"
+                android:textColor="#666666"
+                android:lineSpacingExtra="20px"
+                android:layout_below="@id/tv_date"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="34px"
+                android:textSize="28px"
+                />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="30px"
+            android:background="#f8f8f8"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/rcl_reply"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingRight="30px"
+            android:paddingLeft="30px"
+            android:paddingTop="20px"
+            android:paddingBottom="20px"
+            android:background="#f8f8f8"
+            >
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="66px"
+                android:background="@drawable/shape_edit"
+                android:hint="回复帖子"
+                android:text="@={replyContent}"
+                android:paddingLeft="20px"
+                android:textSize="28px"
+                android:textColorHint="#999999"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="160px"
+                android:layout_height="66px"
+                android:text="回复"
+                android:gravity="center"
+                android:layout_marginLeft="6px"
+                android:id="@+id/tv_send"
+                android:background="@drawable/selector_send_tv"
+                android:textSize="28px"
+                android:onClick="@{clickListener}"
+                android:textColor="#999999"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

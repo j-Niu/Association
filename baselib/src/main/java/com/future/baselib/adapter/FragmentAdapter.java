@@ -14,7 +14,7 @@ import java.util.List;
 public class FragmentAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments;
 
-    public FragmentAdapter(FragmentManager fm , List<Fragment> fragments) {
+    public FragmentAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
     }
@@ -26,7 +26,12 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return fragments!=null ? fragments.size() : 0;
+        return fragments != null ? fragments.size() : 0;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+//        super.destroyItem(container, position, object);
     }
 
     @Override

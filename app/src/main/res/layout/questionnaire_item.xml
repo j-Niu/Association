@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/normal_padding">
+
+    <TextView
+        android:id="@+id/item_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="200dp"
+        android:text="的发生的故事是个的事公司的事"
+        android:lines="1"
+        android:ellipsize="end"
+        android:textSize="@dimen/sp_14"/>
+
+    <TextView
+        android:id="@+id/right_top_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="完成问卷 +5积分"
+        android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:id="@+id/time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/time_pic"
+        android:drawablePadding="@dimen/dp_4"
+        android:text="4小时前"
+        android:layout_below="@id/item_title_tv"
+        android:layout_marginTop="@dimen/normal_padding"/>
+
+    <TextView
+        android:id="@+id/right_bottom_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_padding"
+        android:layout_below="@id/item_title_tv"
+        android:text="进行中"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

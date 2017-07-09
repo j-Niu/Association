@@ -22,6 +22,7 @@ import com.future.baselib.utils.JLog;
 import com.future.baselib.utils.StatusUtils;
 import com.future.baselib.utils.ToastUtils;
 import com.future.baselib.view.LoadingDialog;
+import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.lang.reflect.Method;
 import java.security.Permission;
@@ -40,7 +41,7 @@ import java.util.List;
  * Created by jniu on 2017/6/3.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AutoLayoutActivity {
 
 
     public Toolbar mToolbar;

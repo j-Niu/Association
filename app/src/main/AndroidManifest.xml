@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.future.association">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".common.MyApp"
         android:allowBackup="true"
@@ -27,6 +29,28 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.LoginActivity"></activity>
+        <!--社区模块-->
+        <activity android:name=".community.view.NotifyDetailActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".community.view.BannerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".community.view.SendTieActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".community.view.TieDetailActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" android:screenOrientation="portrait"/>
+        <activity android:name=".community.view.WeiGuiActivity"
+            android:screenOrientation="portrait"/>
+        <!--社区模块-->
+        <activity android:name=".login.FindPwdVerifyActivity" />
+        <activity android:name=".login.FindPwdResetActivity" />
+        <activity android:name=".login.RegisterActivity" />
+        <activity android:name=".login.PerfectInformationActivity" />
+        <activity android:name=".login.RegisterSuccessActivity" />
+        <activity android:name=".questionnaire.QuestionnaireWebActivity"/>
+        <activity android:name=".questionnaire.QuestionnaireEndActivity"/>
+        <activity android:name=".supervice.SuperviceDetailActivity"/>
+        <activity android:name=".supervice.SuperviceApplyActivity"/>
     </application>
 
 </manifest>
