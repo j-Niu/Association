@@ -17,6 +17,9 @@ import com.future.association.questionnaire.QuestionnaireFragment;
 import com.future.association.supervice.SuperviceFragment;
 import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.adapter.FragmentAdapter;
+import com.future.baselib.entity.BaseResponse;
+import com.future.baselib.entity.DefaultResponse;
+import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.StatusUtils;
 import com.future.baselib.view.NoScrollViewPager;
 

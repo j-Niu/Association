@@ -14,6 +14,8 @@ import com.future.association.R;
 import com.future.association.common.MyApp;
 import com.future.association.databinding.ActivityLoginBinding;
 import com.future.baselib.activity.BaseActivity;
+import com.future.baselib.entity.DefaultResponse;
+import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.PatternUtils;
 import com.future.baselib.utils.StatusUtils;
 import com.future.baselib.utils.ToastUtils;
@@ -48,6 +50,22 @@ public class LoginActivity extends BaseActivity {
     protected void initLogic() {
         MyApp.getApp().getActivityManager().pushActivity(this);
         StatusUtils.setStatusbarColor(this, ContextCompat.getColor(this, R.color.color_26A16E));
+
+        new HttpRequest<DefaultResponse>()
+                .with(this)
+                .addParam("apiCode","_sms_001")
+                .addParam("mobile","18516515573")
+                .setListener(new HttpRequest.OnNetworkListener<DefaultResponse>() {
+                    @Override
+                    public void onSuccess(DefaultResponse response) {
+                        toast("请求成功");
+                    }
+
+                    @Override
+                    public void onFail(String message) {
+                        toast(message);
+                    }
+                }).start(new DefaultResponse());
     }
 
     @Override
