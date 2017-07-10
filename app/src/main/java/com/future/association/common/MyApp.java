@@ -28,6 +28,7 @@ public class MyApp extends Application {
         super.onCreate();
     }
 
+    //获取userToken
     public static String getUserToken() {
         return userToken;
     }
