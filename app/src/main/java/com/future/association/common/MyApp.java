@@ -14,6 +14,8 @@ public class MyApp extends Application {
     // activity管理类
     private ActivityManager activityManager = null;
 
+    private static String userToken = "59b85ba365102520b758681d85938ceb";
+
     public MyApp() {
         app = this;
     }
@@ -23,6 +25,10 @@ public class MyApp extends Application {
         // 获得activty管理实例
         activityManager = ActivityManager.getInstance();
         super.onCreate();
+    }
+
+    public static String getUserToken() {
+        return userToken;
     }
 
     public static MyApp getApp() {
