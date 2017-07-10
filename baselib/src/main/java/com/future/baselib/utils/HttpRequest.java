@@ -29,7 +29,7 @@ public class HttpRequest<T extends BaseResponse> {
 
     public static final String TAG = HttpRequest.class.getName();
 
-    public static final String BASE_URL = "http://139.224.70.219:81/kaipaiapp/";
+    public static final String BASE_URL = "http://139.224.70.219:85/";
     public static final String NETWORK_KEY = "1e56c95504a9a846e4c7043704a20f25";
 
     private static HttpService httpService;

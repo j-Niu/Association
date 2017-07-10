@@ -1,6 +1,7 @@
 package com.future.association.common;
 
 import android.app.Application;
+import android.text.TextUtils;
 
 import com.future.association.login.util.ActivityManager;
 
@@ -14,6 +15,8 @@ public class MyApp extends Application {
     // activity管理类
     private ActivityManager activityManager = null;
 
+    private static String userToken = "59b85ba365102520b758681d85938ceb";
+
     public MyApp() {
         app = this;
     }
@@ -23,6 +26,20 @@ public class MyApp extends Application {
         // 获得activty管理实例
         activityManager = ActivityManager.getInstance();
         super.onCreate();
+    }
+
+    //获取userToken
+    public static String getUserToken() {
+        return userToken;
+    }
+
+    public static void setUserToken(String userToken) {
+        MyApp.userToken = userToken;
+    }
+
+    public static boolean hasLogin(){
+        boolean haslogin = !TextUtils.isEmpty(userToken);
+        return haslogin;
     }
 
     public static MyApp getApp() {

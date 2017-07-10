@@ -2,8 +2,9 @@
 .gradle
 /gradle
 /local.properties
-/.idea
+/.idea/*
 .DS_Store
 /build
 /captures
 .externalNativeBuild
+/.idea/markdown-navigator.xml
