@@ -1,6 +1,7 @@
 package com.future.association.common;
 
 import android.app.Application;
+import android.text.TextUtils;
 
 import com.future.association.login.util.ActivityManager;
 
@@ -29,6 +30,15 @@ public class MyApp extends Application {
 
     public static String getUserToken() {
         return userToken;
+    }
+
+    public static void setUserToken(String userToken) {
+        MyApp.userToken = userToken;
+    }
+
+    public static boolean hasLogin(){
+        boolean haslogin = !TextUtils.isEmpty(userToken);
+        return haslogin;
     }
 
     public static MyApp getApp() {
