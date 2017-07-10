@@ -50,22 +50,6 @@ public class LoginActivity extends BaseActivity {
     protected void initLogic() {
         MyApp.getApp().getActivityManager().pushActivity(this);
         StatusUtils.setStatusbarColor(this, ContextCompat.getColor(this, R.color.color_26A16E));
-
-        new HttpRequest<DefaultResponse>()
-                .with(this)
-                .addParam("apiCode","_sms_001")
-                .addParam("mobile","18516515573")
-                .setListener(new HttpRequest.OnNetworkListener<DefaultResponse>() {
-                    @Override
-                    public void onSuccess(DefaultResponse response) {
-                        toast("请求成功");
-                    }
-
-                    @Override
-                    public void onFail(String message) {
-                        toast(message);
-                    }
-                }).start(new DefaultResponse());
     }
 
     @Override
