@@ -30,7 +30,7 @@
             android:ellipsize="end"
             android:text="@string/myWJ2"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_size_small_14" />
+            android:textSize="@dimen/text_size_lsmall_12" />
     </RelativeLayout>
 
     <RelativeLayout
