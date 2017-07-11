@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.future.association.R;
 import com.future.baselib.view.ActionSheetDialog;
@@ -19,6 +20,7 @@ public class PersonalFragment extends MyBaseFragment {
 
     private ActionSheetDialog sheetDialog;
     private LinearLayout myLevel;
+    private RelativeLayout myJianDu;
 
     public PersonalFragment() {
         // Required empty public constructor
@@ -45,15 +47,20 @@ public class PersonalFragment extends MyBaseFragment {
     @Override
     protected void initView(View view, @Nullable Bundle savedInstanceState) {
         setTitle("我的");
-//        mToolbar.setTitle("我的");
         myLevel = (LinearLayout) view.findViewById(R.id.linearMy2);
+        myJianDu = (RelativeLayout) view.findViewById(R.id.myJianDu);
         myLevel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(MyLevelActivity.class);
             }
         });
-
+        myJianDu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(MyJianDuActivity.class);
+            }
+        });
 
 //        view.findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
 //            @Override

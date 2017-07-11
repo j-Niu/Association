@@ -1,15 +1,31 @@
 package com.future.association.personal;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.future.association.R;
+import com.future.baselib.activity.BaseActivity;
+import com.future.baselib.utils.StatusUtils;
 
-public class MyResponseActivity extends AppCompatActivity {
+public class MyResponseActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initContentView(Bundle savedInstanceState) {
+        StatusUtils.setStatusbarColor(this, getResources().getColor(R.color.colorPrimary));
         setContentView(R.layout.activity_my_response);
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initLogic() {
+
+    }
+
+    @Override
+    protected void getBundleExtras(Bundle extras) {
+
     }
 }
