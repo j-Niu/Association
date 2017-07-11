@@ -151,6 +151,11 @@
         android:paddingLeft="@dimen/padding_small_15"
         android:paddingRight="@dimen/padding_small_15">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_line_05"
+            android:background="@color/color_dcdcdc" />
+
         <RelativeLayout
             android:id="@+id/myJianDu"
             android:layout_width="match_parent"

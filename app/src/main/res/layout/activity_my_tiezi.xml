@@ -4,19 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_f8f8f8"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.future.association.personal.MyJianDuActivity">
+    tools:context="com.future.association.personal.MyTieziActivity">
 
     <include layout="@layout/layout_toolbar" />
 
     <ListView
-        android:id="@+id/lvMyJiandu"
+        android:id="@+id/lvMyTiezi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@color/color_dcdcdc"
         android:dividerHeight="@dimen/divider_line_05"
         android:scrollbars="none"></ListView>
-
 </LinearLayout>

@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.future.association.R;
 import com.future.association.personal.entity.BeanJiandu;
 
@@ -32,7 +31,8 @@ public class JianDuAdapter extends BaseListAdapter {
     }
 
     private void initializeViews(BeanJiandu entity, ViewHolder holder) {
-        Glide.with(mContext).load(entity.getImgUrl()).crossFade().into(holder.imgMyJD);
+//        Glide.with(mContext).load(entity.getImgUrl()).crossFade().into(holder.imgMyJD);
+        holder.imgMyJD.setImageResource(R.drawable.ic_birds);
         holder.tvMyJDTitle.setText(entity.getTitle());
         holder.tvMyJDCreatetime.setText(entity.getCreateTime());
         holder.tvMyJDType.setText(entity.getType());

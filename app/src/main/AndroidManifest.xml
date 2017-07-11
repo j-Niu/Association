@@ -13,11 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="design_width"
             android:value="750" />
-
         <meta-data
             android:name="design_height"
             android:value="1334" />
@@ -29,8 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.LoginActivity"></activity>
-        <!--社区模块-->
+        <activity android:name=".login.LoginActivity" />
+        <!-- 社区模块 -->
         <activity
             android:name=".community.view.NotifyDetailActivity"
             android:screenOrientation="portrait"
@@ -48,7 +46,7 @@
         <activity
             android:name=".community.view.WeiGuiActivity"
             android:screenOrientation="portrait" />
-        <!--社区模块-->
+        <!-- 社区模块 -->
         <activity android:name=".login.FindPwdVerifyActivity" />
         <activity android:name=".login.FindPwdResetActivity" />
         <activity android:name=".login.RegisterActivity" />
@@ -58,10 +56,13 @@
         <activity android:name=".questionnaire.QuestionnaireEndActivity" />
         <activity android:name=".supervice.SuperviceDetailActivity" />
         <activity android:name=".supervice.SuperviceApplyActivity" />
-        <!--我的模块-->
+        <!-- 我的模块 -->
         <activity android:name=".personal.MyLevelActivity" />
         <activity android:name=".personal.MyResponseActivity" />
-        <activity android:name=".personal.MyJianDuActivity"></activity>
+        <activity android:name=".personal.MyJianDuActivity" />
+        <activity android:name=".personal.MyNoticeActivity" />
+        <activity android:name=".personal.MyTieziActivity" />
+        <activity android:name=".personal.MyWenJuanActivity"></activity>
     </application>
 
 </manifest>

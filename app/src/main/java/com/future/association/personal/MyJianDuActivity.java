@@ -1,6 +1,7 @@
 package com.future.association.personal;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import com.future.association.R;
@@ -17,8 +18,7 @@ public class MyJianDuActivity extends BaseActivity {
     private ListView lvMyJiandu;
     private JianDuAdapter jianDuAdapter;
     private List<BeanJiandu> jianduList = new ArrayList<>();
-    private String imgUrl = "http://imgsrc.baidu.com/image/c0%3Dshijue%2C0%2C0%2C245%2C40/sign=7700a4f5376d55fbd1cb7e65054b253f/023b5bb5c9ea15ce67442822bc003af33a87b277.jpg";
-
+private String imgUrl="http://img2.3lian.com/2014/f2/37/d/40.jpg";
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         StatusUtils.setStatusbarColor(this, getResources().getColor(R.color.colorPrimary));
@@ -27,6 +27,13 @@ public class MyJianDuActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        setTitle("我的监督");
+        setTitleLeft(R.drawable.ic_back, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         lvMyJiandu = (ListView) findViewById(R.id.lvMyJiandu);
         BeanJiandu beanJiandu = null;
         for (int i = 0; i < 10; i++) {
@@ -35,7 +42,7 @@ public class MyJianDuActivity extends BaseActivity {
             jianduList.add(beanJiandu);
         }
         if (jianDuAdapter == null) {
-            jianDuAdapter = new JianDuAdapter(this, null, getLayoutInflater());
+            jianDuAdapter = new JianDuAdapter(this, jianduList, getLayoutInflater());
             lvMyJiandu.setAdapter(jianDuAdapter);
         } else {
             jianDuAdapter.notifyDataSetChanged();

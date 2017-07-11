@@ -20,7 +20,7 @@ public class PersonalFragment extends MyBaseFragment {
 
     private ActionSheetDialog sheetDialog;
     private LinearLayout myLevel;
-    private RelativeLayout myJianDu;
+    private RelativeLayout myJianDu, myHuiYing, myTieZi, myWenJuan;
 
     public PersonalFragment() {
         // Required empty public constructor
@@ -49,19 +49,11 @@ public class PersonalFragment extends MyBaseFragment {
         setTitle("我的");
         myLevel = (LinearLayout) view.findViewById(R.id.linearMy2);
         myJianDu = (RelativeLayout) view.findViewById(R.id.myJianDu);
-        myLevel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(MyLevelActivity.class);
-            }
-        });
-        myJianDu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(MyJianDuActivity.class);
-            }
-        });
+        myHuiYing = (RelativeLayout) view.findViewById(R.id.myHuiYing);
+        myTieZi = (RelativeLayout) view.findViewById(R.id.myTieZi);
+        myWenJuan = (RelativeLayout) view.findViewById(R.id.myWenJuan);
 
+        initClick();
 //        view.findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -83,6 +75,39 @@ public class PersonalFragment extends MyBaseFragment {
 //                sheetDialog.show();
 //            }
 //        });
+    }
+
+    private void initClick() {
+        myLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(MyLevelActivity.class);
+            }
+        });
+        myJianDu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(MyJianDuActivity.class);
+            }
+        });
+        myHuiYing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(MyResponseActivity.class);
+            }
+        });
+        myTieZi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(MyTieziActivity.class);
+            }
+        });
+        myWenJuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(MyWenJuanActivity.class);
+            }
+        });
     }
 
 }
