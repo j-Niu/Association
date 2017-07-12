@@ -112,8 +112,8 @@ public class MsgNotifyAdapter extends RecyclerView.Adapter<MsgNotifyAdapter.View
     public class SortComparator implements Comparator {
         @Override
         public int compare(Object lhs, Object rhs) {
-            TieInfo a = (TieInfo) lhs;
-            TieInfo b = (TieInfo) rhs;
+            MsgNotifyInfo a = (MsgNotifyInfo) lhs;
+            MsgNotifyInfo b = (MsgNotifyInfo) rhs;
             long timeA = DateUtils.getStamp4Date(a.getCreate_time(), "yyyy-MM-dd HH:mm:ss");
             long timeB = DateUtils.getStamp4Date(b.getCreate_time(), "yyyy-MM-dd HH:mm:ss");
             return (int) (timeB - timeA);
