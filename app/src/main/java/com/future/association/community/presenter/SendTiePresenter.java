@@ -43,7 +43,7 @@ public class SendTiePresenter implements SendTieContract.IPresenter {
                 @Override
                 public void onFail(String message) {
                     dialog.close();
-                    iView.sendResult(false);
+                    iView.showMsg(message);
                 }
             });
         }

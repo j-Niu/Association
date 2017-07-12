@@ -56,11 +56,17 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         viewBinding.rclReply.setLayoutManager(linearLayoutManager);
         popupView = inflater.inflate(R.layout.popup_tie, null);
         popupTieBinding = DataBindingUtil.bind(popupView);
+
     }
 
     @Override
     public void initData() {
         tieInfo = getIntent().getParcelableExtra("tieInfo");
+        if("1".equals(tieInfo.getType())){
+            popupTieBinding.setIsTop("取消置顶");
+        }else{
+            popupTieBinding.setIsTop("置顶") ;
+        }
         tieReplyInfos = new ArrayList<>();
         viewBinding.layoutTitle.setTitle("帖子详情");
         adapter = new TieReplyAdapter(context, tieReplyInfos);
@@ -162,9 +168,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public void setData(ArrayList<TieReplyInfo> replyInfos) {
-        if(replyInfos == null){
-            showShortToast("获取帖子回复失败");
-        }else{
+        if(replyInfos != null){
             tieReplyInfos.addAll(replyInfos);
             adapter.notifyDataSetChanged();
         }
@@ -177,9 +181,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public void setTieDetail(TieDetailInfo detailInfo) {
-        if(detailInfo == null){
-            showShortToast("获取帖子详情失败");
-        }else{
+        if(detailInfo != null){
             viewBinding.setTieDetailInfo(detailInfo);
             Glide.with(context)
                     .load(detailInfo.getAvatar_url())
@@ -189,16 +191,12 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     }
 
     @Override
-    public void replyResult(boolean isSuccess, TieReplyInfo replyInfo) {
-        if(isSuccess){//评论成功
-            viewBinding.setReplyContent("");
-            this.tieReplyInfos.add(replyInfo) ;
-            adapter.notifyDataSetChanged();
-            viewBinding.rclReply.scrollToPosition(adapter.getItemCount()-1);//列表滑到最后一行
-            showShortToast("评论成功");
-        }else{
-            showShortToast("评论失败，请稍候再试");
-        }
+    public void replyResult(TieReplyInfo replyInfo) {
+        viewBinding.setReplyContent("");
+        this.tieReplyInfos.add(replyInfo);
+        adapter.notifyDataSetChanged();
+        viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行
+        showShortToast("评论成功");
     }
 
     @Override
@@ -216,8 +214,6 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         if(result){
             showShortToast("删除帖子成功");
             finish() ;
-        }else{
-            showShortToast("删除帖子失败");
         }
     }
 
@@ -227,8 +223,6 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
             adapter.notifyItemRemoved(delReplyPosition);
             adapter.tieReplyInfos.remove(delReplyPosition) ;
             showShortToast("删除回复成功");
-        }else{
-            showShortToast("删除回复失败");
         }
     }
 
@@ -236,9 +230,12 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     public void topTieResult(boolean result) {
         if(result){
             showShortToast("置顶帖子成功");
-            viewBinding.getTieDetailInfo().setType("置顶");
-        }else{
-            showShortToast("置顶帖子失败");
+            viewBinding.getTieDetailInfo().setType("1");
         }
+    }
+
+    @Override
+    public void showMsg(String msg) {
+        showShortToast(msg);
     }
 }

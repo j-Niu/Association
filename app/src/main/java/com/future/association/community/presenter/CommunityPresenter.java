@@ -22,11 +22,12 @@ public class CommunityPresenter implements CommunityContract.IPresenter{
     public CommunityPresenter(CommunityContract.IView iView,Context context) {
         this.iView = iView;
         this.context = context;
+        dialog = new LoadingDialog(context);
     }
 
     @Override
     public void getData(int currentPage) {
-        showDialog();
+        dialog.show();
         CommunityRequest.getNotifyList(context, new HttpRequest.OnNetworkListener<DataResponse>() {
             @Override
             public void onSuccess(DataResponse response) {
@@ -36,6 +37,7 @@ public class CommunityPresenter implements CommunityContract.IPresenter{
 
             @Override
             public void onFail(String message) {
+                iView.showMsg(message);
                 dialog.close();
             }
         });
@@ -52,19 +54,10 @@ public class CommunityPresenter implements CommunityContract.IPresenter{
 
             @Override
             public void onFail(String message) {
+                iView.showMsg(message);
                 dialog.close();
             }
         });
-    }
-
-    /**
-     * 加载数据dialog
-     */
-    public void showDialog() {
-        if (dialog == null) {
-            dialog = new LoadingDialog(context);
-        }
-        dialog.show();
     }
 
 }

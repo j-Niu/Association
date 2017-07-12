@@ -15,7 +15,8 @@ public interface NotifyDetailContract {
         void setNotifyDetail(MsgDetailInfo detailInfo) ;//设置通知详情
         String getTalkContent() ;//获取评论内容
         String getNofityId() ;//获取通知信息id
-        void talkReult(boolean isSuccess,NotifyReplyInfo replyInfo) ;
+        void talkReult(NotifyReplyInfo replyInfo) ;
+        void showMsg(String msg);
     }
     interface IPresenter{
         void getData(int currentPage) ;//获取所有回复

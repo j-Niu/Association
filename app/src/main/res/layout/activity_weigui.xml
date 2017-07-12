@@ -6,11 +6,11 @@
             name="clickListener"
             type="android.view.View.OnClickListener"/>
         <variable
+            name="dealType"
+            type="String"/>
+        <variable
             name="wgCauseInfo"
             type="com.future.association.community.model.WGCauseInfo"/>
-        <variable
-            name="dealTypeInfo"
-            type="com.future.association.community.model.DealTypeInfo"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             android:textSize="30px"
             android:paddingLeft="30px"
             android:paddingRight="30px"
-            android:text="@{wgCauseInfo.name}" />
+            android:text="@{wgCauseInfo.reason}" />
 
         <View
             android:layout_width="match_parent"
@@ -52,7 +52,7 @@
             android:textSize="30px"
             android:paddingLeft="30px"
             android:paddingRight="30px"
-            android:text="@{dealTypeInfo.name}" />
+            android:text="@{dealType}" />
 
         <View
             android:layout_width="match_parent"

@@ -43,8 +43,7 @@ public class TieListPresenter implements TieListContract.IPresenter {
 
             @Override
             public void onFail(String message) {
-                iView.showMsg("请求数据失败");
-                dialog.close();
+                iView.showMsg(message);
             }
         });
     }

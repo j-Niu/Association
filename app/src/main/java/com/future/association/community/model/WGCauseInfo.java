@@ -6,7 +6,7 @@ package com.future.association.community.model;
 
 public class WGCauseInfo {
     private String id ;
-    private String name ;
+    private String reason ;
 
     public String getId() {
         return id;
@@ -16,11 +16,11 @@ public class WGCauseInfo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getReason() {
+        return reason;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

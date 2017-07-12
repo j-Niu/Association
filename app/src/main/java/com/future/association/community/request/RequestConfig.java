@@ -18,12 +18,12 @@ public class RequestConfig {
     public static final String CODE_TIE_DETAIL = "_sqtiezixiangqing_001" ;//帖子详情
     public static final String CODE_TIE_REPLY = "_sqtiezihuifu_001" ;//获取帖子回复
     public static final String CODE_REPLY_TIE = "_sqhuifutiezi_001" ;//回复帖子
-    public static final String CODE_DEL_TIE = "" ;//删除帖子
-    public static final String CODE_DEL_TIE_REPLY = "" ;//删除帖子回复
-    public static final String CODE_TOP_TIE = "" ;//置顶帖子
+    public static final String CODE_DEL_TIE = "_sqshanchuxiangqing_001" ;//删除帖子
+    public static final String CODE_DEL_TIE_REPLY = "_sqshanchuhuifu_001" ;//删除帖子回复
+    public static final String CODE_TOP_TIE = "_sqzhidingxiangqing_001" ;//置顶帖子
 
-    public static final String CODE_GET_WEIGUI_CAUSE = "" ;//获取违规原因
-    public static final String CODE_GET_DEAL_TYPE = "" ;//获取处理方式
-    public static final String CODE_DEAL_TIE = "" ;//获取处理帖子
+    public static final String CODE_GET_WEIGUI_CAUSE = "_sqweiguiliebiao_001" ;//获取违规原因
+    public static final String CODE_DEAL_TIE = "_sqweiguixiangqing_001" ;//处理帖子违规
+    public static final String CODE_DEAL_TIE_REPLY = "_sqweiguihuifu_001" ;//处理帖子回复违规
 
 }

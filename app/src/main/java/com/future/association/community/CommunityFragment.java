@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.future.association.R;
 import com.future.association.community.adapter.GridViewAdapter;
@@ -126,6 +127,11 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
     public void setPlateList(ArrayList<PlateInfo> plateInfos) {
         adapter.datas.addAll(plateInfos);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showMsg(String msg) {
+        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
     }
 
 }

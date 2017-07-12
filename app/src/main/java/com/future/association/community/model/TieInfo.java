@@ -110,7 +110,7 @@ public class TieInfo implements Parcelable {
      * @return
      */
     public boolean isTop(){
-        if("置顶".equals(type)){
+        if("1".equals(type)){
             return true ;
         }
         return false ;

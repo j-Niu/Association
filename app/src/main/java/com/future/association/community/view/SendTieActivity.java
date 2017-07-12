@@ -113,12 +113,13 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implem
 
     @Override
     public void sendResult(boolean isSuccess) {
-        if(isSuccess){
-            showShortToast("发帖成功");
-            viewBinding.setTitle("");
-            viewBinding.setContent("");
-        }else{
-            showShortToast("发帖失败，请稍候再试");
-        }
+        showShortToast("发帖成功");
+        viewBinding.setTitle("");
+        viewBinding.setContent("");
+    }
+
+    @Override
+    public void showMsg(String msg) {
+        showShortToast(msg);
     }
 }

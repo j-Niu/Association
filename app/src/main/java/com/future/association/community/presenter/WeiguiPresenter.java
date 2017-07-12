@@ -5,6 +5,7 @@ import android.content.Context;
 import com.future.association.community.contract.WeiguiContract;
 import com.future.association.community.request.CommunityRequest;
 import com.future.association.community.request.DataResponse;
+import com.future.association.community.utils.TextUtil;
 import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.view.LoadingDialog;
 
@@ -28,17 +29,31 @@ public class WeiguiPresenter implements WeiguiContract.IPresenter {
     @Override
     public void doOperation() {
         dialog.show();
-        CommunityRequest.dealTie(context, iView.getId(), iView.getTieId(), new HttpRequest.OnNetworkListener<DataResponse>() {
-            @Override
-            public void onSuccess(DataResponse response) {
-                iView.dealResult(true);
-            }
+        if(TextUtil.isEmpty(iView.getId())){
+            CommunityRequest.dealTie(context, iView.getTieId(), new HttpRequest.OnNetworkListener<DataResponse>() {
+                @Override
+                public void onSuccess(DataResponse response) {
+                    iView.dealResult(true);
+                }
 
-            @Override
-            public void onFail(String message) {
-                iView.dealResult(false);
-            }
-        });
+                @Override
+                public void onFail(String message) {
+                    iView.showMsg(message);
+                }
+            });
+        }else{
+            CommunityRequest.dealTieReply(context,iView.getId(), new HttpRequest.OnNetworkListener<DataResponse>() {
+                @Override
+                public void onSuccess(DataResponse response) {
+                    iView.dealResult(true);
+                }
+
+                @Override
+                public void onFail(String message) {
+                    iView.showMsg(message);
+                }
+            });
+        }
     }
 
     @Override
@@ -54,23 +69,9 @@ public class WeiguiPresenter implements WeiguiContract.IPresenter {
             @Override
             public void onFail(String message) {
                 dialog.close();
-                iView.setWGCauses(null);
+                iView.showMsg(message);
             }
         });
     }
 
-    @Override
-    public void requestDealType() {
-        CommunityRequest.getDealType(context, new HttpRequest.OnNetworkListener<DataResponse>() {
-            @Override
-            public void onSuccess(DataResponse response) {
-                iView.setDealTypes(response.infos);
-            }
-
-            @Override
-            public void onFail(String message) {
-                iView.setDealTypes(null);
-            }
-        });
-    }
 }

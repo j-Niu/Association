@@ -17,5 +17,6 @@ public interface CommunityContract {
     interface IView{
         void setData(ArrayList<MsgNotifyInfo> notifyInfos) ;
         void setPlateList(ArrayList<PlateInfo> plateInfos) ;
+        void showMsg(String msg);
     }
 }

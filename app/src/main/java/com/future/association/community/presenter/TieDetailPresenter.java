@@ -42,7 +42,7 @@ public class TieDetailPresenter implements TieDetailContract.IPresenter {
 
             @Override
             public void onFail(String message) {
-                iView.setData(null);
+                iView.showMsg(message);
             }
         });
     }
@@ -59,7 +59,7 @@ public class TieDetailPresenter implements TieDetailContract.IPresenter {
 
             @Override
             public void onFail(String message) {
-                iView.setTieDetail(null);
+                iView.showMsg(message);
                 dialog.close();
             }
         });
@@ -74,13 +74,13 @@ public class TieDetailPresenter implements TieDetailContract.IPresenter {
                     new HttpRequest.OnNetworkListener<DataResponse>() {
                 @Override
                 public void onSuccess(DataResponse response) {
-                    iView.replyResult(true,new TieReplyInfo());
+                    iView.replyResult(new TieReplyInfo());
                     dialog.close();
                 }
 
                 @Override
                 public void onFail(String message) {
-                    iView.replyResult(false,null);
+                    iView.showMsg(message);
                     dialog.close();
                 }
             });
@@ -100,7 +100,7 @@ public class TieDetailPresenter implements TieDetailContract.IPresenter {
             @Override
             public void onFail(String message) {
                 dialog.close();
-                iView.delTieResult(false);
+                iView.showMsg(message);
             }
         });
     }
@@ -117,7 +117,7 @@ public class TieDetailPresenter implements TieDetailContract.IPresenter {
 
             @Override
             public void onFail(String message) {
-                iView.delTieReplyResult(false);
+                iView.showMsg(message);
                 dialog.close();
             }
         });
@@ -135,7 +135,7 @@ public class TieDetailPresenter implements TieDetailContract.IPresenter {
 
             @Override
             public void onFail(String message) {
-                iView.topTieResult(false);
+                iView.showMsg(message);
                 dialog.close();
             }
         });

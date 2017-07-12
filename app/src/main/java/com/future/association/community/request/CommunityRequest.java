@@ -3,7 +3,6 @@ package com.future.association.community.request;
 import android.content.Context;
 
 import com.future.association.common.MyApp;
-import com.future.association.community.model.DealTypeInfo;
 import com.future.association.community.model.MsgNotifyInfo;
 import com.future.association.community.model.NotifyReplyInfo;
 import com.future.association.community.model.PlateInfo;
@@ -240,29 +239,29 @@ public class CommunityRequest {
     }
 
     /**
-     * 获取处理方式
+     * 处理帖子
      * @param context
+     * @param id 帖子id
      * @param listener
      */
-    public static void getDealType(Context context,HttpRequest.OnNetworkListener<DataResponse> listener){
-        TreeMap<String,String> params = new TreeMap<>() ;
-        params.put("apiCode",RequestConfig.CODE_GET_DEAL_TYPE) ;
-        params.put("userToken",MyApp.getUserToken()) ;
-        requestData(context,params,new DataResponse<DealTypeInfo>().init(DealTypeInfo.class),listener);
+    public static void dealTie(Context context,String id,HttpRequest.OnNetworkListener<DataResponse> listener) {
+        TreeMap<String, String> params = new TreeMap<>();
+        params.put("apiCode", RequestConfig.CODE_DEAL_TIE);
+        params.put("id", id);
+        params.put("userToken", MyApp.getUserToken());
+        requestData(context, params, new DataResponse(), listener);
     }
 
     /**
-     * 处理帖子
+     * 处理帖子回复违规
      * @param context
      * @param id 帖子回复ID
-     * @param tieId 帖子ID
      * @param listener
      */
-    public static void dealTie(Context context,String id,String tieId,HttpRequest.OnNetworkListener<DataResponse> listener){
+    public static void dealTieReply(Context context,String id,HttpRequest.OnNetworkListener<DataResponse> listener){
         TreeMap<String,String> params = new TreeMap<>() ;
-        params.put("apiCode",RequestConfig.CODE_DEL_TIE) ;
+        params.put("apiCode",RequestConfig.CODE_DEAL_TIE_REPLY) ;
         params.put("id",id) ;
-        params.put("tieId",tieId) ;
         params.put("userToken",MyApp.getUserToken()) ;
         requestData(context,params,new DataResponse(),listener);
     }

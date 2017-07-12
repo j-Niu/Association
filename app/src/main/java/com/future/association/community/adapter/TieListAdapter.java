@@ -95,8 +95,8 @@ public class TieListAdapter extends RecyclerView.Adapter<TieListAdapter.ViewHold
         public int compare(Object lhs, Object rhs) {
             TieInfo a = (TieInfo) lhs;
             TieInfo b = (TieInfo) rhs;
-            int typeA = "置顶".equals(a.getType()) ?1:0;
-            int typeB = "置顶".equals(b.getType()) ?1:0 ;
+            int typeA = "1".equals(a.getType()) ?1:0;
+            int typeB = "1".equals(b.getType()) ?1:0 ;
             long timeA = DateUtils.getStamp4Date(a.getCreate_time(),"yyyy-MM-dd HH:mm:ss") ;
             long timeB = DateUtils.getStamp4Date(b.getCreate_time(),"yyyy-MM-dd HH:mm:ss") ;
             if(typeA != typeB){

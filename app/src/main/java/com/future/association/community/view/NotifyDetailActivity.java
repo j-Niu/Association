@@ -76,9 +76,7 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
 
     @Override
     public void setData(ArrayList<NotifyReplyInfo> replyInfos) {
-        if(replyInfos == null){
-            showShortToast("获取通知消息回复失败");
-        }else{
+        if(replyInfos != null){
             this.replyInfos.addAll(replyInfos);
             adapter.notifyDataSetChanged();
         }
@@ -86,12 +84,9 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
 
     @Override
     public void setNotifyDetail(MsgDetailInfo detailInfo) {
-        if (detailInfo == null) {
-            showShortToast("获取通知详情失败");
-        } else {
+        if (detailInfo != null) {
             viewBinding.setDetailInfo(detailInfo);
         }
-
     }
 
     @Override
@@ -105,15 +100,16 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
     }
 
     @Override
-    public void talkReult(boolean isSuccess, NotifyReplyInfo replyInfo) {
-        if (isSuccess) {//评论成功
-            viewBinding.setTalkContent("");
-            this.replyInfos.add(replyInfo);
-            adapter.notifyDataSetChanged();
-            viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行
-            showShortToast("评论成功");
-        } else {
-            showShortToast("评论失败，请稍候再试");
-        }
+    public void talkReult( NotifyReplyInfo replyInfo) {
+        viewBinding.setTalkContent("");
+        this.replyInfos.add(replyInfo);
+        adapter.notifyDataSetChanged();
+        viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行
+        showShortToast("评论成功");
+    }
+
+    @Override
+    public void showMsg(String msg) {
+        showShortToast(msg);
     }
 }

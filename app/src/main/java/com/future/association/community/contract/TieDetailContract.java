@@ -15,12 +15,13 @@ public interface TieDetailContract {
         void setData(ArrayList<TieReplyInfo> replyInfos) ;//设置数据
         String getReplyContent() ;//获取回复内容
         void setTieDetail(TieDetailInfo detailInfo) ;
-        void replyResult(boolean isSuccess,TieReplyInfo replyInfo) ;
+        void replyResult(TieReplyInfo replyInfo) ;
         String getTieId() ;//获取帖子id
         String getTieReplyId() ;//获取帖子回复id
         void delTieResult(boolean result) ;//删除帖子结果
         void delTieReplyResult(boolean result) ;//删除帖子回复结果
         void topTieResult(boolean result) ;//置顶帖子结果
+        void showMsg(String msg);
     }
     interface IPresenter{
         void getData(int currentPage) ;//获取网络数据

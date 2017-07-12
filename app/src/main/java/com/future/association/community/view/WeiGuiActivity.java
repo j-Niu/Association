@@ -5,7 +5,6 @@ import android.view.View;
 import com.future.association.R;
 import com.future.association.community.base.BaseActivity;
 import com.future.association.community.contract.WeiguiContract;
-import com.future.association.community.model.DealTypeInfo;
 import com.future.association.community.model.WGCauseInfo;
 import com.future.association.community.presenter.WeiguiPresenter;
 import com.future.association.community.utils.DialogUtils;
@@ -21,12 +20,12 @@ import java.util.ArrayList;
 public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> implements WeiguiContract.IView {
 
     private String[] causes;
-    private String[] typeNames;
+    private String[] typeNames = new String[]{"删除"};
     private WeiguiContract.IPresenter presenter;
     private ArrayList<WGCauseInfo> wgCauses;
-    private ArrayList<DealTypeInfo> dealTypes;
     private String tieId;
     private String id;
+    private String dealTypeId = "1";//处理方式 1 删除
 
     @Override
     public int setContentView() {
@@ -45,7 +44,9 @@ public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> implemen
         //帖子回复ID
         id = getIntent().getStringExtra("id");
         viewBinding.layoutTitle.setTitle("违规操作");
+        viewBinding.setDealType(typeNames[0]);
         presenter = new WeiguiPresenter(this, context);
+        presenter.requestWGCause();
     }
 
     @Override
@@ -74,12 +75,13 @@ public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> implemen
                 DialogUtils.showSelectDialog(context, "请选择处理方式", typeNames, new DialogUtils.ItemSelectedListener() {
                     @Override
                     public void select(int position) {
-                        viewBinding.setDealTypeInfo(dealTypes.get(position));
+                        dealTypeId = position+1+"" ;
+                        viewBinding.setDealType(typeNames[position]);
                     }
                 });
                 break;
             case R.id.btn_sure:
-                if (wgCauses != null && dealTypes != null) {
+                if (wgCauses != null) {
                     presenter.doOperation();
                 }
                 break;
@@ -93,7 +95,7 @@ public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> implemen
 
     @Override
     public String getDealType() {
-        return viewBinding.getDealTypeInfo().getId();
+        return dealTypeId;
     }
 
     @Override
@@ -105,22 +107,6 @@ public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> implemen
                 causes[i] = wgCauses.get(i).getId();
             }
             viewBinding.setWgCauseInfo(wgCauses.get(0));
-        } else {
-            showShortToast("获取违规原因失败");
-        }
-    }
-
-    @Override
-    public void setDealTypes(ArrayList<DealTypeInfo> dealTypes) {
-        if (dealTypes != null) {
-            this.dealTypes = dealTypes;
-            typeNames = new String[dealTypes.size()];
-            for (int i = 0; i < dealTypes.size(); i++) {
-                typeNames[i] = dealTypes.get(i).getId();
-            }
-            viewBinding.setDealTypeInfo(dealTypes.get(0));
-        } else {
-            showShortToast("获取处理方式失败");
         }
     }
 
@@ -139,5 +125,10 @@ public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> implemen
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public void showMsg(String msg) {
+        showShortToast(msg);
     }
 }

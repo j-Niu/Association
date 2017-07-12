@@ -40,7 +40,7 @@ public class NotifyDetailPresenter implements NotifyDetailContract.IPresenter {
 
             @Override
             public void onFail(String message) {
-                iView.setData(null);
+                iView.showMsg(message);
             }
         });
     }
@@ -58,7 +58,7 @@ public class NotifyDetailPresenter implements NotifyDetailContract.IPresenter {
             @Override
             public void onFail(String message) {
                 dialog.close();
-                iView.setNotifyDetail(null);
+                iView.showMsg(message);
             }
         });
     }
@@ -71,14 +71,14 @@ public class NotifyDetailPresenter implements NotifyDetailContract.IPresenter {
             CommunityRequest.replyNotify(context, iView.getNofityId(), talkContent, new HttpRequest.OnNetworkListener<DataResponse>() {
                 @Override
                 public void onSuccess(DataResponse response) {
-                    iView.talkReult(true,new NotifyReplyInfo());
+                    iView.talkReult(new NotifyReplyInfo());
                     dialog.close();
                 }
 
                 @Override
                 public void onFail(String message) {
                     dialog.close();
-                    iView.talkReult(false, null);
+                    iView.showMsg(message);
                 }
             });
         }

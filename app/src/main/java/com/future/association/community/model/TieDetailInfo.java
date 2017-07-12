@@ -8,17 +8,17 @@ import com.future.association.common.MyApp;
  * Created by HX·罗 on 2017/7/11.
  */
 
-public class TieDetailInfo{
-    private String nickname ;//发帖人
-    private String avatar_url ;//头像
-    private String level ;//发帖人等级
-    private String uid ;//发帖人id
-    private String id ;//帖子id
-    private String title ;//帖子标题
-    private String create_time ;//发帖时间
-    private String address ;//所属区域
-    private String content ;//帖子内容
-    private String type ;//帖子类型
+public class TieDetailInfo {
+    private String nickname;//发帖人
+    private String avatar_url;//头像
+    private String level;//发帖人等级
+    private String uid;//发帖人id
+    private String id;//帖子id
+    private String title;//帖子标题
+    private String create_time;//发帖时间
+    private String address;//所属区域
+    private String content;//帖子内容
+    private String type;//帖子类型
 
     public String getNickname() {
         return nickname;
@@ -100,7 +100,11 @@ public class TieDetailInfo{
         this.uid = uid;
     }
 
-    public String typeFormat(){
-        return type+"帖" ;
+    public String typeFormat() {
+        if ("1".equals(type)) {
+            return "置顶帖";
+        }else{
+            return "普通帖";
+        }
     }
 }
