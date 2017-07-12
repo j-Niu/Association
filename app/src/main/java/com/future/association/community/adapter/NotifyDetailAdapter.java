@@ -6,8 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.future.association.R;
-import com.future.association.community.model.ReplyInfo;
+import com.future.association.community.model.NotifyReplyInfo;
 import com.future.association.community.utils.ScreenUtils;
 import com.future.association.databinding.ItemMsgDetailBinding;
 
@@ -20,10 +21,10 @@ import java.util.ArrayList;
 public class NotifyDetailAdapter extends RecyclerView.Adapter<NotifyDetailAdapter.ViewHolder> {
 
     private Context context ;
-    private ArrayList<ReplyInfo> replyInfos;
+    private ArrayList<NotifyReplyInfo> replyInfos;
     private RecyclerView mRecycler;
 
-    public NotifyDetailAdapter(Context context, ArrayList<ReplyInfo> replyInfos) {
+    public NotifyDetailAdapter(Context context, ArrayList<NotifyReplyInfo> replyInfos) {
         this.context = context;
         this.replyInfos = replyInfos;
     }
@@ -51,6 +52,10 @@ public class NotifyDetailAdapter extends RecyclerView.Adapter<NotifyDetailAdapte
             holder.binding.setIsLast(false);
         }
         holder.binding.setReplyInfo(replyInfos.get(position));
+        Glide.with(context)
+                .load(replyInfos.get(position).getAvatar_url())
+                .error(R.drawable.ic_demo)
+                .into(holder.binding.civHead) ;
     }
 
     @Override

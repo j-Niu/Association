@@ -22,7 +22,7 @@
             android:maxLines="2"
             android:lineSpacingExtra="20px"
             android:textSize="30px"
-            android:text="@{notifyInfo.content}"
+            android:text="@{notifyInfo.title}"
             />
         <TextView
             android:layout_width="wrap_content"

@@ -2,6 +2,7 @@ package com.future.association.community.view;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,11 +10,14 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
+import com.bumptech.glide.Glide;
 import com.future.association.R;
 import com.future.association.community.adapter.TieReplyAdapter;
 import com.future.association.community.base.BaseActivity;
 import com.future.association.community.base.EndlessRecyclerOnScrollListener;
 import com.future.association.community.contract.TieDetailContract;
+import com.future.association.community.model.TieDetailInfo;
+import com.future.association.community.model.TieInfo;
 import com.future.association.community.model.TieReplyInfo;
 import com.future.association.community.presenter.TieDetailPresenter;
 import com.future.association.community.utils.ActivityUtils;
@@ -36,6 +40,8 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     private TieReplyAdapter adapter;
     private TieDetailContract.IPresenter presenter;
     private LinearLayoutManager linearLayoutManager;
+    private TieInfo tieInfo;
+    private int delReplyPosition ;
 
     @Override
     public int setContentView() {
@@ -54,12 +60,14 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public void initData() {
+        tieInfo = getIntent().getParcelableExtra("tieInfo");
         tieReplyInfos = new ArrayList<>();
         viewBinding.layoutTitle.setTitle("帖子详情");
         adapter = new TieReplyAdapter(context, tieReplyInfos);
         viewBinding.rclReply.setAdapter(adapter);
-        presenter = new TieDetailPresenter(this);
+        presenter = new TieDetailPresenter(this,context);
         presenter.getData(1);
+        presenter.getTieDetail();
     }
 
     private void showPopupWindow() {
@@ -96,6 +104,21 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         viewBinding.layoutTitle.setViewClickListener(this);
         popupTieBinding.setClickListener(this);
         viewBinding.setClickListener(this);
+        adapter.setCallback(new TieReplyAdapter.Callback() {
+            @Override
+            public void delReply(int position) {
+                delReplyPosition = position ;
+                presenter.delTieReply();
+            }
+
+            @Override
+            public void weigui(int position) {
+                Bundle bundle = new Bundle() ;
+                bundle.putString("tieId",tieInfo.getId());
+                bundle.putString("id",adapter.tieReplyInfos.get(position).getId());
+                ActivityUtils.startActivityIntent(context, WeiGuiActivity.class,bundle);
+            }
+        });
     }
 
     @Override
@@ -109,13 +132,14 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
                 break;
             case R.id.tv_top:
                 popupWindow.dismiss();
+                presenter.tieTop();
                 break;
             case R.id.tv_del:
                 popupWindow.dismiss();
                 DialogUtils.showDialog4View(context, R.layout.dialog_sure, R.id.tv_positive, R.id.tv_nagtive, "删除该帖子？", new DialogUtils.EditContentDialogListener() {
                     @Override
                     public void positive(String content) {
-
+                        presenter.delTie();
                     }
 
                     @Override
@@ -126,7 +150,9 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
                 break;
             case R.id.tv_weigui:
                 popupWindow.dismiss();
-                ActivityUtils.startActivityIntent(context, WeiGuiActivity.class);
+                Bundle bundle = new Bundle() ;
+                bundle.putString("tieId",tieInfo.getId());
+                ActivityUtils.startActivityIntent(context, WeiGuiActivity.class,bundle);
                 break;
             case R.id.tv_send:
                 presenter.sendReply();//发送回复
@@ -136,13 +162,30 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public void setData(ArrayList<TieReplyInfo> replyInfos) {
-        tieReplyInfos.addAll(replyInfos);
-        adapter.notifyDataSetChanged();
+        if(replyInfos == null){
+            showShortToast("获取帖子回复失败");
+        }else{
+            tieReplyInfos.addAll(replyInfos);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
     public String getReplyContent() {
         return viewBinding.getReplyContent();
+    }
+
+    @Override
+    public void setTieDetail(TieDetailInfo detailInfo) {
+        if(detailInfo == null){
+            showShortToast("获取帖子详情失败");
+        }else{
+            viewBinding.setTieDetailInfo(detailInfo);
+            Glide.with(context)
+                    .load(detailInfo.getAvatar_url())
+                    .error(R.drawable.ic_demo)
+                    .into(viewBinding.civHead) ;
+        }
     }
 
     @Override
@@ -155,6 +198,47 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
             showShortToast("评论成功");
         }else{
             showShortToast("评论失败，请稍候再试");
+        }
+    }
+
+    @Override
+    public String getTieId() {
+        return tieInfo.getId();
+    }
+
+    @Override
+    public String getTieReplyId() {
+        return adapter.tieReplyInfos.get(delReplyPosition).getId();
+    }
+
+    @Override
+    public void delTieResult(boolean result) {
+        if(result){
+            showShortToast("删除帖子成功");
+            finish() ;
+        }else{
+            showShortToast("删除帖子失败");
+        }
+    }
+
+    @Override
+    public void delTieReplyResult(boolean result) {
+        if(result){
+            adapter.notifyItemRemoved(delReplyPosition);
+            adapter.tieReplyInfos.remove(delReplyPosition) ;
+            showShortToast("删除回复成功");
+        }else{
+            showShortToast("删除回复失败");
+        }
+    }
+
+    @Override
+    public void topTieResult(boolean result) {
+        if(result){
+            showShortToast("置顶帖子成功");
+            viewBinding.getTieDetailInfo().setType("置顶");
+        }else{
+            showShortToast("置顶帖子失败");
         }
     }
 }

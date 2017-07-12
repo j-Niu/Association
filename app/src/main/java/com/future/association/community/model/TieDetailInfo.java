@@ -1,0 +1,106 @@
+package com.future.association.community.model;
+
+import android.os.Parcelable;
+
+import com.future.association.common.MyApp;
+
+/**
+ * Created by HX·罗 on 2017/7/11.
+ */
+
+public class TieDetailInfo{
+    private String nickname ;//发帖人
+    private String avatar_url ;//头像
+    private String level ;//发帖人等级
+    private String uid ;//发帖人id
+    private String id ;//帖子id
+    private String title ;//帖子标题
+    private String create_time ;//发帖时间
+    private String address ;//所属区域
+    private String content ;//帖子内容
+    private String type ;//帖子类型
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getAvatar_url() {
+        return avatar_url;
+    }
+
+    public void setAvatar_url(String avatar_url) {
+        this.avatar_url = avatar_url;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String typeFormat(){
+        return type+"帖" ;
+    }
+}

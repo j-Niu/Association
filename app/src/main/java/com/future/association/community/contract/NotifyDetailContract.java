@@ -1,8 +1,7 @@
 package com.future.association.community.contract;
 
-import com.future.association.community.model.BannerInfo;
 import com.future.association.community.model.MsgDetailInfo;
-import com.future.association.community.model.ReplyInfo;
+import com.future.association.community.model.NotifyReplyInfo;
 
 import java.util.ArrayList;
 
@@ -12,10 +11,11 @@ import java.util.ArrayList;
 
 public interface NotifyDetailContract {
     interface IView {
-        void setData(ArrayList<ReplyInfo> replyInfos) ;//设置数据
+        void setData(ArrayList<NotifyReplyInfo> replyInfos) ;//设置数据
         void setNotifyDetail(MsgDetailInfo detailInfo) ;//设置通知详情
         String getTalkContent() ;//获取评论内容
-        void talkReult(boolean isSuccess,ReplyInfo replyInfo) ;
+        String getNofityId() ;//获取通知信息id
+        void talkReult(boolean isSuccess,NotifyReplyInfo replyInfo) ;
     }
     interface IPresenter{
         void getData(int currentPage) ;//获取所有回复

@@ -24,21 +24,23 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        visibleItemCount = recyclerView.getChildCount();
-        totalItemCount = mLinearLayoutManager.getItemCount();
-        firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
+        if(dy>0){
+            visibleItemCount = recyclerView.getChildCount();
+            totalItemCount = mLinearLayoutManager.getItemCount();
+            firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
 
-        if (loading) {
-            if (totalItemCount > previousTotal) {
-                loading = false;
-                previousTotal = totalItemCount;
+            if (loading) {
+                if (totalItemCount > previousTotal) {
+                    loading = false;
+                    previousTotal = totalItemCount;
+                }
             }
-        }
-        if (!loading
-                && (totalItemCount - visibleItemCount) <= firstVisibleItem) {
-            currentPage++;
-            onLoadMore(currentPage);
-            loading = true;
+            if (!loading
+                    && (totalItemCount - visibleItemCount) <= firstVisibleItem) {
+                currentPage++;
+                onLoadMore(currentPage);
+                loading = true;
+            }
         }
     }
 

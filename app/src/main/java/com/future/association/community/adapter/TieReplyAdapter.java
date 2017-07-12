@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
+import com.bumptech.glide.Glide;
 import com.future.association.R;
 import com.future.association.community.model.TieReplyInfo;
 import com.future.association.community.utils.ActivityUtils;
@@ -30,18 +31,27 @@ import static com.future.association.R.layout.*;
 
 public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHolder> {
 
+    public interface Callback{
+        void delReply(int position) ;
+        void weigui(int position) ;
+    }
     private Context context ;
-    private ArrayList<TieReplyInfo> tieReplyInfos;
+    public ArrayList<TieReplyInfo> tieReplyInfos;
     private RecyclerView mRecycler;
+    private Callback callback ;
 
     public TieReplyAdapter(Context context, ArrayList<TieReplyInfo> tieReplyInfos) {
         this.context = context;
         this.tieReplyInfos = tieReplyInfos;
     }
 
+    public void setCallback(Callback callback) {
+        this.callback = callback;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, item_reply_detail,null) ;
+        View view = View.inflate(context, R.layout.item_reply_detail,null) ;
         view.setLayoutParams(new RecyclerView.LayoutParams(ScreenUtils.getScreenWidth(context),
                 RecyclerView.LayoutParams.WRAP_CONTENT));
         ViewHolder holder = new ViewHolder(view) ;
@@ -87,6 +97,10 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
          */
         public void setData(int position){
             binding.setReplyInfo(tieReplyInfos.get(position)) ;
+            Glide.with(context)
+                    .load(tieReplyInfos.get(position).getAvatar_url())
+                    .error(drawable.ic_demo)
+                    .into(binding.civHead) ;
             this.position = position ;
         }
 
@@ -113,8 +127,7 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
                             id.tv_nagtive, "删除该回复？",new DialogUtils.EditContentDialogListener() {
                         @Override
                         public void positive(String content) {
-                            tieReplyInfos.remove(position) ;
-                            notifyItemRemoved(position);
+                            callback.delReply(position);
                         }
 
                         @Override
@@ -125,7 +138,8 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
                     break;
                 case id.tv_weigui:
                     popupWindow.dismiss();
-                    ActivityUtils.startActivityIntent(context, WeiGuiActivity.class);
+                    callback.weigui(position);
+
                     break;
             }
         }

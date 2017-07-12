@@ -4,16 +4,14 @@ package com.future.association.community.model;
  * Created by HX·罗 on 2017/7/4.
  */
 
-public class TieReplyInfo {
-    private String id ;//回复ID
-    private String uid ;//回复人ID
-    private String nickname ;//回复人昵称
-    private String avatar_url ;//回复人头像
-    private String level ;//回复人等级
-    private String tiezi_id ;//帖子id
-    private String content ;//回复人内容
-    private String create_time ;//回复时间
-    private String address ;//地址
+public class NotifyReplyInfo {
+
+    private String nickname ;//评论人名称
+    private String avatar_url ;//评论人头像
+    private String level ;//品论人等级
+    private String tiezi_id ;//
+    private String content ;//评论内容
+    private String create_time ;//评论时间
 
     public String getNickname() {
         return nickname;
@@ -61,29 +59,5 @@ public class TieReplyInfo {
 
     public void setCreate_time(String create_time) {
         this.create_time = create_time;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
     }
 }

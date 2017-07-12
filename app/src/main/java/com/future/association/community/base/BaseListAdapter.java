@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2016/8/5 0005.
  */
-public abstract class BaseListAdapter<T extends BaseEntity> extends BaseAdapter{
+public abstract class BaseListAdapter<T> extends BaseAdapter{
     public Context context ;
     public ArrayList<T> datas ;
     public LayoutInflater inflater ;
@@ -24,7 +24,7 @@ public abstract class BaseListAdapter<T extends BaseEntity> extends BaseAdapter{
         return datas.size();
     }
     @Override
-    public Object getItem(int position) {
+    public T getItem(int position) {
         return datas.get(position);
     }
     @Override

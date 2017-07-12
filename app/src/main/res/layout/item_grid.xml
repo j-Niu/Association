@@ -17,6 +17,7 @@
         <ImageView
             android:layout_width="150px"
             android:layout_height="150px"
+            android:id="@+id/iv_img"
             android:scaleType="centerInside"
             android:src="@drawable/icon"
             />

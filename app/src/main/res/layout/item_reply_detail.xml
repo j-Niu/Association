@@ -28,13 +28,12 @@
             <com.future.association.community.custom.CircleImageView
                 android:layout_width="90px"
                 android:layout_height="90px"
-                android:src="@drawable/ic_demo"
                 android:id="@+id/civ_head"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{replyInfo.name}"
+                android:text="@{replyInfo.nickname}"
                 android:layout_marginTop="10px"
                 android:id="@+id/tv_name"
                 android:layout_marginLeft="20px"
@@ -45,7 +44,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{replyInfo.clazz}"
+                android:text="@{replyInfo.level}"
                 android:layout_marginLeft="20px"
                 android:layout_below="@id/tv_name"
                 android:id="@+id/tv_class"

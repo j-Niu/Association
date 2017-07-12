@@ -7,17 +7,23 @@ import android.view.View;
 import com.future.association.R;
 import com.future.association.community.base.BaseActivity;
 import com.future.association.community.contract.SendTieContract;
+import com.future.association.community.model.PlateInfo;
 import com.future.association.community.presenter.SendTiePresenter;
 import com.future.association.community.utils.DialogUtils;
 import com.future.association.databinding.ActivitySendTieBinding;
+
+import java.util.ArrayList;
+
+import static java.lang.System.in;
 
 /**
  * Created by HX·罗 on 2017/7/4.
  */
 
 public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implements SendTieContract.IView{
-    private String[] types={"论坛版块", "其他版块1", "其他版块2", "其他版块3", "其他版块4", "其他版块5"};
+    private String[] types ;
     private SendTieContract.IPresenter presenter;
+    private ArrayList<PlateInfo> plateInfos;
 
     @Override
     public int setContentView() {
@@ -30,9 +36,19 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implem
 
     @Override
     public void initData() {
+        PlateInfo plateInfo = getIntent().getParcelableExtra("plateInfo");
+        plateInfos = getIntent().getParcelableArrayListExtra("plateInfos");
+        types = new String[plateInfos.size()] ;
+        int defaultPlateInfo = 0 ;
+        for (int i = 0; i< plateInfos.size(); i++){
+            if(plateInfo.getId().equals( plateInfos.get(i).getId())){
+                defaultPlateInfo = i ;
+            }
+            types[i] = plateInfos.get(i).getName() ;
+        }
         viewBinding.layoutTitle.setTitle("发布帖子");
-        viewBinding.setTypeName(types[0]);
-        presenter = new SendTiePresenter(this);
+        viewBinding.setPlateInfo(plateInfos.get(defaultPlateInfo));
+        presenter = new SendTiePresenter(this,context);
     }
 
     @Override
@@ -73,7 +89,7 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implem
                 DialogUtils.showSelectDialog(context, "请选择板块", types, new DialogUtils.ItemSelectedListener() {
                     @Override
                     public void select(int position) {
-                        viewBinding.setTypeName(types[position]);
+                        viewBinding.setPlateInfo(plateInfos.get(position));
                     }
                 });
                 break;
@@ -92,13 +108,15 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implem
 
     @Override
     public String geTietType() {
-        return viewBinding.getTypeName();
+        return viewBinding.getPlateInfo().getId();
     }
 
     @Override
     public void sendResult(boolean isSuccess) {
         if(isSuccess){
             showShortToast("发帖成功");
+            viewBinding.setTitle("");
+            viewBinding.setContent("");
         }else{
             showShortToast("发帖失败，请稍候再试");
         }
