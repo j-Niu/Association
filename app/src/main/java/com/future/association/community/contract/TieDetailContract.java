@@ -22,6 +22,7 @@ public interface TieDetailContract {
         void delTieReplyResult(boolean result) ;//删除帖子回复结果
         void topTieResult(boolean result) ;//置顶帖子结果
         void showMsg(String msg);
+        String getTieType();//获取帖子的状态 是置顶还是 普通
     }
     interface IPresenter{
         void getData(int currentPage) ;//获取网络数据

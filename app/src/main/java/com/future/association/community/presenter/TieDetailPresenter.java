@@ -126,7 +126,7 @@ public class TieDetailPresenter implements TieDetailContract.IPresenter {
     @Override
     public void tieTop() {
         dialog.show();
-        CommunityRequest.topTie(context, iView.getTieId(), new HttpRequest.OnNetworkListener<DataResponse>() {
+        CommunityRequest.topTie(context, iView.getTieId(),iView.getTieType(), new HttpRequest.OnNetworkListener<DataResponse>() {
             @Override
             public void onSuccess(DataResponse response) {
                 iView.topTieResult(true);

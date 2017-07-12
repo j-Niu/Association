@@ -174,10 +174,11 @@ public class CommunityRequest {
      * @param id
      * @param listener
      */
-    public static void topTie(Context context,String id,HttpRequest.OnNetworkListener<DataResponse> listener){
+    public static void topTie(Context context,String id,String type,HttpRequest.OnNetworkListener<DataResponse> listener){
         TreeMap<String,String> params = new TreeMap<>() ;
         params.put("apiCode",RequestConfig.CODE_TOP_TIE) ;
         params.put("id",id) ;
+        params.put("type",type) ;
         params.put("userToken",MyApp.getUserToken()) ;
         requestData(context,params,new DataResponse(),listener);
     }

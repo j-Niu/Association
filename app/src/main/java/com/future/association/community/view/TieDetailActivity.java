@@ -238,4 +238,9 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     public void showMsg(String msg) {
         showShortToast(msg);
     }
+
+    @Override
+    public String getTieType() {
+        return tieInfo.getType();
+    }
 }
