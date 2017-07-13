@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.future.association.personal.MyNoticeActivity">
+    tools:context="com.future.association.personal.MyTongZhi">
 
     <include layout="@layout/layout_toolbar" />
 
     <ListView
-        android:id="@+id/lvMyNotice"
+        android:id="@+id/lvMyTongzhi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@color/color_dcdcdc"
