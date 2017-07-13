@@ -5,46 +5,46 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.future.association.R;
-import com.future.association.personal.adapter.NoticeAdapter;
-import com.future.association.personal.entity.BeanNotice;
+import com.future.association.personal.adapter.TongzhiAdapter;
+import com.future.association.personal.entity.BeanTongzhi;
 import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.utils.StatusUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyNoticeActivity extends BaseActivity {
-    private ListView lvMyNotice;
-    private List<BeanNotice> noticeList = new ArrayList<>();
-    private NoticeAdapter noticeAdapter;
+public class MyTongZhi extends BaseActivity {
+    private ListView lvMyTongzhi;
+    private List<BeanTongzhi> tongzhiList = new ArrayList<>();
+    private TongzhiAdapter tongzhiAdapter;
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         StatusUtils.setStatusbarColor(this, getResources().getColor(R.color.colorPrimary));
-        setContentView(R.layout.activity_my_notice);
+        setContentView(R.layout.activity_my_tongzhi);
     }
 
     @Override
     protected void initView() {
-        setTitle("我的消息");
+        setTitle("我的通知");
         setTitleLeft(R.drawable.ic_back, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        lvMyNotice = (ListView) findViewById(R.id.lvMyNotice);
-        BeanNotice notice;
+        lvMyTongzhi = (ListView) findViewById(R.id.lvMyTongzhi);
+        BeanTongzhi tongzhi;
         for (int i = 0; i < 10; i++) {
-            notice = new BeanNotice(getString(R.string.myHY1),
-                    getString(R.string.myHY2), getString(R.string.myHY3));
-            noticeList.add(notice);
+            tongzhi = new BeanTongzhi(getString(R.string.myTZ1),
+                    getString(R.string.myTZ2));
+            tongzhiList.add(tongzhi);
         }
-        if (noticeAdapter == null) {
-            noticeAdapter = new NoticeAdapter(this, noticeList, getLayoutInflater());
-            lvMyNotice.setAdapter(noticeAdapter);
+        if (tongzhiAdapter == null) {
+            tongzhiAdapter = new TongzhiAdapter(this, tongzhiList, getLayoutInflater());
+            lvMyTongzhi.setAdapter(tongzhiAdapter);
         } else {
-            noticeAdapter.notifyDataSetChanged();
+            tongzhiAdapter.notifyDataSetChanged();
         }
     }
 

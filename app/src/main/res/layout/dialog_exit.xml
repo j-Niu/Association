@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginBottom="@dimen/margin_normal_20"
+        android:layout_marginTop="@dimen/margin_normal_20"
+        android:gravity="center"
+        android:text="确定退出登录吗？"
+        android:textSize="@dimen/text_size_big_18" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_line_05"
+        android:background="@color/color_dcdcdc" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbCharge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingBottom="@dimen/padding_small_15"
+            android:paddingTop="@dimen/padding_small_15"
+            android:text="取消"
+            android:textColor="@color/actionsheet_blue" />
+
+        <View
+            android:layout_width="@dimen/divider_line_05"
+            android:layout_height="match_parent"
+            android:background="@color/color_dcdcdc" />
+
+        <RadioButton
+            android:id="@+id/rbCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingBottom="@dimen/padding_small_15"
+            android:paddingTop="@dimen/padding_small_15"
+            android:text="确定"
+            android:textColor="@color/actionsheet_blue" />
+    </RadioGroup>
+</LinearLayout>

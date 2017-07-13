@@ -20,7 +20,7 @@ public class PersonalFragment extends MyBaseFragment {
 
     private ActionSheetDialog sheetDialog;
     private LinearLayout myLevel;
-    private RelativeLayout myJianDu, myHuiYing, myTieZi, myWenJuan;
+    private RelativeLayout myJianDu, myHuiYing, myTieZi, myWenJuan, myXiaoXi, myTongZhi, myMore;
 
     public PersonalFragment() {
         // Required empty public constructor
@@ -52,6 +52,9 @@ public class PersonalFragment extends MyBaseFragment {
         myHuiYing = (RelativeLayout) view.findViewById(R.id.myHuiYing);
         myTieZi = (RelativeLayout) view.findViewById(R.id.myTieZi);
         myWenJuan = (RelativeLayout) view.findViewById(R.id.myWenJuan);
+        myXiaoXi = (RelativeLayout) view.findViewById(R.id.myXiaoXi);
+        myTongZhi = (RelativeLayout) view.findViewById(R.id.myTongZhi);
+        myMore = (RelativeLayout) view.findViewById(R.id.myMore);
 
         initClick();
 //        view.findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
@@ -106,6 +109,24 @@ public class PersonalFragment extends MyBaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(MyWenJuanActivity.class);
+            }
+        });
+        myXiaoXi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(MyNoticeActivity.class);
+            }
+        });
+        myTongZhi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(MyTongZhi.class);
+            }
+        });
+        myMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(MyMoreActivity.class);
             }
         });
     }
