@@ -14,6 +14,7 @@ public interface SendTieContract {
         String getTieContent() ;//获取内容
         String geTietType() ;//获取板块
         void sendResult(boolean isSuccess) ;//发帖结果
+        void showMsg(String msg);
     }
     interface IPresenter{
         void sendTie() ;//发布帖子

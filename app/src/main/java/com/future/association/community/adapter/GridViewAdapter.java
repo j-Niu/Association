@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 
+import com.bumptech.glide.Glide;
 import com.future.association.R;
 import com.future.association.community.base.BaseListAdapter;
+import com.future.association.community.model.PlateInfo;
 import com.future.association.community.utils.ScreenUtils;
 import com.future.association.databinding.ItemGridBinding;
 
@@ -15,31 +17,43 @@ import com.future.association.databinding.ItemGridBinding;
  * Created by HX·罗 on 2017/7/3.
  */
 
-public class GridViewAdapter extends BaseListAdapter {
+public class GridViewAdapter extends BaseListAdapter<PlateInfo> {
 
     private final int width;
+    private int limitCount = 5 ;
 
-    public GridViewAdapter(Context context){
+    public GridViewAdapter(Context context) {
         super(context);
         width = ScreenUtils.getScreenWidth(context);
-        datas.add("公共板块") ;
-        datas.add("区域板块1") ;
-        datas.add("区域板块2") ;
-        datas.add("区域板块3") ;
-        datas.add("区域板块4") ;
-        datas.add("更多") ;
+    }
+
+    @Override
+    public int getCount() {
+        return super.getCount() > limitCount ? limitCount+1 : super.getCount();
+    }
+
+    public void setLimitCount(int limitCount) {
+        this.limitCount = limitCount;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = inflater.inflate(R.layout.item_grid,null) ;
+        convertView = inflater.inflate(R.layout.item_grid, null);
 
         AbsListView.LayoutParams param = new AbsListView.LayoutParams(
                 ViewGroup.LayoutParams.FILL_PARENT,
-                width/3);
+                width / 3);
         convertView.setLayoutParams(param);
-        ItemGridBinding binding = DataBindingUtil.bind(convertView) ;
-        binding.setContent(getItem(position).toString());
+        ItemGridBinding binding = DataBindingUtil.bind(convertView);
+        Glide.with(context)
+                .load(datas.get(position).getImage())
+                .error(R.drawable.ic_demo)
+                .into(binding.ivImg) ;
+        if (getCount() > limitCount && position == limitCount) {
+            binding.setContent("更多");
+        } else {
+            binding.setContent(getItem(position).getName());
+        }
         return convertView;
     }
 

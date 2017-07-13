@@ -1,19 +1,20 @@
 package com.future.association.community.view;
 
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.future.association.R;
-import com.future.association.community.adapter.BannersAdapter;
+import com.future.association.community.adapter.TieListAdapter;
 import com.future.association.community.base.BaseActivity;
 import com.future.association.community.base.EndlessRecyclerOnScrollListener;
-import com.future.association.community.contract.BannerContract;
+import com.future.association.community.contract.TieListContract;
 import com.future.association.community.model.BannerInfo;
-import com.future.association.community.presenter.BannerPresenter;
+import com.future.association.community.model.MsgNotifyInfo;
+import com.future.association.community.model.PlateInfo;
+import com.future.association.community.model.TieInfo;
+import com.future.association.community.presenter.TieListPresenter;
 import com.future.association.community.utils.ActivityUtils;
-import com.future.association.community.utils.ConstantUtil;
 import com.future.association.databinding.ActivityBannerBinding;
 
 import java.util.ArrayList;
@@ -22,12 +23,13 @@ import java.util.ArrayList;
  * Created by HX·罗 on 2017/7/4.
  */
 
-public class BannerActivity extends BaseActivity<ActivityBannerBinding> implements BannerContract.IView{
+public class TieListActivity extends BaseActivity<ActivityBannerBinding> implements TieListContract.IView {
 
-    private BannersAdapter adapter;
-    private ArrayList<BannerInfo> bannerInfos;
-    private BannerContract.IPresenter presenter;
+    private TieListAdapter adapter;
+    private ArrayList<TieInfo> tieInfos;
+    private TieListContract.IPresenter presenter;
     private LinearLayoutManager linearLayoutManager;
+    private PlateInfo plateInfo;
 
     @Override
     public int setContentView() {
@@ -42,12 +44,13 @@ public class BannerActivity extends BaseActivity<ActivityBannerBinding> implemen
 
     @Override
     public void initData() {
-        bannerInfos = new ArrayList<>();
-        viewBinding.layoutTitleRightTv.setTitle("板块名");
+        plateInfo = getIntent().getParcelableExtra("plateInfo");
+        tieInfos = new ArrayList<>();
+        viewBinding.layoutTitleRightTv.setTitle(plateInfo.getName());
         viewBinding.layoutTitleRightTv.setRightFun("发帖");
-        adapter = new BannersAdapter(context, bannerInfos);
+        adapter = new TieListAdapter(context, tieInfos);
         viewBinding.rcvTie.setAdapter(adapter);
-        presenter = new BannerPresenter(this);
+        presenter = new TieListPresenter(this, context);
         presenter.getData(1);
     }
 
@@ -60,29 +63,45 @@ public class BannerActivity extends BaseActivity<ActivityBannerBinding> implemen
             }
         });
         viewBinding.layoutTitleRightTv.setViewClickListener(this);
-        adapter.setItemClickListener(new BannersAdapter.OnItemClickListener() {
+        adapter.setItemClickListener(new TieListAdapter.OnItemClickListener() {
             @Override
             public void itemClick(int position) {
-                ActivityUtils.startActivityIntent(context,TieDetailActivity.class);
+                Bundle bundle = new Bundle() ;
+                bundle.putParcelable("tieInfo",tieInfos.get(position));
+                ActivityUtils.startActivityIntent(context, TieDetailActivity.class,bundle);
             }
         });
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
             case R.id.iv_title_right_tv:
-                ActivityUtils.startActivityIntent(context,SendTieActivity.class);
+                ActivityUtils.startActivityIntent(context, SendTieActivity.class,getIntent().getExtras());
                 break;
         }
     }
 
     @Override
-    public void setData(ArrayList<BannerInfo> bannerInfos) {
-        this.bannerInfos.addAll(bannerInfos);
+    public void setData(ArrayList<TieInfo> tieInfos) {
+        this.tieInfos.addAll(tieInfos);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public String getPlateId() {
+        if (plateInfo != null) {
+            return plateInfo.getId();
+        }else{
+            return "" ;
+        }
+    }
+
+    @Override
+    public void showMsg(String msg) {
+        showShortToast(msg);
     }
 }

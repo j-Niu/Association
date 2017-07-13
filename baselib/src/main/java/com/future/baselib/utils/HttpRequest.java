@@ -86,8 +86,8 @@ public class HttpRequest<T extends BaseResponse> {
     }
 
     public HttpRequest addParams(TreeMap<String,String> params){
-        if (params == null) {
-            params = new TreeMap<>();
+        if (this.params == null) {
+            this.params = new TreeMap<>();
         }
         this.params.putAll(params);
         return this;

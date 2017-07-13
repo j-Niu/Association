@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.future.association.R;
 import com.future.association.community.adapter.GridViewAdapter;
@@ -16,9 +17,11 @@ import com.future.association.community.adapter.MsgNotifyAdapter;
 import com.future.association.community.base.EndlessRecyclerOnScrollListener;
 import com.future.association.community.contract.CommunityContract;
 import com.future.association.community.model.MsgNotifyInfo;
+import com.future.association.community.model.PlateInfo;
 import com.future.association.community.presenter.CommunityPresenter;
 import com.future.association.community.utils.ActivityUtils;
-import com.future.association.community.view.BannerActivity;
+import com.future.association.community.view.AllPlateActivity;
+import com.future.association.community.view.TieListActivity;
 import com.future.association.community.view.NotifyDetailActivity;
 import com.future.association.databinding.FragmentCommunityBinding;
 
@@ -28,7 +31,7 @@ import java.util.ArrayList;
  * 社区Fragment
  * A simple {@link Fragment} subclass.
  */
-public class CommunityFragment extends Fragment implements CommunityContract.IView{
+public class CommunityFragment extends Fragment implements CommunityContract.IView {
 
 
     private FragmentCommunityBinding viewBinding;
@@ -36,6 +39,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
     private ArrayList<MsgNotifyInfo> notifyInfos;
     private CommunityContract.IPresenter presenter;
     private LinearLayoutManager linearLayoutManager;
+    private GridViewAdapter adapter;
 
     public CommunityFragment() {
         // Required empty public constructor
@@ -50,6 +54,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
         viewBinding = DataBindingUtil.bind(contentView);
         return contentView;
     }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -60,20 +65,25 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
 
     private void initView() {
         viewBinding.layoutTitle.ivBack.setVisibility(View.GONE);
-        linearLayoutManager = new LinearLayoutManager(getContext()) ;
+        linearLayoutManager = new LinearLayoutManager(getContext());
         viewBinding.rcvMsg.setLayoutManager(linearLayoutManager);
     }
 
     private void initData(Bundle arguments) {
         notifyInfos = new ArrayList<>();
         viewBinding.layoutTitle.setTitle("社区");
-        GridViewAdapter adapter = new GridViewAdapter(getContext()) ;
+
+        adapter = new GridViewAdapter(getContext());
         viewBinding.gv.setAdapter(adapter);
+
         notifyAdapter = new MsgNotifyAdapter(getContext(), notifyInfos);
         viewBinding.rcvMsg.setAdapter(notifyAdapter);
-        presenter = new CommunityPresenter(this);
+
+        presenter = new CommunityPresenter(this, getContext());
+        presenter.getPlateList();
         presenter.getData(1);
     }
+
     public void initListener() {
         viewBinding.rcvMsg.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
             @Override
@@ -84,13 +94,25 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
         viewBinding.gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ActivityUtils.startActivityIntent(getContext(),BannerActivity.class);
+                PlateInfo plateInfo = adapter.getItem(position);
+                Bundle bundle = new Bundle();
+                Class target = null;
+                if (position < 5) {
+                    target = TieListActivity.class;
+                    bundle.putParcelable("plateInfo", plateInfo);
+                } else {//更多
+                    target = AllPlateActivity.class;
+                }
+                bundle.putParcelableArrayList("plateInfos", adapter.datas);
+                ActivityUtils.startActivityIntent(getContext(), target, bundle);
             }
         });
         notifyAdapter.setItemClickListener(new MsgNotifyAdapter.OnItemClickListener() {
             @Override
             public void itemClick(int position) {
-                ActivityUtils.startActivityIntent(getContext(),NotifyDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("notifyInfo", notifyAdapter.getItem(position));
+                ActivityUtils.startActivityIntent(getContext(), NotifyDetailActivity.class, bundle);
             }
         });
     }
@@ -100,4 +122,16 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
         this.notifyInfos.addAll(notifyInfos);
         notifyAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void setPlateList(ArrayList<PlateInfo> plateInfos) {
+        adapter.datas.addAll(plateInfos);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showMsg(String msg) {
+        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+    }
+
 }
