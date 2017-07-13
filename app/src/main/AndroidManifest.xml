@@ -56,8 +56,8 @@
         <activity android:name=".login.RegisterSuccessActivity" />
         <activity android:name=".questionnaire.QuestionnaireWebActivity" />
         <activity android:name=".questionnaire.QuestionnaireEndActivity" />
-        <activity android:name=".supervice.SuperviceDetailActivity" />
-        <activity android:name=".supervice.SuperviceApplyActivity" />
+        <activity android:name=".supervice.view.SuperviceDetailActivity" />
+        <activity android:name=".supervice.view.SuperviceApplyActivity" />
         <!-- 我的模块 -->
         <activity android:name=".personal.MyLevelActivity" />
         <activity android:name=".personal.MyResponseActivity" />
