@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.future.association.R;
 import com.future.association.databinding.DialogResultBinding;
 import com.future.association.databinding.DialogSelectBinding;
-import com.future.association.databinding.DialogShowTipBinding;
 
 /**
  * Description:显示指定组件的对话框,并跳转至指定的Activity
@@ -63,27 +62,6 @@ public class DialogUtils {
         }
         dialog.show();
         dialog.setContentView(view);
-    }
-
-    /**
-     * 自定义提示信息
-     * @param context
-     * @param content
-     */
-    public static void showTipDialog(Context context,String content){
-        final AlertDialog dialog = new AlertDialog.Builder(context).create();
-        dialog.getWindow().setDimAmount(0f);
-        View view = View.inflate(context,R.layout.dialog_show_tip,null) ;
-        DialogShowTipBinding binding = DataBindingUtil.bind(view) ;
-        binding.setContent(content);
-        dialog.show();
-        dialog.setContentView(view);
-        view.postDelayed(new Runnable() {//2秒后自动消失
-            @Override
-            public void run() {
-                dialog.dismiss();
-            }
-        },2000) ;
     }
 
     /**

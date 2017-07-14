@@ -34,7 +34,7 @@ public class TieDetailPresenter implements TieDetailContract.IPresenter {
     public void getData(int currentPage) {
 
 //        dialog.show();
-        CommunityRequest.getTieReply(context, iView.getTieId(), new HttpRequest.OnNetworkListener<DataResponse>() {
+        CommunityRequest.getTieReply(context, iView.getTieId(),currentPage, new HttpRequest.OnNetworkListener<DataResponse>() {
             @Override
             public void onSuccess(DataResponse response) {
                 iView.setData(response.infos);

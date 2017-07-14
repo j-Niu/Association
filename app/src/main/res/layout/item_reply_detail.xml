@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:visibility="@{isLast?View.GONE:View.VISIBLE}"
             android:layout_alignParentBottom="true"
-            android:src="@drawable/inset_recycle_item_divider"
+            android:src="@drawable/shape_recycle_item_divider"
             />
     </LinearLayout>
 
