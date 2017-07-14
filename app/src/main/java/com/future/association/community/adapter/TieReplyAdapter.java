@@ -12,8 +12,10 @@ import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.future.association.R;
+import com.future.association.community.model.TieInfo;
 import com.future.association.community.model.TieReplyInfo;
 import com.future.association.community.utils.ActivityUtils;
+import com.future.association.community.utils.DateUtils;
 import com.future.association.community.utils.DialogUtils;
 import com.future.association.community.utils.ScreenUtils;
 import com.future.association.community.view.WeiGuiActivity;
@@ -21,6 +23,8 @@ import com.future.association.databinding.ItemReplyDetailBinding;
 import com.future.association.databinding.PopupTie1Binding;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import static com.future.association.R.*;
 import static com.future.association.R.layout.*;
@@ -31,14 +35,16 @@ import static com.future.association.R.layout.*;
 
 public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHolder> {
 
-    public interface Callback{
-        void delReply(int position) ;
-        void weigui(int position) ;
+    public interface Callback {
+        void delReply(int position);
+
+        void weigui(int position);
     }
-    private Context context ;
+
+    private Context context;
     public ArrayList<TieReplyInfo> tieReplyInfos;
     private RecyclerView mRecycler;
-    private Callback callback ;
+    private Callback callback;
 
     public TieReplyAdapter(Context context, ArrayList<TieReplyInfo> tieReplyInfos) {
         this.context = context;
@@ -51,10 +57,10 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.item_reply_detail,null) ;
+        View view = View.inflate(context, R.layout.item_reply_detail, null);
         view.setLayoutParams(new RecyclerView.LayoutParams(ScreenUtils.getScreenWidth(context),
                 RecyclerView.LayoutParams.WRAP_CONTENT));
-        ViewHolder holder = new ViewHolder(view) ;
+        ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
@@ -66,9 +72,9 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if(position == tieReplyInfos.size()-1){
+        if (position == tieReplyInfos.size() - 1) {
             holder.binding.setIsLast(true);
-        }else{
+        } else {
             holder.binding.setIsLast(false);
         }
         holder.setData(position);
@@ -76,37 +82,40 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
 
     @Override
     public int getItemCount() {
+        dataSort();
         return tieReplyInfos.size();
     }
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        ItemReplyDetailBinding binding ;
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ItemReplyDetailBinding binding;
         private PopupWindow popupWindow;
         private PopupTie1Binding popupTie1Binding;
         private View view;
-        private int position ;
+        private int position;
 
         public ViewHolder(final View itemView) {
             super(itemView);
             initView();
-            initListener() ;
+            initListener();
         }
 
         /**
          * 设置数据
+         *
          * @param position
          */
-        public void setData(int position){
-            binding.setReplyInfo(tieReplyInfos.get(position)) ;
+        public void setData(int position) {
+            binding.setReplyInfo(tieReplyInfos.get(position));
             Glide.with(context)
                     .load(tieReplyInfos.get(position).getAvatar_url())
                     .error(drawable.ic_demo)
-                    .into(binding.civHead) ;
-            this.position = position ;
+                    .into(binding.civHead);
+            this.position = position;
         }
 
         private void initView() {
-            binding = DataBindingUtil.bind(itemView) ;
-            view = View.inflate(context, popup_tie1,null);
+            binding = DataBindingUtil.bind(itemView);
+            view = View.inflate(context, popup_tie1, null);
             popupTie1Binding = DataBindingUtil.bind(view);
         }
 
@@ -117,24 +126,24 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case id.iv_more:
                     showPopupWindow();
-                    break ;
+                    break;
                 case id.tv_del:
                     popupWindow.dismiss();
                     DialogUtils.showDialog4View(context, dialog_sure, id.tv_positive,
-                            id.tv_nagtive, "删除该回复？",new DialogUtils.EditContentDialogListener() {
-                        @Override
-                        public void positive(String content) {
-                            callback.delReply(position);
-                        }
+                            id.tv_nagtive, "删除该回复？", new DialogUtils.EditContentDialogListener() {
+                                @Override
+                                public void positive(String content) {
+                                    callback.delReply(position);
+                                }
 
-                        @Override
-                        public void nagtive() {
+                                @Override
+                                public void nagtive() {
 
-                        }
-                    });
+                                }
+                            });
                     break;
                 case id.tv_weigui:
                     popupWindow.dismiss();
@@ -143,6 +152,7 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
                     break;
             }
         }
+
         private void showPopupWindow() {
             if (popupWindow == null) {
                 popupWindow = new PopupWindow(context);
@@ -163,7 +173,26 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
 
                 popupWindow.setBackgroundDrawable(new BitmapDrawable());
             }
-            popupWindow.showAsDropDown(binding.ivMore,0,10);
+            popupWindow.showAsDropDown(binding.ivMore, 0, 10);
+        }
+    }
+
+    /**
+     * 对数据排序
+     */
+    public void dataSort() {
+        Comparator comp = new SortComparator();
+        Collections.sort(tieReplyInfos, comp);
+    }
+
+    public class SortComparator implements Comparator {
+        @Override
+        public int compare(Object lhs, Object rhs) {
+            TieReplyInfo a = (TieReplyInfo) lhs;
+            TieReplyInfo b = (TieReplyInfo) rhs;
+            long timeA = DateUtils.getStamp4Date(a.getCreate_time(), "yyyy-MM-dd HH:mm:ss");
+            long timeB = DateUtils.getStamp4Date(b.getCreate_time(), "yyyy-MM-dd HH:mm:ss");
+            return (int) (timeB - timeA);
         }
     }
 }

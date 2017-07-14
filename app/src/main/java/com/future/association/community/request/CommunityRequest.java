@@ -10,6 +10,7 @@ import com.future.association.community.model.TieDetailInfo;
 import com.future.association.community.model.TieInfo;
 import com.future.association.community.model.TieReplyInfo;
 import com.future.association.community.model.WGCauseInfo;
+import com.future.association.community.utils.ConstantUtil;
 import com.future.baselib.utils.HttpRequest;
 
 import java.util.TreeMap;
@@ -62,6 +63,7 @@ public class CommunityRequest {
         TreeMap<String,String> params = new TreeMap<>() ;
         params.put("apiCode",RequestConfig.CODE_NOTIFY_LIST) ;
         params.put("page",page+"") ;
+        params.put("size", ConstantUtil.PAGE_SIZE) ;
         params.put("userToken",MyApp.getUserToken()) ;
         requestData(context,params,new DataResponse<MsgNotifyInfo>().init(MsgNotifyInfo.class),listener);
     }
@@ -77,6 +79,7 @@ public class CommunityRequest {
         TreeMap<String,String> params = new TreeMap<>() ;
         params.put("apiCode",RequestConfig.CODE_TIE_LIST) ;
         params.put("page",page+"") ;
+        params.put("size", ConstantUtil.PAGE_SIZE) ;
         params.put("id",id) ;
         requestData(context,params,new DataResponse<TieInfo>().init(TieInfo.class),listener);
     }
@@ -126,6 +129,7 @@ public class CommunityRequest {
         params.put("apiCode",RequestConfig.CODE_TIE_REPLY) ;
         params.put("id",id) ;
         params.put("page",page+"") ;
+        params.put("size", ConstantUtil.PAGE_SIZE) ;
         params.put("userToken",MyApp.getUserToken()) ;
         requestData(context,params,new DataResponse<TieReplyInfo>().init(TieReplyInfo.class),listener);
     }
@@ -215,6 +219,7 @@ public class CommunityRequest {
         params.put("apiCode",RequestConfig.CODE_NOTIFY_REPLY) ;
         params.put("id",id) ;
         params.put("page",page+"") ;
+        params.put("size", ConstantUtil.PAGE_SIZE) ;
         params.put("userToken",MyApp.getUserToken()) ;
         requestData(context,params,new DataResponse<NotifyReplyInfo>().init(NotifyReplyInfo.class),listener);
     }

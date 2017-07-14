@@ -9,10 +9,14 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.future.association.R;
 import com.future.association.community.model.NotifyReplyInfo;
+import com.future.association.community.model.TieReplyInfo;
+import com.future.association.community.utils.DateUtils;
 import com.future.association.community.utils.ScreenUtils;
 import com.future.association.databinding.ItemMsgDetailBinding;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by HX·罗 on 2017/7/3.
@@ -60,6 +64,7 @@ public class NotifyDetailAdapter extends RecyclerView.Adapter<NotifyDetailAdapte
 
     @Override
     public int getItemCount() {
+        dataSort();
         return replyInfos.size();
     }
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -67,6 +72,24 @@ public class NotifyDetailAdapter extends RecyclerView.Adapter<NotifyDetailAdapte
         public ViewHolder(final View itemView) {
             super(itemView);
             binding = DataBindingUtil.bind(itemView) ;
+        }
+    }
+    /**
+     * 对数据排序
+     */
+    public void dataSort() {
+        Comparator comp = new SortComparator();
+        Collections.sort(replyInfos, comp);
+    }
+
+    public class SortComparator implements Comparator {
+        @Override
+        public int compare(Object lhs, Object rhs) {
+            NotifyReplyInfo a = (NotifyReplyInfo) lhs;
+            NotifyReplyInfo b = (NotifyReplyInfo) rhs;
+            long timeA = DateUtils.getStamp4Date(a.getCreate_time(), "yyyy-MM-dd HH:mm:ss");
+            long timeB = DateUtils.getStamp4Date(b.getCreate_time(), "yyyy-MM-dd HH:mm:ss");
+            return (int) (timeB - timeA);
         }
     }
 }
