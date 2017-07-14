@@ -1,6 +1,6 @@
 package com.future.association.community.request;
 
-import com.future.association.community.utils.JSONUtils;
+//import com.future.association.community.utils.JSONUtils;
 import com.future.association.community.utils.TextUtil;
 import com.future.baselib.entity.BaseResponse;
 
@@ -23,9 +23,9 @@ public class DataResponse<T extends Object> extends BaseResponse {
     public void parseInfo(String content){
         try{
             if (!TextUtil.isEmpty(content) && content.startsWith("{")) {
-                this.info = (T) JSONUtils.jsonToObject(content,clazz);
+//                this.info = (T) JSONUtils.jsonToObject(content,clazz);
             } else if (!TextUtil.isEmpty(content) && content.startsWith("[")) {
-                this.infos = JSONUtils.jsonToArrayObj(content, clazz);
+//                this.infos = JSONUtils.jsonToArrayObj(content, clazz);
             }
         }catch(Exception e){
             e.printStackTrace();

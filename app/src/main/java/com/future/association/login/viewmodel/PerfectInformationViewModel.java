@@ -1,4 +1,4 @@
-package com.future.association.login;
+package com.future.association.login.viewmodel;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -17,11 +17,18 @@ import android.view.WindowManager;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.future.association.R;
+import com.future.association.community.utils.TextUtil;
 import com.future.association.databinding.ActivityPerfectInformationBinding;
 import com.future.association.databinding.DialogSelectSexBinding;
+import com.future.association.login.RegisterSuccessActivity;
+import com.future.association.login.UserApi;
 import com.future.association.login.bean.GetJsonDataUtil;
 import com.future.association.login.bean.JsonBean;
+import com.future.association.login.bean.VerifyResponse;
 import com.future.association.login.util.CommonUtil;
+import com.future.baselib.entity.BaseResponse;
+import com.future.baselib.utils.HttpRequest;
+import com.future.baselib.utils.ToastUtils;
 import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.view.RxView;
 
@@ -40,6 +47,7 @@ import io.reactivex.functions.Consumer;
  */
 
 public class PerfectInformationViewModel {
+    private UserApi userApi;
     private ActivityPerfectInformationBinding binding;
     private Activity activity;
     private OptionsPickerView pvCustomOptions;
@@ -49,6 +57,8 @@ public class PerfectInformationViewModel {
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
     private DialogSelectSexBinding sexBinding;
     private Dialog sexDialog;
+    private String phoneNumber, code, password;
+
 
     public ObservableField<String> userName = new ObservableField<>();
     public ObservableField<String> location = new ObservableField<>();
@@ -56,9 +66,11 @@ public class PerfectInformationViewModel {
     public ObservableBoolean sex = new ObservableBoolean(true);
     public ObservableField<String> age = new ObservableField<>();
 
+
     public PerfectInformationViewModel(Activity activity, ActivityPerfectInformationBinding binding) {
         this.activity = activity;
         this.binding = binding;
+        userApi = new UserApi();
     }
 
 
@@ -313,8 +325,27 @@ public class PerfectInformationViewModel {
                     public void accept(@NonNull Object o) throws Exception {
                         //执行注册，注册成功之后直接跳转到注册页面
                         //执行null检测
-                        CommonUtil.startActivity(activity, RegisterSuccessActivity.class);
-                        Log.e("ttttt", "data---->" + "usernam:" + userName.get() + "--sex:" + sex.get() + "--location:" + location.get() + "--education" + education.get() + "--age:" + age.get());
+                        if (!TextUtil.isEmpty(userName.get())
+                                && !TextUtil.isEmpty(userName.get())
+                                && !TextUtil.isEmpty(location.get())
+                                && !TextUtil.isEmpty(education.get())
+                                && !TextUtil.isEmpty(age.get()))
+                            //执行注册
+                            userApi
+                                    .register(activity, phoneNumber, code, password, userName.get(), location.get(), sex.get() ? "1" : "2", education.get())
+                                    .setListener(new HttpRequest.OnNetworkListener() {
+                                        @Override
+                                        public void onSuccess(BaseResponse response) {
+                                            CommonUtil.startActivity(activity, RegisterSuccessActivity.class);
+                                        }
+
+                                        @Override
+                                        public void onFail(String message) {
+                                            ToastUtils toastUtils = new ToastUtils(activity);
+                                            toastUtils.show("" + message);
+                                        }
+                                    })
+                                    .start(new VerifyResponse());
                     }
                 });
     }
@@ -362,6 +393,39 @@ public class PerfectInformationViewModel {
         this.age = age;
     }
 
-//endregion
+    public UserApi getUserApi() {
+        return userApi;
+    }
+
+    public void setUserApi(UserApi userApi) {
+        this.userApi = userApi;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+    //endregion
 
 }

@@ -40,7 +40,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         StatusUtils.setStatusbarColor(this, getResources().getColor(R.color.colorPrimary));
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        startActivity(LoginActivity.class);
     }
 
     @Override
