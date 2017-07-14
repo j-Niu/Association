@@ -5,7 +5,7 @@
         <import type="android.view.View"/>
        <variable
            name="findPwdVerifyViewModel"
-           type="com.future.association.login.FindPwdVerifyViewModel"/>
+           type="com.future.association.login.viewmodel.FindPwdVerifyViewModel"/>
     </data>
 
     <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

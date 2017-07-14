@@ -7,7 +7,7 @@
 
         <variable
             name="findPwdResetViewModel"
-            type="com.future.association.login.FindPwdResetViewModel" />
+            type="com.future.association.login.viewmodel.FindPwdResetViewModel" />
     </data>
 
     <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
