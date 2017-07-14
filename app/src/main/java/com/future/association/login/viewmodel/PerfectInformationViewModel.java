@@ -1,4 +1,4 @@
-package com.future.association.login;
+package com.future.association.login.viewmodel;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -20,6 +20,8 @@ import com.future.association.R;
 import com.future.association.community.utils.TextUtil;
 import com.future.association.databinding.ActivityPerfectInformationBinding;
 import com.future.association.databinding.DialogSelectSexBinding;
+import com.future.association.login.RegisterSuccessActivity;
+import com.future.association.login.UserApi;
 import com.future.association.login.bean.GetJsonDataUtil;
 import com.future.association.login.bean.JsonBean;
 import com.future.association.login.bean.VerifyResponse;

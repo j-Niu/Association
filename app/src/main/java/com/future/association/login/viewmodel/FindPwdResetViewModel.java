@@ -1,4 +1,4 @@
-package com.future.association.login;
+package com.future.association.login.viewmodel;
 
 import android.app.Activity;
 import android.databinding.ObservableField;
@@ -11,6 +11,9 @@ import com.future.association.R;
 import com.future.association.common.MainActivity;
 import com.future.association.common.MyApp;
 import com.future.association.databinding.ActivityFindPwdResetBinding;
+import com.future.association.login.LoginActivity;
+import com.future.association.login.MyToast;
+import com.future.association.login.UserApi;
 import com.future.association.login.bean.VerifyResponse;
 import com.future.association.login.util.CommonUtil;
 import com.future.baselib.entity.BaseResponse;

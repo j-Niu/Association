@@ -1,4 +1,4 @@
-package com.future.association.login;
+package com.future.association.login.viewmodel;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -22,6 +22,10 @@ import com.future.association.common.MainActivity;
 import com.future.association.databinding.ActivityLoginBinding;
 import com.future.association.databinding.DialogLoginErrorBinding;
 import com.future.association.databinding.DialogLoginProtectBinding;
+import com.future.association.login.FindPwdResetActivity;
+import com.future.association.login.FindPwdVerifyActivity;
+import com.future.association.login.RegisterActivity;
+import com.future.association.login.UserApi;
 import com.future.association.login.bean.UserResponse;
 import com.future.association.login.util.CommonUtil;
 import com.future.baselib.entity.BaseResponse;
