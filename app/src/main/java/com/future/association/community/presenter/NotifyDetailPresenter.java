@@ -32,7 +32,7 @@ public class NotifyDetailPresenter implements NotifyDetailContract.IPresenter {
 
     @Override
     public void getData(int currentPage) {
-        CommunityRequest.getNotifyReply(context, iView.getNofityId(), new HttpRequest.OnNetworkListener<DataResponse>() {
+        CommunityRequest.getNotifyReply(context, iView.getNofityId(),currentPage, new HttpRequest.OnNetworkListener<DataResponse>() {
             @Override
             public void onSuccess(DataResponse response) {
                 iView.setData(response.infos);

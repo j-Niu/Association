@@ -28,7 +28,7 @@ public class CommunityPresenter implements CommunityContract.IPresenter{
     @Override
     public void getData(int currentPage) {
         dialog.show();
-        CommunityRequest.getNotifyList(context, new HttpRequest.OnNetworkListener<DataResponse>() {
+        CommunityRequest.getNotifyList(context,currentPage, new HttpRequest.OnNetworkListener<DataResponse>() {
             @Override
             public void onSuccess(DataResponse response) {
                 dialog.close();
