@@ -29,8 +29,8 @@ import java.util.List;
 public class SuperviceViewModel {
     private final Fragment fragment;
     private final FragmentSuperviceBinding binding;
-    private final ObservableField<SuperviceAdapter> adapter = new ObservableField<>();
-    private final ObservableArrayList<String> items = new ObservableArrayList<>();
+    public final ObservableField<SuperviceAdapter> adapter = new ObservableField<>();
+    public final ObservableArrayList<String> items = new ObservableArrayList<>();
 
     public SuperviceViewModel(Fragment fragment, FragmentSuperviceBinding binding) {
         this.fragment = fragment;
@@ -44,7 +44,7 @@ public class SuperviceViewModel {
         View head = getHead();
         superviceAdapter.addHeaderView(head,0);
         adapter.set(superviceAdapter);
-
+        initListener();
         //TODO 测试
 //        List<String> test = new ArrayList<>();
         for (int i = 0; i < 70; i++) {
