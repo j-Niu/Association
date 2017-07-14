@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.future.association.personal.ChangePwdActivity">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fifteen"
+        android:background="@color/color_f8f8f8" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small_15"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_small_15">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="原登录密码"
+            android:textColor="#333333"
+            android:textSize="30px" />
+
+        <EditText
+            android:id="@+id/edtMyOldPwd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:hint="请输入原登录密码"
+            android:inputType="numberPassword"
+            android:textColorHint="#999999"
+            android:textSize="30px" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_line_05"
+        android:background="@color/color_dcdcdc"
+        android:paddingLeft="@dimen/padding_small_15"
+        android:paddingRight="@dimen/padding_small_15" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small_15"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_small_15">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="新登录密码"
+            android:textColor="#333333"
+            android:textSize="30px" />
+
+        <EditText
+            android:id="@+id/edtMyNewPwd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:hint="请输入6~16位数字与字母组合"
+            android:inputType="numberPassword"
+            android:textColorHint="#999999"
+            android:textSize="30px" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_line_05"
+        android:background="@color/color_dcdcdc"
+        android:paddingLeft="@dimen/padding_small_15"
+        android:paddingRight="@dimen/padding_small_15" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small_15"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_small_15">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="重复新密码"
+            android:textColor="#333333"
+            android:textSize="30px" />
+
+        <EditText
+            android:id="@+id/edtMyNewPwdAgaing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:hint="请再次输入新密码"
+            android:inputType="numberPassword"
+            android:textColorHint="#999999"
+            android:textSize="30px" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_line_05"
+        android:background="@color/color_dcdcdc"
+        android:paddingLeft="@dimen/padding_small_15"
+        android:paddingRight="@dimen/padding_small_15" />
+
+    <Button
+        android:id="@+id/btMyConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/head_hight_45"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/margin_small_15"
+        android:layout_marginRight="@dimen/margin_small_15"
+        android:layout_marginTop="@dimen/thirtyFive"
+        android:background="@drawable/shape_more"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_normal_16" />
+</LinearLayout>

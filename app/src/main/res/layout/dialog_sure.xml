@@ -11,7 +11,7 @@
             android:layout_height="226px"
             android:orientation="vertical"
             android:layout_centerInParent="true"
-            android:divider="@drawable/inset_recycle_item_divider"
+            android:divider="@drawable/shape_recycle_item_divider"
             android:showDividers="middle"
             android:background="@drawable/shape_dialog_radiu">
             <TextView
@@ -44,7 +44,7 @@
                 <View
                     android:layout_width="1px"
                     android:layout_height="match_parent"
-                    android:background="#0E000000"
+                    android:background="#DCDCDC"
                     />
                 <TextView
                     android:layout_width="0dp"

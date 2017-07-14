@@ -3,6 +3,9 @@
 
     <data>
         <variable
+            name="isTop"
+            type="String"/>
+        <variable
             name="clickListener"
             type="android.view.View.OnClickListener"/>
     </data>
@@ -29,7 +32,7 @@
                 android:onClick="@{clickListener}"
                 android:paddingLeft="32px"
                 android:paddingRight="64px"
-                android:text="置顶"
+                android:text="@{isTop}"
                 android:textColor="#FFFFFF"
                 android:textSize="30px" />
 

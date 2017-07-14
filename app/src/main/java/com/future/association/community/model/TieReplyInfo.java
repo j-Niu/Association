@@ -5,32 +5,62 @@ package com.future.association.community.model;
  */
 
 public class TieReplyInfo {
-    private String name ;
-    private String clazz ;
-    private String address ;
-    private String content ;
+    private String id ;//回复ID
+    private String uid ;//回复人ID
+    private String nickname ;//回复人昵称
+    private String avatar_url ;//回复人头像
+    private String level ;//回复人等级
+    private String tiezi_id ;//帖子id
+    private String content ;//回复人内容
+    private String create_time ;//回复时间
+    private String address ;//地址
 
-    public TieReplyInfo(String name, String clazz, String address, String content) {
-        this.name = name;
-        this.clazz = clazz;
-        this.address = address;
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getAvatar_url() {
+        return avatar_url;
+    }
+
+    public void setAvatar_url(String avatar_url) {
+        this.avatar_url = avatar_url;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getTiezi_id() {
+        return tiezi_id;
+    }
+
+    public void setTiezi_id(String tiezi_id) {
+        this.tiezi_id = tiezi_id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public String getName() {
-        return name;
+    public String getCreate_time() {
+        return create_time;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getClazz() {
-        return clazz;
-    }
-
-    public void setClazz(String clazz) {
-        this.clazz = clazz;
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
     }
 
     public String getAddress() {
@@ -41,11 +71,19 @@ public class TieReplyInfo {
         this.address = address;
     }
 
-    public String getContent() {
-        return content;
+    public String getId() {
+        return id;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

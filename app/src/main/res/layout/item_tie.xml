@@ -2,9 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <import type="android.view.View"/>
         <variable
-            name="bannerInfo"
-            type="com.future.association.community.model.BannerInfo"/>
+            name="tieInfo"
+            type="com.future.association.community.model.TieInfo"/>
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
             android:maxLines="2"
             android:lineSpacingExtra="20px"
             android:textSize="30px"
-            android:text="@{bannerInfo.title}"
+            android:text="@{tieInfo.title}"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -32,7 +33,7 @@
             android:layout_marginTop="20px"
             android:textColor="#999999"
             android:textSize="24px"
-            android:text="@{bannerInfo.date}"
+            android:text="@{tieInfo.create_time}"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
             android:layout_marginTop="20px"
             android:textColor="#999999"
             android:textSize="24px"
-            android:text="@{bannerInfo.getReplyFormat()}"
+            android:text="@{tieInfo.getReplyFormat()}"
             />
         <TextView
             android:layout_width="80px"
@@ -52,6 +53,7 @@
             android:layout_marginTop="20px"
             android:textColor="#e01a00"
             android:textSize="24px"
+            android:visibility="@{tieInfo.isTop()?View.VISIBLE:View.GONE}"
             android:layout_below="@id/tv_content"
             android:layout_alignParentRight="true"
             android:background="@drawable/shape_top"
@@ -63,7 +65,7 @@
             android:layout_marginTop="30px"
             android:layout_below="@id/tv_date"
             android:layout_alignParentBottom="true"
-            android:src="@drawable/inset_recycle_item_divider"
+            android:src="@drawable/shape_recycle_item_divider"
             />
     </RelativeLayout>
 

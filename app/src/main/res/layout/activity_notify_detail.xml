@@ -46,7 +46,7 @@
                 android:layout_marginTop="20px"
                 android:id="@+id/tv_date"
                 android:textColor="#999999"
-                android:text="@{detailInfo.date}"
+                android:text="@{detailInfo.create_time}"
                 />
             <TextView
                 android:layout_width="wrap_content"

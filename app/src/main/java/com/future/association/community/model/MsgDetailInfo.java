@@ -5,16 +5,19 @@ package com.future.association.community.model;
  */
 
 public class MsgDetailInfo {
-    private String title ;
-    private String date ;
-    private String from ;
-    private String content ;
+    private String id ;//消息通知id
+    private String title ;//消息通知标题
+    private String create_time ;//消息发布时间
+    private String from ;//消息通知来源
+    private String content ;//消息通知发布内容
+    private String uid ;//发布人
 
-    public MsgDetailInfo(String title, String date, String from, String content) {
-        this.title = title;
-        this.date = date;
-        this.from = from;
-        this.content = content;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -25,12 +28,12 @@ public class MsgDetailInfo {
         this.title = title;
     }
 
-    public String getDate() {
-        return date;
+    public String getCreate_time() {
+        return create_time;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
     }
 
     public String getFrom() {
@@ -47,5 +50,13 @@ public class MsgDetailInfo {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

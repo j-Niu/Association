@@ -6,13 +6,13 @@
             name="clickListener"
             type="android.view.View.OnClickListener"/>
         <variable
+            name="plateInfo"
+            type="com.future.association.community.model.PlateInfo"/>
+        <variable
             name="title"
             type="String"/>
         <variable
             name="content"
-            type="String"/>
-        <variable
-            name="typeName"
             type="String"/>
     </data>
     <LinearLayout
@@ -37,7 +37,7 @@
             android:textSize="30px"
             android:paddingLeft="30px"
             android:paddingRight="30px"
-            android:text="@{typeName}" />
+            android:text="@{plateInfo.name}" />
 
         <View
             android:layout_width="match_parent"

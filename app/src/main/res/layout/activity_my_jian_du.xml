@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f8f8f8"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.future.association.personal.MyJianDuActivity">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <ListView
+        android:id="@+id/lvMyJiandu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/color_dcdcdc"
+        android:dividerHeight="@dimen/divider_line_05"
+        android:scrollbars="none"></ListView>
+
+</LinearLayout>

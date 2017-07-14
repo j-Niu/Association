@@ -23,20 +23,39 @@
             android:value="1334" />
 
         <activity android:name=".common.MainActivity"></activity>
-        <activity android:name=".login.LoginActivity">
+        <!--登录模块-->
+        <activity
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--社区模块-->
+        <activity
+            android:name=".login.FindPwdVerifyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.FindPwdResetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.PerfectInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.RegisterSuccessActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 社区模块 -->
         <activity
             android:name=".community.view.NotifyDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity
+     <!--   <activity
             android:name=".community.view.BannerActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />-->
         <activity
             android:name=".community.view.SendTieActivity"
             android:screenOrientation="portrait" />
@@ -48,15 +67,21 @@
             android:name=".community.view.WeiGuiActivity"
             android:screenOrientation="portrait" />
         <!--社区模块-->
-        <activity android:name=".login.FindPwdVerifyActivity" />
-        <activity android:name=".login.FindPwdResetActivity" />
-        <activity android:name=".login.RegisterActivity" />
-        <activity android:name=".login.PerfectInformationActivity" />
-        <activity android:name=".login.RegisterSuccessActivity" />
         <activity android:name=".questionnaire.QuestionnaireWebActivity" />
         <activity android:name=".questionnaire.QuestionnaireEndActivity" />
         <activity android:name=".supervice.SuperviceDetailActivity" />
         <activity android:name=".supervice.SuperviceApplyActivity" />
+        <!-- 我的模块 -->
+        <activity android:name=".personal.MyLevelActivity" />
+        <activity android:name=".personal.MyResponseActivity" />
+        <activity android:name=".personal.MyJianDuActivity" />
+        <activity android:name=".personal.MyNoticeActivity" />
+        <activity android:name=".personal.MyTieziActivity" />
+        <activity android:name=".personal.MyWenJuanActivity" />
+        <activity android:name=".personal.MyTongZhi" />
+        <activity android:name=".personal.MyMoreActivity" />
+        <activity android:name=".personal.AboutUsActivity" />
+        <activity android:name=".personal.ChangePwdActivity"></activity>
     </application>
 
 </manifest>

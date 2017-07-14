@@ -2,9 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener"/>
+        <variable
+            name="tieDetailInfo"
+            type="com.future.association.community.model.TieDetailInfo"/>
         <variable
             name="replyContent"
             type="String"/>
@@ -45,7 +49,7 @@
                     android:layout_marginLeft="20px"
                     android:layout_marginTop="10px"
                     android:layout_toRightOf="@id/civ_head"
-                    android:text="发帖人"
+                    android:text="@{tieDetailInfo.nickname}"
                     android:textColor="#333333"
                     android:textSize="30px" />
                 <TextView
@@ -68,7 +72,7 @@
                     android:layout_marginLeft="20px"
                     android:layout_marginTop="10px"
                     android:layout_toRightOf="@id/civ_head"
-                    android:text="v1"
+                    android:text="@{tieDetailInfo.level}"
                     android:textColor="#666666"
                     android:textSize="24px" />
                 <TextView
@@ -78,7 +82,7 @@
                     android:layout_marginLeft="20px"
                     android:layout_marginTop="10px"
                     android:layout_toRightOf="@id/tv_class"
-                    android:text="浙江省杭州市西湖区"
+                    android:text="@{tieDetailInfo.address}"
                     android:textColor="#666666"
                     android:textSize="24px" />
             </RelativeLayout>
@@ -92,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="20px"
                 android:layout_marginTop="30px"
-                android:text="帖子标题帖子标题帖子标题帖子标题帖子标题帖子标题帖子标题帖子标题帖子标题"
+                android:text="@{tieDetailInfo.title}"
                 android:textSize="30px"
                 android:id="@+id/tv_title"
                 android:layout_below="@id/line"
@@ -101,7 +105,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2017-07-04 15:25"
+                android:text="@{tieDetailInfo.create_time}"
                 android:textColor="#999999"
                 android:id="@+id/tv_date"
                 android:layout_below="@id/tv_title"
@@ -111,7 +115,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="普通帖"
+                android:text="@{tieDetailInfo.typeFormat()}"
                 android:textColor="#999999"
                 android:layout_below="@id/tv_title"
                 android:layout_alignParentRight="true"
@@ -121,7 +125,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文帖子正文"
+                android:text="@{tieDetailInfo.content}"
                 android:textColor="#666666"
                 android:lineSpacingExtra="20px"
                 android:layout_below="@id/tv_date"
