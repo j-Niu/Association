@@ -65,7 +65,7 @@
             android:layout_marginTop="30px"
             android:layout_below="@id/tv_date"
             android:layout_alignParentBottom="true"
-            android:src="@drawable/inset_recycle_item_divider"
+            android:src="@drawable/shape_recycle_item_divider"
             />
     </RelativeLayout>
 
