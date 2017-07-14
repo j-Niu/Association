@@ -7,7 +7,7 @@
 
         <variable
             name="loginViewModel"
-            type="com.future.association.login.LoginViewModel" />
+            type="com.future.association.login.viewmodel.LoginViewModel" />
     </data>
 
     <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
