@@ -2,6 +2,7 @@ package com.future.association.login;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -11,8 +12,10 @@ import android.widget.Toast;
 
 import com.future.association.BR;
 import com.future.association.R;
+import com.future.association.common.MainActivity;
 import com.future.association.common.MyApp;
 import com.future.association.databinding.ActivityLoginBinding;
+import com.future.association.login.util.CommonUtil;
 import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.entity.DefaultResponse;
 import com.future.baselib.utils.HttpRequest;
@@ -40,6 +43,12 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        //判定是否登录
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("islogin", false)) {
+            startActivity(MainActivity.class);
+            finish();
+        }
+
         loginViewModel = new LoginViewModel(this, binding);
         binding.setVariable(BR.loginViewModel, loginViewModel);
         loginViewModel.initLinstener();

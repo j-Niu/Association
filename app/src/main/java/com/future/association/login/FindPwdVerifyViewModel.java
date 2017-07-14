@@ -1,13 +1,17 @@
 package com.future.association.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.future.association.databinding.ActivityFindPwdVerifyBinding;
+import com.future.association.login.bean.VerifyResponse;
 import com.future.association.login.util.CommonUtil;
+import com.future.baselib.entity.BaseResponse;
+import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.PatternUtils;
 import com.future.baselib.utils.ToastUtils;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -34,13 +38,14 @@ public class FindPwdVerifyViewModel {
     public ObservableField<String> smsCode = new ObservableField<>();
     public ObservableField<String> errorMessage = new ObservableField<>();
     public ObservableBoolean clearPhonenumberFlag = new ObservableBoolean(false);
-
+    UserApi userApi;
     ToastUtils toastUtils;
 
     public FindPwdVerifyViewModel(Activity activity, ActivityFindPwdVerifyBinding binding) {
         this.activity = activity;
         this.binding = binding;
         toastUtils = new ToastUtils(activity);
+        userApi = new UserApi();
     }
 
     private void checkPhoneMessage(String phoneNumber, String password, String smsCode) {
@@ -70,7 +75,7 @@ public class FindPwdVerifyViewModel {
                     @Override
                     public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
                         String inputNumber = textViewTextChangeEvent.text().toString();
-                        clearPhonenumberFlag.set(!TextUtils.isEmpty(inputNumber) );
+                        clearPhonenumberFlag.set(!TextUtils.isEmpty(inputNumber));
                         if (!TextUtils.isEmpty(inputNumber) && !mobilePattern(inputNumber)) {
                             errorMessage.set("请输入正确电话号码");
                         } else if (!TextUtils.isEmpty(smsCode.get()) && !verifyPattern(smsCode.get())) {
@@ -105,14 +110,21 @@ public class FindPwdVerifyViewModel {
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
+                        //验证码倒计时
+                        CommonUtil.getVerify(binding.findPwdSendVerifyCode, activity);
                         if (PatternUtils.mobilePattern(toastUtils, phoneNumber.get())) {
-                            if (phoneNumber.get().equals("13547804180")) {
-                                //正确输入密码.执行输入电话号码是否注册检测
-                                MyToast.makeText(activity, "改手机号未注册", Toast.LENGTH_SHORT, 0).show();
-                            } else {
-                                CommonUtil.getVerify(binding.findPwdSendVerifyCode, activity);
-                                CommonUtil.testVerifyDown(activity, 0);
-                            }
+                            HttpRequest request = userApi.getVerifyCode(activity, phoneNumber.get()).setListener(new HttpRequest.OnNetworkListener() {
+                                @Override
+                                public void onSuccess(BaseResponse response) {
+                                    toastUtils.show(response.info);
+                                }
+
+                                @Override
+                                public void onFail(String message) {
+                                    toastUtils.show(message);
+                                }
+                            });
+                            request.start(new VerifyResponse());
                         }
                     }
                 });
@@ -125,7 +137,11 @@ public class FindPwdVerifyViewModel {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
                         if (PatternUtils.mobilePattern(toastUtils, phoneNumber.get()) && CommonUtil.verifyPattern(toastUtils, smsCode.get())) {
-                            CommonUtil.startActivity(activity, FindPwdResetActivity.class);
+                            Intent intent = new Intent(activity, FindPwdResetActivity.class);
+                            intent.putExtra("phoneNumber", phoneNumber.get());
+                            intent.putExtra("code", smsCode.get());
+                            intent.putExtra("type", CommonUtil.RESET_PASSWORD_FORGET);
+                            activity.startActivity(intent);
                         }
                     }
                 });

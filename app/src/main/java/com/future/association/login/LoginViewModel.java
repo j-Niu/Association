@@ -2,24 +2,33 @@ package com.future.association.login;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.future.association.R;
+import com.future.association.common.MainActivity;
 import com.future.association.databinding.ActivityLoginBinding;
 import com.future.association.databinding.DialogLoginErrorBinding;
+import com.future.association.databinding.DialogLoginProtectBinding;
+import com.future.association.login.bean.UserResponse;
 import com.future.association.login.util.CommonUtil;
+import com.future.baselib.entity.BaseResponse;
+import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.PatternUtils;
 import com.future.baselib.utils.ToastUtils;
+import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
@@ -39,8 +48,10 @@ import static com.future.association.login.util.CommonUtil.verifyPattern;
  */
 
 public class LoginViewModel {
+    UserApi userApi = new UserApi();
     private Dialog errorDialog, protectDialog;
     private DialogLoginErrorBinding errorBinding;
+    private DialogLoginProtectBinding protectBinding;
     private Activity activity;
     private ActivityLoginBinding binding;
     public ObservableField<String> phoneNumber = new ObservableField<>();
@@ -54,6 +65,7 @@ public class LoginViewModel {
         this.binding = binding;
         toastUtils = new ToastUtils(activity);
         errorBinding = DataBindingUtil.inflate(activity.getLayoutInflater(), R.layout.dialog_login_error, null, false);
+        protectBinding = DataBindingUtil.inflate(activity.getLayoutInflater(), R.layout.dialog_login_protect, null, false);
     }
 
 
@@ -66,20 +78,46 @@ public class LoginViewModel {
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
-                        if (!TextUtils.isEmpty(errorMessage.get())) {
-                            showErrorDialog();
-                        } else {
-                            //跳转到信息完善页面
-                            if (PatternUtils.mobilePattern(toastUtils, phoneNumber.get()) && PatternUtils.passwordPattern(toastUtils, password.get())) {
-                                if (phoneNumber.get().equals("13547804180")) {
-                                    //测试代码1，执行弹窗，用户第一次登陆，提示修改密码
-                                    showProtectDialog();
-                                } else {
-                                    //测试代码2，提示完善信息，这里是因为找不到入口
-                                    activity.finish();
-                                }
+                        if (PatternUtils.mobilePattern(toastUtils, phoneNumber.get()) && PatternUtils.passwordPattern(toastUtils, password.get())) {
+                            //测试代码2，提示完善信息，这里是因为找不到入口
+                            HttpRequest userResponseHttpRequest = userApi
+                                    .login(activity, phoneNumber.get(), password.get())
+                                    .setListener(new HttpRequest.OnNetworkListener<UserResponse>() {
+                                        @Override
+                                        public void onSuccess(UserResponse response) {
+                                            //获取是否修改账户面膜标志 response.xxx
+                                            String quanxian = response.quanxian;
+                                            if (quanxian.equals("2")) {
+                                                //当获取到的标志位强制修改密码的时候
+                                                //将response保存到缓存目录
+                                                CommonUtil.userResponse = response;
+                                                //展示提示用户修改密码
+                                                showProtectDialog();
+                                            } else {
+                                                //当获取到的标志位不强制修改密码的时候
+                                                Gson gson = new Gson();
+                                                PreferenceManager
+                                                        .getDefaultSharedPreferences(activity)
+                                                        .edit()
+                                                        .putString("user", gson.toJson(response))
+                                                        .putBoolean("islogin", true)
+                                                        .apply();
+                                                //跳转到主页
+                                                CommonUtil.startActivity(activity, MainActivity.class);
+                                            }
+                                        }
 
-                            }
+                                        @Override
+                                        public void onFail(String message) {
+                                            if (CommonUtil.isNumeric(message)) {
+                                                showErrorDialog(message);
+                                            } else {
+                                                toastUtils.show("" + message);
+                                            }
+
+                                        }
+                                    });
+                            userResponseHttpRequest.start(new UserResponse());
                         }
                     }
                 });
@@ -153,9 +191,12 @@ public class LoginViewModel {
     //endregion
 
     //region 弹窗
-    public void showErrorDialog() {
+    public void showErrorDialog(String message) {
         if (errorDialog == null) {
-            createErrorDialog();
+            createErrorDialog(message);
+        }
+        if (errorBinding != null) {
+            errorBinding.loginErrorContent.setText("错误次数过多，请" + message + "分钟后重试");
         }
         errorDialog.show();
     }
@@ -167,9 +208,9 @@ public class LoginViewModel {
         protectDialog.show();
     }
 
-    private void createErrorDialog() {
+    private void createErrorDialog(String message) {
         View view = errorBinding.getRoot();
-        errorBinding.loginErrorContent.setText("错误次数过多，请30分钟后重试");
+//        errorBinding.loginErrorContent.setText("错误次数过多，请" + message + "分钟后重试");
         errorBinding.loginErrorTitle.setText("登陆失败");
         errorDialog = new AlertDialog.Builder(activity).setView(view).create();
         errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));  // 有白色背景，加这句代码
@@ -198,12 +239,11 @@ public class LoginViewModel {
     }
 
     private void createProtectDialog() {
-        View view = errorBinding.getRoot();
-        errorBinding.loginErrorContent.setText("为保护账户安全,请修改密码");
-        errorBinding.loginErrorTitle.setText("提示");
+        View view = protectBinding.getRoot();
+        protectBinding.loginProtectContent.setText("为保护账户安全,请修改密码");
+        protectBinding.loginProtectTitle.setText("提示");
         protectDialog = new AlertDialog.Builder(activity).setView(view).create();
         protectDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));  // 有白色背景，加这句代码
-//        errorDialog.setCancelable(false);
         protectDialog.setCanceledOnTouchOutside(false);
         protectDialog.show();
         Window window = protectDialog.getWindow();
@@ -216,14 +256,15 @@ public class LoginViewModel {
         window.setAttributes(layoutParams);
         //设置监听事件
         RxView
-                .clicks(errorBinding.loginErrorKnown)
+                .clicks(protectBinding.loginProtectKnown)
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
                         if (protectDialog != null) {
                             protectDialog.dismiss();
-                            //同时跳转到修改密码
-                            CommonUtil.startActivity(activity, FindPwdResetActivity.class);
+                            Intent intent = new Intent(activity, FindPwdResetActivity.class);
+                            intent.putExtra("type", CommonUtil.RESET_PASSWORD_SET);
+                            activity.startActivity(intent);
                         }
                     }
                 });

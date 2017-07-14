@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="540px"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/login_error_dialog"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/login_protect_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30px"
+            android:layout_marginTop="50px"
+            android:gravity="center_horizontal"
+            android:text="登陆失败"
+            android:textColor="#333333"
+            android:textSize="34px" />
+
+        <TextView
+            android:id="@+id/login_protect_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="#333333"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/login_protect_divier"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="28px"
+            android:layout_marginTop="32px"
+            android:background="#e0e0e0" />
+
+        <TextView
+            android:id="@+id/login_protect_known"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26px"
+            android:gravity="center_horizontal"
+            android:text="我知道了"
+            android:textColor="#007aff"
+            android:textSize="34px" />
+    </com.zhy.autolayout.AutoLinearLayout>
+</layout>

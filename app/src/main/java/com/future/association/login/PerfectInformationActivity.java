@@ -37,15 +37,25 @@ import io.reactivex.schedulers.Schedulers;
 public class PerfectInformationActivity extends BaseActivity {
     ActivityPerfectInformationBinding binding;
     PerfectInformationViewModel perfectInformationViewModel;
+    String phoneNumber;
+    String code;
+    String password;
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_perfect_information);
+        phoneNumber = getIntent().getStringExtra("phoneNumber");
+        code = getIntent().getStringExtra("code");
+        password = getIntent().getStringExtra("password");
+        perfectInformationViewModel = new PerfectInformationViewModel(this, binding);
+        perfectInformationViewModel.setCode(code);
+        perfectInformationViewModel.setPhoneNumber(phoneNumber);
+        perfectInformationViewModel.setPassword(password);
     }
 
     @Override
     protected void initView() {
-        perfectInformationViewModel = new PerfectInformationViewModel(this, binding);
+
         binding.setVariable(BR.perfectInformationViewModel, perfectInformationViewModel);
         perfectInformationViewModel.initLinstener();
         setTitle("完善信息");

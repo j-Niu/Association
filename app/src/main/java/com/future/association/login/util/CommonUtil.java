@@ -9,9 +9,12 @@ import android.widget.Toast;
 
 import com.future.association.R;
 import com.future.association.login.MyToast;
+import com.future.association.login.bean.UserResponse;
 import com.future.baselib.utils.ToastUtils;
 
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -26,8 +29,12 @@ import io.reactivex.functions.Function;
  */
 
 public class CommonUtil {
+    //登录保存的用户类
+    public static UserResponse userResponse;
+    public static int RESET_PASSWORD_SET = 1;
+    public static int RESET_PASSWORD_FORGET = 2;
     //验证码时间
-    private static final long count = 10;
+    private static final long count = 60;
 
     public static void startActivity(Activity activity, Class cls) {
         Intent intent = new Intent(activity, cls);
@@ -67,18 +74,20 @@ public class CommonUtil {
         }
         return true;
     }
-    public static boolean verifyPattern(ToastUtils toast, String pwd){
-        String regex =  "^[0-9]{4,6}$";
-        if (TextUtils.isEmpty(pwd)) {
+
+    public static boolean verifyPattern(ToastUtils toast, String code) {
+        String regex = "^[0-9]{4,6}$";
+        if (TextUtils.isEmpty(code)) {
             toast.show("验证码不能为空");
             return false;
         }
-        if (!pwd.matches(regex)) {
+        if (!code.matches(regex)) {
             toast.show("验证码只能为数字/字符且在4-6位之间");
             return false;
         }
         return true;
     }
+
     //region 验证码倒计时
     public static void getVerify(final TextView textView, final Activity activity) {
         //延迟执行时间  间隔执行时间  时间单位
@@ -125,7 +134,7 @@ public class CommonUtil {
     }
 
 
-    public static void testVerifyDown(final Activity activity,final int pos) {
+    public static void testVerifyDown(final Activity activity, final int pos) {
         final long dowmCount = 2;
         Observable.interval(0, 1, TimeUnit.SECONDS)
                 .take(dowmCount + 1)//超过2时停止
@@ -145,9 +154,18 @@ public class CommonUtil {
 
                     @Override
                     public void onComplete() {
-                        MyToast.makeText(activity, "验证码已发送", Toast.LENGTH_SHORT,pos).show();
+                        MyToast.makeText(activity, "验证码已发送", Toast.LENGTH_SHORT, pos).show();
                     }
                 });
+    }
+
+    public static boolean isNumeric(String str) {
+        Pattern pattern = Pattern.compile("[0-9]*");
+        Matcher isNum = pattern.matcher(str);
+        if (!isNum.matches()) {
+            return false;
+        }
+        return true;
     }
     //endregion
 }

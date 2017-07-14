@@ -2,13 +2,18 @@ package com.future.association.login;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.future.association.databinding.ActivityRegisterBinding;
+import com.future.association.login.bean.VerifyResponse;
 import com.future.association.login.util.CommonUtil;
+import com.future.baselib.entity.BaseResponse;
+import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.PatternUtils;
 import com.future.baselib.utils.ToastUtils;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -30,6 +35,7 @@ import static com.future.association.login.util.CommonUtil.verifyPattern;
  */
 
 public class RegisterViewModel {
+    UserApi userApi;
     private Activity activity;
     private ActivityRegisterBinding binding;
     private Dialog errorDialog;
@@ -44,6 +50,7 @@ public class RegisterViewModel {
         this.activity = activity;
         this.binding = binding;
         toastUtils = new ToastUtils(activity);
+        userApi = new UserApi();
     }
 
     //region linstener
@@ -114,13 +121,22 @@ public class RegisterViewModel {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
                         if (PatternUtils.mobilePattern(toastUtils, phoneNumber.get())) {
-                            if (phoneNumber.get().equals("13547804180")) {
-                                //模拟测试
-                                MyToast.makeText(activity, "手机号码已经注册", Toast.LENGTH_SHORT, 50).show();
-                            } else {
-                                CommonUtil.getVerify(binding.registerSendVerifyCode, activity);
-                                CommonUtil.testVerifyDown(activity, 50);
-                            }
+                            CommonUtil.getVerify(binding.registerSendVerifyCode, activity);
+                            HttpRequest request = userApi
+                                    .getRegisterVerifyCode(activity, phoneNumber.get())
+                                    .setListener(new HttpRequest.OnNetworkListener<VerifyResponse>() {
+                                        @Override
+                                        public void onSuccess(VerifyResponse response) {//请求成功回调
+                                            MyToast.makeText(activity, "" + response.info, Toast.LENGTH_SHORT, 50).show();
+                                        }
+
+                                        @Override
+                                        public void onFail(String message) {
+                                            //请求失败回调
+                                            MyToast.makeText(activity, message, Toast.LENGTH_SHORT, 50).show();
+                                        }
+                                    });
+                            request.start(new VerifyResponse());
                         }
 
                     }
@@ -144,7 +160,12 @@ public class RegisterViewModel {
                         if (PatternUtils.mobilePattern(toastUtils, phoneNumber.get())
                                 && PatternUtils.passwordPattern(toastUtils, password.get())
                                 && CommonUtil.verifyPattern(toastUtils, smsCode.get())) {
-                            CommonUtil.startActivity(activity, PerfectInformationActivity.class);
+                            Intent intent = new Intent(activity, PerfectInformationActivity.class);
+                            //phoneNumber  code  password
+                            intent.putExtra("phoneNumber", phoneNumber.get());
+                            intent.putExtra("code", smsCode.get());
+                            intent.putExtra("password", password.get());
+                            activity.startActivity(intent);
                         }
                     }
                 });
@@ -194,4 +215,6 @@ public class RegisterViewModel {
     }
 
     //endregion
+
+
 }
