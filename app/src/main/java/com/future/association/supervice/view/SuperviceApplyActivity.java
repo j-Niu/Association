@@ -2,6 +2,7 @@ package com.future.association.supervice.view;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.View;
 
 import com.future.association.R;
 import com.future.baselib.activity.BaseActivity;
@@ -18,7 +19,13 @@ public class SuperviceApplyActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        setTitle(R.string.superice_publish);
+        setTitleLeft(R.drawable.ic_back, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

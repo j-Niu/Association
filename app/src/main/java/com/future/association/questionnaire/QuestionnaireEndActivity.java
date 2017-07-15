@@ -2,6 +2,7 @@ package com.future.association.questionnaire;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.View;
 
 import com.future.association.R;
 import com.future.association.databinding.ActivityQuestionnaireEndBinding;
@@ -19,7 +20,13 @@ public class QuestionnaireEndActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        setTitle(R.string.questionnaire_result);
+        setTitleLeft(R.drawable.ic_back, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

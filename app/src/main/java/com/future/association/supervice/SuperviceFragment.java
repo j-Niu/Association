@@ -1,4 +1,4 @@
-package com.future.association.supervice.view;
+package com.future.association.supervice;
 
 
 import android.databinding.DataBindingUtil;
@@ -38,6 +38,7 @@ public class SuperviceFragment extends BaseFragment {
 
     @Override
     protected void initView(View view, @Nullable Bundle savedInstanceState) {
+        setTitle(R.string.superice);
         FragmentSuperviceBinding superviceBinding = DataBindingUtil.bind(view);
         superviceBinding.setViewModel(new SuperviceViewModel(this,superviceBinding));
 

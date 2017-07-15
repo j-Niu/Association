@@ -119,7 +119,8 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
 
     @Override
     public void setData(ArrayList<MsgNotifyInfo> notifyInfos) {
-        this.notifyInfos.addAll(notifyInfos);
+        if (notifyInfos==null) return;
+            this.notifyInfos.addAll(notifyInfos);
         notifyAdapter.notifyDataSetChanged();
     }
 

@@ -1,6 +1,7 @@
 package com.future.association.supervice.viewmodel;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.support.v4.app.Fragment;
@@ -13,14 +14,12 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.future.association.R;
 import com.future.association.databinding.FragmentSuperviceBinding;
+import com.future.association.databinding.SuperviceHeadBinding;
 import com.future.association.supervice.adapter.SuperviceAdapter;
 import com.future.association.supervice.adapter.SuperviceHeadAdapter;
 import com.future.association.supervice.view.SuperviceApplyActivity;
 import com.future.association.supervice.view.SuperviceDetailActivity;
 import com.future.baselib.utils.CommonUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by rain on 2017/7/12.
@@ -30,7 +29,9 @@ public class SuperviceViewModel {
     private final Fragment fragment;
     private final FragmentSuperviceBinding binding;
     public final ObservableField<SuperviceAdapter> adapter = new ObservableField<>();
+    public final ObservableField<SuperviceHeadAdapter> headAdapter = new ObservableField<>();
     public final ObservableArrayList<String> items = new ObservableArrayList<>();
+    public final ObservableArrayList<String> headItems = new ObservableArrayList<>();
 
     public SuperviceViewModel(Fragment fragment, FragmentSuperviceBinding binding) {
         this.fragment = fragment;
@@ -58,17 +59,16 @@ public class SuperviceViewModel {
 
     private View getHead() {
         View view = View.inflate(fragment.getActivity(), R.layout.supervice_head, null);
-        RecyclerView headRv = (RecyclerView) view.findViewById(R.id.supervice_head_rv);
-        headRv.setLayoutManager(new GridLayoutManager(fragment.getActivity(),3));
+        SuperviceHeadBinding superviceHeadBinding = DataBindingUtil.bind(view);
+        superviceHeadBinding.setViewModel(this);
+        superviceHeadBinding.superviceHeadRv.setLayoutManager(new GridLayoutManager(fragment.getActivity(),3));
         SuperviceHeadAdapter adapter = new SuperviceHeadAdapter(R.layout.supervice_head_item,null);
-        headRv.addOnItemTouchListener(applyListener);
-        List<String> test = new ArrayList<>();
+        headAdapter.set(adapter);
+        superviceHeadBinding.superviceHeadRv.addOnItemTouchListener(applyListener);
         //TODO 测试
         for (int i = 0; i < 9; i++) {
-            test.add("测试"+i);
+            headItems.add("测试"+i);
         }
-        adapter.setNewData(test);
-        headRv.setAdapter(adapter);
         return view;
     }
 

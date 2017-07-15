@@ -1,6 +1,7 @@
 package com.future.association.questionnaire;
 
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -37,6 +38,8 @@ public class QuestionnaireFragment extends BaseFragment {
 
     @Override
     protected void initView(View view, @Nullable Bundle savedInstanceState) {
+        setTitle(R.string.questionnaire);
+        DataBindingUtil.bind(view);
         PagerSlidingTabStrip slidingTabStrip = (PagerSlidingTabStrip) view.findViewById(R.id.psts_tabs);
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
         ViewPageFragmentAdapter mTabsAdapter = new ViewPageFragmentAdapter(getActivity().getSupportFragmentManager(), slidingTabStrip, viewPager);

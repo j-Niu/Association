@@ -9,11 +9,10 @@ import android.widget.RadioGroup;
 
 import com.future.association.R;
 import com.future.association.community.CommunityFragment;
-import com.future.association.login.LoginActivity;
 import com.future.association.news.NewsFragment;
 import com.future.association.personal.PersonalFragment;
 import com.future.association.questionnaire.QuestionnaireFragment;
-import com.future.association.supervice.view.SuperviceFragment;
+import com.future.association.supervice.SuperviceFragment;
 import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.adapter.FragmentAdapter;
 import com.future.baselib.utils.StatusUtils;
