@@ -7,13 +7,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/layout_toolbar"
-            android:id="@+id/title"/>
+        <include layout="@layout/layout_toolbar"/>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/title"
+            android:layout_below="@id/toolbar"
             android:padding="@dimen/normal_padding">
 
 
@@ -96,8 +95,7 @@
 
                     <EditText
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:visibility="gone"/>
+                        android:layout_height="0dp"/>
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="0dp"

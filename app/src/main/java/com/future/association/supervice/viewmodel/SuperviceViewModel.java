@@ -36,10 +36,13 @@ public class SuperviceViewModel {
     public SuperviceViewModel(Fragment fragment, FragmentSuperviceBinding binding) {
         this.fragment = fragment;
         this.binding = binding;
-        init();
+        initView();
+        initData();
     }
 
-    private void init() {
+
+
+    private void initView() {
         binding.superviceRv.setLayoutManager(new LinearLayoutManager(fragment.getActivity()));
         SuperviceAdapter superviceAdapter = new SuperviceAdapter(R.layout.supervice_item,null);
         View head = getHead();
@@ -51,6 +54,10 @@ public class SuperviceViewModel {
         for (int i = 0; i < 70; i++) {
             items.add("电风扇 是的是的发士大夫是的是的方式的是的发的范德萨 士大夫是是 是的是的是的都是都是"+i);
         }
+    }
+
+    private void initData() {
+
     }
 
     public void initListener(){

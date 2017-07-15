@@ -1,4 +1,4 @@
-package com.future.association.supervice.bindingviews;
+package com.future.association.common.bindingviews;
 
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class BindingRecyclerViewAdapters {
     // RecyclerView
-    @BindingAdapter(value = {"bind:items", "bind:adapter"}, requireAll = true)
+    @BindingAdapter(value = {"items", "adapter"}, requireAll = true)
     public static <T> void setAdapter(RecyclerView recyclerView, List<T> items, BaseQuickAdapter<T,BaseViewHolder> adapter) {
         if (adapter == null) {
             throw new NullPointerException("adapter can not be null");
