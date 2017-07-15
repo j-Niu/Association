@@ -72,19 +72,19 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         switch (checkedId) {
             case R.id.rb_zx:
-                viewPager.setCurrentItem(0);
+                viewPager.setCurrentItem(0,false);
                 break;
             case R.id.rb_wj:
-                viewPager.setCurrentItem(1);
+                viewPager.setCurrentItem(1,false);
                 break;
             case R.id.rb_jd:
-                viewPager.setCurrentItem(2);
+                viewPager.setCurrentItem(2,false);
                 break;
             case R.id.rb_sq:
-                viewPager.setCurrentItem(3);
+                viewPager.setCurrentItem(3,false);
                 break;
             case R.id.rb_wd:
-                viewPager.setCurrentItem(4);
+                viewPager.setCurrentItem(4,false);
                 break;
         }
     }

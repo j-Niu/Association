@@ -8,4 +8,6 @@ package com.future.association.common;
 public class Contants {
     public static final int HOTQUESTIONNAI_REFRAGMENT = 0x100;
     public static final int MYQUESTIONNAI_REFRAGMENT = 0x101;
+
+    public static final String APP_IMG_PATH = "/Association/Pictures";
 }
