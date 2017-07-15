@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        app:title_height="33dp"
+        app:title_textsize="15sp"
+        app:title_textcolor="#fefefe"
+        app:indicator_width="8dp"
+        app:indicator_height="8dp"
+        app:indicator_margin="5dp"
+        app:indicator_drawable_selected="@drawable/indicator_selected"
+        app:indicator_drawable_unselected="@drawable/indicator_unselected"
+        ></com.youth.banner.Banner>
+</FrameLayout>

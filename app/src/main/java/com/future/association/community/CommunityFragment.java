@@ -21,11 +21,12 @@ import com.future.association.community.model.PlateInfo;
 import com.future.association.community.presenter.CommunityPresenter;
 import com.future.association.community.utils.ActivityUtils;
 import com.future.association.community.view.AllPlateActivity;
-import com.future.association.community.view.TieListActivity;
 import com.future.association.community.view.NotifyDetailActivity;
+import com.future.association.community.view.TieListActivity;
 import com.future.association.databinding.FragmentCommunityBinding;
 
 import java.util.ArrayList;
+
 
 /**
  * 社区Fragment
@@ -121,6 +122,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
     public void setData(ArrayList<MsgNotifyInfo> notifyInfos) {
         if (notifyInfos==null) return;
             this.notifyInfos.addAll(notifyInfos);
+        this.notifyInfos.addAll(notifyInfos);
         notifyAdapter.notifyDataSetChanged();
     }
 
