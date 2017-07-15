@@ -46,4 +46,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     //RecyclerView
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    //事件总线
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

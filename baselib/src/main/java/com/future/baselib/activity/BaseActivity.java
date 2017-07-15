@@ -1,6 +1,5 @@
 package com.future.baselib.activity;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,23 +8,25 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.future.baselib.R;
+import com.future.baselib.entity.MessageEvent;
+import com.future.baselib.utils.EventBusUtil;
 import com.future.baselib.utils.JLog;
 import com.future.baselib.utils.StatusUtils;
 import com.future.baselib.utils.ToastUtils;
 import com.future.baselib.view.LoadingDialog;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.lang.reflect.Method;
-import java.security.Permission;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -196,11 +197,62 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         JLog.e(tag, msg);
     }
 
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBusCome(MessageEvent event) {
+        if (event != null) {
+            receiveEvent(event);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onStickyEventBusCome(MessageEvent event) {
+        if (event != null) {
+            receiveStickyEvent(event);
+        }
+    }
+
+    /**
+     * 接收到分发到事件
+     *
+     * @param event 事件
+     */
+    protected void receiveEvent(MessageEvent event) {}
+
+    /**
+     * 接受到分发的粘性事件
+     *
+     * @param event 粘性事件
+     */
+    protected void receiveStickyEvent(MessageEvent event) {}
+
+    /**
+     * 是否注册事件分发
+     *
+     * @return true绑定EventBus事件分发，默认不绑定，子类需要绑定的话复写此方法返回true.
+     */
+    protected boolean isRegisterEventBus() {
+        return false;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (isRegisterEventBus()) {
+           EventBusUtil.register(this);
+        }
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
         toast.cancel();
+        if (isRegisterEventBus()) {
+            EventBusUtil.unregister(this);
+        }
     }
+
 
     public void checkedPermission(String[] permissions) {
         if (Build.VERSION.SDK_INT < 23) {
