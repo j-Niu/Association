@@ -32,7 +32,7 @@ public class SupericeDetail extends BaseBean<SupericeDetail> {
 
     @Override
     public void parseInfo(String content) throws JSONException {
-        infoBean = GsonUtils.jsonToBean(content, SupericeDetail.class);
+        infoBean = GsonUtils.jsonToBean(content,SupericeDetail.class);
     }
 
 

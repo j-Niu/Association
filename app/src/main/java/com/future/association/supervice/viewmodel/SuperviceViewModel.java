@@ -130,6 +130,8 @@ public class SuperviceViewModel {
             //跳往详情页面
             if (!CommonUtils.isFastDoubleClick()){
                 Intent intent = new Intent(fragment.getActivity(),SuperviceDetailActivity.class);
+                SupericeList.SupericeListInfo item = (SupericeList.SupericeListInfo) baseQuickAdapter.getItem(i);
+                intent.putExtra("id", item.getId());
                 fragment.getActivity().startActivity(intent);
             }
         }

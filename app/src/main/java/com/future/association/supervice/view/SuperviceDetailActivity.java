@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.future.association.R;
 import com.future.association.databinding.ActivitySuperviceDetailBinding;
+import com.future.association.supervice.viewmodel.SuperviceDetailViewModel;
 import com.future.baselib.activity.BaseActivity;
 
 /**
@@ -15,7 +16,9 @@ import com.future.baselib.activity.BaseActivity;
 public class SuperviceDetailActivity extends BaseActivity {
     @Override
     protected void initContentView(Bundle savedInstanceState) {
+        String id = getIntent().getStringExtra("id");
         ActivitySuperviceDetailBinding detailBinding = DataBindingUtil.setContentView(this, R.layout.activity_supervice_detail);
+        detailBinding.setSuperviceDetailViewModel(new SuperviceDetailViewModel(this,detailBinding,id));
     }
 
     @Override
