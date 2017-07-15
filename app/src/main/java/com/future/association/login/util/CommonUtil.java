@@ -1,9 +1,11 @@
 package com.future.association.login.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -168,4 +170,5 @@ public class CommonUtil {
         return true;
     }
     //endregion
+
 }
