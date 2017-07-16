@@ -17,57 +17,59 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <meta-data
             android:name="design_width"
-            android:value="750"/>
+            android:value="750" />
+
         <meta-data
             android:name="design_height"
-            android:value="1334"/>
+            android:value="1334" />
 
-        <activity android:name=".common.MainActivity"/>
-        <!-- 登录模块 -->
+        <activity android:name=".common.MainActivity"></activity>
+        <!--登录模块-->
         <activity
             android:name=".login.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".login.FindPwdVerifyActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login.FindPwdResetActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login.RegisterActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login.PerfectInformationActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login.RegisterSuccessActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <!-- 社区模块 -->
         <activity
             android:name=".community.view.NotifyDetailActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <!--
-            <activity
-            android:name=".community.view.BannerActivity"
-            android:screenOrientation="portrait" />
-        -->
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".community.view.SendTieActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".community.view.AllPlateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".community.view.TieListActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".community.view.TieDetailActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".community.view.WeiGuiActivity"
             android:screenOrientation="portrait"/>

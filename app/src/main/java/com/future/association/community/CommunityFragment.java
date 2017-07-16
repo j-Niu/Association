@@ -24,6 +24,7 @@ import com.future.association.community.view.AllPlateActivity;
 import com.future.association.community.view.NotifyDetailActivity;
 import com.future.association.community.view.TieListActivity;
 import com.future.association.databinding.FragmentCommunityBinding;
+import com.future.association.databinding.LayoutListNotifyHeadBinding;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,8 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
     private CommunityContract.IPresenter presenter;
     private LinearLayoutManager linearLayoutManager;
     private GridViewAdapter adapter;
+    private View headView;
+    private LayoutListNotifyHeadBinding headBinding;
 
     public CommunityFragment() {
         // Required empty public constructor
@@ -68,6 +71,8 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
         viewBinding.layoutTitle.ivBack.setVisibility(View.GONE);
         linearLayoutManager = new LinearLayoutManager(getContext());
         viewBinding.rcvMsg.setLayoutManager(linearLayoutManager);
+        headView = View.inflate(getContext(), R.layout.layout_list_notify_head,null);
+        headBinding = DataBindingUtil.bind(headView);
     }
 
     private void initData(Bundle arguments) {
@@ -75,9 +80,10 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
         viewBinding.layoutTitle.setTitle("社区");
 
         adapter = new GridViewAdapter(getContext());
-        viewBinding.gv.setAdapter(adapter);
+        headBinding.gv.setAdapter(adapter);
 
         notifyAdapter = new MsgNotifyAdapter(getContext(), notifyInfos);
+        notifyAdapter.setmHeadView(headView);
         viewBinding.rcvMsg.setAdapter(notifyAdapter);
 
         presenter = new CommunityPresenter(this, getContext());
@@ -92,7 +98,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
                 presenter.getData(currentPage);
             }
         });
-        viewBinding.gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        headBinding.gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PlateInfo plateInfo = adapter.getItem(position);
@@ -120,7 +126,9 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
 
     @Override
     public void setData(ArrayList<MsgNotifyInfo> notifyInfos) {
-        if (notifyInfos==null) return;
+        if (notifyInfos == null) return;
+            this.notifyInfos.addAll(notifyInfos);
+            this.notifyInfos.addAll(notifyInfos);
             this.notifyInfos.addAll(notifyInfos);
         this.notifyInfos.addAll(notifyInfos);
         notifyAdapter.notifyDataSetChanged();

@@ -30,7 +30,7 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
     private TieListContract.IPresenter presenter;
     private LinearLayoutManager linearLayoutManager;
     private PlateInfo plateInfo;
-
+    private int currentPage = 1 ;//当前页
     @Override
     public int setContentView() {
         return R.layout.activity_banner;
@@ -43,6 +43,13 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        currentPage = 1 ;
+        presenter.getData(currentPage);
+    }
+
+    @Override
     public void initData() {
         plateInfo = getIntent().getParcelableExtra("plateInfo");
         tieInfos = new ArrayList<>();
@@ -51,7 +58,6 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
         adapter = new TieListAdapter(context, tieInfos);
         viewBinding.rcvTie.setAdapter(adapter);
         presenter = new TieListPresenter(this, context);
-        presenter.getData(1);
     }
 
     @Override
@@ -87,6 +93,9 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
 
     @Override
     public void setData(ArrayList<TieInfo> tieInfos) {
+        if(currentPage == 1){
+            this.tieInfos.clear();
+        }
         this.tieInfos.addAll(tieInfos);
         adapter.notifyDataSetChanged();
     }

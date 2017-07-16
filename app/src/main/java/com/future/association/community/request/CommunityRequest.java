@@ -3,6 +3,7 @@ package com.future.association.community.request;
 import android.content.Context;
 
 import com.future.association.common.MyApp;
+import com.future.association.community.model.MsgDetailInfo;
 import com.future.association.community.model.MsgNotifyInfo;
 import com.future.association.community.model.NotifyReplyInfo;
 import com.future.association.community.model.PlateInfo;
@@ -204,7 +205,7 @@ public class CommunityRequest {
         params.put("apiCode",RequestConfig.CODE_NOTIFY_DETAIL) ;
         params.put("id",id) ;
         params.put("userToken",MyApp.getUserToken()) ;
-        requestData(context,params,new DataResponse<MsgNotifyInfo>().init(MsgNotifyInfo.class),listener);
+        requestData(context,params,new DataResponse<MsgDetailInfo>().init(MsgDetailInfo.class),listener);
     }
 
     /**

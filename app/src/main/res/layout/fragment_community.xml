@@ -17,46 +17,6 @@
                 android:id="@+id/layout_title"
                 layout="@layout/layout_title" />
 
-            <GridView
-                android:id="@+id/gv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#DCDCDC"
-                android:horizontalSpacing="1px"
-                android:listSelector="@null"
-                android:numColumns="3"
-                android:verticalSpacing="1px" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="30px"
-                android:background="#f8f8f8" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30px"
-                android:gravity="center_vertical">
-
-                <View
-                    android:id="@+id/line"
-                    android:layout_width="5px"
-                    android:layout_height="36px"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="30px"
-                    android:background="#26A16E" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10px"
-                    android:layout_toRightOf="@id/line"
-                    android:text="消息通知"
-                    android:textColor="#333333"
-                    android:textSize="30px" />
-            </RelativeLayout>
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rcv_msg"
                 android:layout_width="match_parent"
