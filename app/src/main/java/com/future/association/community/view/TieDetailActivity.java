@@ -193,7 +193,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     @Override
     public void replyResult(TieReplyInfo replyInfo) {
         viewBinding.setReplyContent("");
-        this.tieReplyInfos.add(replyInfo);
+//        this.tieReplyInfos.add(replyInfo);
         adapter.notifyDataSetChanged();
         presenter.getData(1);
 //        viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行
@@ -230,8 +230,16 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     @Override
     public void topTieResult(boolean result) {
         if(result){
-            showShortToast("置顶帖子成功");
-            viewBinding.getTieDetailInfo().setType("1");
+            showShortToast("操作成功");
+            TieDetailInfo detailInfo = viewBinding.getTieDetailInfo();
+            if("1".equals(getTieType())){
+                popupTieBinding.setIsTop("置顶");
+                detailInfo.setType("2");
+            }else{
+                popupTieBinding.setIsTop("取消置顶");
+                detailInfo.setType("1");
+            }
+            viewBinding.setTieDetailInfo(detailInfo);
         }
     }
 

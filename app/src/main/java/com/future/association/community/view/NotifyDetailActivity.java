@@ -102,7 +102,7 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
     @Override
     public void talkReult( NotifyReplyInfo replyInfo) {
         viewBinding.setTalkContent("");
-        this.replyInfos.add(replyInfo);
+//        this.replyInfos.add(replyInfo);
         adapter.notifyDataSetChanged();
         presenter.getData(1);
 //        viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行

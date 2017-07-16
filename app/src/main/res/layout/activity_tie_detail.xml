@@ -49,7 +49,7 @@
                     android:layout_marginLeft="20px"
                     android:layout_marginTop="10px"
                     android:layout_toRightOf="@id/civ_head"
-                    android:text="@{tieDetailInfo.nickname}"
+                    android:text="@{tieDetailInfo.real_name}"
                     android:textColor="#333333"
                     android:textSize="30px" />
                 <TextView

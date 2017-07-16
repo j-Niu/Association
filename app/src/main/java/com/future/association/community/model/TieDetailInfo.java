@@ -9,7 +9,7 @@ import com.future.association.common.MyApp;
  */
 
 public class TieDetailInfo {
-    private String nickname;//发帖人
+    private String real_name;//发帖人
     private String avatar_url;//头像
     private String level;//发帖人等级
     private String uid;//发帖人id
@@ -20,12 +20,12 @@ public class TieDetailInfo {
     private String content;//帖子内容
     private String type;//帖子类型
 
-    public String getNickname() {
-        return nickname;
+    public String getReal_name() {
+        return real_name;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setReal_name(String real_name) {
+        this.real_name = real_name;
     }
 
     public String getAvatar_url() {

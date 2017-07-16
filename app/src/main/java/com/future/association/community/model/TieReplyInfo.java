@@ -7,7 +7,7 @@ package com.future.association.community.model;
 public class TieReplyInfo {
     private String id ;//回复ID
     private String uid ;//回复人ID
-    private String nickname ;//回复人昵称
+    private String real_name ;//回复人昵称
     private String avatar_url ;//回复人头像
     private String level ;//回复人等级
     private String tiezi_id ;//帖子id
@@ -15,12 +15,12 @@ public class TieReplyInfo {
     private String create_time ;//回复时间
     private String address ;//地址
 
-    public String getNickname() {
-        return nickname;
+    public String getReal_name() {
+        return real_name;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setReal_name(String real_name) {
+        this.real_name = real_name;
     }
 
     public String getAvatar_url() {

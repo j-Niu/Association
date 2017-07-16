@@ -6,19 +6,19 @@ package com.future.association.community.model;
 
 public class NotifyReplyInfo {
 
-    private String nickname ;//评论人名称
+    private String real_name ;//评论人名称
     private String avatar_url ;//评论人头像
     private String level ;//品论人等级
     private String tiezi_id ;//
     private String content ;//评论内容
     private String create_time ;//评论时间
 
-    public String getNickname() {
-        return nickname;
+    public String getReal_name() {
+        return real_name;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setReal_name(String real_name) {
+        this.real_name = real_name;
     }
 
     public String getAvatar_url() {
