@@ -57,11 +57,14 @@
             android:name=".community.view.NotifyDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-     <!--   <activity
-            android:name=".community.view.BannerActivity"
-            android:screenOrientation="portrait" />-->
         <activity
             android:name=".community.view.SendTieActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".community.view.AllPlateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".community.view.TieListActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".community.view.TieDetailActivity"
