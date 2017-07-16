@@ -24,6 +24,7 @@ import com.future.association.community.utils.ActivityUtils;
 import com.future.association.community.utils.DialogUtils;
 import com.future.association.community.utils.Res;
 import com.future.association.databinding.ActivityTieDetailBinding;
+import com.future.association.databinding.LayoutTieReplyHeadBinding;
 import com.future.association.databinding.PopupTieBinding;
 
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     private LinearLayoutManager linearLayoutManager;
     private TieInfo tieInfo;
     private int delReplyPosition ;
+    private LayoutTieReplyHeadBinding headBinding;
+    private View mHeadView;
 
     @Override
     public int setContentView() {
@@ -57,6 +60,8 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         popupView = inflater.inflate(R.layout.popup_tie, null);
         popupTieBinding = DataBindingUtil.bind(popupView);
 
+        mHeadView = View.inflate(context, R.layout.layout_tie_reply_head,null);
+        headBinding = DataBindingUtil.bind(mHeadView);
     }
 
     @Override
@@ -70,6 +75,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         tieReplyInfos = new ArrayList<>();
         viewBinding.layoutTitle.setTitle("帖子详情");
         adapter = new TieReplyAdapter(context, tieReplyInfos);
+        adapter.setmHeadView(mHeadView);
         viewBinding.rclReply.setAdapter(adapter);
         presenter = new TieDetailPresenter(this,context);
         presenter.getData(1);
@@ -182,11 +188,11 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     @Override
     public void setTieDetail(TieDetailInfo detailInfo) {
         if(detailInfo != null){
-            viewBinding.setTieDetailInfo(detailInfo);
+            headBinding.setTieDetailInfo(detailInfo);
             Glide.with(context)
                     .load(detailInfo.getAvatar_url())
                     .error(R.drawable.ic_demo)
-                    .into(viewBinding.civHead) ;
+                    .into(headBinding.civHead) ;
         }
     }
 
@@ -221,7 +227,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     @Override
     public void delTieReplyResult(boolean result) {
         if(result){
-            adapter.notifyItemRemoved(delReplyPosition);
+            adapter.notifyItemRemoved(delReplyPosition+1);
             adapter.tieReplyInfos.remove(delReplyPosition) ;
             showShortToast("删除回复成功");
         }
@@ -231,7 +237,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     public void topTieResult(boolean result) {
         if(result){
             showShortToast("操作成功");
-            TieDetailInfo detailInfo = viewBinding.getTieDetailInfo();
+            TieDetailInfo detailInfo = headBinding.getTieDetailInfo();
             if("1".equals(getTieType())){
                 popupTieBinding.setIsTop("置顶");
                 detailInfo.setType("2");
@@ -239,7 +245,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
                 popupTieBinding.setIsTop("取消置顶");
                 detailInfo.setType("1");
             }
-            viewBinding.setTieDetailInfo(detailInfo);
+            headBinding.setTieDetailInfo(detailInfo);
         }
     }
 

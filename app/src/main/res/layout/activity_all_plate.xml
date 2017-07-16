@@ -7,20 +7,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#ECECEC"
         android:orientation="vertical"
         >
         <include layout="@layout/layout_title"
             android:id="@+id/layout_title"
             />
-        <GridView
+        <com.future.association.community.custom.CustomGridView
             android:id="@+id/gv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#DCDCDC"
             android:horizontalSpacing="1px"
+            android:verticalSpacing="1px"
+            android:background="#FFFFFF"
             android:listSelector="@null"
-            android:numColumns="3"
-            android:verticalSpacing="1px" />
+            android:numColumns="3"/>
 
     </LinearLayout>
 

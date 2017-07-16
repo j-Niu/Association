@@ -3,6 +3,7 @@ package com.future.association.community.model;
 import android.os.Parcelable;
 
 import com.future.association.common.MyApp;
+import com.future.association.community.utils.TextUtil;
 
 /**
  * Created by HX·罗 on 2017/7/11.
@@ -37,7 +38,10 @@ public class TieDetailInfo {
     }
 
     public String getLevel() {
-        return level;
+        if(TextUtil.isEmpty(level)){
+            return "V0" ;
+        }
+        return "V"+level;
     }
 
     public void setLevel(String level) {

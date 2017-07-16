@@ -35,6 +35,9 @@ import static com.future.association.R.layout.*;
 
 public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHolder> {
 
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_NORMAL = 1;
+
     public interface Callback {
         void delReply(int position);
 
@@ -45,10 +48,15 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
     public ArrayList<TieReplyInfo> tieReplyInfos;
     private RecyclerView mRecycler;
     private Callback callback;
+    private View mHeadView = null;
 
     public TieReplyAdapter(Context context, ArrayList<TieReplyInfo> tieReplyInfos) {
         this.context = context;
         this.tieReplyInfos = tieReplyInfos;
+    }
+
+    public void setmHeadView(View mHeadView) {
+        this.mHeadView = mHeadView;
     }
 
     public void setCallback(Callback callback) {
@@ -57,11 +65,23 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.item_reply_detail, null);
-        view.setLayoutParams(new RecyclerView.LayoutParams(ScreenUtils.getScreenWidth(context),
-                RecyclerView.LayoutParams.WRAP_CONTENT));
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        if (mHeadView != null && viewType == TYPE_NORMAL) {
+            View view = View.inflate(context, R.layout.item_reply_detail, null);
+            view.setLayoutParams(new RecyclerView.LayoutParams(ScreenUtils.getScreenWidth(context),
+                    RecyclerView.LayoutParams.WRAP_CONTENT));
+            ViewHolder holder = new ViewHolder(view);
+            return holder;
+        } else {
+            return new ViewHolder(mHeadView);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (mHeadView != null && position == 0) {
+            return TYPE_HEADER;
+        }
+        return TYPE_NORMAL;
     }
 
     @Override
@@ -72,18 +92,20 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (position == tieReplyInfos.size() - 1) {
-            holder.binding.setIsLast(true);
-        } else {
-            holder.binding.setIsLast(false);
+        if(position > 0){
+            if (position-1 == tieReplyInfos.size() - 1) {
+                holder.binding.setIsLast(true);
+            } else {
+                holder.binding.setIsLast(false);
+            }
+            holder.setData(position-1);
         }
-        holder.setData(position);
     }
 
     @Override
     public int getItemCount() {
         dataSort();
-        return tieReplyInfos.size();
+        return tieReplyInfos.size()+1;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -114,13 +136,19 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
         }
 
         private void initView() {
-            binding = DataBindingUtil.bind(itemView);
+            try {
+                binding = DataBindingUtil.bind(itemView);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             view = View.inflate(context, popup_tie1, null);
             popupTie1Binding = DataBindingUtil.bind(view);
         }
 
         private void initListener() {
-            binding.setClickListener(this);
+            if (binding != null) {
+                binding.setClickListener(this);
+            }
             popupTie1Binding.setClickListener(this);
         }
 

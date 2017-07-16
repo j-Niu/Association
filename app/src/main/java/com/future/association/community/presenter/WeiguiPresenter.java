@@ -33,11 +33,13 @@ public class WeiguiPresenter implements WeiguiContract.IPresenter {
             CommunityRequest.dealTie(context, iView.getTieId(), new HttpRequest.OnNetworkListener<DataResponse>() {
                 @Override
                 public void onSuccess(DataResponse response) {
+                    dialog.close();
                     iView.dealResult(true);
                 }
 
                 @Override
                 public void onFail(String message) {
+                    dialog.close();
                     iView.showMsg(message);
                 }
             });
@@ -45,11 +47,13 @@ public class WeiguiPresenter implements WeiguiContract.IPresenter {
             CommunityRequest.dealTieReply(context,iView.getId(), new HttpRequest.OnNetworkListener<DataResponse>() {
                 @Override
                 public void onSuccess(DataResponse response) {
+                    dialog.close();
                     iView.dealResult(true);
                 }
 
                 @Override
                 public void onFail(String message) {
+                    dialog.close();
                     iView.showMsg(message);
                 }
             });

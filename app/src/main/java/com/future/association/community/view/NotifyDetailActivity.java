@@ -1,5 +1,6 @@
 package com.future.association.community.view;
 
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -13,6 +14,7 @@ import com.future.association.community.model.MsgNotifyInfo;
 import com.future.association.community.model.NotifyReplyInfo;
 import com.future.association.community.presenter.NotifyDetailPresenter;
 import com.future.association.databinding.ActivityNotifyDetailBinding;
+import com.future.association.databinding.LayoutNotifyReplyHeadBinding;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,8 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
     private NotifyDetailContract.IPresenter presenter;
     private LinearLayoutManager linearLayoutManager;
     private MsgNotifyInfo notifyInfo;
+    private View mHeadView;
+    private LayoutNotifyReplyHeadBinding headBinding;
 
     @Override
     public int setContentView() {
@@ -37,6 +41,8 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
     public void initView() {
         linearLayoutManager = new LinearLayoutManager(context);
         viewBinding.rclReply.setLayoutManager(linearLayoutManager);
+        mHeadView = View.inflate(context, R.layout.layout_notify_reply_head,null);
+        headBinding = DataBindingUtil.bind(mHeadView);
     }
 
     @Override
@@ -45,6 +51,7 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
         replyInfos = new ArrayList<>();
         viewBinding.layoutTitle.setTitle("通知详情");
         adapter = new NotifyDetailAdapter(context, replyInfos);
+        adapter.setmHeadView(mHeadView);
         viewBinding.rclReply.setAdapter(adapter);
         presenter = new NotifyDetailPresenter(this, context);
         presenter.getData(1);
@@ -85,7 +92,7 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
     @Override
     public void setNotifyDetail(MsgDetailInfo detailInfo) {
         if (detailInfo != null) {
-            viewBinding.setDetailInfo(detailInfo);
+            headBinding.setDetailInfo(detailInfo);
         }
     }
 
