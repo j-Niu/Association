@@ -18,11 +18,12 @@
         android:orientation="horizontal"
         android:paddingBottom="@dimen/padding_small_15">
 
-        <ImageView
+        <com.future.association.personal.CircleImageView
             android:id="@+id/cirimgMy"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginLeft="@dimen/margin_small_15"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_birds" />
 
         <LinearLayout
@@ -119,6 +120,7 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/padding_lsmall_10"
             android:paddingTop="@dimen/padding_lsmall_10">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

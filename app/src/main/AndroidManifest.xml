@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.future.association">
+          package="com.future.association">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!--读取文件权限-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--写入数据权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".common.MyApp"
@@ -53,6 +57,9 @@
             android:name=".community.view.NotifyDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
+     <!--   <activity
+            android:name=".community.view.BannerActivity"
+            android:screenOrientation="portrait" />-->
         <activity
             android:name=".community.view.SendTieActivity"
             android:screenOrientation="portrait" />
@@ -62,23 +69,43 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".community.view.WeiGuiActivity"
-            android:screenOrientation="portrait" />
-        <!--社区模块-->
-        <activity android:name=".questionnaire.QuestionnaireWebActivity" />
-        <activity android:name=".questionnaire.QuestionnaireEndActivity" />
-        <activity android:name=".supervice.SuperviceDetailActivity" />
-        <activity android:name=".supervice.SuperviceApplyActivity" />
+            android:screenOrientation="portrait"/>
+        <!-- 问卷加监督模块 -->
+        <activity
+            android:name=".questionnaire.QuestionnaireWebActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".questionnaire.QuestionnaireEndActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".supervice.view.SuperviceDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".supervice.view.SuperviceApplyActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <!-- 我的模块 -->
-        <activity android:name=".personal.MyLevelActivity" />
-        <activity android:name=".personal.MyResponseActivity" />
-        <activity android:name=".personal.MyJianDuActivity" />
-        <activity android:name=".personal.MyNoticeActivity" />
-        <activity android:name=".personal.MyTieziActivity" />
-        <activity android:name=".personal.MyWenJuanActivity" />
-        <activity android:name=".personal.MyTongZhi" />
-        <activity android:name=".personal.MyMoreActivity" />
-        <activity android:name=".personal.AboutUsActivity" />
-        <activity android:name=".personal.ChangePwdActivity"></activity>
+        <activity android:name=".personal.MyLevelActivity"/>
+        <activity android:name=".personal.MyResponseActivity"/>
+        <activity android:name=".personal.MyJianDuActivity"/>
+        <activity android:name=".personal.MyNoticeActivity"/>
+        <activity android:name=".personal.MyTieziActivity"/>
+        <activity android:name=".personal.MyWenJuanActivity"/>
+        <activity android:name=".personal.MyTongZhi"/>
+        <activity android:name=".personal.MyMoreActivity"/>
+        <activity android:name=".personal.AboutUsActivity"/>
+        <activity android:name=".personal.ChangePwdActivity"/>
+        <activity android:name=".news.NewsActivity"></activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.future.association.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
     </application>
 
 </manifest>

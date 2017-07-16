@@ -1,4 +1,4 @@
-package com.future.association.supervice;
+package com.future.association.supervice.adapter;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;

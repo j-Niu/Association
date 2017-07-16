@@ -9,17 +9,12 @@ import android.widget.RadioGroup;
 
 import com.future.association.R;
 import com.future.association.community.CommunityFragment;
-import com.future.association.login.LoginActivity;
-import com.future.association.login.PerfectInformationActivity;
 import com.future.association.news.NewsFragment;
 import com.future.association.personal.PersonalFragment;
 import com.future.association.questionnaire.QuestionnaireFragment;
 import com.future.association.supervice.SuperviceFragment;
 import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.adapter.FragmentAdapter;
-import com.future.baselib.entity.BaseResponse;
-import com.future.baselib.entity.DefaultResponse;
-import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.StatusUtils;
 import com.future.baselib.view.NoScrollViewPager;
 
@@ -77,19 +72,19 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         switch (checkedId) {
             case R.id.rb_zx:
-                viewPager.setCurrentItem(0);
+                viewPager.setCurrentItem(0,false);
                 break;
             case R.id.rb_wj:
-                viewPager.setCurrentItem(1);
+                viewPager.setCurrentItem(1,false);
                 break;
             case R.id.rb_jd:
-                viewPager.setCurrentItem(2);
+                viewPager.setCurrentItem(2,false);
                 break;
             case R.id.rb_sq:
-                viewPager.setCurrentItem(3);
+                viewPager.setCurrentItem(3,false);
                 break;
             case R.id.rb_wd:
-                viewPager.setCurrentItem(4);
+                viewPager.setCurrentItem(4,false);
                 break;
         }
     }

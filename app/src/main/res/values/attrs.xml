@@ -8,4 +8,5 @@
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
     <!--社区模块添加end-->
+
 </resources>

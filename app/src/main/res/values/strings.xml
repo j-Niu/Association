@@ -24,4 +24,10 @@
     <string name="myXX2">最后回复时间：11分钟前</string>
     <string name="myTZ1">通知内容摘要通知内容摘要通知内容摘要通知内容摘要通知内容摘要通知内容摘要通知内容摘要</string>
     <string name="myTZ2">2017-06-18 08:33:36</string>
+    <string name="superice">监督</string>
+    <string name="questionnaire">问卷</string>
+    <string name="superice_publish">发布监督</string>
+    <string name="superice_detail">监督详情</string>
+    <string name="questionnaire_detail">问卷详情</string>
+    <string name="questionnaire_result">问卷结果</string>
 </resources>

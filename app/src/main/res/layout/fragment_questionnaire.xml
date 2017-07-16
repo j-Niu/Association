@@ -1,30 +1,35 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-             tools:context="com.future.association.questionnaire.QuestionnaireFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <com.future.baselib.view.PagerSlidingTabStrip
-        android:id="@+id/psts_tabs"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/normal_padding"
-        app:allowWidthFull="true"
-        app:slidingStrokeShape="@drawable/rect_green_shape"
-        app:slidingStrokeColor="@color/basic_color"/>
-    <!--app:sliding_left="@drawable/sliding_left"-->
-    <!--app:sliding_middle="@drawable/sliding_mid"-->
-    <!--app:sliding_right="@drawable/sliding_right"-->
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.future.association.questionnaire.QuestionnaireFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <include layout="@layout/layout_toolbar"/>
+
+        <com.future.baselib.view.PagerSlidingTabStrip
+            android:id="@+id/psts_tabs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/normal_padding"
+            app:allowWidthFull="true"
+            app:slidingStrokeColor="@color/basic_color"
+            app:slidingStrokeShape="@drawable/rect_green_shape"/>
+        <!--app:sliding_left="@drawable/sliding_left"-->
+        <!--app:sliding_middle="@drawable/sliding_mid"-->
+        <!--app:sliding_right="@drawable/sliding_right"-->
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
 
-</LinearLayout>
+    </LinearLayout>
+</layout>
