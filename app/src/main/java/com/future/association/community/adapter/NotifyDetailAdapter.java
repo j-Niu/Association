@@ -24,22 +24,41 @@ import java.util.Comparator;
 
 public class NotifyDetailAdapter extends RecyclerView.Adapter<NotifyDetailAdapter.ViewHolder> {
 
-    private Context context ;
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_NORMAL = 1;
+    private Context context;
     private ArrayList<NotifyReplyInfo> replyInfos;
     private RecyclerView mRecycler;
+    private View mHeadView = null;
 
     public NotifyDetailAdapter(Context context, ArrayList<NotifyReplyInfo> replyInfos) {
         this.context = context;
         this.replyInfos = replyInfos;
     }
 
+    public void setmHeadView(View mHeadView) {
+        this.mHeadView = mHeadView;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (mHeadView != null && position == 0) {
+            return TYPE_HEADER;
+        }
+        return TYPE_NORMAL;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.item_msg_detail,null) ;
-        view.setLayoutParams(new RecyclerView.LayoutParams(ScreenUtils.getScreenWidth(context),
-                RecyclerView.LayoutParams.WRAP_CONTENT));
-        ViewHolder holder = new ViewHolder(view) ;
-        return holder;
+        if (mHeadView != null && viewType == TYPE_NORMAL) {
+            View view = View.inflate(context, R.layout.item_msg_detail, null);
+            view.setLayoutParams(new RecyclerView.LayoutParams(ScreenUtils.getScreenWidth(context),
+                    RecyclerView.LayoutParams.WRAP_CONTENT));
+            ViewHolder holder = new ViewHolder(view);
+            return holder;
+        } else {
+            return new ViewHolder(mHeadView);
+        }
     }
 
     @Override
@@ -50,30 +69,39 @@ public class NotifyDetailAdapter extends RecyclerView.Adapter<NotifyDetailAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if(position == replyInfos.size()-1){
-            holder.binding.setIsLast(true);
-        }else{
-            holder.binding.setIsLast(false);
+        if (position > 0) {
+            if (position - 1 == replyInfos.size() - 1) {
+                holder.binding.setIsLast(true);
+            } else {
+                holder.binding.setIsLast(false);
+            }
+            holder.binding.setReplyInfo(replyInfos.get(position - 1));
+            Glide.with(context)
+                    .load(replyInfos.get(position - 1).getAvatar_url())
+                    .error(R.drawable.ic_demo)
+                    .into(holder.binding.civHead);
         }
-        holder.binding.setReplyInfo(replyInfos.get(position));
-        Glide.with(context)
-                .load(replyInfos.get(position).getAvatar_url())
-                .error(R.drawable.ic_demo)
-                .into(holder.binding.civHead) ;
     }
 
     @Override
     public int getItemCount() {
         dataSort();
-        return replyInfos.size();
+        return replyInfos.size() + 1;
     }
-    class ViewHolder extends RecyclerView.ViewHolder{
-        ItemMsgDetailBinding binding ;
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        ItemMsgDetailBinding binding;
+
         public ViewHolder(final View itemView) {
             super(itemView);
-            binding = DataBindingUtil.bind(itemView) ;
+            try {
+                binding = DataBindingUtil.bind(itemView);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
+
     /**
      * 对数据排序
      */

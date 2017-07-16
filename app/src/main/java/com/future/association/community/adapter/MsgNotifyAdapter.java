@@ -23,10 +23,17 @@ import java.util.Comparator;
 
 public class MsgNotifyAdapter extends RecyclerView.Adapter<MsgNotifyAdapter.ViewHolder> {
 
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_NORMAL = 1;
     private Context context;
     private ArrayList<MsgNotifyInfo> notifyInfos;
     private OnItemClickListener itemClickListener;
     private RecyclerView mRecycler;
+    private View mHeadView = null;
+
+    public void setmHeadView(View mHeadView) {
+        this.mHeadView = mHeadView;
+    }
 
     //list item 点击事件
     public interface OnItemClickListener {
@@ -42,11 +49,23 @@ public class MsgNotifyAdapter extends RecyclerView.Adapter<MsgNotifyAdapter.View
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.item_msg_notify, null);
-        view.setLayoutParams(new RecyclerView.LayoutParams(ScreenUtils.getScreenWidth(context),
-                RecyclerView.LayoutParams.WRAP_CONTENT));
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        if (mHeadView != null && viewType == TYPE_NORMAL) {
+            View view = View.inflate(context, R.layout.item_msg_notify, null);
+            view.setLayoutParams(new RecyclerView.LayoutParams(ScreenUtils.getScreenWidth(context),
+                    RecyclerView.LayoutParams.WRAP_CONTENT));
+            ViewHolder holder = new ViewHolder(view);
+            return holder;
+        } else {
+            return new ViewHolder(mHeadView);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (mHeadView != null && position == 0) {
+            return TYPE_HEADER;
+        }
+        return TYPE_NORMAL;
     }
 
     @Override
@@ -61,7 +80,9 @@ public class MsgNotifyAdapter extends RecyclerView.Adapter<MsgNotifyAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.binding.setNotifyInfo(notifyInfos.get(position));
+        if (position > 0) {
+            holder.setData(position);
+        }
     }
 
     /**
@@ -77,28 +98,33 @@ public class MsgNotifyAdapter extends RecyclerView.Adapter<MsgNotifyAdapter.View
     @Override
     public int getItemCount() {
         dataSort();
-        return notifyInfos.size();
+        return notifyInfos.size()+1;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ItemMsgNotifyBinding binding;
-
+        private int position ;
         public ViewHolder(final View itemView) {
             super(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (itemClickListener != null) {
-                        itemClickListener.itemClick(getRealPosition(itemView));
+                        itemClickListener.itemClick(position);
                     }
                 }
             });
-            binding = DataBindingUtil.bind(itemView);
+            try {
+                binding = DataBindingUtil.bind(itemView);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-    }
 
-    public int getRealPosition(View view) {
-        return mRecycler.getChildLayoutPosition(view);
+        public void setData(int position) {
+            this.position = position -1 ;
+            binding.setNotifyInfo(notifyInfos.get(position-1));
+        }
     }
 
     /**

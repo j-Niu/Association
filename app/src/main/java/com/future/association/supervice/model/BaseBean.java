@@ -8,13 +8,33 @@ import com.future.baselib.entity.BaseResponse;
 import com.google.gson.JsonSyntaxException;
 
 import java.lang.reflect.Array;
+import java.util.List;
+
 /*
 * Created by cheyu on 2017/7/14.
 * */
-public abstract class BaseBean extends BaseResponse implements Parcelable {
+public abstract class BaseBean<T> extends BaseResponse implements Parcelable {
 
+    protected List<T> list;
+    protected T infoBean;
     public String toJSONString() {
         return GsonUtils.getInstance().toJson(this);
+    }
+
+    public List<T> getList() {
+        return list;
+    }
+
+    public void setList(List<T> list) {
+        this.list = list;
+    }
+
+    public T getInfoBean() {
+        return infoBean;
+    }
+
+    public void setInfoBean(T infoBean) {
+        this.infoBean = infoBean;
     }
 
     @Override

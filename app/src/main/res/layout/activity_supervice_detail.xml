@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="superviceDetailViewModel"
+            type="com.future.association.supervice.viewmodel.SuperviceDetailViewModel"/>
+        <variable
+            name="supericeDetail"
+            type="com.future.association.supervice.model.SupericeDetail"/>
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,14 +31,14 @@
                     android:id="@+id/title_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="多福多寿 个是公司是是的都是都是是的都是 都是的都是是的十多个是的是 是是的是的"/>
+                    android:text="@{supericeDetail.title}"/>
 
                 <TextView
                     android:id="@+id/time_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/normal_padding"
-                    android:text="2017-06-06 8:30"/>
+                    android:text="@{supericeDetail.create_time}"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -55,7 +64,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="网游"/>
+                        android:text="@{supericeDetail.type}"/>
 
                 </LinearLayout>
 
@@ -77,7 +86,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="的广东省广东省工商"/>
+                        android:text="@{supericeDetail.address}"/>
 
                 </LinearLayout>
 
@@ -99,7 +108,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="的广东都是个三个是公司公司个三个是三个是是个十多个是的公司的个是的但是公司的是的 省广东省工商"/>
+                        android:text="@{supericeDetail.reason}"/>
 
                 </LinearLayout>
 

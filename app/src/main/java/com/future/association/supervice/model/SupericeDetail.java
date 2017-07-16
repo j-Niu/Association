@@ -8,7 +8,7 @@ import org.json.JSONException;
  * Created by rain on 2017/7/14.
  */
 
-public class SupericeDetail extends BaseBean {
+public class SupericeDetail extends BaseBean<SupericeDetail> {
     public static final Creator<SupericeDetail> CREATOR = new Creator<>(SupericeDetail.class);
 
 
@@ -32,7 +32,7 @@ public class SupericeDetail extends BaseBean {
 
     @Override
     public void parseInfo(String content) throws JSONException {
-        GsonUtils.jsonToList(content,SupericeDetail.class);
+        infoBean = GsonUtils.jsonToBean(content,SupericeDetail.class);
     }
 
 

@@ -8,18 +8,24 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.future.association.R;
+import com.future.association.common.MyApp;
 import com.future.association.databinding.FragmentSuperviceBinding;
 import com.future.association.databinding.SuperviceHeadBinding;
+import com.future.association.supervice.SupericeApi;
 import com.future.association.supervice.adapter.SuperviceAdapter;
 import com.future.association.supervice.adapter.SuperviceHeadAdapter;
+import com.future.association.supervice.model.SupericeList;
+import com.future.association.supervice.model.SupericerTypeList;
 import com.future.association.supervice.view.SuperviceApplyActivity;
 import com.future.association.supervice.view.SuperviceDetailActivity;
 import com.future.baselib.utils.CommonUtils;
+import com.future.baselib.utils.HttpRequest;
 
 /**
  * Created by rain on 2017/7/12.
@@ -30,8 +36,10 @@ public class SuperviceViewModel {
     private final FragmentSuperviceBinding binding;
     public final ObservableField<SuperviceAdapter> adapter = new ObservableField<>();
     public final ObservableField<SuperviceHeadAdapter> headAdapter = new ObservableField<>();
-    public final ObservableArrayList<String> items = new ObservableArrayList<>();
-    public final ObservableArrayList<String> headItems = new ObservableArrayList<>();
+    public final ObservableArrayList<SupericeList.SupericeListInfo> items = new ObservableArrayList<>();
+    public final ObservableArrayList<SupericerTypeList.SupericerTypeInfo> headItems = new ObservableArrayList<>();
+    private int PAHE;
+
 
     public SuperviceViewModel(Fragment fragment, FragmentSuperviceBinding binding) {
         this.fragment = fragment;
@@ -45,18 +53,59 @@ public class SuperviceViewModel {
     private void initView() {
         binding.superviceRv.setLayoutManager(new LinearLayoutManager(fragment.getActivity()));
         SuperviceAdapter superviceAdapter = new SuperviceAdapter(R.layout.supervice_item,null);
+        superviceAdapter.setOnLoadMoreListener(loadMoreListener,binding.superviceRv);
         View head = getHead();
         superviceAdapter.addHeaderView(head,0);
         adapter.set(superviceAdapter);
         initListener();
-        //TODO 测试
-//        List<String> test = new ArrayList<>();
-        for (int i = 0; i < 70; i++) {
-            items.add("电风扇 是的是的发士大夫是的是的方式的是的发的范德萨 士大夫是是 是的是的是的都是都是"+i);
-        }
     }
 
     private void initData() {
+        getSupericeType();
+        getSupericeList();
+    }
+
+    private void getSupericeList() {
+        //查询监督列表
+        ++PAHE;
+        SupericeApi.getInstance().getSupericeList(fragment.getActivity(),String.valueOf(PAHE))
+                .setListener(new HttpRequest.OnNetworkListener<SupericeList>() {
+                    @Override
+                    public void onSuccess(SupericeList response) {
+                        if (response==null||response.getList()==null){
+                            adapter.get().loadMoreEnd();
+                        }else {
+                            if (response.getList().size()<20){
+                                adapter.get().loadMoreEnd();
+                            }
+                            items.addAll(response.getList());
+                        }
+                    }
+
+                    @Override
+                    public void onFail(String message) {
+
+                    }
+                }).start(new SupericeList());
+    }
+
+    private void getSupericeType() {
+        //获取监督分类
+        SupericeApi.getInstance().getSupericeTypeList(fragment.getActivity(),MyApp.getUserToken())
+                .setListener(new HttpRequest.OnNetworkListener<SupericerTypeList>() {
+                    @Override
+                    public void onSuccess(SupericerTypeList response) {
+                        Log.d("rain",response.toString());
+                        headItems.clear();
+                        headItems.addAll(response.getList());
+                    }
+
+                    @Override
+                    public void onFail(String message) {
+                        Log.d("rain",message);
+                    }
+                }).start(new SupericerTypeList());
+
 
     }
 
@@ -72,10 +121,6 @@ public class SuperviceViewModel {
         SuperviceHeadAdapter adapter = new SuperviceHeadAdapter(R.layout.supervice_head_item,null);
         headAdapter.set(adapter);
         superviceHeadBinding.superviceHeadRv.addOnItemTouchListener(applyListener);
-        //TODO 测试
-        for (int i = 0; i < 9; i++) {
-            headItems.add("测试"+i);
-        }
         return view;
     }
 
@@ -85,6 +130,8 @@ public class SuperviceViewModel {
             //跳往详情页面
             if (!CommonUtils.isFastDoubleClick()){
                 Intent intent = new Intent(fragment.getActivity(),SuperviceDetailActivity.class);
+                SupericeList.SupericeListInfo item = (SupericeList.SupericeListInfo) baseQuickAdapter.getItem(i);
+                intent.putExtra("id", item.getId());
                 fragment.getActivity().startActivity(intent);
             }
         }
@@ -98,6 +145,13 @@ public class SuperviceViewModel {
                 Intent intent = new Intent(fragment.getActivity(),SuperviceApplyActivity.class);
                 fragment.getActivity().startActivity(intent);
             }
+        }
+    };
+
+    private BaseQuickAdapter.RequestLoadMoreListener loadMoreListener = new BaseQuickAdapter.RequestLoadMoreListener() {
+        @Override
+        public void onLoadMoreRequested() {
+            getSupericeList();
         }
     };
 }

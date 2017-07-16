@@ -35,7 +35,8 @@
             android:layout_gravity="bottom"
             android:drawablePadding="4dp"
             android:drawableStart="@drawable/time_pic"
-            android:gravity="bottom"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
             android:text="5小时以前"
             android:textColor="@color/basic_text_gray"/>
 
