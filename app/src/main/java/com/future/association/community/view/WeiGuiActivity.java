@@ -104,7 +104,7 @@ public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> implemen
             this.wgCauses = wgCauses;
             causes = new String[wgCauses.size()];
             for (int i = 0; i < wgCauses.size(); i++) {
-                causes[i] = wgCauses.get(i).getId();
+                causes[i] = wgCauses.get(i).getReason();
             }
             viewBinding.setWgCauseInfo(wgCauses.get(0));
         }

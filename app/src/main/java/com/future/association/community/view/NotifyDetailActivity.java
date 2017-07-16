@@ -104,7 +104,8 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
         viewBinding.setTalkContent("");
         this.replyInfos.add(replyInfo);
         adapter.notifyDataSetChanged();
-        viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行
+        presenter.getData(1);
+//        viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行
         showShortToast("评论成功");
     }
 

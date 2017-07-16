@@ -195,7 +195,8 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         viewBinding.setReplyContent("");
         this.tieReplyInfos.add(replyInfo);
         adapter.notifyDataSetChanged();
-        viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行
+        presenter.getData(1);
+//        viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行
         showShortToast("评论成功");
     }
 

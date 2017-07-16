@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.future.association.community.contract.NotifyDetailContract;
 import com.future.association.community.model.MsgDetailInfo;
+import com.future.association.community.model.MsgNotifyInfo;
 import com.future.association.community.model.NotifyReplyInfo;
 import com.future.association.community.request.CommunityRequest;
 import com.future.association.community.request.DataResponse;
