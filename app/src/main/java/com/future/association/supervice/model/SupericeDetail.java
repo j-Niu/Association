@@ -28,7 +28,7 @@ public class SupericeDetail extends BaseBean<SupericeDetail> {
     private String type;
     private String address;
     private String reason;
-    private String image;
+    private String[] image;
 
     @Override
     public void parseInfo(String content) throws JSONException {
@@ -84,11 +84,11 @@ public class SupericeDetail extends BaseBean<SupericeDetail> {
         this.reason = reason;
     }
 
-    public String getImage() {
+    public String[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(String[] image) {
         this.image = image;
     }
 

@@ -21,8 +21,27 @@ public class SupericerTypeList extends BaseBean<SupericerTypeList.SupericerTypeI
 
 
     public static class SupericerTypeInfo{
+        private int res;
         private String id;
         private String hangye;
+
+        public SupericerTypeInfo() {
+
+        }
+
+        public SupericerTypeInfo(String id,String hangye,int res) {
+            this.id=id;
+            this.hangye =hangye;
+            this.res = res;
+        }
+
+        public int getRes() {
+            return res;
+        }
+
+        public void setRes(int res) {
+            this.res = res;
+        }
 
         public String getId() {
             return id;

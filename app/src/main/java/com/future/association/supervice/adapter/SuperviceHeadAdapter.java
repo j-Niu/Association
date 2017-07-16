@@ -2,6 +2,7 @@ package com.future.association.supervice.adapter;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -21,6 +22,8 @@ public class SuperviceHeadAdapter extends BaseQuickAdapter<SupericerTypeList.Sup
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, SupericerTypeList.SupericerTypeInfo item) {
+        ImageView iv = baseViewHolder.getView(R.id.iv);
         baseViewHolder.setText(R.id.tv,item.getHangye());
+        iv.setImageResource(item.getRes());
     }
 }

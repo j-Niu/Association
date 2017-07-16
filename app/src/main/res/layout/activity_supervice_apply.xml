@@ -2,7 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
+<data>
+    <variable
+        name="superviceApplyViewMdel"
+        type="com.future.association.supervice.viewmodel.SuperviceApplyViewModel"/>
+    <variable
+        name="supericeDetail"
+        type="com.future.association.supervice.model.SupericeDetail"/>
+</data>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -35,11 +42,12 @@
                         android:text="监督类别"/>
 
                     <TextView
+                        android:id="@+id/type"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
                         android:gravity="right"
-                        android:text="游戏"/>
+                        android:text="@{supericeDetail.type}"/>
 
                 </LinearLayout>
 
@@ -63,13 +71,14 @@
                         android:text="所属区域"/>
 
                     <TextView
+                        android:id="@+id/address"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
                         android:drawableEnd="@drawable/right_arrow"
                         android:drawablePadding="8dp"
                         android:gravity="right"
-                        android:text="请选择所属区域"/>
+                        android:text="@{supericeDetail.address}"/>
 
                 </LinearLayout>
 
@@ -105,12 +114,14 @@
                         app:counterMaxLength="30">
 
                         <android.support.design.widget.TextInputEditText
+                            android:id="@+id/title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:gravity="top"
                             android:hint="请输入监督标题"
                             android:inputType="textMultiLine"
+                            android:text="@={supericeDetail.title}"
                             android:maxLength="30"/>
 
                     </android.support.design.widget.TextInputLayout>
@@ -146,12 +157,14 @@
                         app:counterMaxLength="1000">
 
                         <android.support.design.widget.TextInputEditText
+                            android:id="@+id/reason"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:gravity="top"
                             android:hint="请输入监督事由"
                             android:inputType="textMultiLine"
+                            android:text="@={supericeDetail.reason}"
                             android:maxLength="1000"/>
 
                     </android.support.design.widget.TextInputLayout>
@@ -174,6 +187,7 @@
         </ScrollView>
 
         <Button
+            android:id="@+id/submit_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

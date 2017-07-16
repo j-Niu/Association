@@ -35,7 +35,7 @@ public class SuperviceDetailViewModel {
                     @Override
                     public void onSuccess(SupericeDetail response) {
 //                        supericeDetail.set(response.getInfoBean());
-                        mBinding.setSupericeDetail((SupericeDetail) response.getInfoBean());
+                        mBinding.setSupericeDetail(response.getInfoBean());
                     }
 
                     @Override

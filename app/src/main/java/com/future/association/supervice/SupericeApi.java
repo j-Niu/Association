@@ -59,11 +59,15 @@ public class SupericeApi {
 /*
 * 监督发布
 * */
-    public HttpRequest getSupericeTypePublish(Context context,String token,String id){
+    public HttpRequest publishSuperice(Context context,String userToken, String hangye, String address,String title, String reason, String image){
         return new HttpRequest<SupericerTypeList>()
                 .with(context)
                 .addParam("apiCode",SUPERICE_TYPE_PUBLISH_APICODE)
-                .addParam("token",token)
-                .addParam("id",id);
+                .addParam("userToken ",userToken)
+                .addParam("hangye",hangye)
+                .addParam("address",address)
+                .addParam("title",title)
+                .addParam("reason",reason)
+                .addParam("image",image);
     }
 }
