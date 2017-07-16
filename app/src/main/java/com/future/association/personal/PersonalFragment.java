@@ -3,7 +3,7 @@ package com.future.association.personal;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.net.Uri;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -46,6 +46,7 @@ public class PersonalFragment extends MyBaseFragment {
     private GalleryConfig galleryConfig;
     private IHandlerCallBack iHandlerCallBack;
     private final int PERMISSIONS_REQUEST_READ_CONTACTS = 8;
+    private final int PERMISSIONS_REQUEST_WRITE_CONTACTS = 9;
     private static final int CHANGE_HEADER = 0x561;
 
     public PersonalFragment() {
@@ -172,9 +173,12 @@ public class PersonalFragment extends MyBaseFragment {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            String img = "";
+            Bitmap bitmap = null;
             if (msg.what == CHANGE_HEADER) {
-                String img = (String) msg.obj;
-                header.setImageURI(Uri.parse(img));
+                img = (String) msg.obj;
+                bitmap = BitmapUtils.scaleBitmap(img);
+                header.setImageBitmap(bitmap);
 //                Glide.with(mContext)
 //                        .load(Uri.parse(img))
 //                        .centerCrop()
@@ -240,14 +244,17 @@ public class PersonalFragment extends MyBaseFragment {
 
     // 授权管理
     private void initPermissions() {
-        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
 //            Log.i(TAG, "需要授权 ");
             if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 //                Log.i(TAG, "拒绝过了");
                 ToastUtils.shortToast(getActivity(), "请在 设置-应用管理 中开启此应用的储存授权。");
             } else {
 //                Log.i(TAG, "进行授权");
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_CONTACTS);
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
+
             }
         } else {
 //            Log.i(TAG, "不需要授权 ");
@@ -257,7 +264,7 @@ public class PersonalFragment extends MyBaseFragment {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-        if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
+        if (requestCode == PERMISSIONS_REQUEST_WRITE_CONTACTS || requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 //                Log.i(TAG, "同意授权");
                 GalleryPick.getInstance().setGalleryConfig(galleryConfig).open(getActivity());
