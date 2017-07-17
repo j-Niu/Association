@@ -32,7 +32,7 @@ public class QuestionnaireWebActivity extends BaseActivity{
         });
         WebView webView = (WebView) findViewById(R.id.web_view);
 //        webView.loadUrl("http://p1.gexing.com/shaitu/20120822/1921/5034c0cfa2571.jpg");
-        webView.loadUrl("http://img1.3lian.com/2015/w8/31/d/101.jpg");
+        webView.loadUrl("http://www.baidu.com/");
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient(){
