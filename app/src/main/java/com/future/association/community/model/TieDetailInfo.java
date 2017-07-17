@@ -38,10 +38,13 @@ public class TieDetailInfo {
     }
 
     public String getLevel() {
-        if(TextUtil.isEmpty(level)){
-            return "V0" ;
+        if (TextUtil.isEmpty(level)) {
+            return "V0";
+        } else if (!level.toLowerCase().startsWith("v")) {
+            return "V" + level;
+        }else{
+            return level ;
         }
-        return "V"+level;
     }
 
     public void setLevel(String level) {
