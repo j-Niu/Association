@@ -1,4 +1,4 @@
-package com.future.association.questionnaire;
+package com.future.association.questionnaire.adapters;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;

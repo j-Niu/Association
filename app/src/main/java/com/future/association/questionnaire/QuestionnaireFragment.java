@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.future.association.R;
+import com.future.association.questionnaire.views.HotQuestionnaireFragment;
+import com.future.association.questionnaire.views.MyQuestionnaireFragment;
 import com.future.baselib.activity.BaseFragment;
 import com.future.baselib.adapter.ViewPageFragmentAdapter;
 import com.future.baselib.view.PagerSlidingTabStrip;

@@ -1,4 +1,4 @@
-package com.future.association.questionnaire;
+package com.future.association.questionnaire.views;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;

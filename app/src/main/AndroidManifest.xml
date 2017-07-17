@@ -75,10 +75,10 @@
             android:screenOrientation="portrait"/>
         <!-- 问卷加监督模块 -->
         <activity
-            android:name=".questionnaire.QuestionnaireWebActivity"
+            android:name=".questionnaire.views.QuestionnaireWebActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".questionnaire.QuestionnaireEndActivity"
+            android:name=".questionnaire.views.QuestionnaireEndActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".supervice.view.SuperviceDetailActivity"

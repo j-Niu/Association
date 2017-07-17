@@ -3,6 +3,7 @@ package com.future.association.supervice;
 import android.content.Context;
 
 import com.future.association.supervice.model.SupericeDetail;
+import com.future.association.supervice.model.SupericeList;
 import com.future.association.supervice.model.SupericerTypeList;
 import com.future.baselib.utils.HttpRequest;
 
@@ -15,7 +16,7 @@ public class SupericeApi {
     public static final String SUPERICE_TYPE_LIST_APICODE = "_jdfenlei_001";
     public static final String SUPERICE_LIST_APICODE = "_jdliebiao_001";
     public static final String SUPERICE_TYPE_DETAIL_APICODE = "_jdxiangqing_001";
-    public static final String SUPERICE_TYPE_PUBLISH_APICODE = "_jdfabu_001";
+    public static final String SUPERICE_TYPE_PUBLISH_APICODE = "_jdfabu_001";//_jdfabu_001
 
     private static SupericeApi instance = null;
 
@@ -41,7 +42,7 @@ public class SupericeApi {
 * 监督列表
 * */
     public HttpRequest getSupericeList(Context context,String page){
-        return new HttpRequest<SupericerTypeList>()
+        return new HttpRequest<SupericeList>()
                 .with(context)
                 .addParam("apiCode",SUPERICE_LIST_APICODE)
                 .addParam("page",page)
@@ -60,7 +61,7 @@ public class SupericeApi {
 * 监督发布
 * */
     public HttpRequest publishSuperice(Context context,String userToken, String hangye, String address,String title, String reason, String image){
-        return new HttpRequest<SupericerTypeList>()
+        return new HttpRequest<SupericeDetail>()
                 .with(context)
                 .addParam("apiCode",SUPERICE_TYPE_PUBLISH_APICODE)
                 .addParam("userToken ",userToken)

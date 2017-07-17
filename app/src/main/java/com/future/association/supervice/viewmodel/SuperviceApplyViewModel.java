@@ -13,14 +13,12 @@ import com.future.association.login.bean.GetJsonDataUtil;
 import com.future.association.login.bean.JsonBean;
 import com.future.association.supervice.SupericeApi;
 import com.future.association.supervice.model.SupericeDetail;
-import com.future.baselib.entity.BaseResponse;
 import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.ToastUtils;
 import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -73,9 +71,9 @@ public class SuperviceApplyViewModel {
 //                            }
                             SupericeApi.getInstance().publishSuperice(activity, MyApp.getUserToken(), supericeDetail.getType(),
                                     supericeDetail.getAddress(), supericeDetail.getTitle(), supericeDetail.getReason(), buffer.toString())
-                                    .setListener(new HttpRequest.OnNetworkListener() {
+                                    .setListener(new HttpRequest.OnNetworkListener<SupericeDetail>() {
                                         @Override
-                                        public void onSuccess(BaseResponse response) {
+                                        public void onSuccess(SupericeDetail response) {
                                             ToastUtils.shortToast(activity, "发布成功");
                                             activity.finish();
                                         }
@@ -84,12 +82,7 @@ public class SuperviceApplyViewModel {
                                         public void onFail(String message) {
 
                                         }
-                                    }).start(new BaseResponse() {
-                                @Override
-                                public void parseInfo(String content) throws JSONException {
-
-                                }
-                            });
+                                    }).start(new SupericeDetail());
                         }
                     }
                 });
