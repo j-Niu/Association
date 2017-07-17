@@ -104,7 +104,7 @@ public class SuperviceViewModel {
                 R.drawable.superice_type3,
                 R.drawable.superice_type4,
                 R.drawable.superice_type5,
-                R.drawable.superice_type5,
+                R.drawable.superice_type6,
                 R.drawable.superice_type7,
                 R.drawable.superice_type8,
                 R.drawable.superice_type9,
