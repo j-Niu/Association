@@ -44,6 +44,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
     private GridViewAdapter adapter;
     private View headView;
     private LayoutListNotifyHeadBinding headBinding;
+    private int currentPage = 1 ;
 
     public CommunityFragment() {
         // Required empty public constructor
@@ -57,6 +58,13 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
         View contentView = inflater.inflate(R.layout.fragment_community, container, false);
         viewBinding = DataBindingUtil.bind(contentView);
         return contentView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        currentPage = 1 ;
+        presenter.getData(currentPage);
     }
 
     @Override
@@ -88,13 +96,13 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
 
         presenter = new CommunityPresenter(this, getContext());
         presenter.getPlateList();
-        presenter.getData(1);
     }
 
     public void initListener() {
         viewBinding.rcvMsg.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
+                CommunityFragment.this.currentPage = currentPage ;
                 presenter.getData(currentPage);
             }
         });
@@ -127,9 +135,9 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
     @Override
     public void setData(ArrayList<MsgNotifyInfo> notifyInfos) {
         if (notifyInfos == null) return;
-            this.notifyInfos.addAll(notifyInfos);
-            this.notifyInfos.addAll(notifyInfos);
-            this.notifyInfos.addAll(notifyInfos);
+        if(currentPage == 1){
+            this.notifyInfos.clear();
+        }
         this.notifyInfos.addAll(notifyInfos);
         notifyAdapter.notifyDataSetChanged();
     }

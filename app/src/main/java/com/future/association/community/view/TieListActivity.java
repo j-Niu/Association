@@ -65,6 +65,7 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
         viewBinding.rcvTie.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
+                TieListActivity.this.currentPage = currentPage ;
                 presenter.getData(currentPage);
             }
         });
