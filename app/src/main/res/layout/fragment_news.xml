@@ -4,19 +4,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context="com.future.association.news.NewsFragment">
 
     <include layout="@layout/layout_toolbar"/>
-
-    <!--<com.youth.banner.Banner-->
-        <!--android:id="@+id/banner"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="380px"-->
-        <!--app:delay_time="3000"-->
-        <!--app:title_height="66px"-->
-        <!--app:title_textcolor="#fefefe"-->
-        <!--app:title_textsize="30px"-->
-        <!--/>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

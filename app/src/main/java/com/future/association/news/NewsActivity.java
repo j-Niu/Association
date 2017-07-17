@@ -43,6 +43,7 @@ public class NewsActivity extends BaseActivity {
         tvTime.setText("2017-7-15 15:57:51");
         setTitle("资讯详情");
         toolbarIvLeft.setImageResource(R.drawable.ic_back);
+        webView.loadData("这是内容部分。。。。。。。。。。。","text/html; charset=utf-8",null);
     }
 
     @Override
