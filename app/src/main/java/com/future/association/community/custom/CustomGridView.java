@@ -53,9 +53,7 @@ public class CustomGridView extends GridView {
         localPaint.setColor(Color.parseColor("#DCDCDC"));//画笔颜色
 
         View view0 = getChildAt(0); //第一个view
-        View view1 = getChildAt(1); //第一个view
         View viewColLast = getChildAt(colnum - 1);//第一行最后一个view
-        View viewRowLast = getChildAt((rownum - 1) * colnum); //第一列最后一个view
 
         for (int i = 1,j=1 ; i < colnum || j < rownum ; i++,j++){
             //画竖线

@@ -15,7 +15,7 @@ public class MyApp extends Application {
     // activity管理类
     private ActivityManager activityManager = null;
 
-    private static String userToken = "59b85ba365102520b758681d85938ceb";
+    private static String userToken = "08bb51d1e82bdb3ac553e8804bcb4f65";
 
     public MyApp() {
         app = this;

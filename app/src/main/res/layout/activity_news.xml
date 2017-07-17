@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context="com.future.association.news.NewsActivity">
 
     <include layout="@layout/layout_toolbar"/>
@@ -38,6 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="30px"
+        android:layout_marginLeft="32px"
+        android:layout_marginRight="32px"
         />
 
 </com.zhy.autolayout.AutoLinearLayout>

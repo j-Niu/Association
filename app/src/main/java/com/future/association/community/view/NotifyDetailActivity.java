@@ -31,6 +31,7 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
     private MsgNotifyInfo notifyInfo;
     private View mHeadView;
     private LayoutNotifyReplyHeadBinding headBinding;
+    private int currentPage = 1 ;
 
     @Override
     public int setContentView() {
@@ -54,7 +55,7 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
         adapter.setmHeadView(mHeadView);
         viewBinding.rclReply.setAdapter(adapter);
         presenter = new NotifyDetailPresenter(this, context);
-        presenter.getData(1);
+        presenter.getData(currentPage);
         presenter.getNotifyDetail();
     }
 
@@ -63,6 +64,7 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
         viewBinding.rclReply.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
+                NotifyDetailActivity.this.currentPage = currentPage ;
                 presenter.getData(currentPage);
             }
         });
@@ -84,6 +86,9 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
     @Override
     public void setData(ArrayList<NotifyReplyInfo> replyInfos) {
         if(replyInfos != null){
+            if(currentPage == 1){
+                this.replyInfos.clear();
+            }
             this.replyInfos.addAll(replyInfos);
             adapter.notifyDataSetChanged();
         }
@@ -111,7 +116,8 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
         viewBinding.setTalkContent("");
 //        this.replyInfos.add(replyInfo);
         adapter.notifyDataSetChanged();
-        presenter.getData(1);
+        currentPage = 1 ;
+        presenter.getData(currentPage);
 //        viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行
         showShortToast("评论成功");
     }

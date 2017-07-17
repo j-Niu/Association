@@ -45,6 +45,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     private int delReplyPosition ;
     private LayoutTieReplyHeadBinding headBinding;
     private View mHeadView;
+    private int currentPage = 1 ;
 
     @Override
     public int setContentView() {
@@ -78,7 +79,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         adapter.setmHeadView(mHeadView);
         viewBinding.rclReply.setAdapter(adapter);
         presenter = new TieDetailPresenter(this,context);
-        presenter.getData(1);
+        presenter.getData(currentPage);
         presenter.getTieDetail();
     }
 
@@ -110,6 +111,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         viewBinding.rclReply.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
+                TieDetailActivity.this.currentPage = currentPage ;
                 presenter.getData(currentPage);
             }
         });
@@ -175,6 +177,9 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     @Override
     public void setData(ArrayList<TieReplyInfo> replyInfos) {
         if(replyInfos != null){
+            if(currentPage == 1){
+                tieReplyInfos.clear();
+            }
             tieReplyInfos.addAll(replyInfos);
             adapter.notifyDataSetChanged();
         }
@@ -201,7 +206,8 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         viewBinding.setReplyContent("");
 //        this.tieReplyInfos.add(replyInfo);
         adapter.notifyDataSetChanged();
-        presenter.getData(1);
+        currentPage = 1 ;
+        presenter.getData(currentPage);
 //        viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行
         showShortToast("评论成功");
     }

@@ -14,17 +14,14 @@ import android.widget.Toast;
 
 import com.future.association.R;
 import com.future.association.common.MyApp;
-import com.future.association.community.utils.AppUtils;
 import com.future.association.community.utils.ConstantUtil;
 import com.future.association.community.utils.Res;
 import com.future.association.community.utils.ScreenUtils;
 import com.zhy.autolayout.AutoFrameLayout;
-import com.zhy.autolayout.AutoLayoutActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 
 /**

@@ -11,6 +11,8 @@
     <color name="color_text_gray">#999999</color>
 
     <color name="yellow">#faa701</color>
+    <!--选取图片页面Title-->
+    <color name="gallery_blue">#26A16E</color>
     //log register
     <color name="color_999999">#999999</color>
     <color name="color_f8f8f8">#f8f8f8</color>

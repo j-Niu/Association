@@ -8,12 +8,12 @@ import com.future.association.community.utils.TextUtil;
 
 public class NotifyReplyInfo {
 
-    private String real_name ;//评论人名称
-    private String avatar_url ;//评论人头像
-    private String level ;//品论人等级
-    private String tiezi_id ;//
-    private String content ;//评论内容
-    private String create_time ;//评论时间
+    private String real_name;//评论人名称
+    private String avatar_url;//评论人头像
+    private String level;//品论人等级
+    private String tiezi_id;//
+    private String content;//评论内容
+    private String create_time;//评论时间
 
     public String getReal_name() {
         return real_name;
@@ -32,10 +32,13 @@ public class NotifyReplyInfo {
     }
 
     public String getLevel() {
-        if(TextUtil.isEmpty(level)){
-            return "V0" ;
+        if (TextUtil.isEmpty(level)) {
+            return "V0";
+        } else if (!level.toLowerCase().startsWith("v")) {
+            return "V" + level;
+        }else{
+            return level ;
         }
-        return "V"+level;
     }
 
     public void setLevel(String level) {
