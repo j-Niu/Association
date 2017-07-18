@@ -29,22 +29,22 @@ public class QuestionnaireApi {
         return instance;
     }
 
-    public HttpRequest<QuestionList> getHotWenjuan(Context context, String userToken, String page, String size) {
+    public HttpRequest<QuestionList> getHotWenjuan(Context context, String userToken, String page) {
         return new HttpRequest<QuestionList>()
                 .with(context)
                 .addParam("apiCode", HOT_WEN_JUAN_CODE)
                 .addParam("userToken", userToken)
                 .addParam("page", page)
-                .addParam("size", size);
+                .addParam("size", "20");
     }
 
-    public HttpRequest<QuestionList> getMyWenjuan(Context context, String userToken, String page, String size) {
+    public HttpRequest<QuestionList> getMyWenjuan(Context context, String userToken, String page) {
         return new HttpRequest<QuestionList>()
                 .with(context)
                 .addParam("apiCode", MY_WEN_JUAN_CODE)
                 .addParam("userToken", userToken)
                 .addParam("page", page)
-                .addParam("size", size);
+                .addParam("size", "20");
     }
 
     public HttpRequest<QuestionDetail> getWenjuanDetail(Context context, String userToken, String id) {
