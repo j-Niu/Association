@@ -130,7 +130,7 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
             binding.setReplyInfo(tieReplyInfos.get(position));
             Glide.with(context)
                     .load(tieReplyInfos.get(position).getAvatar_url())
-                    .error(drawable.ic_demo)
+//                    .error(drawable.ic_demo)
                     .into(binding.civHead);
             this.position = position;
         }

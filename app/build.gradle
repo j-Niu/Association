@@ -11,6 +11,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // 开启multidex
+        multiDexEnabled true
     }
     dataBinding {
         enabled = true
@@ -50,4 +53,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     compile 'com.github.YancyYe:GalleryPick:1.2.1'
+    compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.0'
+//    compile ('com.github.LuckSiege.PictureSelector:picture_library:v2.1.0', {
+//        exclude  module: 'glide'//排除glide重复依赖
+//    })
+    compile 'com.android.support:multidex:1.0.1'
 }

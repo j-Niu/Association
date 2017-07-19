@@ -1,5 +1,6 @@
 package com.future.association.supervice.view;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
@@ -14,11 +15,15 @@ import com.future.baselib.activity.BaseActivity;
  */
 
 public class SuperviceApplyActivity extends BaseActivity {
+
+    private SuperviceApplyViewModel mViewMdel;
+
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         String type = getIntent().getStringExtra("type");
         ActivitySuperviceApplyBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_supervice_apply);
-        binding.setSuperviceApplyViewMdel(new SuperviceApplyViewModel(this,binding,type));
+        mViewMdel = new SuperviceApplyViewModel(this, binding, type);
+        binding.setSuperviceApplyViewMdel(mViewMdel);
     }
 
     @Override
@@ -40,5 +45,11 @@ public class SuperviceApplyActivity extends BaseActivity {
     @Override
     protected void getBundleExtras(Bundle extras) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mViewMdel.onActivityResult(requestCode,resultCode,data);
     }
 }

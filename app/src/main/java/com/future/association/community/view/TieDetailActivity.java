@@ -196,7 +196,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
             headBinding.setTieDetailInfo(detailInfo);
             Glide.with(context)
                     .load(detailInfo.getAvatar_url())
-                    .error(R.drawable.ic_demo)
+//                    .error(R.drawable.ic_demo)
                     .into(headBinding.civHead) ;
         }
     }

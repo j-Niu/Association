@@ -24,7 +24,9 @@ public class SuperviceAdapter extends BaseQuickAdapter<SupericeList.SupericeList
     @Override
     protected void convert(BaseViewHolder baseViewHolder, SupericeList.SupericeListInfo item) {
         ImageView imageView = baseViewHolder.getView(R.id.iv);
-        Glide.with(mContext).load(item.getImage()).error(R.drawable.ic_launcher).into(imageView);
+        Glide.with(mContext).load(item.getImage())
+//                .error(R.drawable.ic_launcher)
+                .into(imageView);
         baseViewHolder.setText(R.id.title,item.getTitle())
                 .setText(R.id.time,item.getTime());
     }

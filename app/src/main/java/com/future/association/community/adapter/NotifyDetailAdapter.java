@@ -78,7 +78,7 @@ public class NotifyDetailAdapter extends RecyclerView.Adapter<NotifyDetailAdapte
             holder.binding.setReplyInfo(replyInfos.get(position - 1));
             Glide.with(context)
                     .load(replyInfos.get(position - 1).getAvatar_url())
-                    .error(R.drawable.ic_demo)
+//                    .error(R.drawable.ic_demo)
                     .into(holder.binding.civHead);
         }
     }

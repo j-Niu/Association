@@ -1,6 +1,6 @@
 package com.future.association.supervice.viewmodel;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.view.View;
@@ -13,14 +13,21 @@ import com.future.association.login.bean.GetJsonDataUtil;
 import com.future.association.login.bean.JsonBean;
 import com.future.association.supervice.SupericeApi;
 import com.future.association.supervice.model.SupericeDetail;
+import com.future.association.supervice.view.SuperviceApplyActivity;
 import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.ToastUtils;
 import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.view.RxView;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
+import com.luck.picture.lib.tools.DebugUtil;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -28,13 +35,15 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by rain on 2017/7/16.
  */
 
 public class SuperviceApplyViewModel {
     private final ActivitySuperviceApplyBinding mBindIng;
-    private final Activity activity;
+    private final SuperviceApplyActivity activity;
     private final String type;
     public ObservableField<SupericeDetail> supericeDetail = new ObservableField<>();
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
@@ -42,7 +51,7 @@ public class SuperviceApplyViewModel {
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
     private final SupericeDetail supericeDetailBean = new SupericeDetail();
 
-    public SuperviceApplyViewModel(Activity activity, ActivitySuperviceApplyBinding binding,String type) {
+    public SuperviceApplyViewModel(SuperviceApplyActivity activity, ActivitySuperviceApplyBinding binding, String type) {
         this.activity = activity;
         this.mBindIng = binding;
         this.type = TextUtil.isEmpty(type)?"":type;
@@ -102,6 +111,19 @@ public class SuperviceApplyViewModel {
                         showLocationPicker();
                     }
                 });
+
+       RxView.clicks(mBindIng.addImgTv)
+               .throttleFirst(1,TimeUnit.SECONDS)
+               .subscribe(new Consumer<Object>() {
+                   @Override
+                   public void accept(@NonNull Object o) throws Exception {
+//                       PictureSelector.create(SuperviceApplyActivity.class).c
+                       PictureSelector.create(activity)
+                               .openGallery(PictureMimeType.ofImage())
+                               .forResult(PictureConfig.CHOOSE_REQUEST);
+                   }
+               });
+
     }
 
     private boolean canCommit() {
@@ -233,5 +255,24 @@ public class SuperviceApplyViewModel {
             e.printStackTrace();
         }
         return detail;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PictureConfig.CHOOSE_REQUEST:
+                    // 图片选择结果回调
+                    List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                    // 例如 LocalMedia 里面返回三种path
+                    // 1.media.getPath(); 为原图path
+                    // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
+                    // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
+                    // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+//                    adapter.setList(selectList);
+//                    adapter.notifyDataSetChanged();
+                    DebugUtil.i("onActivityResult:", "onActivityResult:" + selectList.toString());
+                    break;
+            }
+        }
     }
 }

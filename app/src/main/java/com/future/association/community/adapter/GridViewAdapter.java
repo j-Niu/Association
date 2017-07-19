@@ -47,7 +47,7 @@ public class GridViewAdapter extends BaseListAdapter<PlateInfo> {
         ItemGridBinding binding = DataBindingUtil.bind(convertView);
         Glide.with(context)
                 .load(datas.get(position).getImage())
-                .error(R.drawable.ic_demo)
+//                .error(R.drawable.ic_demo)
                 .into(binding.ivImg) ;
         if (getCount() > limitCount && position == limitCount) {
             binding.setContent("更多");
