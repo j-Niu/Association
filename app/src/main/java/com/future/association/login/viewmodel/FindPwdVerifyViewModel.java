@@ -114,9 +114,9 @@ public class FindPwdVerifyViewModel {
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
-                        //验证码倒计时
-                        CommonUtil.getVerify(binding.findPwdSendVerifyCode, activity);
                         if (PatternUtils.mobilePattern(toastUtils, phoneNumber.get())) {
+                            //验证码倒计时
+                            CommonUtil.getVerify(binding.findPwdSendVerifyCode, activity);
                             HttpRequest request = userApi.getVerifyCode(activity, phoneNumber.get()).setListener(new HttpRequest.OnNetworkListener() {
                                 @Override
                                 public void onSuccess(BaseResponse response) {
