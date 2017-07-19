@@ -11,6 +11,7 @@ import com.future.association.R;
 import com.future.association.common.MainActivity;
 import com.future.association.common.MyApp;
 import com.future.association.databinding.ActivityFindPwdResetBinding;
+import com.future.association.login.FindPwdResetActivity;
 import com.future.association.login.LoginActivity;
 import com.future.association.login.MyToast;
 import com.future.association.login.UserApi;
@@ -24,6 +25,7 @@ import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -40,21 +42,19 @@ import static com.future.association.login.util.CommonUtil.startActivity;
  */
 
 public class FindPwdResetViewModel {
-    private Activity activity;
+    private FindPwdResetActivity activity;
     private ActivityFindPwdResetBinding binding;
     public ObservableField<String> password = new ObservableField<>();
     public ObservableField<String> errorMessage = new ObservableField<>();
-    ToastUtils toastUtils;
     String phoneNumber;
     String code;
     int type;
     UserApi userApi;
     Handler handler;
 
-    public FindPwdResetViewModel(Activity activity, ActivityFindPwdResetBinding binding) {
+    public FindPwdResetViewModel(FindPwdResetActivity activity, ActivityFindPwdResetBinding binding) {
         this.activity = activity;
         this.binding = binding;
-        toastUtils = new ToastUtils(activity);
         userApi = new UserApi();
         handler = new Handler();
     }
@@ -63,15 +63,16 @@ public class FindPwdResetViewModel {
     public void initLinstener() {
         RxView
                 .clicks(binding.resetPwdCommit)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
-                        if (PatternUtils.passwordPattern(toastUtils, password.get())) {
+                        if (PatternUtils.passwordPattern(activity.toast, password.get())) {
                             HttpRequest request = null;
                             if (type == 1) {
+                                activity.showLoadingDialog();
                                 //获取userResponse
-                                // if()
                                 request = userApi
                                         .resetPassWord2(activity, CommonUtil.userResponse.userToken, "000000", password.get(), password.get())
                                         .setListener(new HttpRequest.OnNetworkListener() {
@@ -83,18 +84,10 @@ public class FindPwdResetViewModel {
                                                     @Override
                                                     public void run() {
                                                         //将用户信息保存打xml中
-//                                                        Gson gson = new Gson();
-//                                                        PreferenceManager
-//                                                                .getDefaultSharedPreferences(activity)
-//                                                                .edit()
-//                                                                .putString("user", gson.toJson(CommonUtil.userResponse))
-//                                                                .putBoolean("islogin", true)
-//                                                                .putString("userToken", CommonUtil.userResponse.userToken)
-//                                                                .putString("quxian", CommonUtil.userResponse.quanxian)
-//                                                                .apply();
                                                         CommonUtil.storeLoginMsg(activity, CommonUtil.userResponse);
                                                         //跳转到登陆界面
                                                         MyApp.getApp().getActivityManager().finishAllActivity();
+                                                        activity.dissmissLoadingDialog();
                                                         startActivity(activity, MainActivity.class);
                                                     }
                                                 }, 1500L);
@@ -102,10 +95,12 @@ public class FindPwdResetViewModel {
 
                                             @Override
                                             public void onFail(String message) {
-                                                toastUtils.show("" + message);
+                                                activity.dissmissLoadingDialog();
+                                                activity.toast.show("" + message);
                                             }
                                         });
                             } else if (type == 2) {
+                                activity.showLoadingDialog();
                                 request = userApi
                                         .resetPassWord(activity, phoneNumber, code, password.get())
                                         .setListener(new HttpRequest.OnNetworkListener() {
@@ -115,12 +110,14 @@ public class FindPwdResetViewModel {
                                                 MyToast.makeText(activity, R.layout.dialog_find_pwd_success, Toast.LENGTH_SHORT).show();
                                                 //跳转到登陆界面
                                                 MyApp.getApp().getActivityManager().finishAllActivityExceptOne(LoginActivity.class);
+                                                activity.dissmissLoadingDialog();
                                                 activity.onBackPressed();
                                             }
 
                                             @Override
                                             public void onFail(String message) {
-                                                toastUtils.show("" + message);
+                                                activity.dissmissLoadingDialog();
+                                                activity.toast.show("" + message);
                                             }
                                         });
                             }
@@ -134,10 +131,12 @@ public class FindPwdResetViewModel {
 
         RxTextView
                 .textChangeEvents(binding.resetPwdPassword)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<TextViewTextChangeEvent>() {
+                .subscribe(new Consumer<Object>() {
                     @Override
-                    public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
+                    public void accept(@NonNull Object o) throws Exception {
+                        TextViewTextChangeEvent textViewTextChangeEvent = (TextViewTextChangeEvent) o;
                         String pwd = textViewTextChangeEvent.text().toString();
                         if (!TextUtils.isEmpty(pwd) && !passwordPattern(pwd)) {
                             errorMessage.set("请输入正确密码");

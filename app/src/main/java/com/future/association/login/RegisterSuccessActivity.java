@@ -12,7 +12,7 @@ import com.future.baselib.utils.StatusUtils;
  * Created by Mwh on 2017/7/4.
  */
 
-public class RegisterSuccessActivity extends BaseActivity {
+public class RegisterSuccessActivity extends UBaseActivity {
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_register_success);

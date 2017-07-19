@@ -22,7 +22,7 @@ import com.future.baselib.utils.StatusUtils;
  * Created by Administrator on 2017/7/4.
  */
 
-public class PerfectInformationActivity extends BaseActivity {
+public class PerfectInformationActivity extends UBaseActivity {
     ActivityPerfectInformationBinding binding;
     PerfectInformationViewModel perfectInformationViewModel;
     String phoneNumber;

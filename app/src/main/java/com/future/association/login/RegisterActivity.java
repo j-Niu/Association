@@ -17,7 +17,7 @@ import com.future.baselib.utils.StatusUtils;
  * Created by Mwh on 2017/7/4.
  */
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends UBaseActivity {
     ActivityRegisterBinding binding;
     RegisterViewModel registerViewModel;
 

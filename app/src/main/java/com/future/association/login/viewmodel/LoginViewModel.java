@@ -25,6 +25,7 @@ import com.future.association.databinding.DialogLoginErrorBinding;
 import com.future.association.databinding.DialogLoginProtectBinding;
 import com.future.association.login.FindPwdResetActivity;
 import com.future.association.login.FindPwdVerifyActivity;
+import com.future.association.login.LoginActivity;
 import com.future.association.login.RegisterActivity;
 import com.future.association.login.UserApi;
 import com.future.association.login.bean.UserResponse;
@@ -37,6 +38,7 @@ import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -57,18 +59,16 @@ public class LoginViewModel {
     private Dialog errorDialog, protectDialog;
     private DialogLoginErrorBinding errorBinding;
     private DialogLoginProtectBinding protectBinding;
-    private Activity activity;
+    private LoginActivity activity;
     private ActivityLoginBinding binding;
     public ObservableField<String> phoneNumber = new ObservableField<>();
     public ObservableField<String> password = new ObservableField<>();
     public ObservableField<String> errorMessage = new ObservableField<>();
     public ObservableBoolean clearPhonenumberFlag = new ObservableBoolean(false);
-    ToastUtils toastUtils;
 
-    public LoginViewModel(Activity activity, ActivityLoginBinding binding) {
+    public LoginViewModel(LoginActivity activity, ActivityLoginBinding binding) {
         this.activity = activity;
         this.binding = binding;
-        toastUtils = new ToastUtils(activity);
         errorBinding = DataBindingUtil.inflate(activity.getLayoutInflater(), R.layout.dialog_login_error, null, false);
         protectBinding = DataBindingUtil.inflate(activity.getLayoutInflater(), R.layout.dialog_login_protect, null, false);
     }
@@ -79,11 +79,14 @@ public class LoginViewModel {
         //登录按钮执行网络访问
         RxView
                 .clicks(binding.loginCommit)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
-                        if (PatternUtils.mobilePattern(toastUtils, phoneNumber.get()) && PatternUtils.passwordPattern(toastUtils, password.get())) {
+                        if (PatternUtils.mobilePattern(activity.toast, phoneNumber.get()) && PatternUtils.passwordPattern(activity.toast, password.get())) {
+                            //登陆弹窗
+                            activity.showLoadingDialog();
                             //测试代码2，提示完善信息，这里是因为找不到入口
                             HttpRequest userResponseHttpRequest = userApi
                                     .login(activity, phoneNumber.get(), password.get())
@@ -100,19 +103,11 @@ public class LoginViewModel {
                                                 showProtectDialog();
                                             } else {
                                                 //当获取到的标志位不强制修改密码的时候
-//                                                Gson gson = new Gson();
-//                                                PreferenceManager
-//                                                        .getDefaultSharedPreferences(activity)
-//                                                        .edit()
-//                                                        .putString("user", gson.toJson(response))
-//                                                        .putBoolean("islogin", true)
-//                                                        .putString("userToken", response.userToken)
-//                                                        .putString("quxian", response.quanxian)
-//                                                        .apply();
                                                 CommonUtil.storeLoginMsg(activity, response);
                                                 //跳转到主页
                                                 CommonUtil.startActivity(activity, MainActivity.class);
                                             }
+                                            activity.dissmissLoadingDialog();
                                         }
 
                                         @Override
@@ -120,9 +115,9 @@ public class LoginViewModel {
                                             if (CommonUtil.isNumeric(message)) {
                                                 showErrorDialog(message);
                                             } else {
-                                                toastUtils.show("" + message);
+                                                activity.toast.show("" + message);
                                             }
-
+                                            activity.dissmissLoadingDialog();
                                         }
                                     });
                             userResponseHttpRequest.start(new UserResponse());
@@ -132,10 +127,12 @@ public class LoginViewModel {
         //输入电话实现清除按钮的显示
         RxTextView
                 .textChangeEvents(binding.loginPhonenumber)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<TextViewTextChangeEvent>() {
+                .subscribe(new Consumer<Object>() {
                     @Override
-                    public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
+                    public void accept(@NonNull Object o) throws Exception {
+                        TextViewTextChangeEvent textViewTextChangeEvent = (TextViewTextChangeEvent) o;
                         String inputNumber = textViewTextChangeEvent.text().toString();
                         clearPhonenumberFlag.set(!TextUtils.isEmpty(inputNumber));
                         if (!TextUtils.isEmpty(inputNumber) && !mobilePattern(inputNumber)) {
@@ -150,10 +147,12 @@ public class LoginViewModel {
 
         RxTextView
                 .textChangeEvents(binding.loginPassword)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<TextViewTextChangeEvent>() {
+                .subscribe(new Consumer<Object>() {
                     @Override
-                    public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
+                    public void accept(@NonNull Object o) throws Exception {
+                        TextViewTextChangeEvent textViewTextChangeEvent = (TextViewTextChangeEvent) o;
                         String pwd = textViewTextChangeEvent.text().toString();
                         if (!TextUtils.isEmpty(pwd) && !passwordPattern(pwd)) {
                             errorMessage.set("请输入正确密码");
@@ -164,9 +163,12 @@ public class LoginViewModel {
                         }
                     }
                 });
+
+
         //清除电话号码点击事件
         RxView
                 .clicks(binding.loginClearPhonenumber)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe(new Consumer<Object>() {
                     @Override
@@ -178,6 +180,7 @@ public class LoginViewModel {
         //忘记密码执行跳转
         RxView
                 .clicks(binding.loginForgetPassword)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe(new Consumer<Object>() {
                     @Override
@@ -188,6 +191,7 @@ public class LoginViewModel {
         //注册密码
         RxView
                 .clicks(binding.loginRegister)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe(new Consumer<Object>() {
                     @Override
@@ -265,6 +269,7 @@ public class LoginViewModel {
         //设置监听事件
         RxView
                 .clicks(protectBinding.loginProtectKnown)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {

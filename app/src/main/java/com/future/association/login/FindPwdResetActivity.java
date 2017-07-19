@@ -18,7 +18,7 @@ import com.future.baselib.utils.StatusUtils;
  * Created by Mwh on 2017/7/4.
  */
 
-public class FindPwdResetActivity extends BaseActivity {
+public class FindPwdResetActivity extends UBaseActivity {
     ActivityFindPwdResetBinding binding;
     FindPwdResetViewModel findPwdResetViewModel;
 

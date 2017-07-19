@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.future.association.databinding.ActivityRegisterBinding;
 import com.future.association.login.MyToast;
 import com.future.association.login.PerfectInformationActivity;
+import com.future.association.login.RegisterActivity;
 import com.future.association.login.UserApi;
 import com.future.association.login.bean.VerifyResponse;
 import com.future.association.login.util.CommonUtil;
@@ -22,6 +23,7 @@ import com.future.baselib.utils.ToastUtils;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -39,7 +41,7 @@ import static com.future.association.login.util.CommonUtil.verifyPattern;
 
 public class RegisterViewModel {
     UserApi userApi;
-    private Activity activity;
+    private RegisterActivity activity;
     private ActivityRegisterBinding binding;
     private Dialog errorDialog;
     public ObservableField<String> phoneNumber = new ObservableField<>();
@@ -47,12 +49,10 @@ public class RegisterViewModel {
     public ObservableField<String> smsCode = new ObservableField<>();
     public ObservableField<String> errorMessage = new ObservableField<>();
     public ObservableBoolean clearPhonenumberFlag = new ObservableBoolean(false);
-    ToastUtils toastUtils;
 
-    public RegisterViewModel(Activity activity, ActivityRegisterBinding binding) {
+    public RegisterViewModel(RegisterActivity activity, ActivityRegisterBinding binding) {
         this.activity = activity;
         this.binding = binding;
-        toastUtils = new ToastUtils(activity);
         userApi = new UserApi();
     }
 
@@ -60,10 +60,12 @@ public class RegisterViewModel {
     public void initLinstener() {
         RxTextView
                 .textChangeEvents(binding.registerPhonenumber)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<TextViewTextChangeEvent>() {
+                .subscribe(new Consumer<Object>() {
                     @Override
-                    public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
+                    public void accept(@NonNull Object o) throws Exception {
+                        TextViewTextChangeEvent textViewTextChangeEvent = (TextViewTextChangeEvent) o;
                         String inputNumber = textViewTextChangeEvent.text().toString();
                         clearPhonenumberFlag.set(!TextUtils.isEmpty(inputNumber));
                         if (!TextUtils.isEmpty(inputNumber) && !mobilePattern(inputNumber)) {
@@ -80,12 +82,13 @@ public class RegisterViewModel {
 
         RxTextView
                 .textChangeEvents(binding.registerPassword)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<TextViewTextChangeEvent>() {
+                .subscribe(new Consumer<Object>() {
                     @Override
-                    public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
+                    public void accept(@NonNull Object o) throws Exception {
+                        TextViewTextChangeEvent textViewTextChangeEvent = (TextViewTextChangeEvent) o;
                         String password = textViewTextChangeEvent.text().toString();
-
                         if (!TextUtils.isEmpty(password) && !passwordPattern(password)) {
                             errorMessage.set("请输入正确密码");
                         } else if (!TextUtils.isEmpty(phoneNumber.get()) && !mobilePattern(phoneNumber.get())) {
@@ -100,10 +103,12 @@ public class RegisterViewModel {
 
         RxTextView
                 .textChangeEvents(binding.registerVerifyCode)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<TextViewTextChangeEvent>() {
+                .subscribe(new Consumer<Object>() {
                     @Override
-                    public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
+                    public void accept(@NonNull Object o) throws Exception {
+                        TextViewTextChangeEvent textViewTextChangeEvent = (TextViewTextChangeEvent) o;
                         String code = textViewTextChangeEvent.text().toString();
                         if (!TextUtils.isEmpty(code) && !verifyPattern(code)) {
                             errorMessage.set("请输入正确验证码");
@@ -119,11 +124,12 @@ public class RegisterViewModel {
 
         RxView
                 .clicks(binding.registerSendVerifyCode)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
-                        if (PatternUtils.mobilePattern(toastUtils, phoneNumber.get())) {
+                        if (PatternUtils.mobilePattern(activity.toast, phoneNumber.get())) {
                             CommonUtil.getVerify(binding.registerSendVerifyCode, activity);
                             HttpRequest request = userApi
                                     .getRegisterVerifyCode(activity, phoneNumber.get())
@@ -148,6 +154,7 @@ public class RegisterViewModel {
                 });
         RxView
                 .clicks(binding.registerClearPhonenumber)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Object>() {
@@ -158,13 +165,14 @@ public class RegisterViewModel {
                 });
         RxView
                 .clicks(binding.registerNext)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
-                        if (PatternUtils.mobilePattern(toastUtils, phoneNumber.get())
-                                && PatternUtils.passwordPattern(toastUtils, password.get())
-                                && CommonUtil.verifyPattern(toastUtils, smsCode.get())) {
+                        if (PatternUtils.mobilePattern(activity.toast, phoneNumber.get())
+                                && PatternUtils.passwordPattern(activity.toast, password.get())
+                                && CommonUtil.verifyPattern(activity.toast, smsCode.get())) {
                             Intent intent = new Intent(activity, PerfectInformationActivity.class);
                             //phoneNumber  code  password
                             intent.putExtra("phoneNumber", phoneNumber.get());

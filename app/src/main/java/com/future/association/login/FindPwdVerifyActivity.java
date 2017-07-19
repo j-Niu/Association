@@ -17,7 +17,7 @@ import com.future.baselib.utils.StatusUtils;
  * Created by Mwh on 2017/7/4.
  */
 
-public class FindPwdVerifyActivity extends BaseActivity {
+public class FindPwdVerifyActivity extends UBaseActivity {
     ActivityFindPwdVerifyBinding binding;
     FindPwdVerifyViewModel findPwdVerifyViewModel;
 

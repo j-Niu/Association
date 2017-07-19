@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.future.association.R;
 import com.future.association.databinding.ActivityFindPwdVerifyBinding;
 import com.future.association.login.FindPwdResetActivity;
+import com.future.association.login.FindPwdVerifyActivity;
 import com.future.association.login.UserApi;
 import com.future.association.login.bean.VerifyResponse;
 import com.future.association.login.util.CommonUtil;
@@ -21,6 +22,7 @@ import com.future.baselib.utils.ToastUtils;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -36,7 +38,7 @@ import static com.future.association.login.util.CommonUtil.verifyPattern;
  */
 
 public class FindPwdVerifyViewModel {
-    private Activity activity;
+    private FindPwdVerifyActivity activity;
     private ActivityFindPwdVerifyBinding binding;
     public ObservableField<String> phoneNumber = new ObservableField<>();
     public ObservableField<String> smsCode = new ObservableField<>();
@@ -45,7 +47,7 @@ public class FindPwdVerifyViewModel {
     UserApi userApi;
     ToastUtils toastUtils;
 
-    public FindPwdVerifyViewModel(Activity activity, ActivityFindPwdVerifyBinding binding) {
+    public FindPwdVerifyViewModel(FindPwdVerifyActivity activity, ActivityFindPwdVerifyBinding binding) {
         this.activity = activity;
         this.binding = binding;
         toastUtils = new ToastUtils(activity);
@@ -74,10 +76,12 @@ public class FindPwdVerifyViewModel {
     public void initLinstener() {
         RxTextView
                 .textChangeEvents(binding.findPwdPhonenumber)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<TextViewTextChangeEvent>() {
+                .subscribe(new Consumer<Object>() {
                     @Override
-                    public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
+                    public void accept(@NonNull Object o) throws Exception {
+                        TextViewTextChangeEvent textViewTextChangeEvent = (TextViewTextChangeEvent) o;
                         String inputNumber = textViewTextChangeEvent.text().toString();
                         clearPhonenumberFlag.set(!TextUtils.isEmpty(inputNumber));
                         if (!TextUtils.isEmpty(inputNumber) && !mobilePattern(inputNumber)) {
@@ -93,10 +97,12 @@ public class FindPwdVerifyViewModel {
 
         RxTextView
                 .textChangeEvents(binding.findPwdVerifyCode)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<TextViewTextChangeEvent>() {
+                .subscribe(new Consumer<Object>() {
                     @Override
-                    public void accept(@NonNull TextViewTextChangeEvent textViewTextChangeEvent) throws Exception {
+                    public void accept(@NonNull Object o) throws Exception {
+                        TextViewTextChangeEvent textViewTextChangeEvent = (TextViewTextChangeEvent) o;
                         String code = textViewTextChangeEvent.text().toString();
                         if (!TextUtils.isEmpty(code) && !verifyPattern(code)) {
                             errorMessage.set("请输入正确验证码");
@@ -109,6 +115,7 @@ public class FindPwdVerifyViewModel {
                 });
         RxView
                 .clicks(binding.findPwdSendVerifyCode)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Object>() {
@@ -138,6 +145,7 @@ public class FindPwdVerifyViewModel {
 
         RxView
                 .clicks(binding.findPwdNext)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Object>() {
@@ -155,6 +163,7 @@ public class FindPwdVerifyViewModel {
 
         RxView
                 .clicks(binding.findPwdClearPhonenumber)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Object>() {

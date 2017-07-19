@@ -20,6 +20,7 @@ import com.future.association.R;
 import com.future.association.community.utils.TextUtil;
 import com.future.association.databinding.ActivityPerfectInformationBinding;
 import com.future.association.databinding.DialogSelectSexBinding;
+import com.future.association.login.PerfectInformationActivity;
 import com.future.association.login.RegisterSuccessActivity;
 import com.future.association.login.UserApi;
 import com.future.association.login.bean.GetJsonDataUtil;
@@ -31,6 +32,7 @@ import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.ToastUtils;
 import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.view.RxView;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import org.json.JSONArray;
 
@@ -49,7 +51,7 @@ import io.reactivex.functions.Consumer;
 public class PerfectInformationViewModel {
     private UserApi userApi;
     private ActivityPerfectInformationBinding binding;
-    private Activity activity;
+    private PerfectInformationActivity activity;
     private OptionsPickerView pvCustomOptions;
     private ArrayList<String> classifyList;
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
@@ -67,7 +69,7 @@ public class PerfectInformationViewModel {
     public ObservableField<String> age = new ObservableField<>();
 
 
-    public PerfectInformationViewModel(Activity activity, ActivityPerfectInformationBinding binding) {
+    public PerfectInformationViewModel(PerfectInformationActivity activity, ActivityPerfectInformationBinding binding) {
         this.activity = activity;
         this.binding = binding;
         userApi = new UserApi();
@@ -91,6 +93,7 @@ public class PerfectInformationViewModel {
         //设置监听事件
         RxView
                 .clicks(sexBinding.sexMan)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
@@ -103,6 +106,7 @@ public class PerfectInformationViewModel {
 
         RxView
                 .clicks(sexBinding.sexWoman)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
@@ -273,6 +277,7 @@ public class PerfectInformationViewModel {
     public void initLinstener() {
         RxView
                 .clicks(binding.informationEducation)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -290,6 +295,7 @@ public class PerfectInformationViewModel {
 
         RxView
                 .clicks(binding.informationLocation)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -307,6 +313,7 @@ public class PerfectInformationViewModel {
 
         RxView
                 .clicks(binding.informationSex)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Object>() {
@@ -318,6 +325,7 @@ public class PerfectInformationViewModel {
 
         RxView
                 .clicks(binding.infomationCommit)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Object>() {
@@ -330,22 +338,24 @@ public class PerfectInformationViewModel {
                                 && !TextUtil.isEmpty(location.get())
                                 && !TextUtil.isEmpty(education.get())
                                 && !TextUtil.isEmpty(age.get()))
-                            //执行注册
-                            userApi
-                                    .register(activity, phoneNumber, code, password, userName.get(), location.get(), sex.get() ? "1" : "2", education.get())
-                                    .setListener(new HttpRequest.OnNetworkListener() {
-                                        @Override
-                                        public void onSuccess(BaseResponse response) {
-                                            CommonUtil.startActivity(activity, RegisterSuccessActivity.class);
-                                        }
+                            activity.showLoadingDialog();
+                        //执行注册
+                        userApi
+                                .register(activity, phoneNumber, code, password, userName.get(), location.get(), sex.get() ? "1" : "2", education.get())
+                                .setListener(new HttpRequest.OnNetworkListener() {
+                                    @Override
+                                    public void onSuccess(BaseResponse response) {
+                                        CommonUtil.startActivity(activity, RegisterSuccessActivity.class);
+                                        activity.dissmissLoadingDialog();
+                                    }
 
-                                        @Override
-                                        public void onFail(String message) {
-                                            ToastUtils toastUtils = new ToastUtils(activity);
-                                            toastUtils.show("" + message);
-                                        }
-                                    })
-                                    .start(new VerifyResponse());
+                                    @Override
+                                    public void onFail(String message) {
+                                        activity.toast.show("" + message);
+                                        activity.dissmissLoadingDialog();
+                                    }
+                                })
+                                .start(new VerifyResponse());
                     }
                 });
     }
