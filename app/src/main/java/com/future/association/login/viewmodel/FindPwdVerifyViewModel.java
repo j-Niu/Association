@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.future.association.R;
 import com.future.association.databinding.ActivityFindPwdVerifyBinding;
 import com.future.association.login.FindPwdResetActivity;
 import com.future.association.login.UserApi;
@@ -124,6 +126,9 @@ public class FindPwdVerifyViewModel {
                                 @Override
                                 public void onFail(String message) {
                                     toastUtils.show(message);
+                                    //初始化
+                                    CommonUtil.cancleOi(activity, binding.findPwdSendVerifyCode);
+
                                 }
                             });
                             request.start(new VerifyResponse());

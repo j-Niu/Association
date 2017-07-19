@@ -99,13 +99,16 @@ public class LoginViewModel {
                                                 showProtectDialog();
                                             } else {
                                                 //当获取到的标志位不强制修改密码的时候
-                                                Gson gson = new Gson();
-                                                PreferenceManager
-                                                        .getDefaultSharedPreferences(activity)
-                                                        .edit()
-                                                        .putString("user", gson.toJson(response))
-                                                        .putBoolean("islogin", true)
-                                                        .apply();
+//                                                Gson gson = new Gson();
+//                                                PreferenceManager
+//                                                        .getDefaultSharedPreferences(activity)
+//                                                        .edit()
+//                                                        .putString("user", gson.toJson(response))
+//                                                        .putBoolean("islogin", true)
+//                                                        .putString("userToken", response.userToken)
+//                                                        .putString("quxian", response.quanxian)
+//                                                        .apply();
+                                                CommonUtil.storeLoginMsg(activity, response);
                                                 //跳转到主页
                                                 CommonUtil.startActivity(activity, MainActivity.class);
                                             }

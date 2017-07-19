@@ -137,6 +137,8 @@ public class RegisterViewModel {
                                         public void onFail(String message) {
                                             //请求失败回调
                                             MyToast.makeText(activity, message, Toast.LENGTH_SHORT, 50).show();
+                                            //初始化
+                                            CommonUtil.cancleOi(activity, binding.registerSendVerifyCode);
                                         }
                                     });
                             request.start(new VerifyResponse());

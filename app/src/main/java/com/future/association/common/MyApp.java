@@ -16,8 +16,8 @@ public class MyApp extends Application {
     // activity管理类
     private ActivityManager activityManager = null;
 
-    private static String userToken = "08bb51d1e82bdb3ac553e8804bcb4f65";
-    private static String quanxian = "1";//1为普通用户 2位管理员第一次登录 3是管理员非第一次登录
+    private static String userToken;//"08bb51d1e82bdb3ac553e8804bcb4f65"
+    private static String quanxian;// "1"//1为普通用户 2位管理员第一次登录 3是管理员非第一次登录
 
     public MyApp() {
         app = this;
@@ -64,13 +64,14 @@ public class MyApp extends Application {
 
     /**
      * 是否具有管理员权限
+     *
      * @return
      */
-    public static boolean isAdministrator(){
-        if("1".equals(quanxian)){
-            return false ;
-        }else{
-            return true ;
+    public static boolean isAdministrator() {
+        if ("1".equals(quanxian)) {
+            return false;
+        } else {
+            return true;
         }
     }
 
