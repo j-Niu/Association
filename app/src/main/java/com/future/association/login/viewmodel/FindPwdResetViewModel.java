@@ -83,13 +83,16 @@ public class FindPwdResetViewModel {
                                                     @Override
                                                     public void run() {
                                                         //将用户信息保存打xml中
-                                                        Gson gson = new Gson();
-                                                        PreferenceManager
-                                                                .getDefaultSharedPreferences(activity)
-                                                                .edit()
-                                                                .putString("user", gson.toJson(CommonUtil.userResponse))
-                                                                .putBoolean("islogin", true)
-                                                                .apply();
+//                                                        Gson gson = new Gson();
+//                                                        PreferenceManager
+//                                                                .getDefaultSharedPreferences(activity)
+//                                                                .edit()
+//                                                                .putString("user", gson.toJson(CommonUtil.userResponse))
+//                                                                .putBoolean("islogin", true)
+//                                                                .putString("userToken", CommonUtil.userResponse.userToken)
+//                                                                .putString("quxian", CommonUtil.userResponse.quanxian)
+//                                                                .apply();
+                                                        CommonUtil.storeLoginMsg(activity, CommonUtil.userResponse);
                                                         //跳转到登陆界面
                                                         MyApp.getApp().getActivityManager().finishAllActivity();
                                                         startActivity(activity, MainActivity.class);

@@ -27,6 +27,8 @@ public class LoginActivity extends BaseActivity {
     protected void initView() {
         //判定是否登录
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("islogin", false)) {
+            MyApp.setQuanxian(PreferenceManager.getDefaultSharedPreferences(this).getString("quanxian", ""));
+            MyApp.setUserToken(PreferenceManager.getDefaultSharedPreferences(this).getString("userToken", ""));
             startActivity(MainActivity.class);
             finish();
         }

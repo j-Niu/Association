@@ -12,6 +12,7 @@ import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.future.association.R;
+import com.future.association.common.MyApp;
 import com.future.association.community.adapter.TieReplyAdapter;
 import com.future.association.community.base.BaseActivity;
 import com.future.association.community.base.EndlessRecyclerOnScrollListener;
@@ -54,8 +55,10 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public void initView() {
-        viewBinding.layoutTitle.ivTitleRightImg.
-                setImageDrawable(Res.getDrawableRes(R.drawable.ic_more, context));
+        if(MyApp.isAdministrator()){
+            viewBinding.layoutTitle.ivTitleRightImg.
+                    setImageDrawable(Res.getDrawableRes(R.drawable.ic_more, context));
+        }
         linearLayoutManager = new LinearLayoutManager(context);
         viewBinding.rclReply.setLayoutManager(linearLayoutManager);
         popupView = inflater.inflate(R.layout.popup_tie, null);

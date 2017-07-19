@@ -3,6 +3,7 @@ package com.future.association.community;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.constraint.solver.SolverVariable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -25,8 +26,16 @@ import com.future.association.community.view.NotifyDetailActivity;
 import com.future.association.community.view.TieListActivity;
 import com.future.association.databinding.FragmentCommunityBinding;
 import com.future.association.databinding.LayoutListNotifyHeadBinding;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -44,7 +53,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
     private GridViewAdapter adapter;
     private View headView;
     private LayoutListNotifyHeadBinding headBinding;
-    private int currentPage = 1 ;
+    private int currentPage = 1;
 
     public CommunityFragment() {
         // Required empty public constructor
@@ -63,7 +72,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
     @Override
     public void onResume() {
         super.onResume();
-        currentPage = 1 ;
+        currentPage = 1;
         presenter.getData(currentPage);
     }
 
@@ -79,14 +88,13 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
         viewBinding.layoutTitle.ivBack.setVisibility(View.GONE);
         linearLayoutManager = new LinearLayoutManager(getContext());
         viewBinding.rcvMsg.setLayoutManager(linearLayoutManager);
-        headView = View.inflate(getContext(), R.layout.layout_list_notify_head,null);
+        headView = View.inflate(getContext(), R.layout.layout_list_notify_head, null);
         headBinding = DataBindingUtil.bind(headView);
     }
 
     private void initData(Bundle arguments) {
         notifyInfos = new ArrayList<>();
         viewBinding.layoutTitle.setTitle("社区");
-
         adapter = new GridViewAdapter(getContext());
         headBinding.gv.setAdapter(adapter);
 
@@ -102,7 +110,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
         viewBinding.rcvMsg.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
-                CommunityFragment.this.currentPage = currentPage ;
+                CommunityFragment.this.currentPage = currentPage;
                 presenter.getData(currentPage);
             }
         });
@@ -135,7 +143,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
     @Override
     public void setData(ArrayList<MsgNotifyInfo> notifyInfos) {
         if (notifyInfos == null) return;
-        if(currentPage == 1){
+        if (currentPage == 1) {
             this.notifyInfos.clear();
         }
         this.notifyInfos.addAll(notifyInfos);
@@ -150,7 +158,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
 
     @Override
     public void showMsg(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
 }

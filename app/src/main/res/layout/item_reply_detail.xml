@@ -10,6 +10,9 @@
             name="isLast"
             type="boolean"/>
         <variable
+            name="haveQuan"
+            type="boolean"/>
+        <variable
             name="clickListener"
             type="android.view.View.OnClickListener"/>
     </data>
@@ -58,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="@{clickListener}"
                 android:padding="10px"
+                android:visibility="@{haveQuan?View.VISIBLE:View.GONE}"
                 android:scaleType="centerInside"
                 android:id="@+id/iv_more"
                 android:layout_alignParentRight="true"

@@ -16,6 +16,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.future.association.R;
 import com.future.association.common.MainActivity;
@@ -99,13 +100,16 @@ public class LoginViewModel {
                                                 showProtectDialog();
                                             } else {
                                                 //当获取到的标志位不强制修改密码的时候
-                                                Gson gson = new Gson();
-                                                PreferenceManager
-                                                        .getDefaultSharedPreferences(activity)
-                                                        .edit()
-                                                        .putString("user", gson.toJson(response))
-                                                        .putBoolean("islogin", true)
-                                                        .apply();
+//                                                Gson gson = new Gson();
+//                                                PreferenceManager
+//                                                        .getDefaultSharedPreferences(activity)
+//                                                        .edit()
+//                                                        .putString("user", gson.toJson(response))
+//                                                        .putBoolean("islogin", true)
+//                                                        .putString("userToken", response.userToken)
+//                                                        .putString("quxian", response.quanxian)
+//                                                        .apply();
+                                                CommonUtil.storeLoginMsg(activity, response);
                                                 //跳转到主页
                                                 CommonUtil.startActivity(activity, MainActivity.class);
                                             }
@@ -214,11 +218,9 @@ public class LoginViewModel {
 
     private void createErrorDialog(String message) {
         View view = errorBinding.getRoot();
-//        errorBinding.loginErrorContent.setText("错误次数过多，请" + message + "分钟后重试");
         errorBinding.loginErrorTitle.setText("登陆失败");
         errorDialog = new AlertDialog.Builder(activity).setView(view).create();
         errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));  // 有白色背景，加这句代码
-//        errorDialog.setCancelable(false);
         errorDialog.setCanceledOnTouchOutside(false);
         errorDialog.show();
         Window window = errorDialog.getWindow();
@@ -226,7 +228,8 @@ public class LoginViewModel {
         window.setGravity(Gravity.CENTER);
         float scale = activity.getResources().getDisplayMetrics().density;
         layoutParams.width = (int) (scale * 270);
-        layoutParams.height = (int) (scale * 128);
+        //(int) (scale * 128)
+        layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
         layoutParams.y = -70;
         window.setAttributes(layoutParams);
         //设置监听事件
@@ -255,7 +258,8 @@ public class LoginViewModel {
         window.setGravity(Gravity.CENTER);
         float scale = activity.getResources().getDisplayMetrics().density;
         layoutParams.width = (int) (scale * 270);
-        layoutParams.height = (int) (scale * 128);
+        //(int) (scale * 128)
+        layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
         layoutParams.y = -70;
         window.setAttributes(layoutParams);
         //设置监听事件

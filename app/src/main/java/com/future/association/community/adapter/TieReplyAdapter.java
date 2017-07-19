@@ -12,6 +12,7 @@ import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.future.association.R;
+import com.future.association.common.MyApp;
 import com.future.association.community.model.TieInfo;
 import com.future.association.community.model.TieReplyInfo;
 import com.future.association.community.utils.ActivityUtils;
@@ -138,6 +139,7 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
         private void initView() {
             try {
                 binding = DataBindingUtil.bind(itemView);
+                binding.setHaveQuan(MyApp.isAdministrator());
             } catch (Exception e) {
                 e.printStackTrace();
             }
