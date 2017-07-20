@@ -98,7 +98,7 @@
         <activity android:name=".personal.MyMoreActivity"/>
         <activity android:name=".personal.AboutUsActivity"/>
         <activity android:name=".personal.ChangePwdActivity"/>
-        <activity android:name=".news.NewsActivity"></activity>
+        <activity android:name=".news.ui.activity.NewsActivity"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

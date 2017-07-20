@@ -9,7 +9,7 @@ import android.widget.RadioGroup;
 
 import com.future.association.R;
 import com.future.association.community.CommunityFragment;
-import com.future.association.news.NewsFragment;
+import com.future.association.news.ui.fragment.NewsFragment;
 import com.future.association.personal.PersonalFragment;
 import com.future.association.questionnaire.QuestionnaireFragment;
 import com.future.association.supervice.SuperviceFragment;

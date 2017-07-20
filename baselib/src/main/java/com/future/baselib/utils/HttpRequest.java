@@ -3,6 +3,7 @@ package com.future.baselib.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.ArrayMap;
 
 
 import com.future.baselib.entity.BaseResponse;
@@ -145,6 +146,7 @@ public class HttpRequest<T extends BaseResponse> {
      * @return
      */
     public String getPostToken(TreeMap<String,String> params){
+
         StringBuilder stringBuilder = new StringBuilder();
         Iterator<Map.Entry<String, String>> iterator = params.entrySet().iterator();
         while (iterator.hasNext()) {

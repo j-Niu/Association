@@ -1,4 +1,4 @@
-package com.future.association.news;
+package com.future.association.news.utils;
 
 import android.content.Context;
 import android.widget.ImageView;

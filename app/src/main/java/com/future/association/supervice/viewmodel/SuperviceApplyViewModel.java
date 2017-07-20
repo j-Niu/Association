@@ -107,8 +107,11 @@ public class SuperviceApplyViewModel {
                                     buffer.append("," + img);
                                 }
                             }
-                            SupericeApi.getInstance().publishSuperice(activity, MyApp.getUserToken(), supericeDetail.getType(),
-                                    supericeDetail.getAddress(), supericeDetail.getTitle(), supericeDetail.getReason(), buffer.toString())
+                            SupericeApi.getInstance()
+                                    .publishSuperice(activity, MyApp.getUserToken(),
+                                            supericeDetail.getType(), supericeDetail.getAddress(),
+                                            supericeDetail.getTitle(), supericeDetail.getReason(),
+                                            buffer.toString())
                                     .setListener(new HttpRequest.OnNetworkListener<SupericeDetail>() {
                                         @Override
                                         public void onSuccess(SupericeDetail response) {
@@ -144,7 +147,7 @@ public class SuperviceApplyViewModel {
 
     }
 
-    private List<LocalMedia> selectList = new ArrayList<>();
+    private List<LocalMedia> selectList;
     private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
         @Override
         public void onAddPicClick() {

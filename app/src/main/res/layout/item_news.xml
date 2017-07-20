@@ -13,7 +13,7 @@
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:scaleType="centerCrop"
-        android:src="@color/black4"
+        android:src="#e0e0e0"
         />
 
     <TextView
