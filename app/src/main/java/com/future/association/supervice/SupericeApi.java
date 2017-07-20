@@ -64,7 +64,7 @@ public class SupericeApi {
         return new HttpRequest<SupericeDetail>()
                 .with(context)
                 .addParam("apiCode",SUPERICE_TYPE_PUBLISH_APICODE)
-                .addParam("userToken ",userToken)
+                .addParam("userToken",userToken)
                 .addParam("hangye",hangye)
                 .addParam("address",address)
                 .addParam("title",title)
