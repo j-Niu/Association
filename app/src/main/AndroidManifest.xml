@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.future.association">
+    package="com.future.association">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--读取文件权限-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!--写入数据权限-->
@@ -52,6 +52,9 @@
             android:name=".login.RegisterSuccessActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".login.WebActivity"
+            android:screenOrientation="portrait" />
         <!-- 社区模块 -->
         <activity
             android:name=".community.view.NotifyDetailActivity"
@@ -72,32 +75,32 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".community.view.WeiGuiActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <!-- 问卷加监督模块 -->
         <activity
             android:name=".questionnaire.views.QuestionnaireWebActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".questionnaire.views.QuestionnaireEndActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".supervice.view.SuperviceDetailActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".supervice.view.SuperviceApplyActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <!-- 我的模块 -->
-        <activity android:name=".personal.MyLevelActivity"/>
-        <activity android:name=".personal.MyResponseActivity"/>
-        <activity android:name=".personal.MyJianDuActivity"/>
-        <activity android:name=".personal.MyNoticeActivity"/>
-        <activity android:name=".personal.MyTieziActivity"/>
-        <activity android:name=".personal.MyWenJuanActivity"/>
-        <activity android:name=".personal.MyTongZhi"/>
-        <activity android:name=".personal.MyMoreActivity"/>
-        <activity android:name=".personal.AboutUsActivity"/>
-        <activity android:name=".personal.ChangePwdActivity"/>
+        <activity android:name=".personal.MyLevelActivity" />
+        <activity android:name=".personal.MyResponseActivity" />
+        <activity android:name=".personal.MyJianDuActivity" />
+        <activity android:name=".personal.MyNoticeActivity" />
+        <activity android:name=".personal.MyTieziActivity" />
+        <activity android:name=".personal.MyWenJuanActivity" />
+        <activity android:name=".personal.MyTongZhi" />
+        <activity android:name=".personal.MyMoreActivity" />
+        <activity android:name=".personal.AboutUsActivity" />
+        <activity android:name=".personal.ChangePwdActivity" />
         <activity android:name=".news.ui.activity.NewsActivity"></activity>
 
         <provider

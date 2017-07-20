@@ -14,6 +14,7 @@ import com.future.association.login.MyToast;
 import com.future.association.login.PerfectInformationActivity;
 import com.future.association.login.RegisterActivity;
 import com.future.association.login.UserApi;
+import com.future.association.login.WebActivity;
 import com.future.association.login.bean.VerifyResponse;
 import com.future.association.login.util.CommonUtil;
 import com.future.baselib.entity.BaseResponse;
@@ -181,6 +182,37 @@ public class RegisterViewModel {
                             activity.startActivity(intent);
                         }
                     }
+                });
+
+        RxView
+                .clicks(binding.agreementDetail)
+                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(@NonNull Object o) throws Exception {
+                        HttpRequest request = userApi.userAgreement(activity).setListener(new HttpRequest.OnNetworkListener() {
+                            @Override
+                            public void onSuccess(BaseResponse response) {
+                                Intent intent = new Intent(activity, WebActivity.class);
+                                String url = response.info;
+                                if (!TextUtils.isEmpty(url)) {
+                                    intent.putExtra("url", url);
+                                    activity.startActivity(intent);
+                                } else {
+                                    activity.toast.show("url获取失败");
+                                }
+                            }
+
+                            @Override
+                            public void onFail(String message) {
+                                activity.toast.show("" + message);
+                            }
+                        });
+                        request.start(new VerifyResponse());
+                    }
+
                 });
     }
 //endregion
