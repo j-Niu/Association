@@ -144,7 +144,7 @@ public class SuperviceApplyViewModel {
 
     }
 
-    private List<LocalMedia> selectList;
+    private List<LocalMedia> selectList = new ArrayList<>();
     private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
         @Override
         public void onAddPicClick() {
