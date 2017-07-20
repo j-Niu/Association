@@ -20,7 +20,7 @@ public class UserApi {
     public static final String API_CODE_REGISTER = "_register_001";
     public static final String API_CODE_SET_PWD_1 = "_set_pwd_001";
     public static final String API_CODE_SET_PWD_3 = "_set_pwd_003";
-
+    public static final String API_CODE_USER_AGREEMENT = "_useragreement_001";
 
     public HttpRequest login(Activity activity, String mobile, String loginPass) {
         return new HttpRequest<UserResponse>()//继承BaseResponse的类
@@ -83,4 +83,9 @@ public class UserApi {
                 .addParam("sureNewPwd", sureNewPwd);//请求业务参数
     }
 
+    public HttpRequest userAgreement(Activity activity) {
+        return new HttpRequest<VerifyResponse>()//继承BaseResponse的类
+                .with(activity)
+                .addParam("apiCode", API_CODE_USER_AGREEMENT);//请求业务参数  //apiCode  接口文档里的code
+    }
 }

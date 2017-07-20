@@ -108,10 +108,15 @@ public class FindPwdResetViewModel {
                                             public void onSuccess(BaseResponse response) {
                                                 //提示密码设置成功
                                                 MyToast.makeText(activity, R.layout.dialog_find_pwd_success, Toast.LENGTH_SHORT).show();
-                                                //跳转到登陆界面
-                                                MyApp.getApp().getActivityManager().finishAllActivityExceptOne(LoginActivity.class);
-                                                activity.dissmissLoadingDialog();
-                                                activity.onBackPressed();
+                                                handler.postDelayed(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        //跳转到登陆界面
+                                                        MyApp.getApp().getActivityManager().finishAllActivityExceptOne(LoginActivity.class);
+                                                        activity.dissmissLoadingDialog();
+                                                        activity.onBackPressed();
+                                                    }
+                                                }, 1500);
                                             }
 
                                             @Override
