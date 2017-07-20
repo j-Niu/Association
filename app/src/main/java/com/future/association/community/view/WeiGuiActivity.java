@@ -3,11 +3,13 @@ package com.future.association.community.view;
 import android.view.View;
 
 import com.future.association.R;
+import com.future.association.community.base.ActivityManager;
 import com.future.association.community.base.BaseActivity;
 import com.future.association.community.contract.WeiguiContract;
 import com.future.association.community.model.WGCauseInfo;
 import com.future.association.community.presenter.WeiguiPresenter;
 import com.future.association.community.utils.DialogUtils;
+import com.future.association.community.utils.TextUtil;
 import com.future.association.databinding.ActivityWeiguiBinding;
 
 import java.util.ArrayList;
@@ -75,7 +77,7 @@ public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> implemen
                 DialogUtils.showSelectDialog(context, "请选择处理方式", typeNames, new DialogUtils.ItemSelectedListener() {
                     @Override
                     public void select(int position) {
-                        dealTypeId = position+1+"" ;
+                        dealTypeId = position + 1 + "";
                         viewBinding.setDealType(typeNames[position]);
                     }
                 });
@@ -114,6 +116,9 @@ public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> implemen
     public void dealResult(boolean isSuccess) {
         if (isSuccess) {
             DialogUtils.showResultDialog(context, true);
+            if (TextUtil.isEmpty(getId())) {//对帖子进行的违规操作 不是对帖子回复
+                ActivityManager.getInstance().finishActivityForClass(TieDetailActivity.class);
+            }
         }
     }
 

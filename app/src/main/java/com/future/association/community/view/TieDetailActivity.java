@@ -265,6 +265,6 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public String getTieType() {
-        return tieInfo.getType();
+        return headBinding.getTieDetailInfo().getType();
     }
 }

@@ -91,7 +91,7 @@ public abstract class BaseActivity<G extends ViewDataBinding> extends Activity i
         if (!fullScreen) {
             ScreenUtils.titleAlph(isAlph, color, this);
         }
-        ActivityManager.addActivity(this);
+        ActivityManager.getInstance().addActivity(this);
         setContentView();
         initView();
         initData();
@@ -132,7 +132,7 @@ public abstract class BaseActivity<G extends ViewDataBinding> extends Activity i
                 secondTime = System.currentTimeMillis();
                 long interval = secondTime - firstTime;
                 if (interval <= ConstantUtil.DOUBLE_CLICK_EXIT_DENY) {
-                    ActivityManager.exitApplicaion();
+                    ActivityManager.getInstance().exitApplicaion();
                 } else {
                     firstTime = 0;
                     secondTime = 0;
