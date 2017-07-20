@@ -62,13 +62,13 @@ public class SuperviceApplyViewModel {
     public SuperviceApplyViewModel(SuperviceApplyActivity activity, ActivitySuperviceApplyBinding binding, String type) {
         this.activity = activity;
         this.mBindIng = binding;
-        this.type = TextUtil.isEmpty(type)?"":type;
+        this.type = TextUtil.isEmpty(type) ? "" : type;
         initView();
         initData();
     }
 
     private void initView() {
-        mBindIng.imgRv.setLayoutManager(new FullyGridLayoutManager(activity, 4, GridLayoutManager.VERTICAL, false));
+        mBindIng.imgRv.setLayoutManager(new FullyGridLayoutManager(activity, 3, GridLayoutManager.VERTICAL, false));
         adapter = new GridImageAdapter(activity, onAddPicClickListener);
         adapter.setList(selectList);
         adapter.setSelectMax(maxSelectNum);
@@ -96,6 +96,7 @@ public class SuperviceApplyViewModel {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
                         if (canCommit()) {
+                            activity.showLoadingDialog();
                             SupericeDetail supericeDetail = SuperviceApplyViewModel.this.supericeDetail.get();
                             StringBuffer buffer = new StringBuffer();
                             for (int i = 0; i < selectList.size(); i++) {
@@ -116,12 +117,13 @@ public class SuperviceApplyViewModel {
                                         @Override
                                         public void onSuccess(SupericeDetail response) {
                                             ToastUtils.shortToast(activity, "发布成功");
+                                            activity.dissmissLoadingDialog();
                                             activity.finish();
                                         }
 
                                         @Override
                                         public void onFail(String message) {
-
+                                            activity.dissmissLoadingDialog();
                                         }
                                     }).start(new SupericeDetail());
                         }

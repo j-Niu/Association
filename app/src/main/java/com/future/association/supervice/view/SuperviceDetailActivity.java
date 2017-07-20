@@ -41,4 +41,5 @@ public class SuperviceDetailActivity extends BaseActivity {
     protected void getBundleExtras(Bundle extras) {
 
     }
+
 }

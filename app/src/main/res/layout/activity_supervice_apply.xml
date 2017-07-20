@@ -2,14 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<data>
-    <variable
-        name="superviceApplyViewMdel"
-        type="com.future.association.supervice.viewmodel.SuperviceApplyViewModel"/>
-    <variable
-        name="supericeDetail"
-        type="com.future.association.supervice.model.SupericeDetail"/>
-</data>
+    <data>
+
+        <variable
+            name="superviceApplyViewMdel"
+            type="com.future.association.supervice.viewmodel.SuperviceApplyViewModel"/>
+
+        <variable
+            name="supericeDetail"
+            type="com.future.association.supervice.model.SupericeDetail"/>
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -121,8 +124,8 @@
                             android:gravity="top"
                             android:hint="请输入监督标题"
                             android:inputType="textMultiLine"
-                            android:text="@={supericeDetail.title}"
-                            android:maxLength="30"/>
+                            android:maxLength="30"
+                            android:text="@={supericeDetail.title}"/>
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -164,20 +167,35 @@
                             android:gravity="top"
                             android:hint="请输入监督事由"
                             android:inputType="textMultiLine"
-                            android:text="@={supericeDetail.reason}"
-                            android:maxLength="1000"/>
+                            android:maxLength="1000"
+                            android:text="@={supericeDetail.reason}"/>
 
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/img_rv"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="80dp"
-                    android:padding="@dimen/normal_padding"/>
+                    android:gravity="top"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="添加照片"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/img_rv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="80dp"
+                        android:layout_weight="4"
+                        android:padding="@dimen/normal_padding"/>
+                </LinearLayout>
             </LinearLayout>
 
 
