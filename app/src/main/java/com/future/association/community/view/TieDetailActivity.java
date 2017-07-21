@@ -169,6 +169,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
                 popupWindow.dismiss();
                 Bundle bundle = new Bundle() ;
                 bundle.putString("tieId",tieInfo.getId());
+                bundle.putString("id","");
                 ActivityUtils.startActivityIntent(context, WeiGuiActivity.class,bundle);
                 break;
             case R.id.tv_send:
