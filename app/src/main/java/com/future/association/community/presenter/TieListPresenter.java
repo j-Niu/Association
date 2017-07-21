@@ -37,12 +37,14 @@ public class TieListPresenter implements TieListContract.IPresenter {
         CommunityRequest.getTieList(context, iView.getPlateId(),currentPage, new HttpRequest.OnNetworkListener<DataResponse>() {
             @Override
             public void onSuccess(DataResponse response) {
+                dialog.close();
                 iView.setData(response.infos);
                 dialog.close();
             }
 
             @Override
             public void onFail(String message) {
+                dialog.close();
                 iView.showMsg(message);
             }
         });
