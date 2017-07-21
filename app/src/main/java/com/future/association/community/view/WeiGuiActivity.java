@@ -116,9 +116,7 @@ public class WeiGuiActivity extends BaseActivity<ActivityWeiguiBinding> implemen
     public void dealResult(boolean isSuccess) {
         if (isSuccess) {
             DialogUtils.showResultDialog(context, true);
-            if (TextUtil.isEmpty(getId())) {//对帖子进行的违规操作 不是对帖子回复
-                ActivityManager.getInstance().finishActivityForClass(TieDetailActivity.class);
-            }
+            ActivityManager.getInstance().finishActivityForClass(TieDetailActivity.class);
         }
     }
 
