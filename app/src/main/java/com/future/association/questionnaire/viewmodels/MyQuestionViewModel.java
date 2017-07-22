@@ -83,4 +83,9 @@ public class MyQuestionViewModel {
                     }
                 }).start(new QuestionList());
     }
+
+    //刷新数据
+    public void refresh() {
+        initData();
+    }
 }

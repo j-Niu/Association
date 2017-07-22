@@ -8,9 +8,11 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.future.association.R;
+import com.future.association.common.EventCode;
 import com.future.association.databinding.FragmentSuperviceBinding;
 import com.future.association.supervice.viewmodel.SuperviceViewModel;
 import com.future.baselib.activity.BaseFragment;
+import com.future.baselib.entity.MessageEvent;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +20,7 @@ import com.future.baselib.activity.BaseFragment;
 public class SuperviceFragment extends BaseFragment {
 
 
+    private SuperviceViewModel mViewModel;
 
     public SuperviceFragment() {
         // Required empty public constructor
@@ -40,8 +43,21 @@ public class SuperviceFragment extends BaseFragment {
     protected void initView(View view, @Nullable Bundle savedInstanceState) {
         setTitle(R.string.superice);
         FragmentSuperviceBinding superviceBinding = DataBindingUtil.bind(view);
-        superviceBinding.setViewModel(new SuperviceViewModel(this,superviceBinding));
+        mViewModel = new SuperviceViewModel(this, superviceBinding);
+        superviceBinding.setViewModel(mViewModel);
 
+    }
+
+    @Override
+    protected boolean isRegisterEventBus() {
+        return true;
+    }
+
+    @Override
+    protected void receiveEvent(MessageEvent event) {
+        if (event.getCode() == EventCode.SUPERICE_LIST_REFRESH){
+            mViewModel.refresh();
+        }
     }
 
 

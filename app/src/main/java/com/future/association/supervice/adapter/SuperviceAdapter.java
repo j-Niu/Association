@@ -5,11 +5,13 @@ import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.future.association.R;
 import com.future.association.supervice.model.SupericeList;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -24,8 +26,11 @@ public class SuperviceAdapter extends BaseQuickAdapter<SupericeList.SupericeList
     @Override
     protected void convert(BaseViewHolder baseViewHolder, SupericeList.SupericeListInfo item) {
         ImageView imageView = baseViewHolder.getView(R.id.iv);
-        Glide.with(mContext).load(item.getImage())
-//                .error(R.drawable.ic_launcher)
+        String image = item.getImage();
+        image = image.replace("\\/", File.separator);
+        Glide.with(mContext).load(image)
+                .apply(new RequestOptions().error(R.drawable.ic_logo)
+                        .placeholder(R.drawable.ic_logo))
                 .into(imageView);
         baseViewHolder.setText(R.id.title,item.getTitle())
                 .setText(R.id.time,item.getTime());

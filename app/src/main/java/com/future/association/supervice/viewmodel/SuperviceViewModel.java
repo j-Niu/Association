@@ -186,4 +186,8 @@ public class SuperviceViewModel {
             getSupericeList();
         }
     };
+
+    public void refresh() {
+        getSupericeList();
+    }
 }

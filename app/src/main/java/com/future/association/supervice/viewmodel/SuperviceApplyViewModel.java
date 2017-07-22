@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.future.association.common.EventCode;
 import com.future.association.common.MyApp;
 import com.future.association.community.utils.TextUtil;
 import com.future.association.databinding.ActivitySuperviceApplyBinding;
@@ -17,7 +18,9 @@ import com.future.association.supervice.SupericeApi;
 import com.future.association.supervice.adapter.GridImageAdapter;
 import com.future.association.supervice.model.SupericeDetail;
 import com.future.association.supervice.view.SuperviceApplyActivity;
+import com.future.baselib.entity.MessageEvent;
 import com.future.baselib.utils.CommonUtils;
+import com.future.baselib.utils.EventBusUtil;
 import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.ToastUtils;
 import com.google.gson.Gson;
@@ -117,6 +120,7 @@ public class SuperviceApplyViewModel {
                                         @Override
                                         public void onSuccess(SupericeDetail response) {
                                             ToastUtils.shortToast(activity, "发布成功");
+                                            EventBusUtil.sendEvent(new MessageEvent(EventCode.SUPERICE_LIST_REFRESH));
                                             activity.dissmissLoadingDialog();
                                             activity.finish();
                                         }

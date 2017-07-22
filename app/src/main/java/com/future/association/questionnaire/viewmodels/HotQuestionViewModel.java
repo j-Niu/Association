@@ -41,7 +41,7 @@ public class HotQuestionViewModel {
 
     private void initView() {
         mBinding.rv.setLayoutManager(new LinearLayoutManager(activity));
-        mBinding.rv.addItemDecoration(new DividerItemDecoration(activity,LinearLayoutManager.VERTICAL));
+        mBinding.rv.addItemDecoration(new DividerItemDecoration(activity, LinearLayoutManager.VERTICAL));
         QuestionnaireAdapter adapter = new QuestionnaireAdapter(R.layout.questionnaire_item, null, Contants.HOTQUESTIONNAI_REFRAGMENT);
         adapterObservable.set(adapter);
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
@@ -54,8 +54,9 @@ public class HotQuestionViewModel {
         mBinding.rv.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                if (!CommonUtils.isFastDoubleClick()){
-                    Intent intent = new Intent(activity,QuestionnaireWebActivity.class);
+                if (!CommonUtils.isFastDoubleClick()) {
+                    Intent intent = new Intent(activity, QuestionnaireWebActivity.class);
+                    intent.putExtra("data", ((QuestionList) baseQuickAdapter.getItem(i)));
                     activity.startActivity(intent);
                 }
             }
@@ -63,7 +64,7 @@ public class HotQuestionViewModel {
     }
 
     private void initData() {
-        QuestionnaireApi.getInstance().getHotWenjuan(activity, MyApp.getUserToken(),String.valueOf(PAGE))
+        QuestionnaireApi.getInstance().getHotWenjuan(activity, MyApp.getUserToken(), String.valueOf(PAGE))
                 .setListener(new HttpRequest.OnNetworkListener<QuestionList>() {
                     @Override
                     public void onSuccess(QuestionList response) {
@@ -73,7 +74,7 @@ public class HotQuestionViewModel {
                             if (response.getList().size() < 20) {
                                 adapterObservable.get().loadMoreEnd();
                             }
-                           items.addAll(response.getList());
+                            items.addAll(response.getList());
                         }
                     }
 
@@ -82,5 +83,10 @@ public class HotQuestionViewModel {
 
                     }
                 }).start(new QuestionList());
+    }
+
+    //刷新数据
+    public void refresh() {
+        initData();
     }
 }

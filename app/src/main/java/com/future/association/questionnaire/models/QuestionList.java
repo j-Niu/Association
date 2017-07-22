@@ -22,10 +22,19 @@ public static final Creator<QuestionList> CREATOR = new Creator<>(QuestionList.c
     private String title;
     private String jifen;
     private String time;
+    private String showurl;
 
     @Override
     public void parseInfo(String content) throws JSONException {
         list = GsonUtils.jsonToList(content,QuestionList.class);
+    }
+
+    public String getShowurl() {
+        return showurl;
+    }
+
+    public void setShowurl(String showurl) {
+        this.showurl = showurl;
     }
 
     public String getId() {
