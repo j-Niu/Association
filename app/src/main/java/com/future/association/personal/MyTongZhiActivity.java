@@ -13,7 +13,7 @@ import com.future.baselib.utils.StatusUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyTongZhi extends BaseActivity {
+public class MyTongZhiActivity extends BaseActivity {
     private ListView lvMyTongzhi;
     private List<BeanTongzhi> tongzhiList = new ArrayList<>();
     private TongzhiAdapter tongzhiAdapter;

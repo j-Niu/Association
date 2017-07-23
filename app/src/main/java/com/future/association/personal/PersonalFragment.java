@@ -16,11 +16,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.future.association.R;
 import com.future.association.common.Contants;
 import com.future.association.community.utils.TextUtil;
+import com.future.association.personal.entity.MyInfoEntity;
 import com.future.association.personal.gallerypick.GlideImageLoader;
+import com.future.association.personal.util.BitmapUtils;
+import com.future.association.personal.util.MyDataResponse;
+import com.future.association.personal.util.RequestUtil;
+import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.ToastUtils;
 import com.future.baselib.view.ActionSheetDialog;
 import com.yancy.gallerypick.config.GalleryConfig;
@@ -40,6 +46,7 @@ public class PersonalFragment extends MyBaseFragment {
     private ActionSheetDialog sheetDialog;
     private LinearLayout myLevel;
     private RelativeLayout myJianDu, myHuiYing, myTieZi, myWenJuan, myXiaoXi, myTongZhi, myMore;
+    private TextView tvMyShenFen,tvMyAddress;
 
     //照片
     public List<String> picPath = new ArrayList<>();
@@ -75,6 +82,8 @@ public class PersonalFragment extends MyBaseFragment {
     protected void initView(View view, @Nullable Bundle savedInstanceState) {
         setTitle("我的");
         header = (CircleImageView) view.findViewById(R.id.cirimgMy);
+        tvMyShenFen= (TextView) view.findViewById(R.id.tvMyShenFen);
+        tvMyAddress= (TextView) view.findViewById(R.id.tvMyAddress);
         myLevel = (LinearLayout) view.findViewById(R.id.linearMy2);
         myJianDu = (RelativeLayout) view.findViewById(R.id.myJianDu);
         myHuiYing = (RelativeLayout) view.findViewById(R.id.myHuiYing);
@@ -84,9 +93,28 @@ public class PersonalFragment extends MyBaseFragment {
         myTongZhi = (RelativeLayout) view.findViewById(R.id.myTongZhi);
         myMore = (RelativeLayout) view.findViewById(R.id.myMore);
 
+        initData();
         initGalleyCallBack();
         initGalley();
         initClick();
+    }
+
+    private void initData() {
+        RequestUtil.getMyInfo(mContext, "127", new HttpRequest.OnNetworkListener<MyDataResponse>() {
+            @Override
+            public void onSuccess(MyDataResponse response) {
+                MyInfoEntity myInfoEntity= (MyInfoEntity) response.info;
+                tvMyShenFen.setText(myInfoEntity.getInfo().getReal_name());
+                tvMyAddress.setText(myInfoEntity.getInfo().getAddress());
+
+            }
+
+            @Override
+            public void onFail(String message) {
+                showShortToast(message);
+            }
+        });
+
     }
 
     private void initClick() {
@@ -129,7 +157,7 @@ public class PersonalFragment extends MyBaseFragment {
         myTongZhi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(MyTongZhi.class);
+                startActivity(MyTongZhiActivity.class);
             }
         });
         myMore.setOnClickListener(new View.OnClickListener() {

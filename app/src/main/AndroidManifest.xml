@@ -98,7 +98,7 @@
         <activity android:name=".personal.MyNoticeActivity" />
         <activity android:name=".personal.MyTieziActivity" />
         <activity android:name=".personal.MyWenJuanActivity" />
-        <activity android:name=".personal.MyTongZhi" />
+        <activity android:name=".personal.MyTongZhiActivity" />
         <activity android:name=".personal.MyMoreActivity" />
         <activity android:name=".personal.AboutUsActivity" />
         <activity android:name=".personal.ChangePwdActivity" />

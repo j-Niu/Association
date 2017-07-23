@@ -33,6 +33,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvMyShenFen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="身份认证"
@@ -40,6 +41,7 @@
                 android:textSize="@dimen/text_size_normal_16" />
 
             <TextView
+                android:id="@+id/tvMyAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_lsmall_10"
