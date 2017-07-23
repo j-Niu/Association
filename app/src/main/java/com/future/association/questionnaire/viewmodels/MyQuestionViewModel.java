@@ -86,6 +86,7 @@ public class MyQuestionViewModel {
 
     //刷新数据
     public void refresh() {
+        PAGE=1;
         initData();
     }
 }

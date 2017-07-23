@@ -37,7 +37,7 @@ public class SuperviceViewModel {
     public final ObservableArrayList<SupericeList.SupericeListInfo> items = new ObservableArrayList<>();
     public final ObservableArrayList<SupericerTypeList.SupericerTypeInfo> headItems = new ObservableArrayList<>();
     private int PAHE;
-
+    private RequestType requestType = RequestType.REFRESH;
 
     public SuperviceViewModel(Fragment fragment, FragmentSuperviceBinding binding) {
         this.fragment = fragment;
@@ -75,7 +75,12 @@ public class SuperviceViewModel {
                             if (response.getList().size() < 20) {
                                 adapter.get().loadMoreEnd();
                             }
-                            items.addAll(response.getList());
+                            if (requestType == RequestType.REFRESH) {
+                                items.clear();
+                                items.addAll(response.getList());
+                            } else {
+                                items.addAll(response.getList());
+                            }
                         }
                     }
 
@@ -112,7 +117,7 @@ public class SuperviceViewModel {
 
         for (int i = 0; i < 9; i++) {
             SupericerTypeList.SupericerTypeInfo typeInfo = new SupericerTypeList.SupericerTypeInfo();
-            typeInfo.setId(String.valueOf(i+1));
+            typeInfo.setId(String.valueOf(i + 1));
             typeInfo.setHangye(types[i]);
             typeInfo.setRes(imgs[i]);
             headItems.add(typeInfo);
@@ -183,11 +188,18 @@ public class SuperviceViewModel {
     private BaseQuickAdapter.RequestLoadMoreListener loadMoreListener = new BaseQuickAdapter.RequestLoadMoreListener() {
         @Override
         public void onLoadMoreRequested() {
+            requestType = RequestType.LOAD_MORE;
             getSupericeList();
         }
     };
 
     public void refresh() {
+        PAHE = 0;
+        requestType = RequestType.REFRESH;
         getSupericeList();
+    }
+
+    private enum RequestType {
+        REFRESH, LOAD_MORE
     }
 }
