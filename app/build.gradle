@@ -12,9 +12,10 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        // 开启multidex
+//         开启multidex
         multiDexEnabled true
     }
+
     dataBinding {
         enabled = true
     }
