@@ -1,4 +1,4 @@
-package com.future.association.personal;
+package com.future.association.personal.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

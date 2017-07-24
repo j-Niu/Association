@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.future.association.personal.MyMoreActivity">
+    tools:context="com.future.association.personal.ui.activity.MyMoreActivity">
 
     <include layout="@layout/layout_toolbar" />
 

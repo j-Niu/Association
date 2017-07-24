@@ -1,4 +1,4 @@
-package com.future.association.personal;
+package com.future.association.personal.ui.fragment;
 
 
 import android.Manifest;
@@ -18,14 +18,24 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.future.association.R;
 import com.future.association.common.Contants;
+import com.future.association.common.MyApp;
 import com.future.association.community.utils.TextUtil;
-import com.future.association.personal.entity.MyInfoEntity;
+import com.future.association.personal.CircleImageView;
+import com.future.association.personal.PersonConstant;
+import com.future.association.personal.entity.MyInfoResponse;
 import com.future.association.personal.gallerypick.GlideImageLoader;
+import com.future.association.personal.ui.activity.MyJianDuActivity;
+import com.future.association.personal.ui.activity.MyLevelActivity;
+import com.future.association.personal.ui.activity.MyMoreActivity;
+import com.future.association.personal.ui.activity.MyNoticeActivity;
+import com.future.association.personal.ui.activity.MyResponseActivity;
+import com.future.association.personal.ui.activity.MyTieziActivity;
+import com.future.association.personal.ui.activity.MyTongZhiActivity;
+import com.future.association.personal.ui.activity.MyWenJuanActivity;
 import com.future.association.personal.util.BitmapUtils;
-import com.future.association.personal.util.MyDataResponse;
-import com.future.association.personal.util.RequestUtil;
 import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.ToastUtils;
 import com.future.baselib.view.ActionSheetDialog;
@@ -46,7 +56,8 @@ public class PersonalFragment extends MyBaseFragment {
     private ActionSheetDialog sheetDialog;
     private LinearLayout myLevel;
     private RelativeLayout myJianDu, myHuiYing, myTieZi, myWenJuan, myXiaoXi, myTongZhi, myMore;
-    private TextView tvMyShenFen,tvMyAddress;
+    private TextView tvMyShenFen, tvMyAddress, tvMylevel, tvMychenghao, tvMyJifen;
+    private String id;
 
     //照片
     public List<String> picPath = new ArrayList<>();
@@ -70,6 +81,7 @@ public class PersonalFragment extends MyBaseFragment {
 
     @Override
     protected void getBundleExtras(Bundle extras) {
+        id = extras.getString("id");
     }
 
     @NonNull
@@ -82,8 +94,12 @@ public class PersonalFragment extends MyBaseFragment {
     protected void initView(View view, @Nullable Bundle savedInstanceState) {
         setTitle("我的");
         header = (CircleImageView) view.findViewById(R.id.cirimgMy);
-        tvMyShenFen= (TextView) view.findViewById(R.id.tvMyShenFen);
-        tvMyAddress= (TextView) view.findViewById(R.id.tvMyAddress);
+        tvMyShenFen = (TextView) view.findViewById(R.id.tvMyShenFen);
+        tvMyAddress = (TextView) view.findViewById(R.id.tvMyAddress);
+        tvMylevel = (TextView) view.findViewById(R.id.tvMylevel);
+        tvMychenghao = (TextView) view.findViewById(R.id.tvMychenghao);
+        tvMyJifen = (TextView) view.findViewById(R.id.tvMyJifen);
+
         myLevel = (LinearLayout) view.findViewById(R.id.linearMy2);
         myJianDu = (RelativeLayout) view.findViewById(R.id.myJianDu);
         myHuiYing = (RelativeLayout) view.findViewById(R.id.myHuiYing);
@@ -93,27 +109,57 @@ public class PersonalFragment extends MyBaseFragment {
         myTongZhi = (RelativeLayout) view.findViewById(R.id.myTongZhi);
         myMore = (RelativeLayout) view.findViewById(R.id.myMore);
 
-        initData();
         initGalleyCallBack();
         initGalley();
         initClick();
+        initData();
     }
 
     private void initData() {
-        RequestUtil.getMyInfo(mContext, "127", new HttpRequest.OnNetworkListener<MyDataResponse>() {
-            @Override
-            public void onSuccess(MyDataResponse response) {
-                MyInfoEntity myInfoEntity= (MyInfoEntity) response.info;
-                tvMyShenFen.setText(myInfoEntity.getInfo().getReal_name());
-                tvMyAddress.setText(myInfoEntity.getInfo().getAddress());
+        new HttpRequest<MyInfoResponse>()
+                .with(mContext)
+                .addParam("apiCode", PersonConstant.MY_INFO_SHOW)
+                .addParam("userToken", MyApp.getUserToken())
+//                .addParam("id", id)
+                .setListener(new HttpRequest.OnNetworkListener<MyInfoResponse>() {
+                    @Override
+                    public void onSuccess(MyInfoResponse response) {
+                        MyInfoResponse.MyInfos myInfos = response.myInfos;
+                        if (myInfos != null) {
+                            Glide.with(getActivity()).asBitmap().load(myInfos.level_img).into(header);
+                            tvMyShenFen.setText(myInfos.real_name);
+                            tvMyAddress.setText(myInfos.address);
+                            tvMylevel.setText(myInfos.level);
+                            tvMychenghao.setText(myInfos.chenghao);
+                            tvMyJifen.setText(myInfos.jifen);
+                        }
+                    }
 
-            }
+                    @Override
+                    public void onFail(String message) {
+                        toast("错误信息：" + message);
+                    }
+                }).start(new MyInfoResponse());
 
-            @Override
-            public void onFail(String message) {
-                showShortToast(message);
-            }
-        });
+//方法二：
+//        RequestUtil.getMyInfo(mContext, new HttpRequest.OnNetworkListener<MyDataResponse>() {
+//            @Override
+//            public void onSuccess(MyDataResponse response) {
+//                if (response.info != null) {
+//                    MyInfoEntity myInfoEntity = (MyInfoEntity) response.info;
+//                    Log.d("123"," aaaa --- "+myInfoEntity.toString()+"----bbbb-----"+myInfoEntity.getInfo().getReal_name().toString());
+//                    if (tvMyShenFen != null && tvMyAddress != null) {
+//                        tvMyShenFen.setText(myInfoEntity.getInfo().getReal_name());
+//                        tvMyAddress.setText(myInfoEntity.getInfo().getAddress());
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(String message) {
+//                showShortToast("错误信息：" + message);
+//            }
+//        });
 
     }
 
