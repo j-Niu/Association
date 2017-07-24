@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.future.association.R;
 import com.future.association.common.Contants;
 import com.future.association.common.MyApp;
@@ -126,7 +125,7 @@ public class PersonalFragment extends MyBaseFragment {
                     public void onSuccess(MyInfoResponse response) {
                         MyInfoResponse.MyInfos myInfos = response.myInfos;
                         if (myInfos != null) {
-                            Glide.with(getActivity()).asBitmap().load(myInfos.level_img).into(header);
+//                            Glide.with(getActivity()).asBitmap().load(myInfos.level_img).into(header);
                             tvMyShenFen.setText(myInfos.real_name);
                             tvMyAddress.setText(myInfos.address);
                             tvMylevel.setText(myInfos.level);
