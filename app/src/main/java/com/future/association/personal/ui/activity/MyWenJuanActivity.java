@@ -1,13 +1,17 @@
-package com.future.association.personal;
+package com.future.association.personal.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
 import com.future.association.R;
+import com.future.association.common.MyApp;
+import com.future.association.personal.PersonConstant;
 import com.future.association.personal.adapter.WenjuanAdapter;
 import com.future.association.personal.entity.BeanWenJuan;
+import com.future.association.personal.entity.MyWenJuan;
 import com.future.baselib.activity.BaseActivity;
+import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.StatusUtils;
 
 import java.util.ArrayList;
@@ -58,6 +62,27 @@ public class MyWenJuanActivity extends BaseActivity {
         } else {
             wenjuanAdapter.notifyDataSetChanged();
         }
+
+
+
+        new HttpRequest<MyWenJuan>()
+                .with(this)
+                .addParam("apiCode", PersonConstant.MY_WENJUAN)
+                .addParam("userToken", MyApp.getUserToken())
+                .addParam("page", "2")
+                .addParam("size", PersonConstant.PAGE_SIZE_DEFAULT)
+//                .addParam("id", id)
+                .setListener(new HttpRequest.OnNetworkListener<MyWenJuan>() {
+                    @Override
+                    public void onSuccess(MyWenJuan response) {
+
+                    }
+
+                    @Override
+                    public void onFail(String message) {
+                        toast("错误信息：" + message);
+                    }
+                }).start(new MyWenJuan());
     }
 
     @Override

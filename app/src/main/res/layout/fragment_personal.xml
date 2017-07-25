@@ -3,17 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_f8f8f8"
-    tools:context="com.future.association.personal.PersonalFragment">
+    tools:context="com.future.association.personal.ui.fragment.PersonalFragment">
 
-    <include
-        android:id="@+id/includeMy"
-        layout="@layout/layout_toolbar" />
+    <include layout="@layout/layout_toolbar" />
 
     <LinearLayout
         android:id="@+id/linearMy1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/includeMy"
+        android:layout_below="@id/toolbar"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/padding_small_15">
@@ -33,17 +31,19 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvMyShenFen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="身份认证"
+                tools:text="身份认证"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_normal_16" />
 
             <TextView
+                android:id="@+id/tvMyAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_lsmall_10"
-                android:text="所属区域"
+                tools:text="所属区域"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_small_14" />
 
@@ -68,9 +68,10 @@
             android:paddingTop="@dimen/padding_lsmall_10">
 
             <TextView
+                android:id="@+id/tvMylevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="v1"
+                tools:text="v1"
                 android:textColor="@color/color_text_black"
                 android:textSize="@dimen/text_size_big_18" />
 
@@ -95,9 +96,10 @@
             android:paddingTop="@dimen/padding_lsmall_10">
 
             <TextView
+                android:id="@+id/tvMychenghao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="高级督察"
+                tools:text="高级督察"
                 android:textColor="@color/color_text_black"
                 android:textSize="@dimen/text_size_big_18" />
 
@@ -122,10 +124,11 @@
             android:paddingTop="@dimen/padding_lsmall_10">
 
             <TextView
+                android:id="@+id/tvMyJifen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:text="3056"
+                tools:text="3056"
                 android:textColor="@color/color_text_black"
                 android:textSize="@dimen/text_size_big_18" />
 

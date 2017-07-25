@@ -92,16 +92,16 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <!-- 我的模块 -->
-        <activity android:name=".personal.MyLevelActivity" />
-        <activity android:name=".personal.MyResponseActivity" />
-        <activity android:name=".personal.MyJianDuActivity" />
-        <activity android:name=".personal.MyNoticeActivity" />
-        <activity android:name=".personal.MyTieziActivity" />
-        <activity android:name=".personal.MyWenJuanActivity" />
-        <activity android:name=".personal.MyTongZhi" />
-        <activity android:name=".personal.MyMoreActivity" />
-        <activity android:name=".personal.AboutUsActivity" />
-        <activity android:name=".personal.ChangePwdActivity" />
+        <activity android:name=".personal.ui.activity.MyLevelActivity" />
+        <activity android:name=".personal.ui.activity.MyResponseActivity" />
+        <activity android:name=".personal.ui.activity.MyJianDuActivity" />
+        <activity android:name=".personal.ui.activity.MyNoticeActivity" />
+        <activity android:name=".personal.ui.activity.MyTieziActivity" />
+        <activity android:name=".personal.ui.activity.MyWenJuanActivity" />
+        <activity android:name=".personal.ui.activity.MyTongZhiActivity" />
+        <activity android:name=".personal.ui.activity.MyMoreActivity" />
+        <activity android:name=".personal.ui.activity.AboutUsActivity" />
+        <activity android:name=".personal.ui.activity.ChangePwdActivity" />
         <activity android:name=".news.ui.activity.NewsActivity"></activity>
 
         <provider

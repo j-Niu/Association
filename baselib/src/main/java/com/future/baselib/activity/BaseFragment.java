@@ -73,6 +73,10 @@ public abstract class BaseFragment extends Fragment {
 
         //此处可以给Fragment设置主题
         //mContext = new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo_Light);
+
+        if (isRegisterEventBus()){
+            EventBusUtil.register(this);
+        }
     }
 
     @Nullable
@@ -264,19 +268,18 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (isRegisterEventBus()){
-            EventBusUtil.register(this);
-        }
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
         toast.cancel();
-        if (isRegisterEventBus()){
-            EventBusUtil.unregister(this);
-        }
+//        if (isRegisterEventBus()){
+//            EventBusUtil.unregister(this);
+//        }
     }
+
 
     public void checkedPermission(String[] permissions) {
         if (Build.VERSION.SDK_INT < 23) {

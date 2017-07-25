@@ -7,7 +7,7 @@
     android:background="@color/color_f8f8f8"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.future.association.personal.MyLevelActivity">
+    tools:context="com.future.association.personal.ui.activity.MyLevelActivity">
 
     <include layout="@layout/layout_toolbar" />
 

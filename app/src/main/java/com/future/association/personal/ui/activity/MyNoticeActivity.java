@@ -1,13 +1,17 @@
-package com.future.association.personal;
+package com.future.association.personal.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
 import com.future.association.R;
+import com.future.association.common.MyApp;
+import com.future.association.personal.PersonConstant;
 import com.future.association.personal.adapter.NoticeAdapter;
 import com.future.association.personal.entity.BeanNotice;
+import com.future.association.personal.entity.MyNotice;
 import com.future.baselib.activity.BaseActivity;
+import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.StatusUtils;
 
 import java.util.ArrayList;
@@ -46,6 +50,27 @@ public class MyNoticeActivity extends BaseActivity {
         } else {
             noticeAdapter.notifyDataSetChanged();
         }
+
+
+
+        new HttpRequest<MyNotice>()
+                .with(this)
+                .addParam("apiCode", PersonConstant.MY_NOTICE)
+                .addParam("userToken", MyApp.getUserToken())
+                .addParam("page", "2")
+                .addParam("size", PersonConstant.PAGE_SIZE_DEFAULT)
+//                .addParam("id", id)
+                .setListener(new HttpRequest.OnNetworkListener<MyNotice>() {
+                    @Override
+                    public void onSuccess(MyNotice response) {
+
+                    }
+
+                    @Override
+                    public void onFail(String message) {
+                        toast("错误信息：" + message);
+                    }
+                }).start(new MyNotice());
     }
 
     @Override

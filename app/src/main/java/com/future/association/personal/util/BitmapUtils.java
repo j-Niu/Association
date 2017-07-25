@@ -1,4 +1,4 @@
-package com.future.association.personal;
+package com.future.association.personal.util;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;

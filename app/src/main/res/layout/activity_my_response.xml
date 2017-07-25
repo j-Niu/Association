@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.future.association.personal.MyResponseActivity">
+    tools:context="com.future.association.personal.ui.activity.MyResponseActivity">
 <include layout="@layout/layout_toolbar"/>
 
     <ListView

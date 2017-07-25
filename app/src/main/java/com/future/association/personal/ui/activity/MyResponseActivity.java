@@ -1,18 +1,25 @@
-package com.future.association.personal;
+package com.future.association.personal.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
 import com.future.association.R;
+import com.future.association.common.MyApp;
+import com.future.association.personal.PersonConstant;
 import com.future.association.personal.adapter.HuiYingAdapter;
 import com.future.association.personal.entity.BeanMyResponse;
+import com.future.association.personal.entity.MyResponse;
 import com.future.baselib.activity.BaseActivity;
+import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.StatusUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * _mytiezihuifu_001
+ */
 public class MyResponseActivity extends BaseActivity {
 
     private ListView lvMyResponse;
@@ -35,6 +42,26 @@ public class MyResponseActivity extends BaseActivity {
             }
         });
         lvMyResponse = (ListView) findViewById(R.id.lvMyResponse);
+        new HttpRequest<MyResponse>()
+                .with(this)
+                .addParam("apiCode", PersonConstant.MY_RESPONSE)
+                .addParam("userToken", MyApp.getUserToken())
+                .addParam("page", "2")
+                .addParam("size", PersonConstant.PAGE_SIZE_DEFAULT)
+//                .addParam("id", id)
+                .setListener(new HttpRequest.OnNetworkListener<MyResponse>() {
+                    @Override
+                    public void onSuccess(MyResponse response) {
+
+                    }
+
+                    @Override
+                    public void onFail(String message) {
+                        toast("错误信息：" + message);
+                    }
+                }).start(new MyResponse());
+
+
         BeanMyResponse response;
         for (int i = 0; i < 10; i++) {
             response = new BeanMyResponse(getString(R.string.myHY1),

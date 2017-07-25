@@ -87,6 +87,7 @@ public class HotQuestionViewModel {
 
     //刷新数据
     public void refresh() {
+        PAGE=1;
         initData();
     }
 }

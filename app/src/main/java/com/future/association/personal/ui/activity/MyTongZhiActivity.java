@@ -1,19 +1,23 @@
-package com.future.association.personal;
+package com.future.association.personal.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
 import com.future.association.R;
+import com.future.association.common.MyApp;
+import com.future.association.personal.PersonConstant;
 import com.future.association.personal.adapter.TongzhiAdapter;
 import com.future.association.personal.entity.BeanTongzhi;
+import com.future.association.personal.entity.MyNotification;
 import com.future.baselib.activity.BaseActivity;
+import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.StatusUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyTongZhi extends BaseActivity {
+public class MyTongZhiActivity extends BaseActivity {
     private ListView lvMyTongzhi;
     private List<BeanTongzhi> tongzhiList = new ArrayList<>();
     private TongzhiAdapter tongzhiAdapter;
@@ -46,6 +50,27 @@ public class MyTongZhi extends BaseActivity {
         } else {
             tongzhiAdapter.notifyDataSetChanged();
         }
+
+
+
+        new HttpRequest<MyNotification>()
+                .with(this)
+                .addParam("apiCode", PersonConstant.MY_NOTIFICATION)
+                .addParam("userToken", MyApp.getUserToken())
+                .addParam("page", "2")
+                .addParam("size", PersonConstant.PAGE_SIZE_DEFAULT)
+//                .addParam("id", id)
+                .setListener(new HttpRequest.OnNetworkListener<MyNotification>() {
+                    @Override
+                    public void onSuccess(MyNotification response) {
+
+                    }
+
+                    @Override
+                    public void onFail(String message) {
+                        toast("错误信息：" + message);
+                    }
+                }).start(new MyNotification());
     }
 
     @Override

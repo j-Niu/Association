@@ -12,21 +12,31 @@ import org.json.JSONException;
 public class QuestionList extends BaseBean<QuestionList> {
 public static final Creator<QuestionList> CREATOR = new Creator<>(QuestionList.class);
     /**
-     * id : 1
-     * title : 问卷标题1
-     * jifen : 5
-     * time : 24分钟前
+     "id": "1",//问卷id
+     "title": "问卷标题1",//问卷标题
+     "type": "1",//问卷状态 1 进行中 2 已完成 3已过期
+     "jifen": "5",//问卷积分奖励
+     "time": "2小时前"//问卷发布时间
      */
 
     private String id;
     private String title;
     private String jifen;
+    private String type;
     private String time;
     private String showurl;
 
     @Override
     public void parseInfo(String content) throws JSONException {
         list = GsonUtils.jsonToList(content,QuestionList.class);
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getShowurl() {

@@ -1,4 +1,4 @@
-package com.future.association.personal;
+package com.future.association.personal.ui.activity;
 
 import android.app.Dialog;
 import android.os.Bundle;

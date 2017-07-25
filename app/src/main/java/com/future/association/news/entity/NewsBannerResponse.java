@@ -1,7 +1,6 @@
 package com.future.association.news.entity;
 
 import com.future.baselib.entity.BaseResponse;
-import com.youth.banner.Banner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
