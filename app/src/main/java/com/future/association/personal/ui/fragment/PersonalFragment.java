@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.future.association.R;
 import com.future.association.common.Contants;
 import com.future.association.common.MyApp;
@@ -25,6 +26,7 @@ import com.future.association.community.utils.TextUtil;
 import com.future.association.personal.CircleImageView;
 import com.future.association.personal.PersonConstant;
 import com.future.association.personal.entity.MyInfoResponse;
+import com.future.association.personal.entity.MyUpHeader;
 import com.future.association.personal.gallerypick.GlideImageLoader;
 import com.future.association.personal.ui.activity.MyJianDuActivity;
 import com.future.association.personal.ui.activity.MyLevelActivity;
@@ -35,7 +37,9 @@ import com.future.association.personal.ui.activity.MyTieziActivity;
 import com.future.association.personal.ui.activity.MyTongZhiActivity;
 import com.future.association.personal.ui.activity.MyWenJuanActivity;
 import com.future.association.personal.util.BitmapUtils;
+import com.future.baselib.utils.CommonUtils;
 import com.future.baselib.utils.HttpRequest;
+import com.future.baselib.utils.JLog;
 import com.future.baselib.utils.ToastUtils;
 import com.future.baselib.view.ActionSheetDialog;
 import com.yancy.gallerypick.config.GalleryConfig;
@@ -114,6 +118,14 @@ public class PersonalFragment extends MyBaseFragment {
         initData();
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            initData();
+        }
+    }
+
     private void initData() {
         new HttpRequest<MyInfoResponse>()
                 .with(mContext)
@@ -125,6 +137,10 @@ public class PersonalFragment extends MyBaseFragment {
                     public void onSuccess(MyInfoResponse response) {
                         MyInfoResponse.MyInfos myInfos = response.myInfos;
                         if (myInfos != null) {
+                            Glide.with(getActivity())
+                                    .asBitmap()
+                                    .load(myInfos.level_img)
+                                    .into(header);
 //                            Glide.with(getActivity()).asBitmap().load(myInfos.level_img).into(header);
                             tvMyShenFen.setText(myInfos.real_name);
                             tvMyAddress.setText(myInfos.address);
@@ -252,10 +268,29 @@ public class PersonalFragment extends MyBaseFragment {
                 img = (String) msg.obj;
                 bitmap = BitmapUtils.scaleBitmap(img);
                 header.setImageBitmap(bitmap);
-//                Glide.with(mContext)
-//                        .load(Uri.parse(img))
-//                        .centerCrop()
-//                        .into(header);
+
+                //上传头像  Success !!!
+                new HttpRequest<MyUpHeader>()
+                        .with(mContext)
+                        .addParam("apiCode", PersonConstant.MY_UP_HEADER)
+                        .addParam("userToken", MyApp.getUserToken())
+                        .addParam("avatar_url ", CommonUtils.getImg(img))//
+
+//                .addParam("id", id)
+                        .setListener(new HttpRequest.OnNetworkListener<MyUpHeader>() {
+                            @Override
+                            public void onSuccess(MyUpHeader response) {
+                                JLog.e("json", "成功了少年！");
+                                showShortToast("上传成功");
+                            }
+
+                            @Override
+                            public void onFail(String message) {
+                                toast("错误信息：" + message);
+                            }
+                        }).start(new MyUpHeader());
+
+
             }
         }
     };
