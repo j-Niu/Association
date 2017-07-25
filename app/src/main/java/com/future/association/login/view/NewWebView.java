@@ -50,6 +50,7 @@ public class NewWebView extends LinearLayout {
         View view = View.inflate(context, R.layout.view_web_progress, this);
         mWebView = (WebView)view.findViewById(R.id.web_view);
         mProgressBar = (ProgressBar)view.findViewById(R.id.progress_bar);
+
     }
 
     public String getUrl() {
