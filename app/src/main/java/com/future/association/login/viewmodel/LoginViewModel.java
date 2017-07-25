@@ -106,6 +106,7 @@ public class LoginViewModel {
                                                 CommonUtil.storeLoginMsg(activity, response);
                                                 //跳转到主页
                                                 CommonUtil.startActivity(activity, MainActivity.class);
+                                                 activity.finish();
                                             }
                                             activity.dissmissLoadingDialog();
                                         }
