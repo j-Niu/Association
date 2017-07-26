@@ -27,8 +27,7 @@
                 <com.future.association.community.custom.CircleImageView
                     android:id="@+id/civ_head"
                     android:layout_width="90px"
-                    android:layout_height="90px"
-                    android:src="@drawable/ic_demo" />
+                    android:layout_height="90px"/>
 
                 <TextView
                     android:id="@+id/tv_name"

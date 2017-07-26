@@ -3,6 +3,10 @@ package com.future.association.community.base;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.future.association.community.adapter.GridViewAdapter;
+
+import java.util.ArrayList;
+
 /**
  * Created by HX·罗 on 2017/7/5.
  */
@@ -24,6 +28,7 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
+
         if(dy>0){
             visibleItemCount = recyclerView.getChildCount();
             totalItemCount = mLinearLayoutManager.getItemCount();

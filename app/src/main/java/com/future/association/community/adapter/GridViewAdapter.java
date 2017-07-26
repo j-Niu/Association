@@ -8,6 +8,7 @@ import android.widget.AbsListView;
 
 import com.bumptech.glide.Glide;
 import com.future.association.R;
+import com.future.association.common.GlideUtils;
 import com.future.association.community.base.BaseListAdapter;
 import com.future.association.community.model.PlateInfo;
 import com.future.association.community.utils.ScreenUtils;
@@ -47,7 +48,7 @@ public class GridViewAdapter extends BaseListAdapter<PlateInfo> {
         ItemGridBinding binding = DataBindingUtil.bind(convertView);
         Glide.with(context)
                 .load(datas.get(position).getImage())
-//                .error(R.drawable.ic_demo)
+                .apply(GlideUtils.defaultImg())
                 .into(binding.ivImg) ;
         if (getCount() > limitCount && position == limitCount) {
             binding.setContent("更多");

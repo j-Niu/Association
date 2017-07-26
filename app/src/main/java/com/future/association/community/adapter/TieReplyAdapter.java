@@ -12,6 +12,7 @@ import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.future.association.R;
+import com.future.association.common.GlideUtils;
 import com.future.association.common.MyApp;
 import com.future.association.community.model.TieInfo;
 import com.future.association.community.model.TieReplyInfo;
@@ -131,7 +132,7 @@ public class TieReplyAdapter extends RecyclerView.Adapter<TieReplyAdapter.ViewHo
             binding.setReplyInfo(tieReplyInfos.get(position));
             Glide.with(context)
                     .load(tieReplyInfos.get(position).getAvatar_url())
-//                    .error(drawable.ic_demo)
+                    .apply(GlideUtils.defaultImg())
                     .into(binding.civHead);
             this.position = position;
         }

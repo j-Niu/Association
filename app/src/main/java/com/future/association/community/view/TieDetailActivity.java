@@ -12,6 +12,7 @@ import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.future.association.R;
+import com.future.association.common.GlideUtils;
 import com.future.association.common.MyApp;
 import com.future.association.community.adapter.TieReplyAdapter;
 import com.future.association.community.base.BaseActivity;
@@ -27,6 +28,7 @@ import com.future.association.community.utils.Res;
 import com.future.association.databinding.ActivityTieDetailBinding;
 import com.future.association.databinding.LayoutTieReplyHeadBinding;
 import com.future.association.databinding.PopupTieBinding;
+import com.future.association.news.utils.GlideImageLoader;
 
 import java.util.ArrayList;
 
@@ -200,7 +202,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
             headBinding.setTieDetailInfo(detailInfo);
             Glide.with(context)
                     .load(detailInfo.getAvatar_url())
-//                    .error(R.drawable.ic_demo)
+                    .apply(GlideUtils.defaultImg())
                     .into(headBinding.civHead) ;
         }
     }
