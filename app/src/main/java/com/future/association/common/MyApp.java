@@ -2,11 +2,15 @@ package com.future.association.common;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
 import com.future.association.community.utils.TextUtil;
 import com.future.association.login.util.ActivityManager;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jniu on 2017/7/3.
@@ -80,6 +84,51 @@ public class MyApp extends Application {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public interface ObserverListener {
+        void notifyChange(Bundle bundle, Object object);
+    }
+
+    // 实现整个APP观察者模式
+    private Map<Integer, ObserverListener> observerListeners = new HashMap<Integer, ObserverListener>();
+
+    // 实现整个app观察者模式,同一个action可以注册多个监听
+
+    /**
+     * 注册监听，不需要的时候要取消监听，可在onDestory()中取消
+     *
+     * @param action
+     * @param listener
+     */
+    public void registerObserver(int action, ObserverListener listener) {
+        if (listener != null) {
+            observerListeners.put(action, listener);
+        }
+    }
+
+    /**
+     * 解除注册--注册必须解除,防止内存泄露
+     *
+     * @param action
+     */
+    public void unRegisterObserver(int action) {
+        if (observerListeners.containsKey(action)) {
+            observerListeners.remove(action);
+        }
+    }
+
+    /**
+     * 通知已经注册此action的监听去执行 ,action 必传，其他可传(null)
+     *
+     * @param action 需要传递的action要与注册的一样，
+     * @param bundle 封装对象，
+     * @param object 也可以传递自己封装的对象，
+     */
+    public void notifyDataChange(int action, Bundle bundle, Object object) {
+        if (observerListeners.containsKey(action) && observerListeners.get(action) != null) {
+            observerListeners.get(action).notifyChange(bundle, object);
         }
     }
 

@@ -14,6 +14,7 @@ public class PersonConstant {
     public static final String MY_NOTICE = "_mytieziliebiaohf_001";//我的消息
     public static final String MY_NOTIFICATION = "_mytongzhiliebiao_001";//我的通知
     public static final String MY_UP_HEADER = "_myimg_001";//上传头像
+    public static final String MY_LOGOUT = "_logout_001";//用户登出
 
 
 }

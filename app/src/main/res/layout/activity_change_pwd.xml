@@ -8,11 +8,6 @@
 
     <include layout="@layout/layout_toolbar" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/fifteen"
-        android:background="@color/color_f8f8f8" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

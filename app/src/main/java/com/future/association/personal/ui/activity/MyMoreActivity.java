@@ -2,6 +2,7 @@ package com.future.association.personal.ui.activity;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -10,12 +11,18 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.future.association.R;
+import com.future.association.common.MyApp;
+import com.future.association.personal.PersonConstant;
+import com.future.association.personal.entity.MyExit;
 import com.future.baselib.activity.BaseActivity;
+import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.StatusUtils;
+import com.future.baselib.utils.ToastUtils;
 
 public class MyMoreActivity extends BaseActivity implements View.OnClickListener {
 
@@ -90,9 +97,43 @@ public class MyMoreActivity extends BaseActivity implements View.OnClickListener
                 WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
                 Display display = windowManager.getDefaultDisplay();
 
-                Dialog buyTimeDialog = new Dialog(this, R.style.filletDialog);
+                final Dialog buyTimeDialog = new Dialog(this, R.style.filletDialog);
                 buyTimeDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
                 View bView = getLayoutInflater().inflate(R.layout.dialog_exit, null);
+
+                RadioGroup group = (RadioGroup) bView.findViewById(R.id.rbCharge).getParent();
+                group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                        switch (checkedId) {
+                            case R.id.rbCharge:
+                                buyTimeDialog.dismiss();
+                                break;
+                            case R.id.rbCancel:
+                                new HttpRequest<MyExit>()
+                                        .with(MyMoreActivity.this)
+                                        .addParam("apiCode", PersonConstant.MY_LOGOUT)
+                                        .addParam("userToken", MyApp.getUserToken())
+//                .addParam("id", id)
+                                        .setListener(new HttpRequest.OnNetworkListener<MyExit>() {
+                                            @Override
+                                            public void onSuccess(MyExit response) {
+                                                finish();
+                                                MyApp.getApp().notifyDataChange(0x898, null, null);
+                                                ToastUtils.shortToast(MyMoreActivity.this, "退出成功");
+                                            }
+
+                                            @Override
+                                            public void onFail(String message) {
+                                                toast("错误信息：" + message);
+                                            }
+                                        }).start(new MyExit());
+                                buyTimeDialog.dismiss();
+                                break;
+                        }
+                    }
+                });
+
                 buyTimeDialog.setContentView(bView);
                 buyTimeDialog.show();
                 Window window = buyTimeDialog.getWindow();

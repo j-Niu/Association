@@ -28,6 +28,13 @@ public class ChangePwdActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        setTitle("修改密码");
+        setTitleLeft(R.drawable.ic_back, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         edtMyOldPwd = (EditText) findViewById(R.id.edtMyOldPwd);
         edtMyNewPwd = (EditText) findViewById(R.id.edtMyNewPwd);
         edtMyNewPwdAgaing = (EditText) findViewById(R.id.edtMyNewPwdAgaing);
