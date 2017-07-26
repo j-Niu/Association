@@ -79,7 +79,7 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
     }
 
     private void initView() {
-        toolbarTvTitle.setText("消协");
+        toolbarTvTitle.setText("资讯");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         data = new ArrayList<>();
         adapter = new NewsAdapter(R.layout.item_news, data);
@@ -125,6 +125,7 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
         banner.setImageLoader(new GlideImageLoader());
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
         banner.setIndicatorGravity(BannerConfig.RIGHT);
+        banner.setDelayTime(3500);
 
         titles = new ArrayList<>();
         imageUrls = new ArrayList<>();
