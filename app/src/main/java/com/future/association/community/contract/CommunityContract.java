@@ -2,6 +2,7 @@ package com.future.association.community.contract;
 
 import com.future.association.community.model.MsgNotifyInfo;
 import com.future.association.community.model.PlateInfo;
+import com.future.association.community.model.UserPlateInfo;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public interface CommunityContract {
     }
     interface IView{
         void setData(ArrayList<MsgNotifyInfo> notifyInfos) ;
-        void setPlateList(ArrayList<PlateInfo> plateInfos) ;
+        void setPlateList(UserPlateInfo plateInfo) ;
         void showMsg(String msg);
     }
 }

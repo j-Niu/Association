@@ -3,6 +3,7 @@ package com.future.association.community.view;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,10 +15,12 @@ import com.bumptech.glide.Glide;
 import com.future.association.R;
 import com.future.association.common.GlideUtils;
 import com.future.association.common.MyApp;
+import com.future.association.community.CommunityFragment;
 import com.future.association.community.adapter.TieReplyAdapter;
 import com.future.association.community.base.BaseActivity;
 import com.future.association.community.contract.TieDetailContract;
 import com.future.association.community.custom.CustomRecyclerView;
+import com.future.association.community.model.PlateInfo;
 import com.future.association.community.model.TieDetailInfo;
 import com.future.association.community.model.TieInfo;
 import com.future.association.community.model.TieReplyInfo;
@@ -25,6 +28,7 @@ import com.future.association.community.presenter.TieDetailPresenter;
 import com.future.association.community.utils.ActivityUtils;
 import com.future.association.community.utils.DialogUtils;
 import com.future.association.community.utils.Res;
+import com.future.association.community.utils.StringUtils;
 import com.future.association.databinding.ActivityTieDetailBinding;
 import com.future.association.databinding.LayoutTieReplyHeadBinding;
 import com.future.association.databinding.PopupTieBinding;
@@ -48,6 +52,8 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     private LayoutTieReplyHeadBinding headBinding;
     private View mHeadView;
     private int currentPage = 1;
+    private String jifen;
+    private PlateInfo plateInfo;
 
     @Override
     public int setContentView() {
@@ -70,6 +76,8 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     @Override
     public void initData() {
         tieInfo = getIntent().getParcelableExtra("tieInfo");
+        plateInfo = getIntent().getParcelableExtra("plateInfo");
+        jifen = getIntent().getStringExtra("jifen");
         if ("1".equals(tieInfo.getType())) {
             popupTieBinding.setIsTop("取消置顶");
         } else {
@@ -172,6 +180,10 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
                 ActivityUtils.startActivityIntent(context, WeiGuiActivity.class, bundle);
                 break;
             case R.id.tv_send:
+                if(StringUtils.stringIsInteger(jifen) < StringUtils.stringIsInteger(plateInfo.getHuifu_jf())){
+                    showShortToast("没有回复权限");
+                    return ;
+                }
                 presenter.sendReply();//发送回复
                 break;
         }

@@ -3,6 +3,7 @@ package com.future.association.community.presenter;
 import android.content.Context;
 
 import com.future.association.community.contract.CommunityContract;
+import com.future.association.community.model.UserPlateInfo;
 import com.future.association.community.request.CommunityRequest;
 import com.future.association.community.request.DataResponse;
 import com.future.baselib.utils.HttpRequest;
@@ -49,7 +50,7 @@ public class CommunityPresenter implements CommunityContract.IPresenter{
             @Override
             public void onSuccess(DataResponse response) {
                 dialog.close();
-                iView.setPlateList(response.infos);
+                iView.setPlateList((UserPlateInfo) response.info);
             }
 
             @Override

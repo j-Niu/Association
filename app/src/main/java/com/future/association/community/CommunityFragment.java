@@ -18,8 +18,11 @@ import com.future.association.community.contract.CommunityContract;
 import com.future.association.community.custom.CustomRecyclerView;
 import com.future.association.community.model.MsgNotifyInfo;
 import com.future.association.community.model.PlateInfo;
+import com.future.association.community.model.UserPlateInfo;
 import com.future.association.community.presenter.CommunityPresenter;
 import com.future.association.community.utils.ActivityUtils;
+import com.future.association.community.utils.ScreenUtils;
+import com.future.association.community.utils.StringUtils;
 import com.future.association.community.view.AllPlateActivity;
 import com.future.association.community.view.NotifyDetailActivity;
 import com.future.association.community.view.TieListActivity;
@@ -45,6 +48,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
     private View headView;
     private LayoutListNotifyHeadBinding headBinding;
     private int currentPage = 1;
+    private UserPlateInfo plateInfo;
 
     public CommunityFragment() {
         // Required empty public constructor
@@ -65,7 +69,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
         super.onResume();
         currentPage = 1;
         presenter.getData(currentPage);
-        if(adapter.datas.size() == 0){
+        if (adapter.datas.size() == 0) {
             presenter.getPlateList();
         }
     }
@@ -112,12 +116,16 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
                 Bundle bundle = new Bundle();
                 Class target = null;
                 if (position < 5) {
+                    if(StringUtils.stringIsInteger(CommunityFragment.this.plateInfo.getJifen()) < StringUtils.stringIsInteger(plateInfo.getFangwen_jf())){
+                        showMsg("没有访问该板块的权限");
+                        return ;
+                    }
                     target = TieListActivity.class;
                     bundle.putParcelable("plateInfo", plateInfo);
                 } else {//更多
                     target = AllPlateActivity.class;
                 }
-                bundle.putParcelableArrayList("plateInfos", adapter.datas);
+                bundle.putParcelable("userPlateInfo", CommunityFragment.this.plateInfo);
                 ActivityUtils.startActivityIntent(getContext(), target, bundle);
             }
         });
@@ -141,15 +149,16 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
             }
             this.notifyInfos.addAll(notifyInfos);
             notifyAdapter.notifyDataSetChanged();
-        }else{
-            viewBinding.rcvMsg.setPage(currentPage-1);
+        } else {
+            viewBinding.rcvMsg.setPage(currentPage - 1);
         }
     }
 
     @Override
-    public void setPlateList(ArrayList<PlateInfo> plateInfos) {
-        if(plateInfos != null){
-            adapter.datas.addAll(plateInfos);
+    public void setPlateList(UserPlateInfo plateInfo) {
+        this.plateInfo = plateInfo;
+        if (plateInfo != null && plateInfo.getPlateInfos() != null) {
+            adapter.datas.addAll(plateInfo.getPlateInfos());
             adapter.notifyDataSetChanged();
         }
     }

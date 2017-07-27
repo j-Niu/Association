@@ -1,6 +1,7 @@
 package com.future.association.community.view;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -11,8 +12,10 @@ import com.future.association.community.contract.TieListContract;
 import com.future.association.community.custom.CustomRecyclerView;
 import com.future.association.community.model.PlateInfo;
 import com.future.association.community.model.TieInfo;
+import com.future.association.community.model.UserPlateInfo;
 import com.future.association.community.presenter.TieListPresenter;
 import com.future.association.community.utils.ActivityUtils;
+import com.future.association.community.utils.StringUtils;
 import com.future.association.databinding.ActivityBannerBinding;
 
 import java.util.ArrayList;
@@ -29,6 +32,7 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
     private LinearLayoutManager linearLayoutManager;
     private PlateInfo plateInfo;
     private int currentPage = 1;//当前页
+    private UserPlateInfo userPlateInfo;
 
     @Override
     public int setContentView() {
@@ -51,6 +55,7 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
     @Override
     public void initData() {
         plateInfo = getIntent().getParcelableExtra("plateInfo");
+        userPlateInfo = getIntent().getParcelableExtra("userPlateInfo");
         tieInfos = new ArrayList<>();
         viewBinding.layoutTitleRightTv.setTitle(plateInfo.getName());
         viewBinding.layoutTitleRightTv.setRightFun("发帖");
@@ -74,6 +79,8 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
             public void itemClick(int position) {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("tieInfo", tieInfos.get(position));
+                bundle.putParcelable("plateInfo", plateInfo);
+                bundle.putString("jifen", userPlateInfo.getJifen());
                 ActivityUtils.startActivityIntent(context, TieDetailActivity.class, bundle);
             }
         });
@@ -86,7 +93,12 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
                 finish();
                 break;
             case R.id.iv_title_right_tv:
-                ActivityUtils.startActivityIntent(context, SendTieActivity.class, getIntent().getExtras());
+                if ("2".equals(plateInfo.getLocked()) && StringUtils.stringIsInteger(userPlateInfo.getJifen()) > StringUtils.stringIsInteger(plateInfo.getFatie_jf())) {
+                    ActivityUtils.startActivityIntent(context, SendTieActivity.class, getIntent().getExtras());
+                } else {
+                    showShortToast("没有发帖权限");
+                    return;
+                }
                 break;
         }
     }
@@ -101,7 +113,7 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
             this.tieInfos.addAll(tieInfos);
             adapter.notifyDataSetChanged();
         } else {
-            viewBinding.rcvTie.setPage(currentPage-1);
+            viewBinding.rcvTie.setPage(currentPage - 1);
         }
         viewBinding.rcvTie.setLoading(false);
     }

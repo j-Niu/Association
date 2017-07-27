@@ -14,6 +14,11 @@ import org.json.JSONObject;
 public class PlateInfo implements Parcelable{
 
     private String id ;
+    private String audit ;
+    private String locked ;
+    private String fatie_jf ;
+    private String huifu_jf ;
+    private String fangwen_jf ;
     private String name ;
     private String image ;
 
@@ -21,14 +26,13 @@ public class PlateInfo implements Parcelable{
 
     }
 
-    public PlateInfo(String name,String id,String image) {
-        this.name = name;
-        this.id = id;
-        this.image = image;
-    }
-
     protected PlateInfo(Parcel in) {
         id = in.readString();
+        audit = in.readString();
+        locked = in.readString();
+        fatie_jf = in.readString();
+        huifu_jf = in.readString();
+        fangwen_jf = in.readString();
         name = in.readString();
         image = in.readString();
     }
@@ -69,6 +73,46 @@ public class PlateInfo implements Parcelable{
         this.image = image;
     }
 
+    public String getAudit() {
+        return audit;
+    }
+
+    public void setAudit(String audit) {
+        this.audit = audit;
+    }
+
+    public String getLocked() {
+        return locked;
+    }
+
+    public void setLocked(String locked) {
+        this.locked = locked;
+    }
+
+    public String getFatie_jf() {
+        return fatie_jf;
+    }
+
+    public void setFatie_jf(String fatie_jf) {
+        this.fatie_jf = fatie_jf;
+    }
+
+    public String getHuifu_jf() {
+        return huifu_jf;
+    }
+
+    public void setHuifu_jf(String huifu_jf) {
+        this.huifu_jf = huifu_jf;
+    }
+
+    public String getFangwen_jf() {
+        return fangwen_jf;
+    }
+
+    public void setFangwen_jf(String fangwen_jf) {
+        this.fangwen_jf = fangwen_jf;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -77,6 +121,11 @@ public class PlateInfo implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
+        dest.writeString(audit);
+        dest.writeString(locked);
+        dest.writeString(fatie_jf);
+        dest.writeString(huifu_jf);
+        dest.writeString(fangwen_jf);
         dest.writeString(name);
         dest.writeString(image);
     }

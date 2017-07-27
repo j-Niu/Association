@@ -10,6 +10,7 @@ import com.future.association.community.model.PlateInfo;
 import com.future.association.community.model.TieDetailInfo;
 import com.future.association.community.model.TieInfo;
 import com.future.association.community.model.TieReplyInfo;
+import com.future.association.community.model.UserPlateInfo;
 import com.future.association.community.model.WGCauseInfo;
 import com.future.association.community.utils.ConstantUtil;
 import com.future.baselib.utils.HttpRequest;
@@ -51,7 +52,7 @@ public class CommunityRequest {
         TreeMap<String,String> params = new TreeMap<>() ;
         params.put("apiCode",RequestConfig.CODE_PLATE_LIST) ;
         params.put("userToken",MyApp.getUserToken()) ;
-        requestData(context,params,new DataResponse<PlateInfo>().init(PlateInfo.class),listener);
+        requestData(context,params,new DataResponse<UserPlateInfo>().init(UserPlateInfo.class),listener);
     }
 
     /**

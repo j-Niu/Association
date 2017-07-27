@@ -5,11 +5,14 @@ import android.text.TextWatcher;
 import android.view.View;
 
 import com.future.association.R;
+import com.future.association.community.CommunityFragment;
 import com.future.association.community.base.BaseActivity;
 import com.future.association.community.contract.SendTieContract;
 import com.future.association.community.model.PlateInfo;
+import com.future.association.community.model.UserPlateInfo;
 import com.future.association.community.presenter.SendTiePresenter;
 import com.future.association.community.utils.DialogUtils;
+import com.future.association.community.utils.StringUtils;
 import com.future.association.databinding.ActivitySendTieBinding;
 
 import java.util.ArrayList;
@@ -20,10 +23,12 @@ import static java.lang.System.in;
  * Created by HX·罗 on 2017/7/4.
  */
 
-public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implements SendTieContract.IView{
-    private String[] types ;
+public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implements SendTieContract.IView {
+    private String[] types;
     private SendTieContract.IPresenter presenter;
     private ArrayList<PlateInfo> plateInfos;
+    private PlateInfo plateInfo;
+    private UserPlateInfo userPlateInfo;
 
     @Override
     public int setContentView() {
@@ -36,19 +41,20 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implem
 
     @Override
     public void initData() {
-        PlateInfo plateInfo = getIntent().getParcelableExtra("plateInfo");
-        plateInfos = getIntent().getParcelableArrayListExtra("plateInfos");
-        types = new String[plateInfos.size()] ;
-        int defaultPlateInfo = 0 ;
-        for (int i = 0; i< plateInfos.size(); i++){
-            if(plateInfo.getId().equals( plateInfos.get(i).getId())){
-                defaultPlateInfo = i ;
+        plateInfo = getIntent().getParcelableExtra("plateInfo");
+        userPlateInfo = getIntent().getParcelableExtra("userPlateInfo");
+        plateInfos = userPlateInfo.getPlateInfos();
+        types = new String[plateInfos.size()];
+        int defaultPlateInfo = 0;
+        for (int i = 0; i < plateInfos.size(); i++) {
+            if (plateInfo.getId().equals(plateInfos.get(i).getId())) {
+                defaultPlateInfo = i;
             }
-            types[i] = plateInfos.get(i).getName() ;
+            types[i] = plateInfos.get(i).getName();
         }
         viewBinding.layoutTitle.setTitle("发布帖子");
         viewBinding.setPlateInfo(plateInfos.get(defaultPlateInfo));
-        presenter = new SendTiePresenter(this,context);
+        presenter = new SendTiePresenter(this, context);
     }
 
     @Override
@@ -68,8 +74,8 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implem
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s != null && s.toString().trim().length() >= 40){//不超过40个字符
-                    viewBinding.setTitle(s.toString().trim().substring(0,40));
+                if (s != null && s.toString().trim().length() >= 40) {//不超过40个字符
+                    viewBinding.setTitle(s.toString().trim().substring(0, 40));
                 }
             }
         });
@@ -78,12 +84,22 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implem
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
             case R.id.btn_send:
-                presenter.sendTie();
+                if (StringUtils.stringIsInteger(userPlateInfo.getJifen()) < StringUtils.stringIsInteger(viewBinding.getPlateInfo().getFangwen_jf())) {
+                    showMsg("没有访问所选板块的权限");
+                    return;
+                } else if ("2".equals(viewBinding.getPlateInfo().getLocked()) &&
+                        StringUtils.stringIsInteger(userPlateInfo.getJifen()) >
+                                StringUtils.stringIsInteger(viewBinding.getPlateInfo().getFatie_jf())) {
+                    presenter.sendTie();
+                }else{
+                    showShortToast("没有所选板块发帖的权限");
+                    return;
+                }
                 break;
             case R.id.tv_type:
                 DialogUtils.showSelectDialog(context, "请选择板块", types, new DialogUtils.ItemSelectedListener() {
@@ -113,7 +129,11 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implem
 
     @Override
     public void sendResult(boolean isSuccess) {
-        showShortToast("发帖成功");
+        if ("1".equals(plateInfo.getAudit())) {//1需要审核2不需要审核
+            showShortToast("操作成功，请等待审核");
+        } else {
+            showShortToast("发帖成功");
+        }
         viewBinding.setTitle("");
         viewBinding.setContent("");
     }
