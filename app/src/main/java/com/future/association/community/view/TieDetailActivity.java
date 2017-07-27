@@ -16,8 +16,8 @@ import com.future.association.common.GlideUtils;
 import com.future.association.common.MyApp;
 import com.future.association.community.adapter.TieReplyAdapter;
 import com.future.association.community.base.BaseActivity;
-import com.future.association.community.base.EndlessRecyclerOnScrollListener;
 import com.future.association.community.contract.TieDetailContract;
+import com.future.association.community.custom.CustomRecyclerView;
 import com.future.association.community.model.TieDetailInfo;
 import com.future.association.community.model.TieInfo;
 import com.future.association.community.model.TieReplyInfo;
@@ -28,7 +28,6 @@ import com.future.association.community.utils.Res;
 import com.future.association.databinding.ActivityTieDetailBinding;
 import com.future.association.databinding.LayoutTieReplyHeadBinding;
 import com.future.association.databinding.PopupTieBinding;
-import com.future.association.news.utils.GlideImageLoader;
 
 import java.util.ArrayList;
 
@@ -61,8 +60,6 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
             viewBinding.layoutTitle.ivTitleRightImg.
                     setImageDrawable(Res.getDrawableRes(R.drawable.ic_more, context));
         }
-        linearLayoutManager = new LinearLayoutManager(context);
-        viewBinding.rclReply.setLayoutManager(linearLayoutManager);
         popupView = inflater.inflate(R.layout.popup_tie, null);
         popupTieBinding = DataBindingUtil.bind(popupView);
 
@@ -113,7 +110,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public void initListener() {
-        viewBinding.rclReply.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
+        viewBinding.rclReply.setLoadMoreListener(new CustomRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore(int currentPage) {
                 TieDetailActivity.this.currentPage = currentPage ;
@@ -182,8 +179,10 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public void setData(ArrayList<TieReplyInfo> replyInfos) {
-        if(replyInfos != null){
+        viewBinding.rclReply.setLoading(false);
+        if(replyInfos != null && replyInfos.size() > 0){
             if(currentPage == 1){
+                viewBinding.rclReply.resetPage();
                 tieReplyInfos.clear();
             }
             tieReplyInfos.addAll(replyInfos);

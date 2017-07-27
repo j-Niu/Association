@@ -7,8 +7,8 @@ import android.view.View;
 import com.future.association.R;
 import com.future.association.community.adapter.NotifyDetailAdapter;
 import com.future.association.community.base.BaseActivity;
-import com.future.association.community.base.EndlessRecyclerOnScrollListener;
 import com.future.association.community.contract.NotifyDetailContract;
+import com.future.association.community.custom.CustomRecyclerView;
 import com.future.association.community.model.MsgDetailInfo;
 import com.future.association.community.model.MsgNotifyInfo;
 import com.future.association.community.model.NotifyReplyInfo;
@@ -40,8 +40,6 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
 
     @Override
     public void initView() {
-        linearLayoutManager = new LinearLayoutManager(context);
-        viewBinding.rclReply.setLayoutManager(linearLayoutManager);
         mHeadView = View.inflate(context, R.layout.layout_notify_reply_head,null);
         headBinding = DataBindingUtil.bind(mHeadView);
     }
@@ -61,7 +59,7 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
 
     @Override
     public void initListener() {
-        viewBinding.rclReply.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
+        viewBinding.rclReply.setLoadMoreListener(new CustomRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore(int currentPage) {
                 NotifyDetailActivity.this.currentPage = currentPage ;
@@ -85,8 +83,10 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
 
     @Override
     public void setData(ArrayList<NotifyReplyInfo> replyInfos) {
-        if(replyInfos != null){
+        viewBinding.rclReply.setLoading(false);
+        if(replyInfos != null && replyInfos.size() > 0){
             if(currentPage == 1){
+                viewBinding.rclReply.resetPage();
                 this.replyInfos.clear();
             }
             this.replyInfos.addAll(replyInfos);

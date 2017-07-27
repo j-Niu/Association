@@ -17,11 +17,10 @@
                 android:id="@+id/layout_title"
                 layout="@layout/layout_title" />
 
-            <android.support.v7.widget.RecyclerView
+            <com.future.association.community.custom.CustomRecyclerView
                 android:id="@+id/rcv_msg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:divider="@drawable/inset_recycle_item_divider"
                 android:scrollbars="none" />
         </LinearLayout>
 

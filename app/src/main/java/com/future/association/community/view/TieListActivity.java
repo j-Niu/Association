@@ -7,10 +7,8 @@ import android.view.View;
 import com.future.association.R;
 import com.future.association.community.adapter.TieListAdapter;
 import com.future.association.community.base.BaseActivity;
-import com.future.association.community.base.EndlessRecyclerOnScrollListener;
 import com.future.association.community.contract.TieListContract;
-import com.future.association.community.model.BannerInfo;
-import com.future.association.community.model.MsgNotifyInfo;
+import com.future.association.community.custom.CustomRecyclerView;
 import com.future.association.community.model.PlateInfo;
 import com.future.association.community.model.TieInfo;
 import com.future.association.community.presenter.TieListPresenter;
@@ -62,7 +60,7 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
 
     @Override
     public void initListener() {
-        viewBinding.rcvTie.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
+        viewBinding.rcvTie.setLoadMoreListener(new CustomRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore(int currentPage) {
                 TieListActivity.this.currentPage = currentPage ;
@@ -94,11 +92,15 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
 
     @Override
     public void setData(ArrayList<TieInfo> tieInfos) {
-        if(currentPage == 1){
-            this.tieInfos.clear();
+        if(tieInfos != null && tieInfos.size() > 0){
+            if (currentPage == 1) {
+                this.tieInfos.clear();
+                viewBinding.rcvTie.resetPage();
+            }
+            this.tieInfos.addAll(tieInfos);
+            adapter.notifyDataSetChanged();
         }
-        this.tieInfos.addAll(tieInfos);
-        adapter.notifyDataSetChanged();
+        viewBinding.rcvTie.setLoading(false);
     }
 
     @Override

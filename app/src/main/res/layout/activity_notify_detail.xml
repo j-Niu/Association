@@ -20,7 +20,7 @@
         <include layout="@layout/layout_title"
             android:id="@+id/layout_title"
             />
-        <android.support.v7.widget.RecyclerView
+        <com.future.association.community.custom.CustomRecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
