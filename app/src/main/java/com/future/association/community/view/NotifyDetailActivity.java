@@ -31,7 +31,7 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
     private MsgNotifyInfo notifyInfo;
     private View mHeadView;
     private LayoutNotifyReplyHeadBinding headBinding;
-    private int currentPage = 1 ;
+    private int currentPage = 1;
 
     @Override
     public int setContentView() {
@@ -40,7 +40,7 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
 
     @Override
     public void initView() {
-        mHeadView = View.inflate(context, R.layout.layout_notify_reply_head,null);
+        mHeadView = View.inflate(context, R.layout.layout_notify_reply_head, null);
         headBinding = DataBindingUtil.bind(mHeadView);
     }
 
@@ -62,7 +62,7 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
         viewBinding.rclReply.setLoadMoreListener(new CustomRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore(int currentPage) {
-                NotifyDetailActivity.this.currentPage = currentPage ;
+                NotifyDetailActivity.this.currentPage = currentPage;
                 presenter.getData(currentPage);
             }
         });
@@ -84,13 +84,15 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
     @Override
     public void setData(ArrayList<NotifyReplyInfo> replyInfos) {
         viewBinding.rclReply.setLoading(false);
-        if(replyInfos != null && replyInfos.size() > 0){
-            if(currentPage == 1){
-                viewBinding.rclReply.resetPage();
+        if (replyInfos != null && replyInfos.size() > 0) {
+            if (currentPage == 1) {
+                viewBinding.rclReply.setPage(1);
                 this.replyInfos.clear();
             }
             this.replyInfos.addAll(replyInfos);
             adapter.notifyDataSetChanged();
+        } else {
+            viewBinding.rclReply.setPage(currentPage-1);
         }
     }
 
@@ -112,11 +114,11 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
     }
 
     @Override
-    public void talkReult( NotifyReplyInfo replyInfo) {
+    public void talkReult(NotifyReplyInfo replyInfo) {
         viewBinding.setTalkContent("");
 //        this.replyInfos.add(replyInfo);
         adapter.notifyDataSetChanged();
-        currentPage = 1 ;
+        currentPage = 1;
         presenter.getData(currentPage);
 //        viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行
         showShortToast("评论成功");

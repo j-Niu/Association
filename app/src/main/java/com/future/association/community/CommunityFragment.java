@@ -135,10 +135,12 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
         if (notifyInfos != null && notifyInfos.size() > 0) {
             if (currentPage == 1) {
                 this.notifyInfos.clear();
-                viewBinding.rcvMsg.resetPage();
+                viewBinding.rcvMsg.setPage(1);
             }
             this.notifyInfos.addAll(notifyInfos);
             notifyAdapter.notifyDataSetChanged();
+        }else{
+            viewBinding.rcvMsg.setPage(currentPage-1);
         }
     }
 

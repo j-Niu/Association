@@ -16,8 +16,8 @@ public class CustomRecyclerView extends RecyclerView {
     private boolean isLoading = true ;
     private int currentPage = 1;
 
-    public void resetPage(){
-        currentPage = 1 ;
+    public void setPage(int page){
+        currentPage = page ;
     }
     public void setLoading(boolean loading) {
         isLoading = loading;

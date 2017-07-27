@@ -28,7 +28,8 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
     private TieListContract.IPresenter presenter;
     private LinearLayoutManager linearLayoutManager;
     private PlateInfo plateInfo;
-    private int currentPage = 1 ;//当前页
+    private int currentPage = 1;//当前页
+
     @Override
     public int setContentView() {
         return R.layout.activity_banner;
@@ -43,7 +44,7 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
     @Override
     protected void onResume() {
         super.onResume();
-        currentPage = 1 ;
+        currentPage = 1;
         presenter.getData(currentPage);
     }
 
@@ -63,7 +64,7 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
         viewBinding.rcvTie.setLoadMoreListener(new CustomRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore(int currentPage) {
-                TieListActivity.this.currentPage = currentPage ;
+                TieListActivity.this.currentPage = currentPage;
                 presenter.getData(currentPage);
             }
         });
@@ -71,9 +72,9 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
         adapter.setItemClickListener(new TieListAdapter.OnItemClickListener() {
             @Override
             public void itemClick(int position) {
-                Bundle bundle = new Bundle() ;
-                bundle.putParcelable("tieInfo",tieInfos.get(position));
-                ActivityUtils.startActivityIntent(context, TieDetailActivity.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("tieInfo", tieInfos.get(position));
+                ActivityUtils.startActivityIntent(context, TieDetailActivity.class, bundle);
             }
         });
     }
@@ -85,20 +86,22 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
                 finish();
                 break;
             case R.id.iv_title_right_tv:
-                ActivityUtils.startActivityIntent(context, SendTieActivity.class,getIntent().getExtras());
+                ActivityUtils.startActivityIntent(context, SendTieActivity.class, getIntent().getExtras());
                 break;
         }
     }
 
     @Override
     public void setData(ArrayList<TieInfo> tieInfos) {
-        if(tieInfos != null && tieInfos.size() > 0){
+        if (tieInfos != null && tieInfos.size() > 0) {
             if (currentPage == 1) {
                 this.tieInfos.clear();
-                viewBinding.rcvTie.resetPage();
+                viewBinding.rcvTie.setPage(1);
             }
             this.tieInfos.addAll(tieInfos);
             adapter.notifyDataSetChanged();
+        } else {
+            viewBinding.rcvTie.setPage(currentPage-1);
         }
         viewBinding.rcvTie.setLoading(false);
     }
@@ -107,8 +110,8 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
     public String getPlateId() {
         if (plateInfo != null) {
             return plateInfo.getId();
-        }else{
-            return "" ;
+        } else {
+            return "";
         }
     }
 

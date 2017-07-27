@@ -44,10 +44,10 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     private TieDetailContract.IPresenter presenter;
     private LinearLayoutManager linearLayoutManager;
     private TieInfo tieInfo;
-    private int delReplyPosition ;
+    private int delReplyPosition;
     private LayoutTieReplyHeadBinding headBinding;
     private View mHeadView;
-    private int currentPage = 1 ;
+    private int currentPage = 1;
 
     @Override
     public int setContentView() {
@@ -56,31 +56,31 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public void initView() {
-        if(MyApp.isAdministrator()){
+        if (MyApp.isAdministrator()) {
             viewBinding.layoutTitle.ivTitleRightImg.
                     setImageDrawable(Res.getDrawableRes(R.drawable.ic_more, context));
         }
         popupView = inflater.inflate(R.layout.popup_tie, null);
         popupTieBinding = DataBindingUtil.bind(popupView);
 
-        mHeadView = View.inflate(context, R.layout.layout_tie_reply_head,null);
+        mHeadView = View.inflate(context, R.layout.layout_tie_reply_head, null);
         headBinding = DataBindingUtil.bind(mHeadView);
     }
 
     @Override
     public void initData() {
         tieInfo = getIntent().getParcelableExtra("tieInfo");
-        if("1".equals(tieInfo.getType())){
+        if ("1".equals(tieInfo.getType())) {
             popupTieBinding.setIsTop("取消置顶");
-        }else{
-            popupTieBinding.setIsTop("置顶") ;
+        } else {
+            popupTieBinding.setIsTop("置顶");
         }
         tieReplyInfos = new ArrayList<>();
         viewBinding.layoutTitle.setTitle("帖子详情");
         adapter = new TieReplyAdapter(context, tieReplyInfos);
         adapter.setmHeadView(mHeadView);
         viewBinding.rclReply.setAdapter(adapter);
-        presenter = new TieDetailPresenter(this,context);
+        presenter = new TieDetailPresenter(this, context);
         presenter.getData(currentPage);
         presenter.getTieDetail();
     }
@@ -113,7 +113,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         viewBinding.rclReply.setLoadMoreListener(new CustomRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore(int currentPage) {
-                TieDetailActivity.this.currentPage = currentPage ;
+                TieDetailActivity.this.currentPage = currentPage;
                 presenter.getData(currentPage);
             }
         });
@@ -123,16 +123,16 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         adapter.setCallback(new TieReplyAdapter.Callback() {
             @Override
             public void delReply(int position) {
-                delReplyPosition = position ;
+                delReplyPosition = position;
                 presenter.delTieReply();
             }
 
             @Override
             public void weigui(int position) {
-                Bundle bundle = new Bundle() ;
-                bundle.putString("tieId",tieInfo.getId());
-                bundle.putString("id",adapter.tieReplyInfos.get(position).getId());
-                ActivityUtils.startActivityIntent(context, WeiGuiActivity.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString("tieId", tieInfo.getId());
+                bundle.putString("id", adapter.tieReplyInfos.get(position).getId());
+                ActivityUtils.startActivityIntent(context, WeiGuiActivity.class, bundle);
             }
         });
     }
@@ -166,10 +166,10 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
                 break;
             case R.id.tv_weigui:
                 popupWindow.dismiss();
-                Bundle bundle = new Bundle() ;
-                bundle.putString("tieId",tieInfo.getId());
-                bundle.putString("id","");
-                ActivityUtils.startActivityIntent(context, WeiGuiActivity.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString("tieId", tieInfo.getId());
+                bundle.putString("id", "");
+                ActivityUtils.startActivityIntent(context, WeiGuiActivity.class, bundle);
                 break;
             case R.id.tv_send:
                 presenter.sendReply();//发送回复
@@ -180,13 +180,15 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     @Override
     public void setData(ArrayList<TieReplyInfo> replyInfos) {
         viewBinding.rclReply.setLoading(false);
-        if(replyInfos != null && replyInfos.size() > 0){
-            if(currentPage == 1){
-                viewBinding.rclReply.resetPage();
+        if (replyInfos != null && replyInfos.size() > 0) {
+            if (currentPage == 1) {
+                viewBinding.rclReply.setPage(1);
                 tieReplyInfos.clear();
             }
             tieReplyInfos.addAll(replyInfos);
             adapter.notifyDataSetChanged();
+        } else {
+            viewBinding.rclReply.setPage(currentPage-1);
         }
     }
 
@@ -197,12 +199,12 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public void setTieDetail(TieDetailInfo detailInfo) {
-        if(detailInfo != null){
+        if (detailInfo != null) {
             headBinding.setTieDetailInfo(detailInfo);
             Glide.with(context)
                     .load(detailInfo.getAvatar_url())
                     .apply(GlideUtils.defaultImg())
-                    .into(headBinding.civHead) ;
+                    .into(headBinding.civHead);
         }
     }
 
@@ -211,7 +213,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         viewBinding.setReplyContent("");
 //        this.tieReplyInfos.add(replyInfo);
         adapter.notifyDataSetChanged();
-        currentPage = 1 ;
+        currentPage = 1;
         presenter.getData(currentPage);
 //        viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行
         showShortToast("评论成功");
@@ -229,30 +231,30 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public void delTieResult(boolean result) {
-        if(result){
+        if (result) {
             showShortToast("删除帖子成功");
-            finish() ;
+            finish();
         }
     }
 
     @Override
     public void delTieReplyResult(boolean result) {
-        if(result){
-            adapter.notifyItemRemoved(delReplyPosition+1);
-            adapter.tieReplyInfos.remove(delReplyPosition) ;
+        if (result) {
+            adapter.notifyItemRemoved(delReplyPosition + 1);
+            adapter.tieReplyInfos.remove(delReplyPosition);
             showShortToast("删除回复成功");
         }
     }
 
     @Override
     public void topTieResult(boolean result) {
-        if(result){
+        if (result) {
             showShortToast("操作成功");
             TieDetailInfo detailInfo = headBinding.getTieDetailInfo();
-            if("1".equals(getTieType())){
+            if ("1".equals(getTieType())) {
                 popupTieBinding.setIsTop("置顶");
                 detailInfo.setType("2");
-            }else{
+            } else {
                 popupTieBinding.setIsTop("取消置顶");
                 detailInfo.setType("1");
             }
