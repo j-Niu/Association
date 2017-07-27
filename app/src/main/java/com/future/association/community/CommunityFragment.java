@@ -65,6 +65,9 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
         super.onResume();
         currentPage = 1;
         presenter.getData(currentPage);
+        if(adapter.datas.size() == 0){
+            presenter.getPlateList();
+        }
     }
 
     @Override
@@ -92,7 +95,6 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
         viewBinding.rcvMsg.setAdapter(notifyAdapter);
 
         presenter = new CommunityPresenter(this, getContext());
-        presenter.getPlateList();
     }
 
     public void initListener() {
@@ -146,8 +148,10 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
 
     @Override
     public void setPlateList(ArrayList<PlateInfo> plateInfos) {
-        adapter.datas.addAll(plateInfos);
-        adapter.notifyDataSetChanged();
+        if(plateInfos != null){
+            adapter.datas.addAll(plateInfos);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
