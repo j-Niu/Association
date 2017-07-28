@@ -93,11 +93,13 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
                 finish();
                 break;
             case R.id.iv_title_right_tv:
-                if ("2".equals(plateInfo.getLocked()) && StringUtils.stringIsInteger(userPlateInfo.getJifen()) > StringUtils.stringIsInteger(plateInfo.getFatie_jf())) {
+                if("2".equals(plateInfo.getIspost())){
+                    showMsg("该板块只有版主才能发帖");
+                }else if (StringUtils.stringIsInteger(userPlateInfo.getJifen()) >
+                                StringUtils.stringIsInteger(plateInfo.getFatie_jf())) {
                     ActivityUtils.startActivityIntent(context, SendTieActivity.class, getIntent().getExtras());
                 } else {
-                    showShortToast("没有发帖权限");
-                    return;
+                    showShortToast("积分不够不能发帖");
                 }
                 break;
         }

@@ -81,6 +81,7 @@ public class CommunityRequest {
         TreeMap<String,String> params = new TreeMap<>() ;
         params.put("apiCode",RequestConfig.CODE_TIE_LIST) ;
         params.put("page",page+"") ;
+        params.put("userToken",MyApp.getUserToken()) ;
         params.put("size", ConstantUtil.PAGE_SIZE) ;
         params.put("id",id) ;
         requestData(context,params,new DataResponse<TieInfo>().init(TieInfo.class),listener);

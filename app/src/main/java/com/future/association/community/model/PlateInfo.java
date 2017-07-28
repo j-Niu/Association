@@ -14,6 +14,7 @@ import org.json.JSONObject;
 public class PlateInfo implements Parcelable{
 
     private String id ;
+    private String ispost ;
     private String audit ;
     private String locked ;
     private String fatie_jf ;
@@ -28,6 +29,7 @@ public class PlateInfo implements Parcelable{
 
     protected PlateInfo(Parcel in) {
         id = in.readString();
+        ispost = in.readString();
         audit = in.readString();
         locked = in.readString();
         fatie_jf = in.readString();
@@ -113,6 +115,14 @@ public class PlateInfo implements Parcelable{
         this.fangwen_jf = fangwen_jf;
     }
 
+    public String getIspost() {
+        return ispost;
+    }
+
+    public void setIspost(String ispost) {
+        this.ispost = ispost;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -121,6 +131,7 @@ public class PlateInfo implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
+        dest.writeString(ispost);
         dest.writeString(audit);
         dest.writeString(locked);
         dest.writeString(fatie_jf);

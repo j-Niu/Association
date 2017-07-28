@@ -117,7 +117,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
                 Class target = null;
                 if (position < 5) {
                     if(StringUtils.stringIsInteger(CommunityFragment.this.plateInfo.getJifen()) < StringUtils.stringIsInteger(plateInfo.getFangwen_jf())){
-                        showMsg("没有访问该板块的权限");
+                        showMsg("积分不够不能访问该版块");
                         return ;
                     }
                     target = TieListActivity.class;

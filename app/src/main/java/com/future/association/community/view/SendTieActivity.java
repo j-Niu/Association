@@ -11,6 +11,7 @@ import com.future.association.community.contract.SendTieContract;
 import com.future.association.community.model.PlateInfo;
 import com.future.association.community.model.UserPlateInfo;
 import com.future.association.community.presenter.SendTiePresenter;
+import com.future.association.community.utils.ActivityUtils;
 import com.future.association.community.utils.DialogUtils;
 import com.future.association.community.utils.StringUtils;
 import com.future.association.databinding.ActivitySendTieBinding;
@@ -89,15 +90,16 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implem
                 finish();
                 break;
             case R.id.btn_send:
+
                 if (StringUtils.stringIsInteger(userPlateInfo.getJifen()) < StringUtils.stringIsInteger(viewBinding.getPlateInfo().getFangwen_jf())) {
-                    showMsg("没有访问所选板块的权限");
-                    return;
-                } else if ("2".equals(viewBinding.getPlateInfo().getLocked()) &&
-                        StringUtils.stringIsInteger(userPlateInfo.getJifen()) >
+                    showMsg("积分不够不能访问所选板块");
+                } else if ("2".equals(viewBinding.getPlateInfo().getIspost()) ){
+                    showMsg("所选板块只有版主才能发帖");
+                }else if(StringUtils.stringIsInteger(userPlateInfo.getJifen()) >
                                 StringUtils.stringIsInteger(viewBinding.getPlateInfo().getFatie_jf())) {
                     presenter.sendTie();
                 }else{
-                    showShortToast("没有所选板块发帖的权限");
+                    showShortToast("积分不够不能再所选板块发帖");
                     return;
                 }
                 break;

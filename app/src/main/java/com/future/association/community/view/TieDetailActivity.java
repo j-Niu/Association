@@ -181,7 +181,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
                 break;
             case R.id.tv_send:
                 if(StringUtils.stringIsInteger(jifen) < StringUtils.stringIsInteger(plateInfo.getHuifu_jf())){
-                    showShortToast("没有回复权限");
+                    showShortToast("积分不够不能回复");
                     return ;
                 }
                 presenter.sendReply();//发送回复
@@ -223,11 +223,9 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     @Override
     public void replyResult(TieReplyInfo replyInfo) {
         viewBinding.setReplyContent("");
-//        this.tieReplyInfos.add(replyInfo);
         adapter.notifyDataSetChanged();
         currentPage = 1;
         presenter.getData(currentPage);
-//        viewBinding.rclReply.scrollToPosition(adapter.getItemCount() - 1);//列表滑到最后一行
         showShortToast("评论成功");
     }
 
