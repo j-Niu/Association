@@ -69,9 +69,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
         super.onResume();
         currentPage = 1;
         presenter.getData(currentPage);
-        if (adapter.datas.size() == 0) {
-            presenter.getPlateList();
-        }
+        presenter.getPlateList();
     }
 
     @Override
@@ -116,9 +114,9 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
                 Bundle bundle = new Bundle();
                 Class target = null;
                 if (position < 5) {
-                    if(StringUtils.stringIsInteger(CommunityFragment.this.plateInfo.getJifen()) < StringUtils.stringIsInteger(plateInfo.getFangwen_jf())){
+                    if (StringUtils.stringIsInteger(CommunityFragment.this.plateInfo.getJifen()) < StringUtils.stringIsInteger(plateInfo.getFangwen_jf())) {
                         showMsg("积分不够不能访问该版块");
-                        return ;
+                        return;
                     }
                     target = TieListActivity.class;
                     bundle.putParcelable("plateInfo", plateInfo);
@@ -157,7 +155,8 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
     @Override
     public void setPlateList(UserPlateInfo plateInfo) {
         this.plateInfo = plateInfo;
-        if (plateInfo != null && plateInfo.getPlateInfos() != null) {
+        if (plateInfo != null && plateInfo.getPlateInfos() != null && plateInfo.getPlateInfos().size() > 0) {
+            adapter.datas.clear();
             adapter.datas.addAll(plateInfo.getPlateInfos());
             adapter.notifyDataSetChanged();
         }
