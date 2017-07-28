@@ -2,6 +2,7 @@ package com.future.association.login;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 
 import com.future.association.R;
 import com.future.association.common.MyApp;
@@ -21,6 +22,12 @@ public class RegisterSuccessActivity extends UBaseActivity {
     @Override
     protected void initView() {
         setTitle("注册");
+        setTitleLeft(R.drawable.nav_back, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
