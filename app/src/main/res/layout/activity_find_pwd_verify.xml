@@ -92,6 +92,7 @@
                     android:background="@null"
                     android:inputType="number"
                     android:textColorHint="#999999"
+                    android:hint="请输入验证码"
                     android:text="@={findPwdVerifyViewModel.smsCode}"
                     android:textSize="30px" />
 

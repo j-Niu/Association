@@ -88,6 +88,7 @@
                     android:layout_toRightOf="@id/register_title_verify"
                     android:background="@null"
                     android:inputType="number"
+                    android:hint="请输入验证码"
                     android:text="@={registerViewModel.smsCode}"
                     android:textColorHint="#999999"
                     android:textSize="30px" />

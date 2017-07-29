@@ -26,6 +26,7 @@ import com.future.association.databinding.DialogLoginProtectBinding;
 import com.future.association.login.FindPwdResetActivity;
 import com.future.association.login.FindPwdVerifyActivity;
 import com.future.association.login.LoginActivity;
+import com.future.association.login.PerfectInformationActivity;
 import com.future.association.login.RegisterActivity;
 import com.future.association.login.UserApi;
 import com.future.association.login.bean.UserResponse;
@@ -48,6 +49,7 @@ import io.reactivex.functions.Consumer;
 
 import static com.future.association.login.util.CommonUtil.mobilePattern;
 import static com.future.association.login.util.CommonUtil.passwordPattern;
+import static com.future.association.login.util.CommonUtil.startActivity;
 import static com.future.association.login.util.CommonUtil.verifyPattern;
 
 /**
@@ -106,7 +108,7 @@ public class LoginViewModel {
                                                 CommonUtil.storeLoginMsg(activity, response);
                                                 //跳转到主页
                                                 CommonUtil.startActivity(activity, MainActivity.class);
-                                                 activity.finish();
+                                                activity.finish();
                                             }
                                             activity.dissmissLoadingDialog();
                                         }
@@ -115,6 +117,8 @@ public class LoginViewModel {
                                         public void onFail(String message) {
                                             if (CommonUtil.isNumeric(message)) {
                                                 showErrorDialog(message);
+                                            } else if (message.equals("用户审核未通过，请重新申请")) {
+                                                startActivity(activity, PerfectInformationActivity.class);
                                             } else {
                                                 activity.toast.show("" + message);
                                             }
