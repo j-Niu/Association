@@ -1,6 +1,7 @@
 package com.future.association.personal.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import com.future.association.R;
 import com.future.association.personal.entity.MyJianDu;
+import com.future.association.supervice.view.SuperviceDetailActivity;
+import com.future.baselib.utils.CommonUtils;
 
 import java.util.List;
 
@@ -38,6 +41,12 @@ public class JianDuAdapter extends BaseListAdapter {
         holder.tvMyJDType.setText(entity.type);
         holder.tvMyJDAddress.setText(entity.address);
         holder.tvMyJDContent.setText(entity.reason);
+        //跳往详情页面
+        if (!CommonUtils.isFastDoubleClick()) {
+            Intent intent = new Intent(mContext, SuperviceDetailActivity.class);
+            intent.putExtra("id", entity.id);
+            mContext.startActivity(intent);
+        }
     }
 
     protected class ViewHolder {
