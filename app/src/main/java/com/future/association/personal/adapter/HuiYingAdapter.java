@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.future.association.R;
-import com.future.association.personal.entity.BeanMyResponse;
+import com.future.association.personal.entity.MyResponse;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class HuiYingAdapter extends BaseListAdapter {
 
-    public HuiYingAdapter(Context mContext, List mList, LayoutInflater mInflater) {
+    public HuiYingAdapter(Context mContext, List<MyResponse.MyResponses> mList, LayoutInflater mInflater) {
         super(mContext, mList, mInflater);
     }
 
@@ -26,15 +26,14 @@ public class HuiYingAdapter extends BaseListAdapter {
             convertView = mInflater.inflate(R.layout.item_my_response, parent, false);
             convertView.setTag(new ViewHolder(convertView));
         }
-        initializeViews((BeanMyResponse) getItem(position), (ViewHolder) convertView.getTag());
+        initializeViews((MyResponse.MyResponses) getItem(position), (ViewHolder) convertView.getTag());
         return convertView;
     }
 
-    private void initializeViews(BeanMyResponse item, ViewHolder holder) {
-
-        holder.tvMyTitle.setText(item.getTitle());
-        holder.tvMyHYBelong.setText(item.getBelongTo());
-        holder.tvMyHYTime.setText(item.getTime());
+    private void initializeViews(MyResponse.MyResponses item, ViewHolder holder) {
+        holder.tvMyTitle.setText(item.title);
+        holder.tvMyHYBelong.setText(item.name);
+        holder.tvMyHYTime.setText(item.create_time);
     }
 
     protected class ViewHolder {

@@ -3,11 +3,14 @@ package com.future.association.personal.ui.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.future.association.R;
+import com.future.association.personal.PersonConstant;
 import com.future.association.personal.adapter.JianDuAdapter;
-import com.future.association.personal.entity.BeanJiandu;
+import com.future.association.personal.entity.MyJianDu;
 import com.future.baselib.activity.BaseActivity;
+import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.StatusUtils;
 
 import java.util.ArrayList;
@@ -17,8 +20,9 @@ public class MyJianDuActivity extends BaseActivity {
 
     private ListView lvMyJiandu;
     private JianDuAdapter jianDuAdapter;
-    private List<BeanJiandu> jianduList = new ArrayList<>();
-private String imgUrl="http://img2.3lian.com/2014/f2/37/d/40.jpg";
+    private List<MyJianDu.MyJianDus> jianduList = new ArrayList<>();
+    private String imgUrl = "http://img2.3lian.com/2014/f2/37/d/40.jpg";
+
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         StatusUtils.setStatusbarColor(this, getResources().getColor(R.color.colorPrimary));
@@ -35,18 +39,34 @@ private String imgUrl="http://img2.3lian.com/2014/f2/37/d/40.jpg";
             }
         });
         lvMyJiandu = (ListView) findViewById(R.id.lvMyJiandu);
-        BeanJiandu beanJiandu = null;
-        for (int i = 0; i < 10; i++) {
-            beanJiandu = new BeanJiandu(imgUrl, getString(R.string.mystr1), getString(R.string.mystr2), getString(R.string.mystr3)
-                    , getString(R.string.mystr4), getString(R.string.mystr5));
-            jianduList.add(beanJiandu);
-        }
-        if (jianDuAdapter == null) {
-            jianDuAdapter = new JianDuAdapter(this, jianduList, getLayoutInflater());
-            lvMyJiandu.setAdapter(jianDuAdapter);
-        } else {
-            jianDuAdapter.notifyDataSetChanged();
-        }
+        new HttpRequest<MyJianDu>()
+                .with(this)
+                .addParam("apiCode", PersonConstant.MY_JIANDU_LINSHI)
+                //.addParam("userToken", MyApp.getUserToken())
+                .addParam("page", "1")
+                .addParam("size", PersonConstant.PAGE_SIZE_DEFAULT)
+//                .addParam("id", id)
+                .setListener(new HttpRequest.OnNetworkListener<MyJianDu>() {
+                    @Override
+                    public void onSuccess(MyJianDu response) {
+                        MyJianDu.MyJianDus myJianDus = response.myInfos;
+                        if (response.myInfos == null) return;
+                        jianduList.add(myJianDus);
+                        if (jianDuAdapter == null) {
+                            jianDuAdapter = new JianDuAdapter(MyJianDuActivity.this, jianduList, getLayoutInflater());
+                            lvMyJiandu.setAdapter(jianDuAdapter);
+                        } else {
+                            jianDuAdapter.notifyDataSetChanged();
+                        }
+                        Toast.makeText(MyJianDuActivity.this, "JIANDU...", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFail(String message) {
+                        toast("错误信息：" + message);
+                    }
+                }).start(new MyJianDu());
+
     }
 
     @Override

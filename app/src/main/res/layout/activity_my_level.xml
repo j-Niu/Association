@@ -33,6 +33,7 @@
             android:paddingTop="@dimen/padding_small_15">
 
             <TextView
+                android:id="@+id/tvMyLevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="当前等级"
@@ -40,6 +41,7 @@
                 android:textSize="@dimen/text_size_normal_16" />
 
             <TextView
+                android:id="@+id/tvMyChenghao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_lsmall_10"
@@ -48,6 +50,7 @@
                 android:textSize="@dimen/text_size_normal_16" />
 
             <TextView
+                android:id="@+id/tvMyLevelOth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_lsmall_10"
@@ -56,6 +59,7 @@
                 android:textSize="@dimen/text_size_normal_16" />
 
             <TextView
+                android:id="@+id/tvMyDiffNextLevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_lsmall_10"
@@ -157,6 +161,7 @@
                 android:background="@color/color_dcdcdc" />
 
             <TextView
+                android:id="@+id/tvMyOrg1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -201,6 +206,7 @@
                 android:background="@color/color_dcdcdc" />
 
             <TextView
+                android:id="@+id/tvMyOrg2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -327,6 +333,7 @@
                 android:background="@color/color_dcdcdc" />
 
             <TextView
+                android:id="@+id/tvMyZy1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -340,6 +347,7 @@
                 android:background="@color/color_dcdcdc" />
 
             <TextView
+                android:id="@+id/tvMyOrg3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -386,6 +394,7 @@
                 android:background="@color/color_dcdcdc" />
 
             <TextView
+                android:id="@+id/tvMyZy2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -399,6 +408,7 @@
                 android:background="@color/color_dcdcdc" />
 
             <TextView
+                android:id="@+id/tvMyOrg4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

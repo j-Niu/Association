@@ -8,7 +8,6 @@ import com.future.association.R;
 import com.future.association.common.MyApp;
 import com.future.association.personal.PersonConstant;
 import com.future.association.personal.adapter.NoticeAdapter;
-import com.future.association.personal.entity.BeanNotice;
 import com.future.association.personal.entity.MyNotice;
 import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.utils.HttpRequest;
@@ -19,7 +18,7 @@ import java.util.List;
 
 public class MyNoticeActivity extends BaseActivity {
     private ListView lvMyNotice;
-    private List<BeanNotice> noticeList = new ArrayList<>();
+    private List<MyNotice.MyNotices> noticeList = new ArrayList<>();
     private NoticeAdapter noticeAdapter;
 
     @Override
@@ -38,32 +37,26 @@ public class MyNoticeActivity extends BaseActivity {
             }
         });
         lvMyNotice = (ListView) findViewById(R.id.lvMyNotice);
-        BeanNotice notice;
-        for (int i = 0; i < 10; i++) {
-            notice = new BeanNotice(getString(R.string.myHY1),
-                    getString(R.string.myHY2), getString(R.string.myHY3));
-            noticeList.add(notice);
-        }
-        if (noticeAdapter == null) {
-            noticeAdapter = new NoticeAdapter(this, noticeList, getLayoutInflater());
-            lvMyNotice.setAdapter(noticeAdapter);
-        } else {
-            noticeAdapter.notifyDataSetChanged();
-        }
-
-
 
         new HttpRequest<MyNotice>()
                 .with(this)
                 .addParam("apiCode", PersonConstant.MY_NOTICE)
                 .addParam("userToken", MyApp.getUserToken())
-                .addParam("page", "2")
+                .addParam("page", "1")
                 .addParam("size", PersonConstant.PAGE_SIZE_DEFAULT)
 //                .addParam("id", id)
                 .setListener(new HttpRequest.OnNetworkListener<MyNotice>() {
                     @Override
                     public void onSuccess(MyNotice response) {
-
+                        MyNotice.MyNotices myNotices = response.myInfos;
+                        if (myNotices == null) return;
+                        noticeList.add(myNotices);
+                        if (noticeAdapter == null) {
+                            noticeAdapter = new NoticeAdapter(MyNoticeActivity.this, noticeList, getLayoutInflater());
+                            lvMyNotice.setAdapter(noticeAdapter);
+                        } else {
+                            noticeAdapter.notifyDataSetChanged();
+                        }
                     }
 
                     @Override

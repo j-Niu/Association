@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.future.association.R;
-import com.future.association.personal.entity.BeanJiandu;
+import com.future.association.personal.entity.MyJianDu;
 
 import java.util.List;
 
@@ -26,18 +26,18 @@ public class JianDuAdapter extends BaseListAdapter {
             convertView = mInflater.inflate(R.layout.item_my_jiandu, null);
             convertView.setTag(new ViewHolder(convertView));
         }
-        initializeViews((BeanJiandu) getItem(position), (ViewHolder) convertView.getTag());
+        initializeViews((MyJianDu.MyJianDus) getItem(position), (ViewHolder) convertView.getTag());
         return convertView;
     }
 
-    private void initializeViews(BeanJiandu entity, ViewHolder holder) {
+    private void initializeViews(MyJianDu.MyJianDus entity, ViewHolder holder) {
 //        Glide.with(mContext).load(entity.getImgUrl()).crossFade().into(holder.imgMyJD);
         holder.imgMyJD.setImageResource(R.drawable.ic_birds);
-        holder.tvMyJDTitle.setText(entity.getTitle());
-        holder.tvMyJDCreatetime.setText(entity.getCreateTime());
-        holder.tvMyJDType.setText(entity.getType());
-        holder.tvMyJDAddress.setText(entity.getLocation());
-        holder.tvMyJDContent.setText(entity.getContent());
+        holder.tvMyJDTitle.setText(entity.title);
+        holder.tvMyJDCreatetime.setText(entity.create_time);
+        holder.tvMyJDType.setText(entity.type);
+        holder.tvMyJDAddress.setText(entity.address);
+        holder.tvMyJDContent.setText(entity.reason);
     }
 
     protected class ViewHolder {

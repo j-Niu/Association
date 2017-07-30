@@ -8,7 +8,6 @@ import com.future.association.R;
 import com.future.association.common.MyApp;
 import com.future.association.personal.PersonConstant;
 import com.future.association.personal.adapter.TongzhiAdapter;
-import com.future.association.personal.entity.BeanTongzhi;
 import com.future.association.personal.entity.MyNotification;
 import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.utils.HttpRequest;
@@ -19,7 +18,7 @@ import java.util.List;
 
 public class MyTongZhiActivity extends BaseActivity {
     private ListView lvMyTongzhi;
-    private List<BeanTongzhi> tongzhiList = new ArrayList<>();
+    private List<MyNotification.MyNotifications> tongzhiList = new ArrayList<>();
     private TongzhiAdapter tongzhiAdapter;
 
     @Override
@@ -38,32 +37,26 @@ public class MyTongZhiActivity extends BaseActivity {
             }
         });
         lvMyTongzhi = (ListView) findViewById(R.id.lvMyTongzhi);
-        BeanTongzhi tongzhi;
-        for (int i = 0; i < 10; i++) {
-            tongzhi = new BeanTongzhi(getString(R.string.myTZ1),
-                    getString(R.string.myTZ2));
-            tongzhiList.add(tongzhi);
-        }
-        if (tongzhiAdapter == null) {
-            tongzhiAdapter = new TongzhiAdapter(this, tongzhiList, getLayoutInflater());
-            lvMyTongzhi.setAdapter(tongzhiAdapter);
-        } else {
-            tongzhiAdapter.notifyDataSetChanged();
-        }
-
-
 
         new HttpRequest<MyNotification>()
                 .with(this)
                 .addParam("apiCode", PersonConstant.MY_NOTIFICATION)
                 .addParam("userToken", MyApp.getUserToken())
-                .addParam("page", "2")
+                .addParam("page", "1")
                 .addParam("size", PersonConstant.PAGE_SIZE_DEFAULT)
 //                .addParam("id", id)
                 .setListener(new HttpRequest.OnNetworkListener<MyNotification>() {
                     @Override
                     public void onSuccess(MyNotification response) {
-
+                        MyNotification.MyNotifications myNotifications=response.myInfos;
+                        if(myNotifications==null)return;
+                            tongzhiList.add(myNotifications);
+                        if (tongzhiAdapter == null) {
+                            tongzhiAdapter = new TongzhiAdapter(MyTongZhiActivity.this, tongzhiList, getLayoutInflater());
+                            lvMyTongzhi.setAdapter(tongzhiAdapter);
+                        } else {
+                            tongzhiAdapter.notifyDataSetChanged();
+                        }
                     }
 
                     @Override

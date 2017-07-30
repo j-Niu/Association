@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.future.association.R;
-import com.future.association.personal.entity.BeanTongzhi;
+import com.future.association.personal.entity.MyNotification;
 
 import java.util.List;
 
@@ -26,13 +26,13 @@ public class TongzhiAdapter extends BaseListAdapter {
             convertView = mInflater.inflate(R.layout.item_my_tongzhi, parent, false);
             convertView.setTag(new ViewHolder(convertView));
         }
-        initializeViews((BeanTongzhi) getItem(position), (ViewHolder) convertView.getTag());
+        initializeViews((MyNotification.MyNotifications) getItem(position), (ViewHolder) convertView.getTag());
         return convertView;
     }
 
-    private void initializeViews(BeanTongzhi item, ViewHolder holder) {
-        holder.tvMyTitle.setText(item.getTitle());
-        holder.tvMyTongzhiTime.setText(item.getTime());
+    private void initializeViews(MyNotification.MyNotifications item, ViewHolder holder) {
+        holder.tvMyTitle.setText(item.title);
+        holder.tvMyTongzhiTime.setText(item.from);
     }
 
     protected class ViewHolder {

@@ -6,7 +6,6 @@ package com.future.association.personal;
 public class PersonConstant {
     public static final String PAGE_SIZE_DEFAULT = "20";//数据列表每次加载数据条数
 
-
     public static final String MY_INFO_SHOW = "_mymsg_001";//我的信息显示
     public static final String MY_RESPONSE = "_mytiezihuifu_001";//我的回应
     public static final String MY_TIEZI = "_mytieziliebiao_001";//我的帖子
@@ -15,6 +14,8 @@ public class PersonConstant {
     public static final String MY_NOTIFICATION = "_mytongzhiliebiao_001";//我的通知
     public static final String MY_UP_HEADER = "_myimg_001";//上传头像
     public static final String MY_LOGOUT = "_logout_001";//用户登出
+    public static final String MY_JIANDU_LINSHI = "_jdliebiao_001";//我的监督
+    public static final String MY_LEVELS_LINSHI = "";//我的等级
 
 
 }

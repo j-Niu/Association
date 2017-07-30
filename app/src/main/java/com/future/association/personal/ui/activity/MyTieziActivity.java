@@ -8,7 +8,6 @@ import com.future.association.R;
 import com.future.association.common.MyApp;
 import com.future.association.personal.PersonConstant;
 import com.future.association.personal.adapter.TieziAdapter;
-import com.future.association.personal.entity.BeanMyTiezi;
 import com.future.association.personal.entity.MyTiezi;
 import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.utils.HttpRequest;
@@ -19,7 +18,7 @@ import java.util.List;
 
 public class MyTieziActivity extends BaseActivity {
     private ListView lvMyTiezi;
-    private List<BeanMyTiezi> tieziList = new ArrayList<>();
+    private List<MyTiezi.MyTiezis> tieziList = new ArrayList<>();
     private TieziAdapter tieziAdapter;
 
     @Override
@@ -38,30 +37,30 @@ public class MyTieziActivity extends BaseActivity {
             }
         });
         lvMyTiezi = (ListView) findViewById(R.id.lvMyTiezi);
-        BeanMyTiezi myTiezi;
-        for (int i = 0; i < 10; i++) {
-            myTiezi = new BeanMyTiezi(getString(R.string.myHY1),
-                    getString(R.string.myHY2), getString(R.string.myHY4), getString(R.string.myHY3));
-            tieziList.add(myTiezi);
-        }
-        if (tieziAdapter == null) {
-            tieziAdapter = new TieziAdapter(this, tieziList, getLayoutInflater());
-            lvMyTiezi.setAdapter(tieziAdapter);
-        } else {
-            tieziAdapter.notifyDataSetChanged();
-        }
-
-
+/*
+07-30 20:19:52.339 23486-23486/com.future.association E/json: {"error":0,"info":[]}
+07-30 20:19:52.339 23486-23486/com.future.association W/123: MyTiezis 内容 --- []
+07-30 20:19:52.341 23486-23486/com.future.association E/BaseResponse: json格式有误:{"error":0,"info":[]}
+ */
         new HttpRequest<MyTiezi>()
                 .with(this)
                 .addParam("apiCode", PersonConstant.MY_TIEZI)
                 .addParam("userToken", MyApp.getUserToken())
-                .addParam("page", "2")
+                .addParam("page", "1")
                 .addParam("size", PersonConstant.PAGE_SIZE_DEFAULT)
 //                .addParam("id", id)
                 .setListener(new HttpRequest.OnNetworkListener<MyTiezi>() {
                     @Override
                     public void onSuccess(MyTiezi response) {
+                        MyTiezi.MyTiezis myTiezi = response.myInfos;
+                        if (myTiezi == null) return;
+                        tieziList.add(myTiezi);
+                        if (tieziAdapter == null) {
+                            tieziAdapter = new TieziAdapter(MyTieziActivity.this, tieziList, getLayoutInflater());
+                            lvMyTiezi.setAdapter(tieziAdapter);
+                        } else {
+                            tieziAdapter.notifyDataSetChanged();
+                        }
 
                     }
 

@@ -3,12 +3,12 @@ package com.future.association.personal.ui.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.future.association.R;
 import com.future.association.common.MyApp;
 import com.future.association.personal.PersonConstant;
 import com.future.association.personal.adapter.HuiYingAdapter;
-import com.future.association.personal.entity.BeanMyResponse;
 import com.future.association.personal.entity.MyResponse;
 import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.utils.HttpRequest;
@@ -23,7 +23,7 @@ import java.util.List;
 public class MyResponseActivity extends BaseActivity {
 
     private ListView lvMyResponse;
-    private List<BeanMyResponse> responseList = new ArrayList<>();
+    private List<MyResponse.MyResponses> responseList = new ArrayList<>();
     private HuiYingAdapter huiYingAdapter;
 
     @Override
@@ -42,17 +42,31 @@ public class MyResponseActivity extends BaseActivity {
             }
         });
         lvMyResponse = (ListView) findViewById(R.id.lvMyResponse);
+        /*
+        07-30 19:48:27.168 3000-3000/com.future.association E/json: {"error":0,"info":[]}
+07-30 19:48:27.168 3000-3000/com.future.association W/123: MyResponse 内容 --- []
+07-30 19:48:27.168 3000-3000/com.future.association E/BaseResponse: json格式有误:{"error":0,"info":[]}
+         */
         new HttpRequest<MyResponse>()
                 .with(this)
                 .addParam("apiCode", PersonConstant.MY_RESPONSE)
                 .addParam("userToken", MyApp.getUserToken())
-                .addParam("page", "2")
+                .addParam("page", "1")
                 .addParam("size", PersonConstant.PAGE_SIZE_DEFAULT)
 //                .addParam("id", id)
                 .setListener(new HttpRequest.OnNetworkListener<MyResponse>() {
                     @Override
                     public void onSuccess(MyResponse response) {
-
+                        MyResponse.MyResponses datas = response.myInfos;
+                        if (datas==null) return;
+                        responseList.add(datas);
+                        if (huiYingAdapter == null) {
+                            huiYingAdapter = new HuiYingAdapter(MyResponseActivity.this, responseList, getLayoutInflater());
+                            lvMyResponse.setAdapter(huiYingAdapter);
+                        } else {
+                            huiYingAdapter.notifyDataSetChanged();
+                        }
+                        Toast.makeText(MyResponseActivity.this, "ResSSSS", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -61,19 +75,6 @@ public class MyResponseActivity extends BaseActivity {
                     }
                 }).start(new MyResponse());
 
-
-        BeanMyResponse response;
-        for (int i = 0; i < 10; i++) {
-            response = new BeanMyResponse(getString(R.string.myHY1),
-                    getString(R.string.myHY2), getString(R.string.myHY3));
-            responseList.add(response);
-        }
-        if (huiYingAdapter == null) {
-            huiYingAdapter = new HuiYingAdapter(this, responseList, getLayoutInflater());
-            lvMyResponse.setAdapter(huiYingAdapter);
-        } else {
-            huiYingAdapter.notifyDataSetChanged();
-        }
     }
 
     @Override

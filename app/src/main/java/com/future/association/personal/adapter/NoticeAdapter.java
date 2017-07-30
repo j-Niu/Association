@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.future.association.R;
-import com.future.association.personal.entity.BeanNotice;
+import com.future.association.personal.entity.MyNotice;
 
 import java.util.List;
 
@@ -26,14 +26,14 @@ public class NoticeAdapter extends BaseListAdapter {
             convertView = mInflater.inflate(R.layout.item_my_notice, parent, false);
             convertView.setTag(new ViewHolder(convertView));
         }
-        initializeViews((BeanNotice) getItem(position), (ViewHolder) convertView.getTag());
+        initializeViews((MyNotice.MyNotices) getItem(position), (ViewHolder) convertView.getTag());
         return convertView;
     }
 
-    private void initializeViews(BeanNotice item, ViewHolder holder) {
-        holder.tvMyTitle.setText(item.getTitle());
-        holder.tvMyPartName.setText(item.getPartName());
-        holder.tvMyLasttime.setText(item.getLasttime());
+    private void initializeViews(MyNotice.MyNotices item, ViewHolder holder) {
+        holder.tvMyTitle.setText(item.title);
+        holder.tvMyPartName.setText(item.name);
+        holder.tvMyLasttime.setText(item.create_time);
     }
 
     protected class ViewHolder {

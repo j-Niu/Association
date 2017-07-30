@@ -10,12 +10,12 @@
 
     <ImageView
         android:id="@+id/imgXiaoXie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_hhhbig_60"
-        android:src="@drawable/ic_dengji" />
+        android:src="@drawable/ic_logo" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.future.association.R;
-import com.future.association.personal.entity.BeanWenJuan;
+import com.future.association.personal.entity.MyWenJuan;
 
 import java.util.List;
 
@@ -25,22 +25,23 @@ public class WenjuanAdapter extends BaseListAdapter {
             convertView = mInflater.inflate(R.layout.item_my_wenjuan, null);
             convertView.setTag(new ViewHolder(convertView));
         }
-        initializeViews((BeanWenJuan) getItem(position), (ViewHolder) convertView.getTag());
+        initializeViews((MyWenJuan.MyWenJuans) getItem(position), (ViewHolder) convertView.getTag());
         return convertView;
     }
 
-    private void initializeViews(BeanWenJuan beanWenJuan, ViewHolder holder) {
-        holder.tvMyTitle.setText(beanWenJuan.getTitle());
-        holder.tvMyTitleGreen.setText(beanWenJuan.getIncreaseCore());
-        holder.tvMyTimeAgo.setText(beanWenJuan.getTime());
-        //0 已过期  1 已完成  2 进行中
-        if (beanWenJuan.getState() == 0 ) {
+    private void initializeViews(MyWenJuan.MyWenJuans beanWenJuan, ViewHolder holder) {
+        holder.tvMyTitle.setText(beanWenJuan.title);
+        holder.tvMyTitleGreen.setText(beanWenJuan.jifen);
+        holder.tvMyTimeAgo.setText(beanWenJuan.time);
+        //type": "1",//问卷状态 1 进行中 2 已完成 3已过期
+
+        if (beanWenJuan.type.equals("3")) {
             holder.tvMyState.setText("已过期");
             holder.tvMyState.setTextColor(mContext.getResources().getColor(R.color.color_999999));
-        } else if (beanWenJuan.getState() == 1) {
+        } else if (beanWenJuan.type.equals("2")) {
             holder.tvMyState.setText("已完成");
             holder.tvMyState.setTextColor(mContext.getResources().getColor(R.color.color_999999));
-        } else if (beanWenJuan.getState() == 2) {
+        } else if (beanWenJuan.type.equals("1")) {
             holder.tvMyState.setText("进行中");
             holder.tvMyState.setTextColor(mContext.getResources().getColor(R.color.yellow));
         }
