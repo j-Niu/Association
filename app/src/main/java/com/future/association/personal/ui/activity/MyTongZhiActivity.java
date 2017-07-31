@@ -48,9 +48,9 @@ public class MyTongZhiActivity extends BaseActivity {
                 .setListener(new HttpRequest.OnNetworkListener<MyNotification>() {
                     @Override
                     public void onSuccess(MyNotification response) {
-                        MyNotification.MyNotifications myNotifications=response.myInfos;
-                        if(myNotifications==null)return;
-                            tongzhiList.add(myNotifications);
+                        if (response == null) return;
+                        tongzhiList.clear();
+                        tongzhiList = response.getList();
                         if (tongzhiAdapter == null) {
                             tongzhiAdapter = new TongzhiAdapter(MyTongZhiActivity.this, tongzhiList, getLayoutInflater());
                             lvMyTongzhi.setAdapter(tongzhiAdapter);

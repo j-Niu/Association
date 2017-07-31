@@ -1,27 +1,30 @@
 package com.future.association.personal.entity;
 
-import android.util.Log;
-
-import com.future.baselib.entity.BaseResponse;
+import com.future.association.common.GsonUtils;
+import com.future.association.community.utils.TextUtil;
+import com.future.association.supervice.model.BaseBean;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by javakam on 2017/7/24 0024.
  */
-public class MyExit extends BaseResponse {
+public class MyExit extends BaseBean<MyExit.MyExits> {
 
-    public MyExits myExits;
+    public static final BaseBean.Creator<MyExit> CREATOR = new BaseBean.Creator<>(MyExit.class);
 
     @Override
     public void parseInfo(String content) throws JSONException {
-        Log.w("123", "MyExits  内容 --- " + content);
-        JSONObject object = new JSONObject(content);
-        myExits = new MyExits();
-        myExits.parse(object);
+        if (TextUtil.isEmpty(content)) return;
+        list = GsonUtils.jsonToList(content, MyExits.class);
     }
 
+    /**
+     * id : 1
+     * image :
+     * title : 测试1
+     * time : 23分钟前
+     */
     public static class MyExits {
         /**
          * {
@@ -29,12 +32,23 @@ public class MyExit extends BaseResponse {
          * "info": "退出成功"
          * }
          */
-        public String error;
-        public String info;
+        private String error;
+        private String info;
 
-        public void parse(JSONObject object) {
-            error = object.optString("error");
-            info = object.optString("info");
+        public String getError() {
+            return error;
+        }
+
+        public void setError(String error) {
+            this.error = error;
+        }
+
+        public String getInfo() {
+            return info;
+        }
+
+        public void setInfo(String info) {
+            this.info = info;
         }
     }
 }

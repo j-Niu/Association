@@ -53,9 +53,9 @@ public class MyWenJuanActivity extends BaseActivity {
                 .setListener(new HttpRequest.OnNetworkListener<MyWenJuan>() {
                     @Override
                     public void onSuccess(MyWenJuan response) {
-                        MyWenJuan.MyWenJuans wenJuans = response.myInfos;
-                        if (wenJuans == null) return;
-                        wenJuanList.add(wenJuans);
+                        if (response == null) return;
+                        wenJuanList.clear();
+                        wenJuanList=response.getList();
                         if (wenjuanAdapter == null) {
                             wenjuanAdapter = new WenjuanAdapter(MyWenJuanActivity.this, wenJuanList, getLayoutInflater());
                             lvMyWenjuan.setAdapter(wenjuanAdapter);

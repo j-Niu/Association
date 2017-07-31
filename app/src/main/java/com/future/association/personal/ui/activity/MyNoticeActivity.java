@@ -48,9 +48,9 @@ public class MyNoticeActivity extends BaseActivity {
                 .setListener(new HttpRequest.OnNetworkListener<MyNotice>() {
                     @Override
                     public void onSuccess(MyNotice response) {
-                        MyNotice.MyNotices myNotices = response.myInfos;
-                        if (myNotices == null) return;
-                        noticeList.add(myNotices);
+                        if (response == null) return;
+                        noticeList.clear();
+                        noticeList=response.getList();
                         if (noticeAdapter == null) {
                             noticeAdapter = new NoticeAdapter(MyNoticeActivity.this, noticeList, getLayoutInflater());
                             lvMyNotice.setAdapter(noticeAdapter);

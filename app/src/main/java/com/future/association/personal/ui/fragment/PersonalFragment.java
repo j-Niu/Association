@@ -135,18 +135,18 @@ public class PersonalFragment extends MyBaseFragment {
                 .setListener(new HttpRequest.OnNetworkListener<MyInfoResponse>() {
                     @Override
                     public void onSuccess(MyInfoResponse response) {
-                        MyInfoResponse.MyInfos myInfos = response.myInfos;
+                        MyInfoResponse.MyInfos myInfos = response.getInfoBean();
                         if (myInfos != null) {
                             Glide.with(getActivity())
                                     .asBitmap()
-                                    .load(myInfos.level_img)
+                                    .load(myInfos.getLevel_img())
                                     .into(header);
 //                            Glide.with(getActivity()).asBitmap().load(myInfos.level_img).into(header);
-                            tvMyShenFen.setText(myInfos.real_name);
-                            tvMyAddress.setText(myInfos.address);
-                            tvMylevel.setText(myInfos.level);
-                            tvMychenghao.setText(myInfos.chenghao);
-                            tvMyJifen.setText(myInfos.jifen);
+                            tvMyShenFen.setText(myInfos.getReal_name());
+                            tvMyAddress.setText(myInfos.getAddress());
+                            tvMylevel.setText(myInfos.getLevel());
+                            tvMychenghao.setText(myInfos.getChenghao());
+                            tvMyJifen.setText(myInfos.getJifen());
                         }
                     }
 

@@ -6,6 +6,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.future.association.R;
+import com.future.association.common.MyApp;
 import com.future.association.personal.PersonConstant;
 import com.future.association.personal.adapter.JianDuAdapter;
 import com.future.association.personal.entity.MyJianDu;
@@ -41,17 +42,17 @@ public class MyJianDuActivity extends BaseActivity {
         lvMyJiandu = (ListView) findViewById(R.id.lvMyJiandu);
         new HttpRequest<MyJianDu>()
                 .with(this)
-                .addParam("apiCode", PersonConstant.MY_JIANDU_LINSHI)
-                //.addParam("userToken", MyApp.getUserToken())
+                .addParam("apiCode", PersonConstant.MY_JIANDU)
+                .addParam("userToken", MyApp.getUserToken())
                 .addParam("page", "1")
                 .addParam("size", PersonConstant.PAGE_SIZE_DEFAULT)
 //                .addParam("id", id)
                 .setListener(new HttpRequest.OnNetworkListener<MyJianDu>() {
                     @Override
                     public void onSuccess(MyJianDu response) {
-                        MyJianDu.MyJianDus myJianDus = response.myInfos;
-                        if (response.myInfos == null) return;
-                        jianduList.add(myJianDus);
+                        if (response == null) return;
+                        jianduList.clear();
+                        jianduList=response.getList();
                         if (jianDuAdapter == null) {
                             jianDuAdapter = new JianDuAdapter(MyJianDuActivity.this, jianduList, getLayoutInflater());
                             lvMyJiandu.setAdapter(jianDuAdapter);

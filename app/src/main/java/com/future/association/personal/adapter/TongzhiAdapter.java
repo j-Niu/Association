@@ -31,8 +31,8 @@ public class TongzhiAdapter extends BaseListAdapter {
     }
 
     private void initializeViews(MyNotification.MyNotifications item, ViewHolder holder) {
-        holder.tvMyTitle.setText(item.title);
-        holder.tvMyTongzhiTime.setText(item.from);
+        holder.tvMyTitle.setText(item.getTitle());
+        holder.tvMyTongzhiTime.setText(item.getFrom());
     }
 
     protected class ViewHolder {

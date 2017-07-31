@@ -1,26 +1,23 @@
 package com.future.association.personal.entity;
 
-import android.util.Log;
-
-import com.future.baselib.entity.BaseResponse;
+import com.future.association.common.GsonUtils;
+import com.future.association.community.utils.TextUtil;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by javakam on 2017/7/23 0023.
  */
-public class MyInfoResponse extends BaseResponse {
-    public MyInfos myInfos;
+public class MyInfoResponse extends  BaseBean<MyInfoResponse.MyInfos>{
+    public static final BaseBean.Creator<MyInfoResponse> CREATOR = new BaseBean.Creator<>(MyInfoResponse.class);
 
     @Override
     public void parseInfo(String content) throws JSONException {
-        Log.w("123", "我是内容 --- " + content);
-        JSONObject object = new JSONObject(content);
-        myInfos = new MyInfos();
-        myInfos.parse(object);
+        if (TextUtil.isEmpty(content)) return;
+        list = GsonUtils.jsonToList(content, MyInfos.class);
     }
 
+   
     public static class MyInfos {
         /**
          * id : 136
@@ -34,28 +31,97 @@ public class MyInfoResponse extends BaseResponse {
          * level_img :
          * jifencha : 27
          */
-        public String id;
-        public String avatar_url;
-        public String real_name;
-        public String quanxian;
-        public String address;
-        public String jifen;
-        public String level;
-        public String chenghao;
-        public String level_img;
-        public String jifencha;
+        private String id;
+        private String avatar_url;
+        private String real_name;
+        private String quanxian;
+        private String address;
+        private String jifen;
+        private String level;
+        private String chenghao;
+        private String level_img;
+        private String jifencha;
 
-        public void parse(JSONObject object) {
-            id = object.optString("id");
-            avatar_url = object.optString("avatar_url");
-            real_name = object.optString("real_name");
-            quanxian = object.optString("quanxian");
-            address = object.optString("address");
-            jifen = object.optString("jifen");
-            level = object.optString("level");
-            chenghao = object.optString("chenghao");
-            level_img = object.optString("level_img");
-            jifencha = object.optString("jifencha");
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getAvatar_url() {
+            return avatar_url;
+        }
+
+        public void setAvatar_url(String avatar_url) {
+            this.avatar_url = avatar_url;
+        }
+
+        public String getReal_name() {
+            return real_name;
+        }
+
+        public void setReal_name(String real_name) {
+            this.real_name = real_name;
+        }
+
+        public String getQuanxian() {
+            return quanxian;
+        }
+
+        public void setQuanxian(String quanxian) {
+            this.quanxian = quanxian;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public String getJifen() {
+            return jifen;
+        }
+
+        public void setJifen(String jifen) {
+            this.jifen = jifen;
+        }
+
+        public String getLevel() {
+            return level;
+        }
+
+        public void setLevel(String level) {
+            this.level = level;
+        }
+
+        public String getChenghao() {
+            return chenghao;
+        }
+
+        public void setChenghao(String chenghao) {
+            this.chenghao = chenghao;
+        }
+
+        public String getLevel_img() {
+            return level_img;
+        }
+
+        public void setLevel_img(String level_img) {
+            this.level_img = level_img;
+        }
+
+        public String getJifencha() {
+            return jifencha;
+        }
+
+        public void setJifencha(String jifencha) {
+            this.jifencha = jifencha;
         }
     }
+     
+    
 }
