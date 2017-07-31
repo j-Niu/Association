@@ -6,6 +6,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.future.association.R;
+import com.future.association.common.MyApp;
 import com.future.association.personal.PersonConstant;
 import com.future.association.personal.adapter.JianDuAdapter;
 import com.future.association.personal.entity.MyJianDu;
@@ -42,7 +43,7 @@ public class MyJianDuActivity extends BaseActivity {
         new HttpRequest<MyJianDu>()
                 .with(this)
                 .addParam("apiCode", PersonConstant.MY_JIANDU)
-                //.addParam("userToken", MyApp.getUserToken())
+                .addParam("userToken", MyApp.getUserToken())
                 .addParam("page", "1")
                 .addParam("size", PersonConstant.PAGE_SIZE_DEFAULT)
 //                .addParam("id", id)
