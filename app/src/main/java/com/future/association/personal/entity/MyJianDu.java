@@ -24,13 +24,22 @@ public class MyJianDu extends BaseBean<MyJianDu.MyJianDus> {
      * time : 23分钟前
      */
     public static class MyJianDus {
+        /**
+         "id": "1",
+         "image": "http://139.224.70.219:85asdasdasd",//监督图片
+         "title": "测试1",//监督标题
+         "hangye": "游戏",//监督行业
+         "address": "啊是打算打说的",//所属区域
+         "reason": "啊是打算打说的",//监督原因
+         "time": "29分钟前"//监督发布时间
+         */
         private String id;
         private String title;
         private String create_time;
         private String type;
         private String address;
         private String reason;
-        private String[] image;//String[]
+        private String image;//String[]
 
         public String getId() {
             return id;
@@ -80,11 +89,11 @@ public class MyJianDu extends BaseBean<MyJianDu.MyJianDus> {
             this.reason = reason;
         }
 
-        public String[] getImage() {
+        public String getImage() {
             return image;
         }
 
-        public void setImage(String[] image) {
+        public void setImage(String  image) {
             this.image = image;
         }
     }

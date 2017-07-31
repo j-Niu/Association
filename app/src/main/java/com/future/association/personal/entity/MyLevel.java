@@ -20,8 +20,19 @@ public class MyLevel extends BaseBean<MyLevel.MyLevels> {
 
 
     public static class MyLevels {
+        /**
+        "id": "1",
+        "level": "V1",//等级
+        "level_name": "等级1",//称号
+        "jifen": "10"//积分
+        */
+
+        public String id;
+        public String level;
+        public String level_name;
+        public String jifen;
 
     }
 
-   
+
 }

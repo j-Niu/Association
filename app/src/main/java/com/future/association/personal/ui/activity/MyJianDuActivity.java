@@ -41,7 +41,7 @@ public class MyJianDuActivity extends BaseActivity {
         lvMyJiandu = (ListView) findViewById(R.id.lvMyJiandu);
         new HttpRequest<MyJianDu>()
                 .with(this)
-                .addParam("apiCode", PersonConstant.MY_JIANDU_LINSHI)
+                .addParam("apiCode", PersonConstant.MY_JIANDU)
                 //.addParam("userToken", MyApp.getUserToken())
                 .addParam("page", "1")
                 .addParam("size", PersonConstant.PAGE_SIZE_DEFAULT)
