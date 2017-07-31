@@ -2,6 +2,7 @@ package com.future.association.supervice;
 
 import android.content.Context;
 
+import com.future.association.login.bean.JsonBean;
 import com.future.association.supervice.model.SupericeDetail;
 import com.future.association.supervice.model.SupericeList;
 import com.future.association.supervice.model.SupericerTypeList;
@@ -17,6 +18,7 @@ public class SupericeApi {
     public static final String SUPERICE_LIST_APICODE = "_jdliebiao_001";
     public static final String SUPERICE_TYPE_DETAIL_APICODE = "_jdxiangqing_001";
     public static final String SUPERICE_TYPE_PUBLISH_APICODE = "_jdfabu_001";//_jdfabu_001
+    public static final String SUPERICE_TYPE_GET_PROVINCE = "_postcity_001";//三级地址获取
 
     private static SupericeApi instance = null;
 
@@ -70,5 +72,14 @@ public class SupericeApi {
                 .addParam("title",title)
                 .addParam("reason",reason)
                 .addParam("image",image);
+    }
+
+    /*
+    * 三级地址数据获取
+    * */
+    public HttpRequest<JsonBean> getProvinces(Context context){
+        return new HttpRequest()
+                .with(context)
+                .addParam("apiCode",SUPERICE_TYPE_GET_PROVINCE);
     }
 }
