@@ -2,11 +2,13 @@ package com.future.association.news.ui.fragment;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import com.future.association.news.utils.GlideImageLoader;
 import com.future.association.news.adapter.NewsAdapter;
 import com.future.association.news.ui.activity.NewsActivity;
 import com.future.baselib.entity.BaseResponse;
+import com.future.baselib.utils.DensityUtil;
 import com.future.baselib.utils.HttpRequest;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -104,7 +107,8 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
                         data.clear();
                         data.addAll(response.data);
 
-                        if (data.size()< PAGE_SIZE) {
+                        if (response.data.size()< PAGE_SIZE) {
+                            noMoreData();
                             adapter.loadMoreEnd();
                         }
                     }
@@ -114,6 +118,16 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
                         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     }
                 }).start(new NewsResponse());
+    }
+
+    public void noMoreData() {
+        TextView textView = new TextView(recyclerView.getContext());
+        textView.setGravity(Gravity.CENTER);
+        textView.setTextColor(Color.rgb(0xcc,0xcc,0xcc));
+        textView.setTextSize(DensityUtil.dip2px(getContext(),5f));
+        textView.setPadding(0,DensityUtil.dip2px(getContext(),5f),0,DensityUtil.dip2px(getContext(),5f));
+        textView.setText("没有更多数据了");
+        adapter.addFooterView(textView);
     }
 
     @SuppressWarnings("unchecked")
@@ -184,7 +198,7 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
     @Override
     public void onLoadMoreRequested() {
         if (adapter.getData().size()<PAGE_SIZE) {//如果本身数据少于一页数据，没有更多数据了
-            adapter.loadMoreEnd(true);
+            adapter.notifyDataSetChanged();
             return;
         }
 
@@ -197,10 +211,12 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
                     @Override
                     public void onSuccess(NewsResponse response) {
                         if (response.data == null || response.data.size() == 0) {
+                            noMoreData();
                             adapter.loadMoreEnd(true);
                             return;
                         }
                         if (response.data.size()<PAGE_SIZE) {
+                            noMoreData();
                             adapter.loadMoreEnd(true);
                         }
                         adapter.addData(response.data);
@@ -212,6 +228,6 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
                         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                         adapter.loadMoreFail();
                     }
-                }).start(new NewsBannerResponse());
+                }).start(new NewsResponse());
     }
 }
