@@ -11,6 +11,7 @@ import com.future.association.R;
 import com.future.association.common.GlideUtils;
 import com.future.association.community.base.BaseListAdapter;
 import com.future.association.community.model.PlateInfo;
+import com.future.association.community.utils.Res;
 import com.future.association.community.utils.ScreenUtils;
 import com.future.association.databinding.ItemGridBinding;
 
@@ -46,14 +47,15 @@ public class GridViewAdapter extends BaseListAdapter<PlateInfo> {
                 width / 3);
         convertView.setLayoutParams(param);
         ItemGridBinding binding = DataBindingUtil.bind(convertView);
-        Glide.with(context)
-                .load(datas.get(position).getImage())
-                .apply(GlideUtils.defaultImg())
-                .into(binding.ivImg) ;
         if (getCount() > limitCount && position == limitCount) {
+            binding.ivImg.setImageDrawable(Res.getDrawableRes(R.drawable.ic_more_plate,context));
             binding.setContent("更多");
         } else {
             binding.setContent(getItem(position).getName());
+            Glide.with(context)
+                    .load(datas.get(position).getImage())
+                    .apply(GlideUtils.defaultImg())
+                    .into(binding.ivImg);
         }
         return convertView;
     }
