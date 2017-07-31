@@ -25,7 +25,6 @@ import static java.lang.System.in;
  */
 
 public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implements SendTieContract.IView {
-    private String[] types;
     private SendTieContract.IPresenter presenter;
     private ArrayList<PlateInfo> plateInfos;
     private PlateInfo plateInfo;
@@ -45,13 +44,11 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implem
         plateInfo = getIntent().getParcelableExtra("plateInfo");
         userPlateInfo = getIntent().getParcelableExtra("userPlateInfo");
         plateInfos = userPlateInfo.getPlateInfos();
-        types = new String[plateInfos.size()];
         int defaultPlateInfo = 0;
         for (int i = 0; i < plateInfos.size(); i++) {
             if (plateInfo.getId().equals(plateInfos.get(i).getId())) {
                 defaultPlateInfo = i;
             }
-            types[i] = plateInfos.get(i).getName();
         }
         viewBinding.layoutTitle.setTitle("发布帖子");
         viewBinding.setPlateInfo(plateInfos.get(defaultPlateInfo));
@@ -90,26 +87,7 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implem
                 finish();
                 break;
             case R.id.btn_send:
-
-                if (StringUtils.stringIsInteger(userPlateInfo.getJifen()) < StringUtils.stringIsInteger(viewBinding.getPlateInfo().getFangwen_jf())) {
-                    showMsg("积分不够不能访问所选板块");
-                } else if ("2".equals(viewBinding.getPlateInfo().getIspost()) ){
-                    showMsg("所选板块只有版主才能发帖");
-                }else if(StringUtils.stringIsInteger(userPlateInfo.getJifen()) >
-                                StringUtils.stringIsInteger(viewBinding.getPlateInfo().getFatie_jf())) {
-                    presenter.sendTie();
-                }else{
-                    showShortToast("积分不够不能再所选板块发帖");
-                    return;
-                }
-                break;
-            case R.id.tv_type:
-                DialogUtils.showSelectDialog(context, "请选择板块", types, new DialogUtils.ItemSelectedListener() {
-                    @Override
-                    public void select(int position) {
-                        viewBinding.setPlateInfo(plateInfos.get(position));
-                    }
-                });
+                presenter.sendTie();
                 break;
         }
     }
@@ -136,8 +114,7 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implem
         } else {
             showShortToast("发帖成功");
         }
-        viewBinding.setTitle("");
-        viewBinding.setContent("");
+        finish();
     }
 
     @Override
