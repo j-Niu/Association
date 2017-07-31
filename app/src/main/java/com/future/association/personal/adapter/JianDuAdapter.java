@@ -36,15 +36,15 @@ public class JianDuAdapter extends BaseListAdapter {
     private void initializeViews(MyJianDu.MyJianDus entity, ViewHolder holder) {
 //        Glide.with(mContext).load(entity.getImgUrl()).crossFade().into(holder.imgMyJD);
         holder.imgMyJD.setImageResource(R.drawable.ic_birds);
-        holder.tvMyJDTitle.setText(entity.title);
-        holder.tvMyJDCreatetime.setText(entity.create_time);
-        holder.tvMyJDType.setText(entity.type);
-        holder.tvMyJDAddress.setText(entity.address);
-        holder.tvMyJDContent.setText(entity.reason);
+        holder.tvMyJDTitle.setText(entity.getTitle());
+        holder.tvMyJDCreatetime.setText(entity.getCreate_time());
+        holder.tvMyJDType.setText(entity.getType());
+        holder.tvMyJDAddress.setText(entity.getAddress());
+        holder.tvMyJDContent.setText(entity.getReason());
         //跳往详情页面
         if (!CommonUtils.isFastDoubleClick()) {
             Intent intent = new Intent(mContext, SuperviceDetailActivity.class);
-            intent.putExtra("id", entity.id);
+            intent.putExtra("id", entity.getId());
             mContext.startActivity(intent);
         }
     }

@@ -1,26 +1,23 @@
 package com.future.association.personal.entity;
 
-import android.util.Log;
-
-import com.future.baselib.entity.BaseResponse;
+import com.future.association.common.GsonUtils;
+import com.future.association.community.utils.TextUtil;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by javakam on 2017/7/24 0024.
  */
-public class MyNotice extends BaseResponse {
+public class MyNotice extends BaseBean<MyNotice.MyNotices> {
 
-    public MyNotices myInfos;
+    public static final BaseBean.Creator<MyNotice> CREATOR = new BaseBean.Creator<>(MyNotice.class);
 
     @Override
     public void parseInfo(String content) throws JSONException {
-        Log.w("123", "MyWenJuan 内容 --- " + content);
-        JSONObject object = new JSONObject(content);
-        myInfos = new MyNotices();
-        myInfos.parse(object);
+        if (TextUtil.isEmpty(content)) return;
+        list = GsonUtils.jsonToList(content, MyNotices.class);
     }
+
 
     public static class MyNotices {
         /**
@@ -60,16 +57,42 @@ public class MyNotice extends BaseResponse {
          ]
          }
          */
-        public String id;
-        public String title;
-        public String name;
-        public String create_time;
+        private String id;
+        private String title;
+        private String name;
+        private String create_time;
 
-        public void parse(JSONObject object) {
-            id = object.optString("id");
-            title = object.optString("title");
-            name = object.optString("name");
-            create_time = object.optString("create_time");
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getCreate_time() {
+            return create_time;
+        }
+
+        public void setCreate_time(String create_time) {
+            this.create_time = create_time;
         }
     }
+
 }

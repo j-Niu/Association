@@ -1,27 +1,24 @@
 package com.future.association.personal.entity;
 
-import android.util.Log;
-
-import com.future.baselib.entity.BaseResponse;
+import com.future.association.common.GsonUtils;
+import com.future.association.community.utils.TextUtil;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * type": "1",//问卷状态 1 进行中 2 已完成 3已过期
  * Created by javakam on 2017/7/24 0024.
  */
-public class MyWenJuan extends BaseResponse {
+public class MyWenJuan extends BaseBean<MyWenJuan.MyWenJuans> {
 
-    public MyWenJuans myInfos;
+    public static final BaseBean.Creator<MyWenJuan> CREATOR = new BaseBean.Creator<>(MyWenJuan.class);
 
     @Override
     public void parseInfo(String content) throws JSONException {
-        Log.w("123", "MyWenJuan 内容 --- " + content);
-        JSONObject object = new JSONObject(content);
-        myInfos = new MyWenJuans();
-        myInfos.parse(object);
+        if (TextUtil.isEmpty(content)) return;
+        list = GsonUtils.jsonToList(content, MyWenJuans.class);
     }
+
 
     public static class MyWenJuans {
         /**
@@ -57,14 +54,5 @@ public class MyWenJuan extends BaseResponse {
         public String type;
         public String jifen;
         public String time;
-
-
-        public void parse(JSONObject object) {
-            id = object.optString("id");
-            title = object.optString("title");
-            type = object.optString("type");
-            jifen = object.optString("jifen");
-            time = object.optString("time");
-        }
     }
 }

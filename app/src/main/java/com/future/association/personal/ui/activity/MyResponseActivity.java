@@ -57,9 +57,9 @@ public class MyResponseActivity extends BaseActivity {
                 .setListener(new HttpRequest.OnNetworkListener<MyResponse>() {
                     @Override
                     public void onSuccess(MyResponse response) {
-                        MyResponse.MyResponses datas = response.myInfos;
-                        if (datas==null) return;
-                        responseList.add(datas);
+                        if (response==null) return;
+                        responseList.clear();
+                        responseList=response.getList();
                         if (huiYingAdapter == null) {
                             huiYingAdapter = new HuiYingAdapter(MyResponseActivity.this, responseList, getLayoutInflater());
                             lvMyResponse.setAdapter(huiYingAdapter);

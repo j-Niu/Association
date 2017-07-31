@@ -1,31 +1,27 @@
 package com.future.association.personal.entity;
 
-import android.util.Log;
-
-import com.future.baselib.entity.BaseResponse;
+import com.future.association.common.GsonUtils;
+import com.future.association.community.utils.TextUtil;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by javakam on 2017/7/24 0024.
  */
-public class MyLevel extends BaseResponse {
+public class MyLevel extends BaseBean<MyLevel.MyLevels> {
 
-    public MyLevels myLevels;
+    public static final BaseBean.Creator<MyLevel> CREATOR = new BaseBean.Creator<>(MyLevel.class);
 
     @Override
     public void parseInfo(String content) throws JSONException {
-        Log.w("123", "MyLevel  内容 --- " + content);
-        JSONObject object = new JSONObject(content);
-        myLevels = new MyLevels();
-        myLevels.parse(object);
+        if (TextUtil.isEmpty(content)) return;
+        list = GsonUtils.jsonToList(content, MyLevels.class);
     }
+
 
     public static class MyLevels {
 
-
-        public void parse(JSONObject object) {
-        }
     }
+
+   
 }

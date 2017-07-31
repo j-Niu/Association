@@ -52,9 +52,9 @@ public class MyTieziActivity extends BaseActivity {
                 .setListener(new HttpRequest.OnNetworkListener<MyTiezi>() {
                     @Override
                     public void onSuccess(MyTiezi response) {
-                        MyTiezi.MyTiezis myTiezi = response.myInfos;
-                        if (myTiezi == null) return;
-                        tieziList.add(myTiezi);
+                        if (response == null) return;
+                        tieziList.clear();
+                        tieziList = response.getList();
                         if (tieziAdapter == null) {
                             tieziAdapter = new TieziAdapter(MyTieziActivity.this, tieziList, getLayoutInflater());
                             lvMyTiezi.setAdapter(tieziAdapter);

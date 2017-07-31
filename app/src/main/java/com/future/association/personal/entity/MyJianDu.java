@@ -1,43 +1,91 @@
 package com.future.association.personal.entity;
 
-import android.util.Log;
-
-import com.future.baselib.entity.BaseResponse;
+import com.future.association.common.GsonUtils;
+import com.future.association.community.utils.TextUtil;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
- * Created by javakam on 2017/7/30 0030.
+ * Created by javakam on 2017/7/30 .
  */
-public class MyJianDu extends BaseResponse {
-    public MyJianDus myInfos;
+public class MyJianDu extends BaseBean<MyJianDu.MyJianDus> {
+    public static final BaseBean.Creator<MyJianDu> CREATOR = new BaseBean.Creator<>(MyJianDu.class);
 
     @Override
     public void parseInfo(String content) throws JSONException {
-        Log.w("123", "MyJianDu   内容 --- " + content);
-        JSONObject object = new JSONObject(content);
-        myInfos = new MyJianDus();
-        myInfos.parse(object);
+        if (TextUtil.isEmpty(content)) return;
+        list = GsonUtils.jsonToList(content, MyJianDus.class);
     }
 
+    /**
+     * id : 1
+     * image :
+     * title : 测试1
+     * time : 23分钟前
+     */
     public static class MyJianDus {
-        public String id;
-        public String title;
-        public String create_time;
-        public String type;
-        public String address;
-        public String reason;
-        public String image;//String[]
+        private String id;
+        private String title;
+        private String create_time;
+        private String type;
+        private String address;
+        private String reason;
+        private String[] image;//String[]
 
-        public void parse(JSONObject object) {
-            id = object.optString("id");
-            title = object.optString("title");
-            create_time = object.optString("create_time");
-            type = object.optString("type");
-            address = object.optString("address");
-            reason = object.optString("reason");
-            image = object.optString("image");
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getCreate_time() {
+            return create_time;
+        }
+
+        public void setCreate_time(String create_time) {
+            this.create_time = create_time;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public String getReason() {
+            return reason;
+        }
+
+        public void setReason(String reason) {
+            this.reason = reason;
+        }
+
+        public String[] getImage() {
+            return image;
+        }
+
+        public void setImage(String[] image) {
+            this.image = image;
         }
     }
 }

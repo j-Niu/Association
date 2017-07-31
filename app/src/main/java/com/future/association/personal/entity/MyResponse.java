@@ -1,26 +1,23 @@
 package com.future.association.personal.entity;
 
-import android.util.Log;
-
-import com.future.baselib.entity.BaseResponse;
+import com.future.association.common.GsonUtils;
+import com.future.association.community.utils.TextUtil;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by javakam on 2017/7/24 0024.
  */
-public class MyResponse extends BaseResponse {
+public class MyResponse extends BaseBean<MyResponse.MyResponses> {
 
-    public MyResponses myInfos;
+    public static final BaseBean.Creator<MyResponse> CREATOR = new BaseBean.Creator<>(MyResponse.class);
 
     @Override
     public void parseInfo(String content) throws JSONException {
-        Log.w("123", "MyResponse 内容 --- " + content);
-        JSONObject object = new JSONObject(content);
-        myInfos = new MyResponses();
-        myInfos.parse(object);
+        if (TextUtil.isEmpty(content)) return;
+        list = GsonUtils.jsonToList(content, MyResponses.class);
     }
+
 
     public static class MyResponses {
         /**
@@ -52,15 +49,5 @@ public class MyResponse extends BaseResponse {
         public String name;
         public String tiezi_id;
         public String huifu_num;
-
-
-        public void parse(JSONObject object) {
-            id = object.optString("id");
-            title = object.optString("title");
-            create_time = object.optString("create_time");
-            name = object.optString("name");
-            tiezi_id = object.optString("tiezi_id");
-            huifu_num = object.optString("huifu_num");
-        }
     }
 }

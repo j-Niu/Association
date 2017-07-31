@@ -49,9 +49,9 @@ public class MyJianDuActivity extends BaseActivity {
                 .setListener(new HttpRequest.OnNetworkListener<MyJianDu>() {
                     @Override
                     public void onSuccess(MyJianDu response) {
-                        MyJianDu.MyJianDus myJianDus = response.myInfos;
-                        if (response.myInfos == null) return;
-                        jianduList.add(myJianDus);
+                        if (response == null) return;
+                        jianduList.clear();
+                        jianduList=response.getList();
                         if (jianDuAdapter == null) {
                             jianDuAdapter = new JianDuAdapter(MyJianDuActivity.this, jianduList, getLayoutInflater());
                             lvMyJiandu.setAdapter(jianDuAdapter);

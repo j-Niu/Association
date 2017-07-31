@@ -31,9 +31,9 @@ public class NoticeAdapter extends BaseListAdapter {
     }
 
     private void initializeViews(MyNotice.MyNotices item, ViewHolder holder) {
-        holder.tvMyTitle.setText(item.title);
-        holder.tvMyPartName.setText(item.name);
-        holder.tvMyLasttime.setText(item.create_time);
+        holder.tvMyTitle.setText(item.getTitle());
+        holder.tvMyPartName.setText(item.getName());
+        holder.tvMyLasttime.setText(item.getCreate_time());
     }
 
     protected class ViewHolder {
