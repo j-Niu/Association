@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.future.association.R;
@@ -23,6 +24,7 @@ import com.future.association.databinding.DialogSelectSexBinding;
 import com.future.association.login.PerfectInformationActivity;
 import com.future.association.login.RegisterSuccessActivity;
 import com.future.association.login.UserApi;
+import com.future.association.login.bean.CityResponse;
 import com.future.association.login.bean.GetJsonDataUtil;
 import com.future.association.login.bean.JsonBean;
 import com.future.association.login.bean.VerifyResponse;
@@ -31,12 +33,15 @@ import com.future.baselib.entity.BaseResponse;
 import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.ToastUtils;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -54,14 +59,13 @@ public class PerfectInformationViewModel {
     private PerfectInformationActivity activity;
     private OptionsPickerView pvCustomOptions;
     private ArrayList<String> classifyList;
-    private ArrayList<JsonBean> options1Items = new ArrayList<>();
+    private List<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
     private DialogSelectSexBinding sexBinding;
     private Dialog sexDialog;
     private String phoneNumber, code, password;
-
-
+    private boolean isParserOver = false;
     public ObservableField<String> userName = new ObservableField<>();
     public ObservableField<String> location = new ObservableField<>();
     public ObservableField<String> education = new ObservableField<>();
@@ -146,17 +150,16 @@ public class PerfectInformationViewModel {
         pvOptions.show();
     }
 
-    public void initJsonData() {//解析数据
+    public void initJsonData(List<JsonBean> jsonBean) {//解析数据
 
         /**
          * 注意：assets 目录下的Json文件仅供参考，实际使用可自行替换文件
          * 关键逻辑在于循环体
          *
          * */
-        String JsonData = new GetJsonDataUtil().getJson(activity, "province.json");//获取assets目录下的json文件数据
+//        String JsonData = new GetJsonDataUtil().getJson(activity, "province.json");//获取assets目录下的json文件数据
 
-        ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
-
+//        ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
         /**
          * 添加省份数据
          *
@@ -200,6 +203,7 @@ public class PerfectInformationViewModel {
              */
             options3Items.add(Province_AreaList);
         }
+        isParserOver = true;
     }
 
 
@@ -209,8 +213,14 @@ public class PerfectInformationViewModel {
             JSONArray data = new JSONArray(result);
             Gson gson = new Gson();
             for (int i = 0; i < data.length(); i++) {
-                JsonBean entity = gson.fromJson(data.optJSONObject(i).toString(), JsonBean.class);
-                detail.add(entity);
+                try {
+                    JSONObject object = data.optJSONObject(i);
+                    JSONArray area = object.getJSONArray("area");
+                    JsonBean entity = gson.fromJson(area.toString(), JsonBean.class);
+                    detail.add(entity);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -300,14 +310,21 @@ public class PerfectInformationViewModel {
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(@NonNull Disposable disposable) throws Exception {
-                        initJsonData();
+                        initCitys();
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
-                        showLocationPicker();
+                        if (options1Items.size() > 0) {
+                            showLocationPicker();
+                        } else if (options1Items.size() == 0 && !isParserOver) {
+                            ToastUtils.shortToast(activity, "请等待数据解析完成，稍后重试");
+                        } else if (options1Items.size() == 0 && isParserOver) {
+                            ToastUtils.shortToast(activity, "地址数据初始化失败,请等待重新解析");
+                            initCitys();
+                        }
                     }
                 });
 
@@ -340,7 +357,7 @@ public class PerfectInformationViewModel {
                                 && !TextUtil.isEmpty(age.get()))
                             activity.showLoadingDialog();
                         //执行注册
-                        userApi
+                        HttpRequest registerRequest = userApi
                                 .register(activity, phoneNumber, code, password, userName.get(), location.get(), sex.get() ? "1" : "2", education.get(), age.get())
                                 .setListener(new HttpRequest.OnNetworkListener() {
                                     @Override
@@ -354,13 +371,33 @@ public class PerfectInformationViewModel {
                                         activity.toast.show("" + message);
                                         activity.dissmissLoadingDialog();
                                     }
-                                })
-                                .start(new VerifyResponse());
+                                });
+                        registerRequest.start(new VerifyResponse());
                     }
                 });
     }
 
     //endregion
+
+
+    public void initCitys() {
+        isParserOver = false;
+        HttpRequest cityRequest = userApi.getCitys(activity).setListener(new HttpRequest.OnNetworkListener<JsonBean>() {
+            @Override
+            public void onSuccess(JsonBean jsonBean) {
+                initJsonData(jsonBean.getList());
+            }
+
+            @Override
+            public void onFail(String message) {
+                ToastUtils.shortToast(activity, "" + message);
+//                initJsonData("");
+                isParserOver = true;
+            }
+
+        });
+        cityRequest.start(new JsonBean());
+    }
 
     //region get set method
     public ObservableField<String> getUserName() {

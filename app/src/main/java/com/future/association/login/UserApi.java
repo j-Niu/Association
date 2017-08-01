@@ -1,8 +1,11 @@
 package com.future.association.login;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
+import com.future.association.login.bean.CityResponse;
+import com.future.association.login.bean.JsonBean;
 import com.future.association.login.bean.RegisterResponse;
 import com.future.association.login.bean.UserResponse;
 import com.future.association.login.bean.VerifyResponse;
@@ -21,6 +24,7 @@ public class UserApi {
     public static final String API_CODE_SET_PWD_1 = "_set_pwd_001";
     public static final String API_CODE_SET_PWD_3 = "_set_pwd_003";
     public static final String API_CODE_USER_AGREEMENT = "_useragreement_001";
+    public static final String API_CODE_CITY = "_postcity_001";
 
     public HttpRequest login(Activity activity, String mobile, String loginPass) {
         return new HttpRequest<UserResponse>()//继承BaseResponse的类
@@ -89,4 +93,16 @@ public class UserApi {
                 .with(activity)
                 .addParam("apiCode", API_CODE_USER_AGREEMENT);//请求业务参数  //apiCode  接口文档里的code
     }
+
+    public HttpRequest<JsonBean> getCitys(Activity activity) {
+        return new HttpRequest()//继承BaseResponse的类
+                .with(activity)
+                .addParam("apiCode", API_CODE_CITY);//请求业务参数  //apiCode  接口文档里的code
+    }
+
+//    public HttpRequest<JsonBean> getProvinces(Context context){
+//        return new HttpRequest()
+//                .with(context)
+//                .addParam("apiCode",SUPERICE_TYPE_GET_PROVINCE);
+//    }
 }
