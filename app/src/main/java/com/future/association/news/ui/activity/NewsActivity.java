@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.GlideBuilder;
 import com.future.association.R;
 import com.future.association.common.Contants;
+import com.future.association.common.MyApp;
 import com.future.association.community.utils.TextUtil;
 import com.future.association.news.entity.NewsDetailsResponse;
 import com.future.baselib.activity.BaseActivity;
@@ -62,6 +63,7 @@ public class NewsActivity extends BaseActivity {
         new HttpRequest<NewsDetailsResponse>()
                 .with(this)
                 .addParam("apiCode", Contants.API_CODE_NEWS_DETAIL)
+                .addParam("userToken", MyApp.getUserToken())
                 .addParam("id",id)
                 .setListener(new HttpRequest.OnNetworkListener<NewsDetailsResponse>() {
                     @Override
