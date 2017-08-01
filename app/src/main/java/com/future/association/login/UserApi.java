@@ -49,7 +49,7 @@ public class UserApi {
 
 
     //sex 1男 2女
-    public HttpRequest register(Activity activity, String mobile, String code, String loginPass, String real_name, String address, String sex, String schooling) {
+    public HttpRequest register(Activity activity, String mobile, String code, String loginPass, String real_name, String address, String sex, String schooling, String old) {
         return new HttpRequest<RegisterResponse>()//继承BaseResponse的类
                 .with(activity)
                 .addParam("apiCode", API_CODE_REGISTER)//apiCode  接口文档里的code
@@ -59,6 +59,7 @@ public class UserApi {
                 .addParam("real_name", real_name)
                 .addParam("address", address)
                 .addParam("sex", sex)
+                .addParam("old", old)
                 .addParam("schooling", schooling);//请求业务参数
 
     }
