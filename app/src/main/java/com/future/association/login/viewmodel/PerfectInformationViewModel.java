@@ -341,7 +341,7 @@ public class PerfectInformationViewModel {
                             activity.showLoadingDialog();
                         //执行注册
                         userApi
-                                .register(activity, phoneNumber, code, password, userName.get(), location.get(), sex.get() ? "1" : "2", education.get())
+                                .register(activity, phoneNumber, code, password, userName.get(), location.get(), sex.get() ? "1" : "2", education.get(), age.get())
                                 .setListener(new HttpRequest.OnNetworkListener() {
                                     @Override
                                     public void onSuccess(BaseResponse response) {
