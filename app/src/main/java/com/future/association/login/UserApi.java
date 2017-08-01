@@ -94,7 +94,7 @@ public class UserApi {
                 .addParam("apiCode", API_CODE_USER_AGREEMENT);//请求业务参数  //apiCode  接口文档里的code
     }
 
-    public HttpRequest<JsonBean> getCitys(Activity activity) {
+    public HttpRequest<CityResponse> getCitys(Activity activity) {
         return new HttpRequest()//继承BaseResponse的类
                 .with(activity)
                 .addParam("apiCode", API_CODE_CITY);//请求业务参数  //apiCode  接口文档里的code

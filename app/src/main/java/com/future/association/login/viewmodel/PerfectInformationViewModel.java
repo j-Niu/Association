@@ -150,7 +150,7 @@ public class PerfectInformationViewModel {
         pvOptions.show();
     }
 
-    public void initJsonData(List<JsonBean> jsonBean) {//解析数据
+    public void initJsonData(String JsonData) {//解析数据
 
         /**
          * 注意：assets 目录下的Json文件仅供参考，实际使用可自行替换文件
@@ -159,7 +159,7 @@ public class PerfectInformationViewModel {
          * */
 //        String JsonData = new GetJsonDataUtil().getJson(activity, "province.json");//获取assets目录下的json文件数据
 
-//        ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
+        ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
         /**
          * 添加省份数据
          *
@@ -214,9 +214,7 @@ public class PerfectInformationViewModel {
             Gson gson = new Gson();
             for (int i = 0; i < data.length(); i++) {
                 try {
-                    JSONObject object = data.optJSONObject(i);
-                    JSONArray area = object.getJSONArray("area");
-                    JsonBean entity = gson.fromJson(area.toString(), JsonBean.class);
+                    JsonBean entity = gson.fromJson(data.optJSONObject(i).toString(), JsonBean.class);
                     detail.add(entity);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -382,21 +380,21 @@ public class PerfectInformationViewModel {
 
     public void initCitys() {
         isParserOver = false;
-        HttpRequest cityRequest = userApi.getCitys(activity).setListener(new HttpRequest.OnNetworkListener<JsonBean>() {
+        HttpRequest cityRequest = userApi.getCitys(activity).setListener(new HttpRequest.OnNetworkListener<CityResponse>() {
             @Override
-            public void onSuccess(JsonBean jsonBean) {
-                initJsonData(jsonBean.getList());
+            public void onSuccess(CityResponse cityResponse) {
+                initJsonData(cityResponse.jsonData);
             }
 
             @Override
             public void onFail(String message) {
                 ToastUtils.shortToast(activity, "" + message);
-//                initJsonData("");
-                isParserOver = true;
+                initJsonData("");
+//                isParserOver = true;
             }
 
         });
-        cityRequest.start(new JsonBean());
+        cityRequest.start(new CityResponse());
     }
 
     //region get set method
