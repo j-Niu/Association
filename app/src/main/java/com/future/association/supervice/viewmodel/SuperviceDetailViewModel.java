@@ -3,6 +3,7 @@ package com.future.association.supervice.viewmodel;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.future.association.R;
 import com.future.association.databinding.ActivitySuperviceDetailBinding;
@@ -13,6 +14,7 @@ import com.future.association.supervice.view.SuperviceDetailActivity;
 import com.future.baselib.utils.HttpRequest;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by rain on 2017/7/15.
@@ -53,7 +55,11 @@ public class SuperviceDetailViewModel {
                     public void onSuccess(SupericeDetail response) {
 //                        supericeDetail.set(response.getInfoBean());
                         activity.dissmissLoadingDialog();
-                        items.addAll(Arrays.asList(response.getInfoBean().getImage()));
+                        List<String> collection = Arrays.asList(response.getInfoBean().getImage());
+                        if (collection.size()==0){
+                            mBinding.ivLayout.setVisibility(View.GONE);
+                        }
+                        items.addAll(collection);
                         mBinding.setSupericeDetail(response.getInfoBean());
                     }
 

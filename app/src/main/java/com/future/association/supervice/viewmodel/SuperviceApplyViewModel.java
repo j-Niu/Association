@@ -11,7 +11,6 @@ import com.future.association.common.EventCode;
 import com.future.association.common.MyApp;
 import com.future.association.community.utils.TextUtil;
 import com.future.association.databinding.ActivitySuperviceApplyBinding;
-import com.future.association.login.bean.GetJsonDataUtil;
 import com.future.association.login.bean.JsonBean;
 import com.future.association.supervice.FullyGridLayoutManager;
 import com.future.association.supervice.SupericeApi;
@@ -54,7 +53,7 @@ public class SuperviceApplyViewModel {
     private final SuperviceApplyActivity activity;
     private final String type;
     public ObservableField<SupericeDetail> supericeDetail = new ObservableField<>();
-    private ArrayList<JsonBean> options1Items = new ArrayList<>();
+    private List<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
     private final SupericeDetail supericeDetailBean = new SupericeDetail();
@@ -139,7 +138,8 @@ public class SuperviceApplyViewModel {
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(@NonNull Disposable disposable) throws Exception {
-                        initJsonData();
+                        activity.showLoadingDialog();
+                        getProvinces();
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -211,9 +211,27 @@ public class SuperviceApplyViewModel {
     }
 
     private void initData() {
+//        getProvinces();//获取三级地址级联
         supericeDetailBean.setType(type);
         supericeDetail.set(supericeDetailBean);
         mBindIng.setSupericeDetail(supericeDetailBean);
+    }
+
+    private void getProvinces() {
+        SupericeApi.getInstance().getProvinces(activity)
+                .setListener(new HttpRequest.OnNetworkListener<JsonBean>() {
+                    @Override
+                    public void onSuccess(JsonBean jsonBean) {
+                        activity.dissmissLoadingDialog();
+                        initJsonData(jsonBean.getList());
+                    }
+
+                    @Override
+                    public void onFail(String message) {
+                        activity.dissmissLoadingDialog();
+                        if (!TextUtil.isEmpty(message)) activity.toast(message);
+                    }
+                }).start(new JsonBean());
     }
 
     //region location picker
@@ -244,16 +262,16 @@ public class SuperviceApplyViewModel {
         pvOptions.show();
     }
 
-    public void initJsonData() {//解析数据
+    public void initJsonData(List<JsonBean> jsonBean ) {//解析数据
 
         /**
          * 注意：assets 目录下的Json文件仅供参考，实际使用可自行替换文件
          * 关键逻辑在于循环体
          *
          * */
-        String JsonData = new GetJsonDataUtil().getJson(activity, "province.json");//获取assets目录下的json文件数据
+//        String JsonData = new GetJsonDataUtil().getJson(activity, "province.json");//获取assets目录下的json文件数据
 
-        ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
+//        ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
 
         /**
          * 添加省份数据

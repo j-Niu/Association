@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +50,7 @@ public class SuperviceViewModel {
 
     private void initView() {
         binding.superviceRv.setLayoutManager(new LinearLayoutManager(fragment.getActivity()));
+        binding.superviceRv.addItemDecoration(new DividerItemDecoration(fragment.getActivity(),LinearLayoutManager.VERTICAL));
         SuperviceAdapter superviceAdapter = new SuperviceAdapter(R.layout.supervice_item, null);
         superviceAdapter.setOnLoadMoreListener(loadMoreListener, binding.superviceRv);
         View head = getHead();

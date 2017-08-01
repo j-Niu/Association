@@ -1,6 +1,10 @@
 package com.future.association.login.bean;
 
 import com.bigkoo.pickerview.model.IPickerViewData;
+import com.future.association.common.GsonUtils;
+import com.future.association.supervice.model.BaseBean;
+
+import org.json.JSONException;
 
 import java.util.List;
 
@@ -11,13 +15,21 @@ import java.util.List;
  * @date: 2017/3/16 15:36
  */
 
-public class JsonBean  implements IPickerViewData {
+public class JsonBean extends BaseBean<JsonBean> implements IPickerViewData {
 
-
+public static final Creator<JsonBean> CREATOR = new Creator<>(JsonBean.class);
     /**
      * name : 省份
      * city : [{"name":"北京市","area":["东城区","西城区","崇文区","宣武区","朝阳区"]}]
      */
+
+
+    @Override
+    public void parseInfo(String content) throws JSONException {
+        list = GsonUtils.jsonToList(content,JsonBean.class);
+    }
+
+
 
     private String name;
     private List<CityBean> city;

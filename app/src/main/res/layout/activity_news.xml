@@ -24,8 +24,9 @@
                 android:layout_marginLeft="32px"
                 android:layout_marginRight="32px"
                 android:layout_marginTop="34px"
+                android:lineSpacingMultiplier="1.5"
                 tools:text="这是标题"
-                android:textSize="64px"
+                android:textSize="50px"
                 android:textColor="@color/black1"
                 />
             <TextView
