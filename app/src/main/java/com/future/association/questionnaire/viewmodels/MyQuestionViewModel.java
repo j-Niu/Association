@@ -42,7 +42,7 @@ public class MyQuestionViewModel {
     private void initView() {
         mBinding.rv.setLayoutManager(new LinearLayoutManager(activity));
         mBinding.rv.addItemDecoration(new DividerItemDecoration(activity,LinearLayoutManager.VERTICAL));
-        QuestionnaireAdapter adapter = new QuestionnaireAdapter(R.layout.questionnaire_item, null, Contants.HOTQUESTIONNAI_REFRAGMENT);
+        QuestionnaireAdapter adapter = new QuestionnaireAdapter(R.layout.questionnaire_item, null, Contants.MYQUESTIONNAI_REFRAGMENT);
         adapterObservable.set(adapter);
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override

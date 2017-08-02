@@ -8,7 +8,6 @@ import android.view.View;
 import com.future.association.R;
 import com.future.association.common.EventCode;
 import com.future.association.databinding.FragmentMyQuestionnaireBinding;
-import com.future.association.questionnaire.adapters.QuestionnaireAdapter;
 import com.future.association.questionnaire.viewmodels.MyQuestionViewModel;
 import com.future.baselib.activity.BaseFragment;
 import com.future.baselib.entity.MessageEvent;
@@ -18,7 +17,6 @@ import com.future.baselib.entity.MessageEvent;
  */
 
 public class MyQuestionnaireFragment extends BaseFragment {
-    private QuestionnaireAdapter mAdapter;
     private MyQuestionViewModel mMyQuestionViewModel;
 
     @Override
