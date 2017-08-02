@@ -25,7 +25,7 @@ import com.future.association.common.MyApp;
 import com.future.association.community.utils.TextUtil;
 import com.future.association.personal.CircleImageView;
 import com.future.association.personal.PersonConstant;
-import com.future.association.personal.entity.MyInfoResponse;
+import com.future.association.personal.entity.JDResponse;
 import com.future.association.personal.entity.MyUpHeader;
 import com.future.association.personal.gallerypick.GlideImageLoader;
 import com.future.association.personal.ui.activity.MyJianDuActivity;
@@ -61,6 +61,7 @@ public class PersonalFragment extends MyBaseFragment {
     private RelativeLayout myJianDu, myHuiYing, myTieZi, myWenJuan, myXiaoXi, myTongZhi, myMore;
     private TextView tvMyShenFen, tvMyAddress, tvMylevel, tvMychenghao, tvMyJifen;
     private String id;
+    private List<JDResponse.JDDetail> mDatas = new ArrayList<>();
 
     //照片
     public List<String> picPath = new ArrayList<>();
@@ -112,61 +113,115 @@ public class PersonalFragment extends MyBaseFragment {
         myTongZhi = (RelativeLayout) view.findViewById(R.id.myTongZhi);
         myMore = (RelativeLayout) view.findViewById(R.id.myMore);
 
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initData();
+            }
+        });
         initGalleyCallBack();
         initGalley();
         initClick();
         initData();
     }
 
- //   @Override
- //   public void onHiddenChanged(boolean hidden) {
- //       super.onHiddenChanged(hidden);
-  //      if (!hidden) {
-  //          initData();
-  //      }
-//    }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+
+        }
+    }
 
     private void initData() {
-        new HttpRequest<MyInfoResponse>()
+//        Log.i("123", "userToken ===  " + MyApp.getUserToken());
+        new HttpRequest<JDResponse>()
                 .with(mContext)
                 .addParam("apiCode", PersonConstant.MY_INFO_SHOW)
                 .addParam("userToken", MyApp.getUserToken())
-//                .addParam("id", id)
-                .setListener(new HttpRequest.OnNetworkListener<MyInfoResponse>() {
+                .setListener(new HttpRequest.OnNetworkListener<JDResponse>() {
                     @Override
-                    public void onSuccess(MyInfoResponse response) {
-                        MyInfoResponse.MyInfos myInfos = response.getInfoBean();
-                        if (myInfos != null) {
+                    public void onSuccess(JDResponse response) {
+                        if (response.data != null) {
+                            mDatas.clear();
+                            mDatas = response.data;
+                            JDResponse.JDDetail jdDetail = mDatas.get(0);
                             Glide.with(getActivity())
                                     .asBitmap()
-                                    .load(myInfos.getLevel_img())
+                                    .load(jdDetail.level_img)
                                     .into(header);
 //                            Glide.with(getActivity()).asBitmap().load(myInfos.level_img).into(header);
-                            tvMyShenFen.setText(myInfos.getReal_name());
-                            tvMyAddress.setText(myInfos.getAddress());
-                            tvMylevel.setText(myInfos.getLevel());
-                            tvMychenghao.setText(myInfos.getChenghao());
-                            tvMyJifen.setText(myInfos.getJifen());
+                            tvMyShenFen.setText(jdDetail.real_name);
+                            tvMyAddress.setText(jdDetail.address);
+                            tvMylevel.setText(jdDetail.level);
+                            tvMychenghao.setText(jdDetail.chenghao);
+                            tvMyJifen.setText(jdDetail.jifen);
                         }
                     }
 
                     @Override
                     public void onFail(String message) {
-                        toast("错误信息：" + message);
+                        toast(message);
                     }
-                }).start(new MyInfoResponse());
+                }).start(new JDResponse());
+//        new HttpRequest<MyInfoResponse>()
+//                .with(mContext)
+//                .addParam("apiCode", PersonConstant.MY_INFO_SHOW)
+//                .addParam("userToken", MyApp.getUserToken())
+////                .addParam("id", id)
+//                .setListener(new HttpRequest.OnNetworkListener<MyInfoResponse>() {
+//                    @Override
+//                    public void onSuccess(MyInfoResponse response) {
+//                        if (response.info == null) {
+//                            Log.i("123", "response data === null!!! ");
+//
+//                            return;
+//
+//                        }
+//                        Log.i("123", "response ===  " + response.getInfoBean().toString());
+//
+//                        MyInfoResponse.MyInfos myInfos = response.getInfoBean();
+//                        if (myInfos != null) {
+//                            Glide.with(getActivity())
+//                                    .asBitmap()
+//                                    .load(myInfos.getLevel_img())
+//                                    .into(header);
+////                            Glide.with(getActivity()).asBitmap().load(myInfos.level_img).into(header);
+//                            tvMyShenFen.setText(myInfos.getReal_name());
+//                            tvMyAddress.setText(myInfos.getAddress());
+//                            tvMylevel.setText(myInfos.getLevel());
+//                            tvMychenghao.setText(myInfos.getChenghao());
+//                            tvMyJifen.setText(myInfos.getJifen());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFail(String message) {
+//                        toast("错误信息：" + message);
+//                    }
+//                }).start(new MyInfoResponse());
 
 //方法二：
 //        RequestUtil.getMyInfo(mContext, new HttpRequest.OnNetworkListener<MyDataResponse>() {
 //            @Override
 //            public void onSuccess(MyDataResponse response) {
+//                Log.e("123", "SUccess!!!");
+//                if (response.info == null) {
+//                    Log.i("123", "response info === null!!! ");
+//                }
 //                if (response.info != null) {
 //                    MyInfoEntity myInfoEntity = (MyInfoEntity) response.info;
-//                    Log.d("123"," aaaa --- "+myInfoEntity.toString()+"----bbbb-----"+myInfoEntity.getInfo().getReal_name().toString());
-//                    if (tvMyShenFen != null && tvMyAddress != null) {
-//                        tvMyShenFen.setText(myInfoEntity.getInfo().getReal_name());
-//                        tvMyAddress.setText(myInfoEntity.getInfo().getAddress());
+//                    Log.d("123", " aaaa --- " + myInfoEntity.toString());
+//                    if (myInfoEntity.getInfo()==null) {
+//                        Log.d("123", " bbbb --- " );
+//
 //                    }
+//
+////                    Log.d("123", " aaaa --- " + myInfoEntity.toString() + "----bbbb-----" + myInfoEntity.getInfo().getReal_name().toString());
+////                    if (tvMyShenFen != null && tvMyAddress != null) {
+////                        tvMyShenFen.setText(myInfoEntity.getInfo().getReal_name());
+////                        tvMyAddress.setText(myInfoEntity.getInfo().getAddress());
+////                    }
 //                }
 //            }
 //

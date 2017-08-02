@@ -2,6 +2,7 @@ package com.future.association.personal.entity;
 
 import com.future.association.common.GsonUtils;
 import com.future.association.community.utils.TextUtil;
+import com.future.baselib.utils.JLog;
 
 import org.json.JSONException;
 
@@ -13,11 +14,13 @@ public class MyInfoResponse extends  BaseBean<MyInfoResponse.MyInfos>{
 
     @Override
     public void parseInfo(String content) throws JSONException {
+        JLog.e("json", "content  dsadsad---");
         if (TextUtil.isEmpty(content)) return;
         list = GsonUtils.jsonToList(content, MyInfos.class);
+        JLog.e("json", " lllkkklll  ---"+list.toString());
+
     }
 
-   
     public static class MyInfos {
         /**
          * id : 136

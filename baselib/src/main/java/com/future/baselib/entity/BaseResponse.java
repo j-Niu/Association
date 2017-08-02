@@ -16,8 +16,8 @@ public abstract class BaseResponse {
     public int error;
     public String info;
 
-    public void parseJson(String json){
-        JLog.e("json",json);
+    public void parseJson(String json) {
+        JLog.e("json", "json --- " + json);
         try {
             if (TextUtils.isEmpty(json)) {
                 return;
@@ -29,17 +29,17 @@ public abstract class BaseResponse {
                 if (object.optJSONObject("info") != null) {
                     info = object.optJSONObject("info").toString();
                     parseInfo(info);
-                }else if (object.optJSONArray("info")!=null){
+                } else if (object.optJSONArray("info") != null) {
                     info = object.optJSONArray("info").toString();
                     parseInfo(info);
-                }else{
+                } else {
                     this.info = object.optString("info");
                 }
-            }else{
+            } else {
                 info = object.optString("info");
             }
-        }catch (JSONException e){
-            JLog.e("BaseResponse","json格式有误:"+json);
+        } catch (JSONException e) {
+            JLog.e("BaseResponse", "json格式有误:" + json );
         }
     }
 
