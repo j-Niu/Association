@@ -118,13 +118,13 @@ public class PersonalFragment extends MyBaseFragment {
         initData();
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {
-            initData();
-        }
-    }
+ //   @Override
+ //   public void onHiddenChanged(boolean hidden) {
+ //       super.onHiddenChanged(hidden);
+  //      if (!hidden) {
+  //          initData();
+  //      }
+//    }
 
     private void initData() {
         new HttpRequest<MyInfoResponse>()
