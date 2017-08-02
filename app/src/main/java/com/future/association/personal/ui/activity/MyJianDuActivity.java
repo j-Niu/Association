@@ -3,7 +3,6 @@ package com.future.association.personal.ui.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.future.association.R;
 import com.future.association.common.MyApp;
@@ -59,7 +58,6 @@ public class MyJianDuActivity extends BaseActivity {
                         } else {
                             jianDuAdapter.notifyDataSetChanged();
                         }
-                        Toast.makeText(MyJianDuActivity.this, "JIANDU...", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
