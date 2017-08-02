@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -34,7 +35,7 @@ public class JianDuAdapter extends BaseListAdapter {
         return convertView;
     }
 
-    private void initializeViews(MyJianDu.MyJianDus entity, ViewHolder holder) {
+    private void initializeViews(final MyJianDu.MyJianDus entity, ViewHolder holder) {
         Glide.with(mContext).load(entity.getImage()).into(holder.imgMyJD);
 //        holder.imgMyJD.setImageResource(R.drawable.ic_birds);
         holder.tvMyJDTitle.setText(entity.getTitle());
@@ -42,15 +43,21 @@ public class JianDuAdapter extends BaseListAdapter {
         holder.tvMyJDType.setText(entity.getType());
         holder.tvMyJDAddress.setText(entity.getAddress());
         holder.tvMyJDContent.setText(entity.getReason());
-        //跳往详情页面
-        if (!CommonUtils.isFastDoubleClick()) {
-            Intent intent = new Intent(mContext, SuperviceDetailActivity.class);
-            intent.putExtra("id", entity.getId());
-            mContext.startActivity(intent);
-        }
+        holder.linearJiandu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳往详情页面
+                if (!CommonUtils.isFastDoubleClick()) {
+                    Intent intent = new Intent(mContext, SuperviceDetailActivity.class);
+                    intent.putExtra("id", entity.getId());
+                    mContext.startActivity(intent);
+                }
+            }
+        });
     }
 
     protected class ViewHolder {
+        private LinearLayout linearJiandu;
         private ImageView imgMyJD;
         private TextView tvMyJDTitle;
         private TextView tvMyJDCreatetime;
@@ -59,6 +66,7 @@ public class JianDuAdapter extends BaseListAdapter {
         private TextView tvMyJDContent;
 
         public ViewHolder(View view) {
+            linearJiandu = (LinearLayout) view.findViewById(R.id.linearJiandu);
             imgMyJD = (ImageView) view.findViewById(R.id.img_myJD);
             tvMyJDTitle = (TextView) view.findViewById(R.id.tv_myJD_title);
             tvMyJDCreatetime = (TextView) view.findViewById(R.id.tv_myJD_createtime);
