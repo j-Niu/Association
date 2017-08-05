@@ -110,9 +110,9 @@ public class SendTieActivity extends BaseActivity<ActivitySendTieBinding> implem
     @Override
     public void sendResult(boolean isSuccess) {
         if ("1".equals(plateInfo.getAudit())) {//1需要审核2不需要审核
-            showShortToast("操作成功，请等待审核");
+            showLongToast("帖子审核中...");
         } else {
-            showShortToast("发帖成功");
+            showLongToast("发帖成功");
         }
         finish();
     }

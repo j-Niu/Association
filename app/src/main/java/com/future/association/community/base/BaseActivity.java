@@ -160,7 +160,7 @@ public abstract class BaseActivity<G extends ViewDataBinding> extends Activity i
                     toast.cancel();
                 } catch (Exception e) {
                 }
-                toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+                toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
                 toast.show();
 
             }

@@ -84,7 +84,7 @@ public class CustomRecyclerView extends RecyclerView {
             totalItemCount = mLinearLayoutManager.getItemCount();
             lastVisibleItem = mLinearLayoutManager.findLastVisibleItemPosition() ;
             if (!isLoading
-                    && lastVisibleItem == totalItemCount-1) {
+                    && lastVisibleItem == totalItemCount-1 && dy > 0) {
                 isLoading = true ;
                 currentPage++;
                 onLoadMore(currentPage);
