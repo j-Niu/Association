@@ -1,6 +1,7 @@
 package com.future.association.personal.ui.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.view.Display;
@@ -17,18 +18,19 @@ import android.widget.Toast;
 
 import com.future.association.R;
 import com.future.association.common.MyApp;
+import com.future.association.login.LoginActivity;
+import com.future.association.login.util.CommonUtil;
 import com.future.association.personal.PersonConstant;
 import com.future.association.personal.entity.MyExit;
 import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.StatusUtils;
-import com.future.baselib.utils.ToastUtils;
 
 public class MyMoreActivity extends BaseActivity implements View.OnClickListener {
 
     private RelativeLayout myChangePwd, myAboutUs, myGiveUsPingJia, myVerifyUpdate, myClearCache;
     private Button mySafeExit;
-    private Toast clearSuccToast;
+    private Toast checkUpdate, clearSuccToast;
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
@@ -81,16 +83,23 @@ public class MyMoreActivity extends BaseActivity implements View.OnClickListener
 
                 break;
             case R.id.myVerifyUpdate:
-
-                break;
-            case R.id.myClearCache:
-                clearSuccToast = Toast.makeText(this, "缓存清理成功", Toast.LENGTH_SHORT);
-                clearSuccToast.setGravity(Gravity.CENTER, 0, 0);
-                LinearLayout toastView = (LinearLayout) clearSuccToast.getView();
+                checkUpdate = Toast.makeText(this, "已是最新版本", Toast.LENGTH_SHORT);
+                checkUpdate.setGravity(Gravity.CENTER, 0, 0);
+                LinearLayout toastView = (LinearLayout) checkUpdate.getView();
                 toastView.setLayoutParams(new LinearLayout.LayoutParams(140, 90));
                 ImageView imageCodeProject = new ImageView(this);
                 imageCodeProject.setImageResource(R.drawable.clear_succ);
                 toastView.addView(imageCodeProject, 0);
+                checkUpdate.show();
+                break;
+            case R.id.myClearCache:
+                clearSuccToast = Toast.makeText(this, "缓存清理成功", Toast.LENGTH_SHORT);
+                clearSuccToast.setGravity(Gravity.CENTER, 0, 0);
+                LinearLayout toastView2 = (LinearLayout) clearSuccToast.getView();
+                toastView2.setLayoutParams(new LinearLayout.LayoutParams(140, 90));
+                ImageView imageCodeProject2 = new ImageView(this);
+                imageCodeProject2.setImageResource(R.drawable.clear_succ);
+                toastView2.addView(imageCodeProject2, 0);
                 clearSuccToast.show();
                 break;
             case R.id.mySafeExit:
@@ -118,9 +127,11 @@ public class MyMoreActivity extends BaseActivity implements View.OnClickListener
                                         .setListener(new HttpRequest.OnNetworkListener<MyExit>() {
                                             @Override
                                             public void onSuccess(MyExit response) {
+                                                CommonUtil.clearLoginMsg(MyMoreActivity.this);
                                                 finish();
                                                 MyApp.getApp().notifyDataChange(0x898, null, null);
-                                                ToastUtils.shortToast(MyMoreActivity.this, "退出成功");
+//                                                ToastUtils.shortToast(MyMoreActivity.this, "退出成功");
+                                                startActivity(new Intent(MyMoreActivity.this, LoginActivity.class));
                                             }
 
                                             @Override

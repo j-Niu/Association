@@ -37,6 +37,7 @@ import com.future.association.personal.ui.activity.MyTieziActivity;
 import com.future.association.personal.ui.activity.MyTongZhiActivity;
 import com.future.association.personal.ui.activity.MyWenJuanActivity;
 import com.future.association.personal.util.BitmapUtils;
+import com.future.association.personal.util.StringUtils;
 import com.future.baselib.utils.CommonUtils;
 import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.JLog;
@@ -62,6 +63,7 @@ public class PersonalFragment extends MyBaseFragment {
     private TextView tvMyShenFen, tvMyAddress, tvMylevel, tvMychenghao, tvMyJifen;
     private String id;
     private List<JDResponse.JDDetail> mDatas = new ArrayList<>();
+    private JDResponse.JDDetail jdDetail;
 
     //照片
     public List<String> picPath = new ArrayList<>();
@@ -145,10 +147,10 @@ public class PersonalFragment extends MyBaseFragment {
                         if (response.data != null) {
                             mDatas.clear();
                             mDatas = response.data;
-                            JDResponse.JDDetail jdDetail = mDatas.get(0);
+                            jdDetail = mDatas.get(0);
                             Glide.with(getActivity())
                                     .asBitmap()
-                                    .load(jdDetail.level_img)
+                                    .load(StringUtils.utf8Encode(jdDetail.avatar_url))
                                     .into(header);
 //                            Glide.with(getActivity()).asBitmap().load(myInfos.level_img).into(header);
                             tvMyShenFen.setText(jdDetail.real_name);
@@ -237,7 +239,12 @@ public class PersonalFragment extends MyBaseFragment {
         myLevel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(MyLevelActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("level_img", jdDetail.level_img);
+                bundle.putString("level", jdDetail.level);
+                bundle.putString("chenghao", jdDetail.chenghao);
+                bundle.putString("jifencha", jdDetail.jifencha);
+                startActivity(MyLevelActivity.class, bundle);
             }
         });
         myJianDu.setOnClickListener(new View.OnClickListener() {
@@ -377,11 +384,16 @@ public class PersonalFragment extends MyBaseFragment {
 
             @Override
             public void onSuccess(List<String> photoList) {
+
                 Log.i("123", "onSuccess: 返回数据");
                 for (String path : photoList) {
                     Log.i("123", "onSuccess  路径    " + path);
                 }
                 if (!TextUtil.isEmpty(photoList.get(0))) {
+                    if (jdDetail.avatar_url == photoList.get(0)) {
+                        Log.i("123", "OLD---    " + jdDetail.avatar_url + "    New--- " + photoList.get(0));
+                        return;
+                    }
                     Message msg = handler.obtainMessage(CHANGE_HEADER);
                     msg.obj = photoList.get(0);
                     handler.sendMessage(msg);

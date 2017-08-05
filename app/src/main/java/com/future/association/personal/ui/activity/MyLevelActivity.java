@@ -3,24 +3,49 @@ package com.future.association.personal.ui.activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.future.association.R;
 import com.future.association.common.MyApp;
 import com.future.association.personal.PersonConstant;
+import com.future.association.personal.adapter.ItemMyLevelAdapter;
 import com.future.association.personal.entity.MyLevel;
+import com.future.association.personal.util.MesureListView;
 import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.StatusUtils;
 
-public class MyLevelActivity extends BaseActivity {
+import java.util.ArrayList;
+import java.util.List;
 
-    private TextView tvMyLevel, tvMyChenghao, tvMyLevelOth, tvMyDiffNextLevel;
+public class MyLevelActivity extends BaseActivity {
+    private ImageView imgDengji;
+    private TextView tvMyLevelResponse, tvMyChenghao, tvMyLevelResponseOth, tvMyDiffNextLevel;
+    private List<MyLevel.MyLevels> myLevelsList = new ArrayList<>();
+    private ItemMyLevelAdapter myLevelAdapter;
+    private ListView lvMyZY;
+    private String str1, str2, str3, str4;
+
+    @Override
+    protected void getBundleExtras(Bundle extras) {
+        str1 = extras.getString("level_img");
+        str2 = extras.getString("level");
+        str3 = extras.getString("chenghao");
+        str4 = extras.getString("jifencha");
+    }
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         StatusUtils.setStatusbarColor(this, getResources().getColor(R.color.colorPrimary));
         setContentView(R.layout.activity_my_level);
+    }
+
+    @Override
+    protected void initLogic() {
+
     }
 
     @Override
@@ -32,9 +57,16 @@ public class MyLevelActivity extends BaseActivity {
                 finish();
             }
         });
-        tvMyLevel= (TextView) findViewById(R.id.tvMyLevel);
-        tvMyChenghao= (TextView) findViewById(R.id.tvMyChenghao);
-        tvMyDiffNextLevel= (TextView) findViewById(R.id.tvMyDiffNextLevel);
+        imgDengji = (ImageView) findViewById(R.id.imgDengji);
+        tvMyLevelResponse = (TextView) findViewById(R.id.tvMyLevel);
+        tvMyChenghao = (TextView) findViewById(R.id.tvMyChenghao);
+        tvMyDiffNextLevel = (TextView) findViewById(R.id.tvMyDiffNextLevel);
+        lvMyZY = (ListView) findViewById(R.id.lvMyZY);
+
+        Glide.with(this).asBitmap().load(str1).into(imgDengji);
+        tvMyLevelResponse.setText("当前等级" + str2);
+        tvMyChenghao.setText("称号" + str3);
+        tvMyDiffNextLevel.setText(String.format("距离下一等级还需要%s积分", str4));
 
         new HttpRequest<MyLevel>()
                 .with(this)
@@ -44,11 +76,16 @@ public class MyLevelActivity extends BaseActivity {
                     @Override
                     public void onSuccess(MyLevel response) {
                         if (response == null) return;
-                        Log.v("123", "我的等级  ---    " + response.toString());
-                        tvMyLevel.setText("当前等级" + response.getInfoBean().level);
-                        tvMyChenghao.setText("称号" + response.getInfoBean().level_name);
-                        tvMyDiffNextLevel.setText(
-                                String.format("距离下一等级还需要%s积分", response.getInfoBean().jifen));
+                        myLevelsList.clear();
+                        myLevelsList = response.getList();
+                        Log.v("123", "我的等级  ---    " + myLevelsList.toString());
+                        if (myLevelAdapter == null) {
+                            myLevelAdapter = new ItemMyLevelAdapter(MyLevelActivity.this, myLevelsList, getLayoutInflater());
+                            lvMyZY.setAdapter(myLevelAdapter);
+                        } else {
+                            myLevelAdapter.notifyDataSetChanged();
+                        }
+                        MesureListView.setListViewHeightBasedOnChildren(lvMyZY);
                     }
 
                     @Override
@@ -58,13 +95,4 @@ public class MyLevelActivity extends BaseActivity {
                 }).start(new MyLevel());
     }
 
-    @Override
-    protected void initLogic() {
-
-    }
-
-    @Override
-    protected void getBundleExtras(Bundle extras) {
-
-    }
 }
