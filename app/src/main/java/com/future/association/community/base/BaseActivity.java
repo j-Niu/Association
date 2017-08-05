@@ -181,7 +181,7 @@ public abstract class BaseActivity<G extends ViewDataBinding> extends Activity i
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                toast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
+                toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG);
                 toast.show();
             }
         });
