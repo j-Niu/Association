@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="notifyInfo"
+            type="com.future.association.personal.entity.MyNotification.MyNotifications"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30px"
+        android:background="@drawable/selector_grid_item"
+        android:paddingRight="20px"
+        android:paddingLeft="20px"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:id="@+id/tv_content"
+            android:maxLines="2"
+            android:lineSpacingExtra="20px"
+            android:textSize="30px"
+            android:text="@{notifyInfo.title}"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_content"
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="10px"
+            android:textColor="#999999"
+            android:textSize="28px"
+            android:text="@{notifyInfo.from}"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="10px"
+            android:textColor="#999999"
+            android:textSize="28px"
+            android:text="@{notifyInfo.getReplyFormat()}"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/shape_recycle_item_divider"
+            />
+    </RelativeLayout>
+
+</layout>

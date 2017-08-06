@@ -1,13 +1,17 @@
 package com.future.association.personal.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.future.association.R;
 import com.future.association.personal.entity.MyWenJuan;
+import com.future.association.questionnaire.views.QuestionnaireWebActivity;
+import com.future.baselib.utils.CommonUtils;
 
 import java.util.List;
 
@@ -29,7 +33,7 @@ public class WenjuanAdapter extends BaseListAdapter {
         return convertView;
     }
 
-    private void initializeViews(MyWenJuan.MyWenJuans beanWenJuan, ViewHolder holder) {
+    private void initializeViews(final MyWenJuan.MyWenJuans beanWenJuan, ViewHolder holder) {
         holder.tvMyTitle.setText(beanWenJuan.title);
         holder.tvMyTitleGreen.setText(beanWenJuan.jifen);
         holder.tvMyTimeAgo.setText(beanWenJuan.time);
@@ -45,15 +49,27 @@ public class WenjuanAdapter extends BaseListAdapter {
             holder.tvMyState.setText("进行中");
             holder.tvMyState.setTextColor(mContext.getResources().getColor(R.color.yellow));
         }
+        holder.linearWenjuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!CommonUtils.isFastDoubleClick()) {
+                    Intent intent = new Intent(mContext, QuestionnaireWebActivity.class);
+                    intent.putExtra("data", beanWenJuan);
+                    mContext.startActivity(intent);
+                }
+            }
+        });
     }
 
     protected class ViewHolder {
+        private LinearLayout linearWenjuan;
         private TextView tvMyTitle;
         private TextView tvMyTitleGreen;
         private TextView tvMyTimeAgo;
         private TextView tvMyState;
 
         public ViewHolder(View view) {
+            linearWenjuan = (LinearLayout) view.findViewById(R.id.linearWenjuan);
             tvMyTitle = (TextView) view.findViewById(R.id.tvMyTitle);
             tvMyTitleGreen = (TextView) view.findViewById(R.id.tvMyTitleGreen);
             tvMyTimeAgo = (TextView) view.findViewById(R.id.tvMyTimeAgo);
