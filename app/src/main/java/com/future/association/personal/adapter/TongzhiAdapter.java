@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.future.association.R;
@@ -30,18 +31,28 @@ public class TongzhiAdapter extends BaseListAdapter {
         return convertView;
     }
 
-    private void initializeViews(MyNotification.MyNotifications item, ViewHolder holder) {
+    private void initializeViews(final MyNotification.MyNotifications item, ViewHolder holder) {
         holder.tvMyTitle.setText(item.getTitle());
         holder.tvMyTongzhiTime.setText(item.getFrom());
+//        holder.layout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("notifyInfo", item);
+//                ActivityUtils.startActivityIntent(mContext, NotifyDetailActivity.class, bundle);
+//            }
+//        });
     }
 
     protected class ViewHolder {
+        private LinearLayout layout;
         private TextView tvMyTitle;
         private TextView tvMyTongzhiTime;
 
         public ViewHolder(View view) {
             tvMyTitle = (TextView) view.findViewById(R.id.tvMyTitle);
             tvMyTongzhiTime = (TextView) view.findViewById(R.id.tvMyTongzhiTime);
+            layout = (LinearLayout) tvMyTitle.getParent();
         }
     }
 }

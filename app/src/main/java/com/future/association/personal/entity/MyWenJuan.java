@@ -5,6 +5,8 @@ import com.future.association.community.utils.TextUtil;
 
 import org.json.JSONException;
 
+import java.io.Serializable;
+
 /**
  * type": "1",//问卷状态 1 进行中 2 已完成 3已过期
  * Created by javakam on 2017/7/24 0024.
@@ -20,7 +22,7 @@ public class MyWenJuan extends BaseBean<MyWenJuan.MyWenJuans> {
     }
 
 
-    public static class MyWenJuans {
+    public static class MyWenJuans implements Serializable {
         /**
          * {
          * "error": 0,

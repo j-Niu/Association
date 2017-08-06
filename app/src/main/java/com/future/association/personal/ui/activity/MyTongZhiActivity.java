@@ -6,6 +6,9 @@ import android.widget.ListView;
 
 import com.future.association.R;
 import com.future.association.common.MyApp;
+import com.future.association.community.model.MsgDetailInfo;
+import com.future.association.community.request.CommunityRequest;
+import com.future.association.community.request.DataResponse;
 import com.future.association.personal.PersonConstant;
 import com.future.association.personal.adapter.TongzhiAdapter;
 import com.future.association.personal.entity.MyNotification;
@@ -37,6 +40,7 @@ public class MyTongZhiActivity extends BaseActivity {
             }
         });
         lvMyTongzhi = (ListView) findViewById(R.id.lvMyTongzhi);
+
 
         new HttpRequest<MyNotification>()
                 .with(this)
