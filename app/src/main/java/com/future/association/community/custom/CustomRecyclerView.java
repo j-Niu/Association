@@ -20,7 +20,7 @@ public class CustomRecyclerView extends RecyclerView {
         currentPage = page ;
     }
     public void setLoading(boolean loading) {
-        isLoading = loading;
+//        isLoading = loading;
     }
 
     public interface LoadMoreListener{
@@ -72,6 +72,9 @@ public class CustomRecyclerView extends RecyclerView {
         int totalItemCount,lastVisibleItem;
 
         private LinearLayoutManager mLinearLayoutManager;
+        private int previousTotal;
+        private int firstVisibleItem;
+        private int visibleItemCount;
 
         public EndlessRecyclerOnScrollListener(
                 LinearLayoutManager linearLayoutManager) {
@@ -81,13 +84,23 @@ public class CustomRecyclerView extends RecyclerView {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
+            visibleItemCount = recyclerView.getChildCount();
             totalItemCount = mLinearLayoutManager.getItemCount();
             lastVisibleItem = mLinearLayoutManager.findLastVisibleItemPosition() ;
+            firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
+            if(isLoading){
+                if(totalItemCount > previousTotal){
+                    //说明数据已经加载结束
+                    isLoading = false;
+                    previousTotal = totalItemCount;
+                }
+            }
+
             if (!isLoading
-                    && lastVisibleItem == totalItemCount-1 && dy > 0) {
-                isLoading = true ;
+                    && totalItemCount-visibleItemCount <= firstVisibleItem) {
                 currentPage++;
                 onLoadMore(currentPage);
+                isLoading = true ;
             }
         }
 

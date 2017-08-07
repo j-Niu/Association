@@ -41,8 +41,8 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
 
     @Override
     public void initView() {
-        linearLayoutManager = new LinearLayoutManager(context);
-        viewBinding.rcvTie.setLayoutManager(linearLayoutManager);
+//        linearLayoutManager = new LinearLayoutManager(context);
+//        viewBinding.rcvTie.setLayoutManager(linearLayoutManager);
     }
 
     @Override
