@@ -26,6 +26,7 @@ public class SupericeDetail extends BaseBean<SupericeDetail> {
     private String title;
     private String create_time;
     private String type;
+    private String hangye;//和type是一样的
     private String address;
     private String reason;
     private String[] image;
@@ -35,6 +36,14 @@ public class SupericeDetail extends BaseBean<SupericeDetail> {
         infoBean = GsonUtils.jsonToBean(content,SupericeDetail.class);
     }
 
+
+    public String getHangye() {
+        return hangye;
+    }
+
+    public void setHangye(String hangye) {
+        this.hangye = hangye;
+    }
 
     public String getId() {
         return id;
