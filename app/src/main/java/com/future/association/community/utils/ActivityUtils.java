@@ -11,47 +11,70 @@ import android.os.Bundle;
  */
 public class ActivityUtils {
 
-    private static Intent intent ;
-    private static Intent getIntent(){
-        if (intent == null){
-            intent = new Intent() ;
+    private static Intent intent;
+
+    private static Intent getIntent() {
+        if (intent == null) {
+            intent = new Intent();
         }
-        return  intent ;
+        return intent;
     }
 
     /**
      * activity页面跳转
+     *
      * @param context
      * @param clazz
      */
-    public static void startActivityIntent(Context context,Class clazz){
-        Activity activity = (Activity) context ;
-        Intent intent = getIntent() ;
-        intent.setClass(context,clazz) ;
+    public static void startActivityIntent(Context context, Class clazz) {
+        Activity activity = (Activity) context;
+        Intent intent = getIntent();
+        intent.setClass(context, clazz);
         context.startActivity(intent);
-    }/**
+    }
+
+    /**
      * activity页面跳转
+     *
      * @param context
      * @param clazz
      * @param bundle
      */
-    public static void startActivityIntent(Context context, Class clazz, Bundle bundle){
-        Intent intent = getIntent() ;
-        intent.setClass(context,clazz) ;
-        if(bundle != null){
-            intent.putExtras(bundle) ;
+    public static void startActivityIntent(Context context, Class clazz, Bundle bundle) {
+        Intent intent = getIntent();
+        intent.setClass(context, clazz);
+        if (bundle != null) {
+            intent.putExtras(bundle);
         }
+        context.startActivity(intent);
+    }
+
+    /**
+     * activity页面跳转
+     *
+     * @param context
+     * @param clazz
+     * @param bundle
+     */
+    public static void startActivityIntent(Context context, Class clazz, Bundle bundle, int flag) {
+        Intent intent = getIntent();
+        intent.setClass(context, clazz);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        intent.setFlags(flag);
         context.startActivity(intent);
     }
 
     /**
      * activity页面跳转返回
+     *
      * @param requestCode
      */
 
     public static void startActivityForResult(Context context, Intent intent, int requestCode) {
-        Activity activity = (Activity) context ;
-        activity.startActivityForResult(intent,requestCode);
+        Activity activity = (Activity) context;
+        activity.startActivityForResult(intent, requestCode);
     }
 
 }

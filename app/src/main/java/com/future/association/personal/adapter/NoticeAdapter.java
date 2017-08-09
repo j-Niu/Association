@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.future.association.R;
@@ -34,9 +35,16 @@ public class NoticeAdapter extends BaseListAdapter {
         holder.tvMyTitle.setText(item.getTitle());
         holder.tvMyPartName.setText(item.getName());
         holder.tvMyLasttime.setText(item.getCreate_time());
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     protected class ViewHolder {
+        private LinearLayout layout;
         private TextView tvMyTitle;
         private TextView tvMyPartName;
         private TextView tvMyLasttime;
@@ -45,6 +53,7 @@ public class NoticeAdapter extends BaseListAdapter {
             tvMyTitle = (TextView) view.findViewById(R.id.tvMyTitle);
             tvMyPartName = (TextView) view.findViewById(R.id.tvMyPartName);
             tvMyLasttime = (TextView) view.findViewById(R.id.tvMyLasttime);
+            layout = (LinearLayout) tvMyTitle.getParent();
         }
     }
 }

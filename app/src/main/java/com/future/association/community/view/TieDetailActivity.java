@@ -3,7 +3,6 @@ package com.future.association.community.view;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.bumptech.glide.Glide;
 import com.future.association.R;
 import com.future.association.common.GlideUtils;
 import com.future.association.common.MyApp;
-import com.future.association.community.CommunityFragment;
 import com.future.association.community.adapter.TieReplyAdapter;
 import com.future.association.community.base.BaseActivity;
 import com.future.association.community.contract.TieDetailContract;
@@ -32,6 +30,7 @@ import com.future.association.community.utils.StringUtils;
 import com.future.association.databinding.ActivityTieDetailBinding;
 import com.future.association.databinding.LayoutTieReplyHeadBinding;
 import com.future.association.databinding.PopupTieBinding;
+import com.future.association.personal.entity.MyTiezi;
 
 import java.util.ArrayList;
 
@@ -55,6 +54,10 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     private String jifen;
     private PlateInfo plateInfo;
 
+    private MyTiezi.MyTiezis myTiezis;
+    private String tieziId;
+    private int flag;
+
     @Override
     public int setContentView() {
         return R.layout.activity_tie_detail;
@@ -75,13 +78,21 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public void initData() {
-        tieInfo = getIntent().getParcelableExtra("tieInfo");
-        plateInfo = getIntent().getParcelableExtra("plateInfo");
-        jifen = getIntent().getStringExtra("jifen");
-        if ("1".equals(tieInfo.getType())) {
-            popupTieBinding.setIsTop("取消置顶");
-        } else {
-            popupTieBinding.setIsTop("置顶");
+        flag = getIntent().getFlags();
+        if (flag == 123) {
+            myTiezis = getIntent().getParcelableExtra("tieInfo");
+            plateInfo = getIntent().getParcelableExtra("plateInfo");
+            jifen = getIntent().getStringExtra("jifen");
+            tieziId = myTiezis.id;
+        }else {
+            tieInfo = getIntent().getParcelableExtra("tieInfo");
+            plateInfo = getIntent().getParcelableExtra("plateInfo");
+            jifen = getIntent().getStringExtra("jifen");
+            tieziId = tieInfo.getId(); if ("1".equals(tieInfo.getType())) {
+                popupTieBinding.setIsTop("取消置顶");
+            } else {
+                popupTieBinding.setIsTop("置顶");
+            }
         }
         tieReplyInfos = new ArrayList<>();
         viewBinding.layoutTitle.setTitle("帖子详情");
@@ -138,7 +149,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
             @Override
             public void weigui(int position) {
                 Bundle bundle = new Bundle();
-                bundle.putString("tieId", tieInfo.getId());
+                bundle.putString("tieId", tieziId);
                 bundle.putString("id", adapter.tieReplyInfos.get(position).getId());
                 ActivityUtils.startActivityIntent(context, WeiGuiActivity.class, bundle);
             }
@@ -175,14 +186,14 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
             case R.id.tv_weigui:
                 popupWindow.dismiss();
                 Bundle bundle = new Bundle();
-                bundle.putString("tieId", tieInfo.getId());
+                bundle.putString("tieId", tieziId);
                 bundle.putString("id", "");
                 ActivityUtils.startActivityIntent(context, WeiGuiActivity.class, bundle);
                 break;
             case R.id.tv_send:
-                if(StringUtils.stringIsInteger(jifen) < StringUtils.stringIsInteger(plateInfo.getHuifu_jf())){
+                if (StringUtils.stringIsInteger(jifen) < StringUtils.stringIsInteger(plateInfo.getHuifu_jf())) {
                     showShortToast("积分不够不能回复");
-                    return ;
+                    return;
                 }
                 presenter.sendReply();//发送回复
                 break;
@@ -200,7 +211,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
             tieReplyInfos.addAll(replyInfos);
             adapter.notifyDataSetChanged();
         } else {
-            viewBinding.rclReply.setPage(currentPage-1);
+            viewBinding.rclReply.setPage(currentPage - 1);
         }
     }
 
@@ -231,7 +242,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public String getTieId() {
-        return tieInfo.getId();
+        return tieziId;
     }
 
     @Override

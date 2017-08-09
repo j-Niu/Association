@@ -34,6 +34,20 @@ public class HuiYingAdapter extends BaseListAdapter {
         holder.tvMyTitle.setText(item.title);
         holder.tvMyHYBelong.setText(item.name);
         holder.tvMyHYTime.setText(item.create_time);
+
+        /*
+        public String id;
+        public String title;
+        public String create_time;
+        public String name;
+        public String tiezi_id;
+        public String huifu_num;
+         */
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable("tieInfo", tieInfos.get(position));
+//        bundle.putParcelable("plateInfo", plateInfo);
+//        bundle.putString("jifen", userPlateInfo.getJifen());
+//        ActivityUtils.startActivityIntent(mContext, TieDetailActivity.class, bundle);
     }
 
     protected class ViewHolder {

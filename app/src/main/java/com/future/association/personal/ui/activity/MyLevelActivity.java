@@ -23,11 +23,11 @@ import java.util.List;
 
 public class MyLevelActivity extends BaseActivity {
     private ImageView imgDengji;
-    private TextView tvMyLevelResponse, tvMyChenghao, tvMyLevelResponseOth, tvMyDiffNextLevel;
+    private TextView tvMyLevelResponse, tvMyChenghao, tvMyLevelOth, tvMyDiffNextLevel;
     private List<MyLevel.MyLevels> myLevelsList = new ArrayList<>();
     private ItemMyLevelAdapter myLevelAdapter;
     private ListView lvMyZY;
-    private String str1, str2, str3, str4;
+    private String str1, str2, str3, str4, str5;
 
     @Override
     protected void getBundleExtras(Bundle extras) {
@@ -35,6 +35,7 @@ public class MyLevelActivity extends BaseActivity {
         str2 = extras.getString("level");
         str3 = extras.getString("chenghao");
         str4 = extras.getString("jifencha");
+        str5 = extras.getString("jifen");
     }
 
     @Override
@@ -60,12 +61,14 @@ public class MyLevelActivity extends BaseActivity {
         imgDengji = (ImageView) findViewById(R.id.imgDengji);
         tvMyLevelResponse = (TextView) findViewById(R.id.tvMyLevel);
         tvMyChenghao = (TextView) findViewById(R.id.tvMyChenghao);
+        tvMyLevelOth = (TextView) findViewById(R.id.tvMyLevelOth);
         tvMyDiffNextLevel = (TextView) findViewById(R.id.tvMyDiffNextLevel);
         lvMyZY = (ListView) findViewById(R.id.lvMyZY);
 
         Glide.with(this).asBitmap().load(str1).into(imgDengji);
-        tvMyLevelResponse.setText("当前等级" + str2);
-        tvMyChenghao.setText("称号" + str3);
+        tvMyLevelResponse.setText("当前等级:" + str2);
+        tvMyChenghao.setText("称号:" + str3);
+        tvMyLevelOth.setText("积分:" +str5);
         tvMyDiffNextLevel.setText(String.format("距离下一等级还需要%s积分", str4));
 
         new HttpRequest<MyLevel>()

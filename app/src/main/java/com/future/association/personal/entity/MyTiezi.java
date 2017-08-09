@@ -5,6 +5,8 @@ import com.future.association.community.utils.TextUtil;
 
 import org.json.JSONException;
 
+import java.io.Serializable;
+
 /**
  * Created by javakam on 2017/7/24 0024.
  */
@@ -19,7 +21,7 @@ public class MyTiezi extends BaseBean<MyTiezi.MyTiezis> {
     }
 
 
-    public static class MyTiezis {
+    public static class MyTiezis implements Serializable{
         /**
          * {
          * "error": 0,

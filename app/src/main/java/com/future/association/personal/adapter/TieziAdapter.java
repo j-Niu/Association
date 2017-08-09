@@ -1,12 +1,17 @@
 package com.future.association.personal.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.future.association.R;
+import com.future.association.community.utils.ActivityUtils;
+import com.future.association.community.view.TieDetailActivity;
 import com.future.association.personal.entity.MyTiezi;
 
 import java.util.List;
@@ -30,15 +35,40 @@ public class TieziAdapter extends BaseListAdapter {
         return convertView;
     }
 
-    private void initializeViews(MyTiezi.MyTiezis item, ViewHolder holder) {
+    private void initializeViews(final MyTiezi.MyTiezis item, ViewHolder holder) {
 
         holder.tvMyTitle.setText(item.title);
         holder.tvMyHYBelong.setText(item.name);
         holder.tvMyHYHuifu.setText(item.huifu_num);
         holder.tvMyHYTime.setText(item.create_time);
+        /*
+         public String id;
+        public String title;
+        public String create_time;
+        public String name;
+        public String huifu_num;
+         */
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+//                bundle.putParcelable("tieInfo", tieInfos.get(position));
+//                bundle.putParcelable("plateInfo", plateInfo);
+//                bundle.putString("jifen", userPlateInfo.getJifen());
+                bundle.putSerializable("tieInfo", item);
+                bundle.putSerializable("plateInfo", "");
+                bundle.putSerializable("jifen", "3000");
+//                Intent intent = new Intent(mContext, TieDetailActivity.class);
+//                intent.setFlags(121);
+//                mContext.startActivity(intent, bundle);
+                ActivityUtils.startActivityIntent(mContext, TieDetailActivity.class, bundle, 121);
+                Toast.makeText(mContext, "lklkl", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     protected class ViewHolder {
+        private LinearLayout layout;
         private TextView tvMyTitle;
         private TextView tvMyHYBelong;
         private TextView tvMyHYHuifu;
@@ -49,6 +79,7 @@ public class TieziAdapter extends BaseListAdapter {
             tvMyHYBelong = (TextView) view.findViewById(R.id.tvMyHYBelong);
             tvMyHYHuifu = (TextView) view.findViewById(R.id.tvMyHYHuifu);
             tvMyHYTime = (TextView) view.findViewById(R.id.tvMyHYTime);
+            layout = (LinearLayout) tvMyTitle.getParent();
         }
     }
 }

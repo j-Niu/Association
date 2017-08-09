@@ -16,6 +16,7 @@ public class PersonConstant {
     public static final String MY_UP_HEADER = "_myimg_001";//上传头像
     public static final String MY_LOGOUT = "_logout_001";//用户登出
     public static final String MY_LEVELS = "_userlevel_001";//我的等级
+    public static final String MY_TIEZI_DETAIL = "_sqtiezixiangqing_001";//帖子详情
 
 
 }

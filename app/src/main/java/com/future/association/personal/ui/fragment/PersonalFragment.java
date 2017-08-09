@@ -244,6 +244,7 @@ public class PersonalFragment extends MyBaseFragment {
                 bundle.putString("level", jdDetail.level);
                 bundle.putString("chenghao", jdDetail.chenghao);
                 bundle.putString("jifencha", jdDetail.jifencha);
+                bundle.putString("jifen", jdDetail.jifen);
                 startActivity(MyLevelActivity.class, bundle);
             }
         });
