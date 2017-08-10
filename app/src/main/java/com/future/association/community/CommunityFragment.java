@@ -131,7 +131,7 @@ public class CommunityFragment extends Fragment implements CommunityContract.IVi
             @Override
             public void itemClick(int position) {
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("notifyInfo", notifyAdapter.getItem(position));
+                bundle.putString("id", notifyAdapter.getItem(position).getId());
                 ActivityUtils.startActivityIntent(getContext(), NotifyDetailActivity.class, bundle);
             }
         });

@@ -27,11 +27,10 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
     private NotifyDetailAdapter adapter;
     private ArrayList<NotifyReplyInfo> replyInfos;
     private NotifyDetailContract.IPresenter presenter;
-    private LinearLayoutManager linearLayoutManager;
-    private MsgNotifyInfo notifyInfo;
     private View mHeadView;
     private LayoutNotifyReplyHeadBinding headBinding;
     private int currentPage = 1;
+    private String id;
 
     @Override
     public int setContentView() {
@@ -46,7 +45,7 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
 
     @Override
     public void initData() {
-        notifyInfo = getIntent().getParcelableExtra("notifyInfo");
+        id = getIntent().getStringExtra("id");
         replyInfos = new ArrayList<>();
         viewBinding.layoutTitle.setTitle("通知详情");
         adapter = new NotifyDetailAdapter(context, replyInfos);
@@ -110,7 +109,7 @@ public class NotifyDetailActivity extends BaseActivity<ActivityNotifyDetailBindi
 
     @Override
     public String getNofityId() {
-        return notifyInfo.getId();
+        return id;
     }
 
     @Override
