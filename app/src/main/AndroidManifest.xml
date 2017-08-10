@@ -4,9 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--读取文件权限-->
+    <!-- 读取文件权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--写入数据权限-->
+    <!-- 写入数据权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -17,23 +17,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
         <meta-data
             android:name="design_width"
             android:value="750" />
-
         <meta-data
             android:name="design_height"
             android:value="1334" />
 
-        <activity android:name=".common.MainActivity"></activity>
-        <!--登录模块-->
+        <activity android:name=".common.MainActivity" />
+        <!-- 登录模块 -->
         <activity
             android:name=".login.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -52,7 +50,6 @@
         <activity
             android:name=".login.RegisterSuccessActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".login.WebActivity"
             android:screenOrientation="portrait" />
@@ -102,7 +99,7 @@
         <activity android:name=".personal.ui.activity.MyMoreActivity" />
         <activity android:name=".personal.ui.activity.AboutUsActivity" />
         <activity android:name=".personal.ui.activity.ChangePwdActivity" />
-        <activity android:name=".news.ui.activity.NewsActivity"></activity>
+        <activity android:name=".news.ui.activity.NewsActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -114,7 +111,7 @@
                 android:resource="@xml/filepaths" />
         </provider>
         <provider
-            android:name="com.future.association.supervice.MyProvider"
+            android:name=".supervice.MyProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -122,6 +119,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".personal.ui.activity.TzDetailActivity"></activity>
     </application>
 
 </manifest>

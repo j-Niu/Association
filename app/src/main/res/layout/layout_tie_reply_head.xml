@@ -2,32 +2,33 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="tieDetailInfo"
-            type="com.future.association.community.model.TieDetailInfo"/>
+            type="com.future.association.community.model.TieDetailInfo" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingRight="30px"
             android:paddingLeft="30px"
-            android:paddingTop="20px"
-            >
+            android:paddingRight="30px"
+            android:paddingTop="20px">
+
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/rl_base_info"
-                >
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <com.future.association.community.custom.CircleImageView
                     android:id="@+id/civ_head"
                     android:layout_width="90px"
-                    android:layout_height="90px"/>
+                    android:layout_height="90px" />
 
                 <TextView
                     android:id="@+id/tv_name"
@@ -39,29 +40,31 @@
                     android:text="@{tieDetailInfo.real_name}"
                     android:textColor="#333333"
                     android:textSize="30px" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="10px"
+                    android:background="@drawable/shape_lanlord"
                     android:paddingLeft="10px"
                     android:paddingRight="10px"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/shape_lanlord"
                     android:text="楼主"
                     android:textColor="#faa701"
                     android:textSize="30px" />
 
                 <TextView
+                    android:id="@+id/tv_class"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_name"
-                    android:id="@+id/tv_class"
                     android:layout_marginLeft="20px"
                     android:layout_marginTop="10px"
                     android:layout_toRightOf="@id/civ_head"
                     android:text="@{tieDetailInfo.level}"
                     android:textColor="#666666"
                     android:textSize="24px" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -73,58 +76,60 @@
                     android:textColor="#666666"
                     android:textSize="24px" />
             </RelativeLayout>
-            <View style="@style/appGreyLine"
-                android:layout_below="@id/rl_base_info"
-                android:layout_marginTop="10px"
+
+            <View
                 android:id="@+id/line"
-                />
+                style="@style/appGreyLine"
+                android:layout_below="@id/rl_base_info"
+                android:layout_marginTop="10px" />
+
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="20px"
-                android:layout_marginTop="30px"
-                android:text="@{tieDetailInfo.title}"
-                android:textSize="30px"
-                android:id="@+id/tv_title"
                 android:layout_below="@id/line"
+                android:layout_marginTop="30px"
+                android:lineSpacingExtra="20px"
+                android:text="@{tieDetailInfo.title}"
                 android:textColor="#333333"
-                />
+                android:textSize="30px" />
+
             <TextView
+                android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title"
+                android:layout_marginTop="20px"
                 android:text="@{tieDetailInfo.create_time}"
                 android:textColor="#999999"
-                android:id="@+id/tv_date"
-                android:layout_below="@id/tv_title"
-                android:layout_marginTop="20px"
-                android:textSize="24px"
-                />
+                android:textSize="24px" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/tv_title"
+                android:layout_marginTop="20px"
                 android:text="@{tieDetailInfo.typeFormat()}"
                 android:textColor="#999999"
-                android:layout_below="@id/tv_title"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="20px"
-                android:textSize="24px"
-                />
+                android:textSize="24px" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/tv_date"
+                android:layout_marginTop="34px"
+                android:lineSpacingExtra="20px"
                 android:text="@{tieDetailInfo.content}"
                 android:textColor="#666666"
-                android:lineSpacingExtra="20px"
-                android:layout_below="@id/tv_date"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="34px"
-                android:textSize="28px"
-                />
+                android:textSize="28px" />
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="30px"
-            android:background="#f8f8f8"/>
+            android:background="#f8f8f8" />
     </LinearLayout>
 
 </layout>

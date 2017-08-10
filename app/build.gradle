@@ -5,7 +5,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     configurations {
-        all*.exclude  module: 'ucrop'  //去除重复依赖库
+        all*.exclude module: 'ucrop'  //去除重复依赖库
     }
     defaultConfig {
         applicationId "com.future.association"
@@ -38,9 +38,11 @@ dependencies {
     compile project(':baselib')
     //rxbinding
     //rxjava扩展
-    
 
 
+    compile('com.github.LuckSiege.PictureSelector:picture_library:v2.1.0', {
+        exclude module: 'ucrop'//排除ucrop重复依赖
+    })
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.jakewharton:butterknife:8.6.0'
@@ -50,11 +52,8 @@ dependencies {
     compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
     compile 'com.contrarywind:Android-PickerView:3.2.5'
     compile 'com.youth.banner:banner:1.4.9'
+    compile 'com.github.YancyYe:GalleryPick:1.2.1'
+    compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
-    compile 'com.github.YancyYe:GalleryPick:1.2.1'
-    compile ('com.github.LuckSiege.PictureSelector:picture_library:v2.1.0', {
-        exclude  module: 'ucrop'//排除ucrop重复依赖
-    })
-    compile 'com.android.support:multidex:1.0.1'
 }
