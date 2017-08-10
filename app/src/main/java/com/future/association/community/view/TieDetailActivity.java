@@ -45,18 +45,15 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     private ArrayList<TieReplyInfo> tieReplyInfos;
     private TieReplyAdapter adapter;
     private TieDetailContract.IPresenter presenter;
-    private LinearLayoutManager linearLayoutManager;
-    private TieInfo tieInfo;
     private int delReplyPosition;
     private LayoutTieReplyHeadBinding headBinding;
     private View mHeadView;
     private int currentPage = 1;
     private String jifen;
-    private PlateInfo plateInfo;
 
-    private MyTiezi.MyTiezis myTiezis;
     private String tieziId;
     private int flag;
+    private String huifu_jf;
 
     @Override
     public int setContentView() {
@@ -79,20 +76,14 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     @Override
     public void initData() {
         flag = getIntent().getFlags();
-        if (flag == 123) {
-            myTiezis = getIntent().getParcelableExtra("tieInfo");
-            plateInfo = getIntent().getParcelableExtra("plateInfo");
-            jifen = getIntent().getStringExtra("jifen");
-            tieziId = myTiezis.id;
-        }else {
-            tieInfo = getIntent().getParcelableExtra("tieInfo");
-            plateInfo = getIntent().getParcelableExtra("plateInfo");
-            jifen = getIntent().getStringExtra("jifen");
-            tieziId = tieInfo.getId(); if ("1".equals(tieInfo.getType())) {
-                popupTieBinding.setIsTop("取消置顶");
-            } else {
-                popupTieBinding.setIsTop("置顶");
-            }
+        String type = getIntent().getStringExtra("type") ;
+        jifen = getIntent().getStringExtra("jifen");
+        huifu_jf = getIntent().getStringExtra("huifu_jf");
+        tieziId =getIntent().getStringExtra("id");
+        if ("1".equals(type)) {
+            popupTieBinding.setIsTop("取消置顶");
+        } else {
+            popupTieBinding.setIsTop("置顶");
         }
         tieReplyInfos = new ArrayList<>();
         viewBinding.layoutTitle.setTitle("帖子详情");
@@ -191,7 +182,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
                 ActivityUtils.startActivityIntent(context, WeiGuiActivity.class, bundle);
                 break;
             case R.id.tv_send:
-                if (StringUtils.stringIsInteger(jifen) < StringUtils.stringIsInteger(plateInfo.getHuifu_jf())) {
+                if (StringUtils.stringIsInteger(jifen) < StringUtils.stringIsInteger(huifu_jf)) {
                     showShortToast("积分不够不能回复");
                     return;
                 }

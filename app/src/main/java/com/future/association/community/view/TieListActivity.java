@@ -78,8 +78,9 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
             @Override
             public void itemClick(int position) {
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("tieInfo", tieInfos.get(position));
-                bundle.putParcelable("plateInfo", plateInfo);
+                bundle.putString("huifu_Jf",plateInfo.getHuifu_jf());
+                bundle.putString("id",tieInfos.get(position).getId());
+                bundle.putString("type",tieInfos.get(position).getType());
                 bundle.putString("jifen", userPlateInfo.getJifen());
                 ActivityUtils.startActivityIntent(context, TieDetailActivity.class, bundle);
             }
