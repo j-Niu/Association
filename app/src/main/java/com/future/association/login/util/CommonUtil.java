@@ -221,7 +221,7 @@ public class CommonUtil {
                 .putString("user", gson.toJson(userResponse))
                 .putBoolean("islogin", true)
                 .putString("userToken", userResponse.userToken)
-                .putString("quxian", userResponse.quanxian)
+                .putString("quanxian", userResponse.quanxian)
                 .apply();
         MyApp.setQuanxian(userResponse.quanxian);
         MyApp.setUserToken(userResponse.userToken);
