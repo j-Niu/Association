@@ -80,10 +80,10 @@ public class MyApp extends Application {
      * @return
      */
     public static boolean isAdministrator() {
-        if ("1".equals(quanxian)) {
-            return false;
-        } else {
+        if ("2".equals(quanxian) || "3".equals(quanxian)) {
             return true;
+        } else {
+            return false;
         }
     }
 
