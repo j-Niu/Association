@@ -118,7 +118,7 @@ public class LoginViewModel {
                                             if (CommonUtil.isNumeric(message)) {
                                                 showErrorDialog(message);
                                             } else if (message.equals("用户审核未通过，请重新申请")) {
-                                                startActivity(activity, PerfectInformationActivity.class);
+                                                startActivity(activity, RegisterActivity.class);
                                             } else {
                                                 activity.toast.show("" + message);
                                             }
