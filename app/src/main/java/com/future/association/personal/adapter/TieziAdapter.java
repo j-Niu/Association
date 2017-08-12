@@ -40,26 +40,10 @@ public class TieziAdapter extends BaseListAdapter {
         holder.tvMyHYBelong.setText(item.name);
         holder.tvMyHYHuifu.setText(item.huifu_num);
         holder.tvMyHYTime.setText(item.create_time);
-        /*
-         public String id;
-        public String title;
-        public String create_time;
-        public String name;
-        public String huifu_num;
-         */
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-//                bundle.putParcelable("tieInfo", tieInfos.get(position));
-//                bundle.putParcelable("plateInfo", plateInfo);
-//                bundle.putString("jifen", userPlateInfo.getJifen());
-//                bundle.putSerializable("tieInfo", item);
-//                bundle.putSerializable("plateInfo", "");
-//                bundle.putSerializable("jifen", "3000");
-//                Intent intent = new Intent(mContext, TieDetailActivity.class);
-//                intent.setFlags(121);
-//                mContext.startActivity(intent, bundle);
                 bundle.putString("tzid", item.id);
                 ActivityUtils.startActivityIntent(mContext, TzDetailActivity.class, bundle);
             }

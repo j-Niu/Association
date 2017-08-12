@@ -1,13 +1,17 @@
 package com.future.association.personal.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.future.association.R;
+import com.future.association.community.utils.ActivityUtils;
 import com.future.association.personal.entity.MyResponse;
+import com.future.association.personal.ui.activity.TzDetailActivity;
 
 import java.util.List;
 
@@ -30,27 +34,23 @@ public class HuiYingAdapter extends BaseListAdapter {
         return convertView;
     }
 
-    private void initializeViews(MyResponse.MyResponses item, ViewHolder holder) {
+    private void initializeViews(final MyResponse.MyResponses item, ViewHolder holder) {
         holder.tvMyTitle.setText(item.title);
         holder.tvMyHYBelong.setText(item.name);
         holder.tvMyHYTime.setText(item.create_time);
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("tzid", item.tiezi_id);
+                ActivityUtils.startActivityIntent(mContext, TzDetailActivity.class, bundle);
+            }
+        });
 
-        /*
-        public String id;
-        public String title;
-        public String create_time;
-        public String name;
-        public String tiezi_id;
-        public String huifu_num;
-         */
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelable("tieInfo", tieInfos.get(position));
-//        bundle.putParcelable("plateInfo", plateInfo);
-//        bundle.putString("jifen", userPlateInfo.getJifen());
-//        ActivityUtils.startActivityIntent(mContext, TieDetailActivity.class, bundle);
     }
 
     protected class ViewHolder {
+        private LinearLayout layout;
         private TextView tvMyTitle;
         private TextView tvMyHYBelong;
         private TextView tvMyHYTime;
@@ -59,6 +59,7 @@ public class HuiYingAdapter extends BaseListAdapter {
             tvMyTitle = (TextView) view.findViewById(R.id.tvMyTitle);
             tvMyHYBelong = (TextView) view.findViewById(R.id.tvMyHYBelong);
             tvMyHYTime = (TextView) view.findViewById(R.id.tvMyHYTime);
+            layout= (LinearLayout) tvMyTitle.getParent();
         }
     }
 }

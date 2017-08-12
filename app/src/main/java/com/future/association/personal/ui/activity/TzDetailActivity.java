@@ -1,12 +1,12 @@
 package com.future.association.personal.ui.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.future.association.R;
 import com.future.association.common.MyApp;
 import com.future.association.community.custom.CircleImageView;
@@ -67,8 +67,7 @@ public class TzDetailActivity extends BaseActivity {
         tv_date = (TextView) mHeadView.findViewById(R.id.tv_date);
         typeFormat = (TextView) mHeadView.findViewById(R.id.typeFormat);
         content = (TextView) mHeadView.findViewById(R.id.content);
-        content.setText("HHHXXXX");
-//        tz_detail.addHeaderView(mHeadView, null, false);
+        tz_detail.addHeaderView(mHeadView, null, false);
 
         netForReply();
         netDetail();
@@ -85,17 +84,16 @@ public class TzDetailActivity extends BaseActivity {
                     public void onSuccess(MyTieziDetail response) {
                         if (response == null) return;
                         MyTieziDetail.MyTieziDetails details = response.getList().get(0);
-                        Log.v("123", "hahhauuu ----  " + details.real_name);
 
-//                        Glide.with(TzDetailActivity.this)
-//                                .asBitmap().load(details.avatar_url).into(civ_head);
-//                        tv_name.setText(details.real_name);
-//                        tv_class.setText(details.level);
-//                        tv_address.setText(details.address);
-//                        tv_title.setText(details.title);
-//                        tv_date.setText(details.create_time);
-//                        typeFormat.setText(details.type);
-//                        content.setText(details.content);
+                        Glide.with(TzDetailActivity.this)
+                                .asBitmap().load(details.avatar_url).into(civ_head);
+                        tv_name.setText(details.real_name);
+                        tv_class.setText(details.getLevel());
+                        tv_address.setText(details.address);
+                        tv_title.setText(details.title);
+                        tv_date.setText(details.create_time);
+                        typeFormat.setText(details.typeFormat());
+                        content.setText(details.content);
                     }
 
                     @Override
@@ -116,11 +114,10 @@ public class TzDetailActivity extends BaseActivity {
                 .setListener(new HttpRequest.OnNetworkListener<MyTzReplyInfo>() {
                     @Override
                     public void onSuccess(MyTzReplyInfo response) {
-                        Log.w("123","OOOPPPP --- "+response.toString());
+//                        Log.w("123","OOOPPPP --- "+response.toString());
                         if (response == null) return;
                         tieReplyInfos = response.getList();
-                        Log.i("123","xxxxx--- "+tieReplyInfos.get(0).toString());
-                        if (tieReplyInfos == null) {
+                        if (adapter == null) {
                             adapter = new MyTzReplyAdapter(TzDetailActivity.this, tieReplyInfos, getLayoutInflater());
                             tz_detail.setAdapter(adapter);
                         } else {

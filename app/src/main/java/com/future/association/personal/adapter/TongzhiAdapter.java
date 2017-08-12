@@ -1,6 +1,7 @@
 package com.future.association.personal.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.future.association.R;
+import com.future.association.community.utils.ActivityUtils;
 import com.future.association.personal.entity.MyNotification;
+import com.future.association.personal.ui.activity.TzDetailActivity;
 
 import java.util.List;
 
@@ -34,14 +37,14 @@ public class TongzhiAdapter extends BaseListAdapter {
     private void initializeViews(final MyNotification.MyNotifications item, ViewHolder holder) {
         holder.tvMyTitle.setText(item.getTitle());
         holder.tvMyTongzhiTime.setText(item.getFrom());
-//        holder.layout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Bundle bundle = new Bundle();
-//                bundle.putParcelable("notifyInfo", item);
-//                ActivityUtils.startActivityIntent(mContext, NotifyDetailActivity.class, bundle);
-//            }
-//        });
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("tzid", item.getId());
+                ActivityUtils.startActivityIntent(mContext, TzDetailActivity.class, bundle);
+            }
+        });
     }
 
     protected class ViewHolder {
