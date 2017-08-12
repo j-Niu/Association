@@ -9,16 +9,17 @@ import android.widget.TextView;
 
 import com.future.association.R;
 import com.future.association.common.MyApp;
-import com.future.association.community.adapter.TieReplyAdapter;
 import com.future.association.community.custom.CircleImageView;
 import com.future.association.personal.PersonConstant;
-import com.future.association.personal.entity.MyTiezi;
+import com.future.association.personal.adapter.MyTzReplyAdapter;
 import com.future.association.personal.entity.MyTieziDetail;
+import com.future.association.personal.entity.MyTzReplyInfo;
 import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.StatusUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TzDetailActivity extends BaseActivity {
     private ListView tz_detail;
@@ -26,8 +27,8 @@ public class TzDetailActivity extends BaseActivity {
     private CircleImageView civ_head;
     private TextView tv_name, tv_class, tv_address;
     private TextView tv_title, tv_date, typeFormat, content;
-    private ArrayList<MyTiezi.MyTiezis> tieReplyInfos;
-    private TieReplyAdapter adapter;
+    private MyTzReplyAdapter adapter;
+    private List<MyTzReplyInfo.MyTzReplyInfos> tieReplyInfos = new ArrayList<>();
     private String tid;
 
     @Override
@@ -67,12 +68,13 @@ public class TzDetailActivity extends BaseActivity {
         typeFormat = (TextView) mHeadView.findViewById(R.id.typeFormat);
         content = (TextView) mHeadView.findViewById(R.id.content);
         content.setText("HHHXXXX");
-        tz_detail.addHeaderView(mHeadView, null, false);
+//        tz_detail.addHeaderView(mHeadView, null, false);
 
-        netData();
+        netForReply();
+        netDetail();
     }
 
-    private void netData() {
+    private void netDetail() {
         new HttpRequest<MyTieziDetail>()
                 .with(this)
                 .addParam("apiCode", PersonConstant.MY_TIEZI_DETAIL)
@@ -87,22 +89,13 @@ public class TzDetailActivity extends BaseActivity {
 
 //                        Glide.with(TzDetailActivity.this)
 //                                .asBitmap().load(details.avatar_url).into(civ_head);
-                        tv_name.setText(details.real_name);
+//                        tv_name.setText(details.real_name);
 //                        tv_class.setText(details.level);
 //                        tv_address.setText(details.address);
 //                        tv_title.setText(details.title);
 //                        tv_date.setText(details.create_time);
 //                        typeFormat.setText(details.type);
 //                        content.setText(details.content);
-
-//                        wenJuanList.clear();
-//                        wenJuanList = response.getList();
-//                        if (wenjuanAdapter == null) {
-//                            wenjuanAdapter = new WenjuanAdapter(MyTieziDetailActivity.this, wenJuanList, getLayoutInflater());
-//                            lvMyWenjuan.setAdapter(wenjuanAdapter);
-//                        } else {
-//                            wenjuanAdapter.notifyDataSetChanged();
-//                        }
                     }
 
                     @Override
@@ -112,5 +105,33 @@ public class TzDetailActivity extends BaseActivity {
                 }).start(new MyTieziDetail());
     }
 
+    private void netForReply() {
+        new HttpRequest<MyTzReplyInfo>()
+                .with(this)
+                .addParam("apiCode", PersonConstant.MY_TIEZI_REPLY)
+                .addParam("userToken", MyApp.getUserToken())
+                .addParam("id", tid)
+                .addParam("page", 1 + "")
+                .addParam("size", PersonConstant.PAGE_SIZE_DEFAULT)
+                .setListener(new HttpRequest.OnNetworkListener<MyTzReplyInfo>() {
+                    @Override
+                    public void onSuccess(MyTzReplyInfo response) {
+                        Log.w("123","OOOPPPP --- "+response.toString());
+                        if (response == null) return;
+                        tieReplyInfos = response.getList();
+                        Log.i("123","xxxxx--- "+tieReplyInfos.get(0).toString());
+                        if (tieReplyInfos == null) {
+                            adapter = new MyTzReplyAdapter(TzDetailActivity.this, tieReplyInfos, getLayoutInflater());
+                            tz_detail.setAdapter(adapter);
+                        } else {
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
 
+                    @Override
+                    public void onFail(String message) {
+                        toast("错误信息：" + message);
+                    }
+                }).start(new MyTzReplyInfo());
+    }
 }

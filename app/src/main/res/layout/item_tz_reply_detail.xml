@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="20px"
+    android:paddingRight="20px"
+    android:paddingTop="30px">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.future.association.personal.CircleImageView
+            android:id="@+id/civ_head"
+            android:layout_width="90px"
+            android:layout_height="90px" />
+
+        <TextView
+            android:id="@+id/tv_real_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="10px"
+            android:layout_toRightOf="@id/civ_head"
+            android:textColor="#333333"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/tv_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="10px"
+            android:layout_toRightOf="@id/civ_head"
+            android:textColor="#666666"
+            android:textSize="24px" />
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20px"
+            android:padding="10px"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_black_more" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="10px"
+            android:layout_toRightOf="@id/tv_class"
+            android:textColor="#666666"
+            android:textSize="24px" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110px"
+        android:layout_marginTop="20px"
+        android:lineSpacingExtra="20px"
+        android:textColor="#666666"
+        android:textSize="28px" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/shape_recycle_item_divider" />
+</LinearLayout>

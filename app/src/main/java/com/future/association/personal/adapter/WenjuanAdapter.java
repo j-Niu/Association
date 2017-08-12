@@ -35,7 +35,7 @@ public class WenjuanAdapter extends BaseListAdapter {
 
     private void initializeViews(final MyWenJuan.MyWenJuans beanWenJuan, ViewHolder holder) {
         holder.tvMyTitle.setText(beanWenJuan.title);
-        holder.tvMyTitleGreen.setText(beanWenJuan.jifen);
+        holder.tvMyTitleGreen.setText(String.format("完成问卷+%1$s积分", beanWenJuan.jifen));
         holder.tvMyTimeAgo.setText(beanWenJuan.time);
         //type": "1",//问卷状态 1 进行中 2 已完成 3已过期
 

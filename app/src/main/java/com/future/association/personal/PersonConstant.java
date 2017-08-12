@@ -17,6 +17,6 @@ public class PersonConstant {
     public static final String MY_LOGOUT = "_logout_001";//用户登出
     public static final String MY_LEVELS = "_userlevel_001";//我的等级
     public static final String MY_TIEZI_DETAIL = "_sqtiezixiangqing_001";//帖子详情
-
+    public static final String MY_TIEZI_REPLY = "_sqtiezihuifu_001";//获取帖子回复
 
 }
