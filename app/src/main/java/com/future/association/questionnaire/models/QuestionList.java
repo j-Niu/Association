@@ -25,10 +25,19 @@ public static final Creator<QuestionList> CREATOR = new Creator<>(QuestionList.c
     private String type;
     private String time;
     private String showurl;
+    private String jianjie;
 
     @Override
     public void parseInfo(String content) throws JSONException {
         list = GsonUtils.jsonToList(content,QuestionList.class);
+    }
+
+    public String getJianjie() {
+        return jianjie;
+    }
+
+    public void setJianjie(String jianjie) {
+        this.jianjie = jianjie;
     }
 
     public String getType() {
