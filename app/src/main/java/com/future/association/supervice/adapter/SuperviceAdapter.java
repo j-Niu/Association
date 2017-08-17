@@ -5,15 +5,11 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.future.association.R;
-import com.future.association.common.GlideUtils;
-import com.future.association.community.utils.TextUtil;
 import com.future.association.supervice.model.SupericeList;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -28,16 +24,18 @@ public class SuperviceAdapter extends BaseQuickAdapter<SupericeList.SupericeList
     @Override
     protected void convert(BaseViewHolder baseViewHolder, SupericeList.SupericeListInfo item) {
         final ImageView imageView = baseViewHolder.getView(R.id.iv);
-        String image = item.getImage();
-        image = image.replace("\\/", File.separator);
-        if (!TextUtil.isEmpty(image) && image.startsWith("http")) {
-            imageView.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(image)
-                    .apply(GlideUtils.defaultImg())
-                    .into(imageView);
-        } else {
+        //2017.8.17需求变更为不显示图片
+//        String image = item.getImage();
+//        image = image.replace("\\/", File.separator);
+//        if (!TextUtil.isEmpty(image) && image.startsWith("http")) {
+//            imageView.setVisibility(View.VISIBLE);
+//            Glide.with(mContext).load(image)
+//                    .apply(GlideUtils.defaultImg())
+//                    .into(imageView);
+//        } else {
+//            imageView.setVisibility(View.GONE);
+//        }
             imageView.setVisibility(View.GONE);
-        }
 
         baseViewHolder.setText(R.id.title, item.getTitle())
                 .setText(R.id.time, item.getTime());
