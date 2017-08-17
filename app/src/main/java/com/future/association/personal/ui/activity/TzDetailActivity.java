@@ -98,7 +98,7 @@ public class TzDetailActivity extends BaseActivity {
 
                     @Override
                     public void onFail(String message) {
-                        toast("错误信息：" + message);
+                        toast("详情错误信息：" + message);
                     }
                 }).start(new MyTieziDetail());
     }

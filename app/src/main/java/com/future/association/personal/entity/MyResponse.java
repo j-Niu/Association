@@ -49,5 +49,6 @@ public class MyResponse extends BaseBean<MyResponse.MyResponses> {
         public String name;
         public String tiezi_id;
         public String huifu_num;
+
     }
 }

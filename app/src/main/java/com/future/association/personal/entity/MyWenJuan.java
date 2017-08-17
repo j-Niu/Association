@@ -24,37 +24,23 @@ public class MyWenJuan extends BaseBean<MyWenJuan.MyWenJuans> {
 
     public static class MyWenJuans implements Serializable {
         /**
-         * {
-         * "error": 0,
-         * "info": [
-         * {
-         * "id": "1",//问卷id
-         * "title": "问卷标题1",//问卷标题
-         * "type": "1",//问卷状态 1 进行中 2 已完成 3已过期
-         * "jifen": "5",//问卷积分奖励
-         * "time": "2小时前"//问卷发布时间
-         * },
-         * {
-         * "id": "3",
-         * "title": "问卷标题3",
-         * "type": "1",
+         * "id": null,
+         * "title": null,
+         * "jianjie": null,
+         * "type": null,
+         * "status": "1",
          * "jifen": "5",
-         * "time": "2小时前"
-         * },
-         * {
-         * "id": "2",
-         * "title": "问卷标题2",
-         * "type": "1",
-         * "jifen": "5",
-         * "time": "2小时前"
-         * }
-         * ]
-         * }
+         * "showurl": "http://139.224.70.219:85/app/wenjuancanyu.html?id=41&usertoken=58deff49f29d72943c4d1f8f1100db11",
+         * "time": "6天前"
          */
         public String id;
         public String title;
+        public String jianjie;
         public String type;
+        public String status;
         public String jifen;
+        public String showurl;
         public String time;
+
     }
 }
