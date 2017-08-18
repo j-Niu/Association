@@ -54,19 +54,22 @@ public class CustomGridView extends GridView {
 
         View view0 = getChildAt(0); //第一个view
         View viewColLast = getChildAt(colnum - 1);//第一行最后一个view
-
-        for (int i = 1,j=1 ; i < colnum || j < rownum ; i++,j++){
-            //画竖线
-            if(total % colnum != 0 && i > total % colnum){
-                canvas.drawLine(view0.getRight() * i + horizontalSpace * (i - 1), view0.getTop(),
-                        view0.getRight() * i + horizontalSpace * (i - 1), view0.getBottom() * (rownum-1), localPaint);
-            }else{
-                canvas.drawLine(view0.getRight() * i + horizontalSpace * (i - 1), view0.getTop(),
-                        view0.getRight() * i + horizontalSpace * (i - 1), view0.getBottom() * rownum, localPaint);
+        try{
+            for (int i = 1, j = 1; i < colnum || j < rownum; i++, j++) {
+                //画竖线
+                if (total % colnum != 0 && i > total % colnum) {
+                    canvas.drawLine(view0.getRight() * i + horizontalSpace * (i - 1), view0.getTop(),
+                            view0.getRight() * i + horizontalSpace * (i - 1), view0.getBottom() * (rownum - 1), localPaint);
+                } else {
+                    canvas.drawLine(view0.getRight() * i + horizontalSpace * (i - 1), view0.getTop(),
+                            view0.getRight() * i + horizontalSpace * (i - 1), view0.getBottom() * rownum, localPaint);
+                }
+                //画横线
+                canvas.drawLine(view0.getLeft(), view0.getBottom() * j + verTicalSpace * (j - 1),
+                        viewColLast.getRight(), viewColLast.getBottom() * j + verTicalSpace * (j - 1), localPaint);
             }
-            //画横线
-            canvas.drawLine(view0.getLeft(), view0.getBottom() * j + verTicalSpace * (j - 1),
-                    viewColLast.getRight(), viewColLast.getBottom() * j + verTicalSpace * (j - 1), localPaint);
+        }catch(Exception e){
+            e.printStackTrace();
         }
 
     }
