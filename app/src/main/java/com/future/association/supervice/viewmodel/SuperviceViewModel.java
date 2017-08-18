@@ -14,6 +14,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.future.association.R;
+import com.future.association.common.MyApp;
 import com.future.association.databinding.FragmentSuperviceBinding;
 import com.future.association.databinding.SuperviceHeadBinding;
 import com.future.association.supervice.SupericeApi;
@@ -67,7 +68,7 @@ public class SuperviceViewModel {
     private void getSupericeList() {
         //查询监督列表
         ++PAHE;
-        SupericeApi.getInstance().getSupericeList(fragment.getActivity(), String.valueOf(PAHE))
+        SupericeApi.getInstance().getSupericeList(fragment.getActivity(), String.valueOf(PAHE), MyApp.getUserToken())
                 .setListener(new HttpRequest.OnNetworkListener<SupericeList>() {
                     @Override
                     public void onSuccess(SupericeList response) {

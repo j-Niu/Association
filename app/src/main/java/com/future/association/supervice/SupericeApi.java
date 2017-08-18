@@ -43,11 +43,12 @@ public class SupericeApi {
 /*
 * 监督列表
 * */
-    public HttpRequest getSupericeList(Context context,String page){
+    public HttpRequest getSupericeList(Context context,String page,String userToken){
         return new HttpRequest<SupericeList>()
                 .with(context)
                 .addParam("apiCode",SUPERICE_LIST_APICODE)
                 .addParam("page",page)
+                .addParam("userToken",userToken)
                 .addParam("size","20");
     }
 /*
