@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.future.association.R;
 import com.future.association.personal.entity.MyWenJuan;
+import com.future.association.personal.util.StringUtils;
 import com.future.association.questionnaire.views.QuestionnaireWebActivity;
 import com.future.baselib.utils.CommonUtils;
 
@@ -38,18 +39,21 @@ public class WenjuanAdapter extends BaseListAdapter {
         holder.tvMyTitleGreen.setText(String.format("完成问卷+%1$s积分", beanWenJuan.jifen));
         holder.tvMyTimeAgo.setText(beanWenJuan.time);
         //type": "1",//问卷状态 1 进行中 2 已完成 3已过期
-
-        if (beanWenJuan.type.equals("3")) {
-            holder.tvMyState.setText("已过期");
-            holder.tvMyState.setTextColor(mContext.getResources().getColor(R.color.color_999999));
-        } else if (beanWenJuan.type.equals("2")) {
-            holder.tvMyState.setText("已完成");
-            holder.tvMyState.setTextColor(mContext.getResources().getColor(R.color.color_999999));
-        } else if (beanWenJuan.type.equals("1")) {
+        String type = beanWenJuan.type;
+        if (StringUtils.isBlank(type)) return;
+        if (type.equals("1")) {
             holder.tvMyState.setText("进行中");
             holder.tvMyState.setTextColor(mContext.getResources().getColor(R.color.yellow));
+        } else if (type.equals("2")) {
+            holder.tvMyState.setText("已完成");
+            holder.tvMyState.setTextColor(mContext.getResources().getColor(R.color.color_999999));
+        } else if (type.equals("3")) {
+            holder.tvMyState.setText("已过期");
+            holder.tvMyState.setTextColor(mContext.getResources().getColor(R.color.color_999999));
         }
-        holder.linearWenjuan.setOnClickListener(new View.OnClickListener() {
+        holder.linearWenjuan.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View v) {
                 if (!CommonUtils.isFastDoubleClick()) {
