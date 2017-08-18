@@ -26,10 +26,20 @@ public static final Creator<QuestionList> CREATOR = new Creator<>(QuestionList.c
     private String time;
     private String showurl;
     private String jianjie;
+    private String status;
+
 
     @Override
     public void parseInfo(String content) throws JSONException {
         list = GsonUtils.jsonToList(content,QuestionList.class);
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getJianjie() {

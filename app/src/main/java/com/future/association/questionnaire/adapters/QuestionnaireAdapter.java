@@ -42,13 +42,17 @@ public class QuestionnaireAdapter extends BaseQuickAdapter<QuestionList, BaseVie
             rightTopTv.setText(String.format("完成问卷+%1$s积分", item.getJifen()));
             rightTopTv.setTextColor(mContext.getResources().getColor(R.color.basic_color));
             String type = item.getType();
-            if ("1".equals(type)) {
-                rightBottomTv.setTextColor(Color.YELLOW);
-                rightBottomTv.setText("进行中");
-            } else if ("2".equals(type)) {
-                rightBottomTv.setText("已完成");
-                rightBottomTv.setTextColor(Color.LTGRAY);
-            } else {
+
+            if ("5".equals(type)) {
+                String status = item.getStatus();
+                if ("1".equals(status)) {
+                    rightBottomTv.setText("已完成");
+                    rightBottomTv.setTextColor(Color.LTGRAY);
+                } else {
+                    rightBottomTv.setTextColor(Color.YELLOW);
+                    rightBottomTv.setText("进行中");
+                }
+            }else if ("3".equals(type)){
                 rightBottomTv.setTextColor(Color.LTGRAY);
                 rightBottomTv.setText("已过期");
             }
