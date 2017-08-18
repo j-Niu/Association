@@ -36,6 +36,8 @@ public class NewsActivity extends BaseActivity {
     TextView tvTitle;
     @BindView(R.id.tv_time)
     TextView tvTime;
+    @BindView(R.id.tv_from)
+    TextView tvFrom;
     @BindView(R.id.webView)
     WebView webView;
     private String id;
@@ -70,6 +72,7 @@ public class NewsActivity extends BaseActivity {
                     public void onSuccess(NewsDetailsResponse response) {
                         tvTitle.setText(response.newsDetails.title);
                         tvTime.setText(response.newsDetails.create_time);
+                        tvFrom.setText("来源："+response.newsDetails.info_from);
                         webView.loadData(response.newsDetails.content,"text/html; charset=utf-8",null);
                     }
 

@@ -29,24 +29,42 @@
                 android:textSize="50px"
                 android:textColor="@color/black1"
                 />
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32px"
                 android:layout_marginRight="32px"
                 android:layout_marginTop="30px"
-                tools:text="2017-7-15 15:56:08"
-                android:textSize="24px"
-                android:textColor="@color/black3"
-                />
+                >
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="2017-7-15 15:56:08"
+                    android:textSize="24px"
+                    android:textColor="@color/black3"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="来源："
+                    android:textSize="24px"
+                    android:textColor="@color/black3"
+                    android:layout_gravity="right"
+                    />
+
+            </FrameLayout>
+
             <WebView
                 android:id="@+id/webView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="30px"
-                android:layout_marginLeft="32px"
-                android:layout_marginRight="32px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
                 />
         </com.zhy.autolayout.AutoLinearLayout>
 

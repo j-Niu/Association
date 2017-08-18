@@ -108,7 +108,6 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
                         data.addAll(response.data);
 
                         if (response.data.size()< PAGE_SIZE) {
-                            noMoreData();
                             adapter.loadMoreEnd();
                         }
                     }
@@ -120,15 +119,6 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
                 }).start(new NewsResponse());
     }
 
-    public void noMoreData() {
-        TextView textView = new TextView(recyclerView.getContext());
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(Color.rgb(0xcc,0xcc,0xcc));
-        textView.setTextSize(DensityUtil.dip2px(getContext(),5f));
-        textView.setPadding(0,DensityUtil.dip2px(getContext(),5f),0,DensityUtil.dip2px(getContext(),5f));
-        textView.setText("没有更多数据了");
-        adapter.addFooterView(textView);
-    }
 
     @SuppressWarnings("unchecked")
     private void initBanner() {
@@ -211,12 +201,10 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
                     @Override
                     public void onSuccess(NewsResponse response) {
                         if (response.data == null || response.data.size() == 0) {
-                            noMoreData();
                             adapter.loadMoreEnd(true);
                             return;
                         }
                         if (response.data.size()<PAGE_SIZE) {
-                            noMoreData();
                             adapter.loadMoreEnd(true);
                         }
                         adapter.addData(response.data);
