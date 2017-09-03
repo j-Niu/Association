@@ -3,7 +3,6 @@ package com.future.association.questionnaire;
 import android.content.Context;
 
 import com.future.association.questionnaire.models.QuestionDetail;
-import com.future.association.questionnaire.models.QuestionList;
 import com.future.baselib.utils.HttpRequest;
 
 /**
@@ -29,8 +28,8 @@ public class QuestionnaireApi {
         return instance;
     }
 
-    public HttpRequest<QuestionList> getHotWenjuan(Context context, String userToken, String page) {
-        return new HttpRequest<QuestionList>()
+    public HttpRequest<QuestionDetail> getHotWenjuan(Context context, String userToken, String page) {
+        return new HttpRequest<QuestionDetail>()
                 .with(context)
                 .addParam("apiCode", HOT_WEN_JUAN_CODE)
                 .addParam("userToken", userToken)
@@ -38,8 +37,8 @@ public class QuestionnaireApi {
                 .addParam("size", "20");
     }
 
-    public HttpRequest<QuestionList> getMyWenjuan(Context context, String userToken, String page) {
-        return new HttpRequest<QuestionList>()
+    public HttpRequest<QuestionDetail> getMyWenjuan(Context context, String userToken, String page) {
+        return new HttpRequest<QuestionDetail>()
                 .with(context)
                 .addParam("apiCode", MY_WEN_JUAN_CODE)
                 .addParam("userToken", userToken)
@@ -50,7 +49,7 @@ public class QuestionnaireApi {
     public HttpRequest<QuestionDetail> getWenjuanDetail(Context context, String userToken, String id) {
         return new HttpRequest<QuestionDetail>()
                 .with(context)
-                .addParam("apiCode", WEN_JUAN_DETAIL_CODE)
+                .addParam("apiCode", WEN_JUAN_STEP_CODE)
                 .addParam("userToken", userToken)
                 .addParam("id",id);
     }

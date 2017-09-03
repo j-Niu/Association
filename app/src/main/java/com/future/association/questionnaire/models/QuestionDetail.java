@@ -5,29 +5,69 @@ import com.future.association.supervice.model.BaseBean;
 
 import org.json.JSONException;
 
-import java.util.List;
-
 /**
  * Created by rain on 2017/7/17.
  */
 
 public class QuestionDetail extends BaseBean<QuestionDetail> {
-public static final Creator<QuestionDetail> CREATOR = new Creator<>(QuestionDetail.class);
+    public static final Creator<QuestionDetail> CREATOR = new Creator<>(QuestionDetail.class);
     /**
-     * id : 1
-     * title : 题目1
-     * type : 1
-     * options : ["选项1","选项2","选项3","选项4"]
+     * "id": "1",//问卷id
+     * "title": "问卷标题1",//问卷标题
+     * "type": "1",//问卷状态 1 进行中 2 已完成 3已过期
+     * "jifen": "5",//问卷积分奖励
+     * "time": "2小时前"//问卷发布时间
      */
 
     private String id;
     private String title;
+    private String jifen;
     private String type;
-    private List<String> options;
+    private String time;
+    private String showurl;
+    private String jianjie;
+    private String status;
+
 
     @Override
     public void parseInfo(String content) throws JSONException {
-        list = GsonUtils.jsonToList(content,QuestionDetail.class);
+        if (content.startsWith("{")) {
+            infoBean = GsonUtils.jsonToBean(content, QuestionDetail.class);
+        } else {
+            list = GsonUtils.jsonToList(content, QuestionDetail.class);
+        }
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getJianjie() {
+        return jianjie;
+    }
+
+    public void setJianjie(String jianjie) {
+        this.jianjie = jianjie;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getShowurl() {
+        return showurl;
+    }
+
+    public void setShowurl(String showurl) {
+        this.showurl = showurl;
     }
 
     public String getId() {
@@ -46,19 +86,21 @@ public static final Creator<QuestionDetail> CREATOR = new Creator<>(QuestionDeta
         this.title = title;
     }
 
-    public String getType() {
-        return type;
+    public String getJifen() {
+        return jifen;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setJifen(String jifen) {
+        this.jifen = jifen;
     }
 
-    public List<String> getOptions() {
-        return options;
+    public String getTime() {
+        return time;
     }
 
-    public void setOptions(List<String> options) {
-        this.options = options;
+    public void setTime(String time) {
+        this.time = time;
     }
+
+
 }

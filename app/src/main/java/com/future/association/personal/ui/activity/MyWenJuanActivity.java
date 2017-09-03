@@ -71,9 +71,9 @@ public class MyWenJuanActivity extends BaseActivity {
                 }).start(new MyWenJuan());
 
 //        QuestionnaireApi.getInstance().getMyWenjuan(this, MyApp.getUserToken(),String.valueOf(1))
-//                .setListener(new HttpRequest.OnNetworkListener<QuestionList>() {
+//                .setListener(new HttpRequest.OnNetworkListener<QuestionDetail>() {
 //                    @Override
-//                    public void onSuccess(QuestionList response) {
+//                    public void onSuccess(QuestionDetail response) {
 //                        Toast.makeText(MyWenJuanActivity.this, "我的问卷"+response.getTitle(), Toast.LENGTH_SHORT).show();
 //                        if (response == null || response.getList() == null) {
 ////                            adapterObservable.get().loadMoreEnd();
@@ -89,7 +89,7 @@ public class MyWenJuanActivity extends BaseActivity {
 //                    public void onFail(String message) {
 //                        toast("错误信息：" + message);
 //                    }
-//                }).start(new QuestionList());
+//                }).start(new QuestionDetail());
 
 
     }

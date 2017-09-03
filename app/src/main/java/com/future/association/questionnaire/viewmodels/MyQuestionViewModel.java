@@ -16,7 +16,7 @@ import com.future.association.common.MyApp;
 import com.future.association.databinding.FragmentMyQuestionnaireBinding;
 import com.future.association.questionnaire.QuestionnaireApi;
 import com.future.association.questionnaire.adapters.QuestionnaireAdapter;
-import com.future.association.questionnaire.models.QuestionList;
+import com.future.association.questionnaire.models.QuestionDetail;
 import com.future.association.questionnaire.views.QuestionnaireWebActivity;
 import com.future.baselib.utils.CommonUtils;
 import com.future.baselib.utils.HttpRequest;
@@ -29,7 +29,7 @@ public class MyQuestionViewModel {
     private final Activity activity;
     private final FragmentMyQuestionnaireBinding mBinding;
     public ObservableField<QuestionnaireAdapter> adapterObservable = new ObservableField<>();
-    public ObservableArrayList<QuestionList> items = new ObservableArrayList<>();
+    public ObservableArrayList<QuestionDetail> items = new ObservableArrayList<>();
     private int PAGE = 1;
 
     public MyQuestionViewModel(Activity activity, FragmentMyQuestionnaireBinding binding) {
@@ -64,9 +64,9 @@ public class MyQuestionViewModel {
 
     private void initData() {
         QuestionnaireApi.getInstance().getMyWenjuan(activity, MyApp.getUserToken(),String.valueOf(PAGE))
-                .setListener(new HttpRequest.OnNetworkListener<QuestionList>() {
+                .setListener(new HttpRequest.OnNetworkListener<QuestionDetail>() {
                     @Override
-                    public void onSuccess(QuestionList response) {
+                    public void onSuccess(QuestionDetail response) {
                         if (response == null || response.getList() == null) {
                             adapterObservable.get().loadMoreEnd();
                         } else {
@@ -81,7 +81,7 @@ public class MyQuestionViewModel {
                     public void onFail(String message) {
 
                     }
-                }).start(new QuestionList());
+                }).start(new QuestionDetail());
     }
 
     //刷新数据

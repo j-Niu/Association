@@ -50,7 +50,12 @@ public class SuperviceViewModel {
 
 
     private void initView() {
-        binding.superviceRv.setLayoutManager(new LinearLayoutManager(fragment.getActivity()));
+        binding.superviceRv.setLayoutManager(new LinearLayoutManager(fragment.getActivity()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
         binding.superviceRv.addItemDecoration(new DividerItemDecoration(fragment.getActivity(),LinearLayoutManager.VERTICAL));
         SuperviceAdapter superviceAdapter = new SuperviceAdapter(R.layout.supervice_item, null);
         superviceAdapter.setOnLoadMoreListener(loadMoreListener, binding.superviceRv);
