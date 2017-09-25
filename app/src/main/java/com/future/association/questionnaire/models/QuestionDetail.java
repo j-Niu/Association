@@ -1,6 +1,6 @@
 package com.future.association.questionnaire.models;
 
-import com.future.association.common.GsonUtils;
+import com.future.association.common.utils.GsonUtils;
 import com.future.association.supervice.model.BaseBean;
 
 import org.json.JSONException;

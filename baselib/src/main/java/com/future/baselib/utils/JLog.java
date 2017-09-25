@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class JLog {
 
-    private static boolean isDebug = true;
+    private static boolean isDebug = false;
 
     public static void e(String tag,String msg){
         if (isDebug) {

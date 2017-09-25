@@ -268,7 +268,8 @@ public class PerfectInformationViewModel {
         classifyList.add("小学");
         classifyList.add("初中");
         classifyList.add("中专/高中");
-        classifyList.add("专科/本科");
+        classifyList.add("专科");
+        classifyList.add("本科");
         classifyList.add("硕士研究生");
         classifyList.add("博士研究生");
         initEducationPicker();

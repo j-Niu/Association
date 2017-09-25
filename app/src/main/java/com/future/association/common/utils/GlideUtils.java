@@ -1,4 +1,4 @@
-package com.future.association.common;
+package com.future.association.common.utils;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.future.association.R;

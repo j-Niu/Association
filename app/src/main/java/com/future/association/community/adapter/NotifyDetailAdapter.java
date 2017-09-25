@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.future.association.R;
-import com.future.association.common.GlideUtils;
+import com.future.association.common.utils.GlideUtils;
 import com.future.association.community.model.NotifyReplyInfo;
-import com.future.association.community.model.TieReplyInfo;
 import com.future.association.community.utils.DateUtils;
 import com.future.association.community.utils.ScreenUtils;
 import com.future.association.databinding.ItemMsgDetailBinding;

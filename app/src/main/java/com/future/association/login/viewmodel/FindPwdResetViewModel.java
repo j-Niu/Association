@@ -1,14 +1,12 @@
 package com.future.association.login.viewmodel;
 
-import android.app.Activity;
 import android.databinding.ObservableField;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.future.association.R;
-import com.future.association.common.MainActivity;
+import com.future.association.common.view.MainActivity;
 import com.future.association.common.MyApp;
 import com.future.association.databinding.ActivityFindPwdResetBinding;
 import com.future.association.login.FindPwdResetActivity;
@@ -20,8 +18,6 @@ import com.future.association.login.util.CommonUtil;
 import com.future.baselib.entity.BaseResponse;
 import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.PatternUtils;
-import com.future.baselib.utils.ToastUtils;
-import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
@@ -33,7 +29,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
-import static com.future.association.login.util.CommonUtil.mobilePattern;
 import static com.future.association.login.util.CommonUtil.passwordPattern;
 import static com.future.association.login.util.CommonUtil.startActivity;
 

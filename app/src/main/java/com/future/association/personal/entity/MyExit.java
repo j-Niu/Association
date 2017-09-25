@@ -1,6 +1,6 @@
 package com.future.association.personal.entity;
 
-import com.future.association.common.GsonUtils;
+import com.future.association.common.utils.GsonUtils;
 import com.future.association.community.utils.TextUtil;
 import com.future.association.supervice.model.BaseBean;
 

@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.future.association.R;
-import com.future.association.common.GlideUtils;
+import com.future.association.common.utils.GlideUtils;
 import com.future.association.community.utils.TextUtil;
 
 import java.io.File;

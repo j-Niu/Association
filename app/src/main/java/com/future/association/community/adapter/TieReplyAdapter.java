@@ -12,15 +12,12 @@ import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.future.association.R;
-import com.future.association.common.GlideUtils;
+import com.future.association.common.utils.GlideUtils;
 import com.future.association.common.MyApp;
-import com.future.association.community.model.TieInfo;
 import com.future.association.community.model.TieReplyInfo;
-import com.future.association.community.utils.ActivityUtils;
 import com.future.association.community.utils.DateUtils;
 import com.future.association.community.utils.DialogUtils;
 import com.future.association.community.utils.ScreenUtils;
-import com.future.association.community.view.WeiGuiActivity;
 import com.future.association.databinding.ItemReplyDetailBinding;
 import com.future.association.databinding.PopupTie1Binding;
 

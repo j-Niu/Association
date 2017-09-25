@@ -1,6 +1,6 @@
 package com.future.association.supervice.model;
 
-import com.future.association.common.GsonUtils;
+import com.future.association.common.utils.GsonUtils;
 
 import org.json.JSONException;
 

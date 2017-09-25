@@ -3,7 +3,6 @@ package com.future.association.community.view;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +11,13 @@ import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.future.association.R;
-import com.future.association.common.GlideUtils;
+import com.future.association.common.utils.GlideUtils;
 import com.future.association.common.MyApp;
 import com.future.association.community.adapter.TieReplyAdapter;
 import com.future.association.community.base.BaseActivity;
 import com.future.association.community.contract.TieDetailContract;
 import com.future.association.community.custom.CustomRecyclerView;
-import com.future.association.community.model.PlateInfo;
 import com.future.association.community.model.TieDetailInfo;
-import com.future.association.community.model.TieInfo;
 import com.future.association.community.model.TieReplyInfo;
 import com.future.association.community.presenter.TieDetailPresenter;
 import com.future.association.community.utils.ActivityUtils;
@@ -30,7 +27,6 @@ import com.future.association.community.utils.StringUtils;
 import com.future.association.databinding.ActivityTieDetailBinding;
 import com.future.association.databinding.LayoutTieReplyHeadBinding;
 import com.future.association.databinding.PopupTieBinding;
-import com.future.association.personal.entity.MyTiezi;
 
 import java.util.ArrayList;
 

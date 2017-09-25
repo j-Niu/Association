@@ -3,19 +3,16 @@ package com.future.association.login;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
 import com.future.association.BR;
 import com.future.association.R;
-import com.future.association.common.MainActivity;
+import com.future.association.common.view.MainActivity;
 import com.future.association.common.MyApp;
 import com.future.association.databinding.ActivityLoginBinding;
 import com.future.association.login.util.CommonUtil;
 import com.future.association.login.viewmodel.LoginViewModel;
-import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.utils.StatusUtils;
-import com.trello.rxlifecycle2.components.RxActivity;
 
 public class LoginActivity extends UBaseActivity {
     ActivityLoginBinding binding;

@@ -57,9 +57,8 @@ public class QuestionnaireWebActivity extends BaseActivity {
                 }
             });
             WebView webView = (WebView) findViewById(R.id.web_view);
-//        webView.loadUrl("http://p1.gexing.com/shaitu/20120822/1921/5034c0cfa2571.jpg");
             String showurl = questionDetail.getShowurl();
-            showurl = showurl.replace("\\/", File.separator);
+//            showurl = showurl.replace("\\/", File.separator);
             webView.loadUrl(showurl);
             WebSettings webSettings = webView.getSettings();
             webSettings.setJavaScriptEnabled(true);

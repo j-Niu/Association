@@ -1,4 +1,4 @@
-package com.future.association.common;
+package com.future.association.common.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;

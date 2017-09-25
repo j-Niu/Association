@@ -8,7 +8,7 @@ import android.widget.AbsListView;
 
 import com.bumptech.glide.Glide;
 import com.future.association.R;
-import com.future.association.common.GlideUtils;
+import com.future.association.common.utils.GlideUtils;
 import com.future.association.community.base.BaseListAdapter;
 import com.future.association.community.model.PlateInfo;
 import com.future.association.community.utils.Res;

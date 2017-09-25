@@ -1,7 +1,7 @@
 package com.future.association.login.bean;
 
 import com.bigkoo.pickerview.model.IPickerViewData;
-import com.future.association.common.GsonUtils;
+import com.future.association.common.utils.GsonUtils;
 import com.future.association.supervice.model.BaseBean;
 
 import org.json.JSONException;

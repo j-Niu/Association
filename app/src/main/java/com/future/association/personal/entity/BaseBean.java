@@ -3,7 +3,7 @@ package com.future.association.personal.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.future.association.common.GsonUtils;
+import com.future.association.common.utils.GsonUtils;
 import com.future.baselib.entity.BaseResponse;
 import com.google.gson.JsonSyntaxException;
 

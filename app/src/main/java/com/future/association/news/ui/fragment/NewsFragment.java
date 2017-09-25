@@ -107,9 +107,9 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
                         data.clear();
                         data.addAll(response.data);
 
-                        if (response.data.size()< PAGE_SIZE) {
-                            adapter.loadMoreEnd();
-                        }
+//                        if (response.data.size()< PAGE_SIZE) {
+//                            adapter.loadMoreEnd();
+//                        }
                     }
 
                     @Override
@@ -187,10 +187,10 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
     @SuppressWarnings("unchecked")
     @Override
     public void onLoadMoreRequested() {
-        if (adapter.getData().size()<PAGE_SIZE) {//如果本身数据少于一页数据，没有更多数据了
-            adapter.notifyDataSetChanged();
-            return;
-        }
+//        if (adapter.getData().size()<PAGE_SIZE) {//如果本身数据少于一页数据，没有更多数据了
+//            adapter.notifyDataSetChanged();
+//            return;
+//        }
 
         new HttpRequest<NewsResponse>()
                 .with(getContext())
@@ -204,9 +204,9 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
                             adapter.loadMoreEnd(true);
                             return;
                         }
-                        if (response.data.size()<PAGE_SIZE) {
-                            adapter.loadMoreEnd(true);
-                        }
+//                        if (response.data.size()<PAGE_SIZE) {
+//                            adapter.loadMoreEnd(true);
+//                        }
                         adapter.addData(response.data);
                         adapter.loadMoreComplete();
                     }
