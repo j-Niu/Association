@@ -56,6 +56,8 @@ public class MyQuestionViewModel {
             public void onSimpleItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
                 if (!CommonUtils.isFastDoubleClick()){
                     Intent intent = new Intent(activity,QuestionnaireWebActivity.class);
+                    QuestionDetail data = (QuestionDetail) baseQuickAdapter.getItem(i);
+                    intent.putExtra("data",data);
                     activity.startActivity(intent);
                 }
             }
