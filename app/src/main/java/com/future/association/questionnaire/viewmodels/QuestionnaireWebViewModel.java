@@ -1,5 +1,7 @@
 package com.future.association.questionnaire.viewmodels;
 
+import android.net.Uri;
+
 import com.future.association.R;
 import com.future.association.common.MyApp;
 import com.future.association.databinding.ActivityQuestionnaireWebBinding;
@@ -8,8 +10,6 @@ import com.future.association.questionnaire.models.QuestionDetail;
 import com.future.association.questionnaire.views.QuestionnaireWebActivity;
 import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.ToastUtils;
-
-import java.io.File;
 
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
@@ -97,7 +97,7 @@ public class QuestionnaireWebViewModel {
         // text是分享文本，所有平台都需要这个字段
         oks.setText(questionDetail.getJianjie());
         // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-//        oks.setImageUrl(roomDetail.img);
+        oks.setImagePath(Uri.parse("android:resource://com.future.association/"+R.mipmap.ic_launcher).getPath());
         // url仅在微信（包括好友和朋友圈）中使用
         oks.setUrl(questionDetail.getShowurl());
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
