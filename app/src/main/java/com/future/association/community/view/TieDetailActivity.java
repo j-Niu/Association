@@ -58,10 +58,6 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
 
     @Override
     public void initView() {
-        if (MyApp.isAdministrator()) {
-            viewBinding.layoutTitle.ivTitleRightImg.
-                    setImageDrawable(Res.getDrawableRes(R.drawable.ic_more, context));
-        }
         popupView = inflater.inflate(R.layout.popup_tie, null);
         popupTieBinding = DataBindingUtil.bind(popupView);
 
@@ -95,6 +91,12 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         if (popupWindow == null) {
             popupWindow = new PopupWindow(this);
             popupWindow.setContentView(popupView);
+
+            if(isSelfTie){
+                popupView.findViewById(R.id.tv_top).setVisibility(View.GONE);
+                popupView.findViewById(R.id.tv_weigui).setVisibility(View.GONE);
+            }
+
             popupWindow.setFocusable(true);
             popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
             popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -112,6 +114,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
             popupWindow.setBackgroundDrawable(new BitmapDrawable());
         }
         popupWindow.showAsDropDown(viewBinding.layoutTitle.ivTitleRightImg, 20, -20);
+
     }
 
     @Override
@@ -207,10 +210,19 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         return viewBinding.getReplyContent();
     }
 
+    private boolean isSelfTie;
     @Override
     public void setTieDetail(TieDetailInfo detailInfo) {
         if (detailInfo != null) {
             headBinding.setTieDetailInfo(detailInfo);
+
+            isSelfTie = detailInfo.getUid().equals(MyApp.userId);
+            //自己发的或者管理员
+            if(isSelfTie || MyApp.isAdministrator()){
+                viewBinding.layoutTitle.ivTitleRightImg.
+                        setImageDrawable(Res.getDrawableRes(R.drawable.ic_more, context));
+            }
+
             Glide.with(context)
                     .load(detailInfo.getAvatar_url())
                     .apply(GlideUtils.defaultImg())

@@ -25,7 +25,7 @@ public class NewsAdapter extends BaseQuickAdapter<NewsResponse.NewsDetail,BaseVi
 
     @Override
     protected void convert(BaseViewHolder helper, NewsResponse.NewsDetail item) {
-        Glide.with(mContext).load(item.image).apply(GlideUtils.defaultImg()).into((ImageView) helper.getView(R.id.imageView));
+        Glide.with(mContext).load(item.image).apply(GlideUtils.defaultImg2()).into((ImageView) helper.getView(R.id.imageView));
         helper.setText(R.id.tv_title,item.title);
         helper.setText(R.id.tv_time,item.time);
     }

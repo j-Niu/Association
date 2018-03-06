@@ -1,8 +1,13 @@
 package com.future.association.news.ui.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +21,7 @@ import com.future.baselib.activity.BaseActivity;
 import com.future.baselib.entity.BaseResponse;
 import com.future.baselib.entity.DefaultResponse;
 import com.future.baselib.utils.HttpRequest;
+import com.future.baselib.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +59,39 @@ public class NewsActivity extends BaseActivity {
 
         setTitle("资讯详情");
         toolbarIvLeft.setImageResource(R.drawable.ic_back);
+
+        webView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                if(url.contains(""))
+                ToastUtils.shortToast(NewsActivity.this,url);
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+                return true;
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode,
+                                        String description, String failingUrl) {
+                // TODO Auto-generated method stub
+                super.onReceivedError(view, errorCode, description, failingUrl);
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                // TODO Auto-generated method stub
+                super.onPageStarted(view, url, favicon);
+            }
+
+        });
+
     }
 
     @SuppressWarnings("unchecked")

@@ -24,6 +24,7 @@ public class MyApp extends Application {
 
     private static String userToken;//"08bb51d1e82bdb3ac553e8804bcb4f65"
     private static String quanxian;// "1"//1为普通用户 2位管理员第一次登录 3是管理员非第一次登录
+    public static String userId;//
 
     public MyApp() {
         app = this;

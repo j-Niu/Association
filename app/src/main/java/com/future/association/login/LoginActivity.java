@@ -40,6 +40,8 @@ public class LoginActivity extends UBaseActivity {
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("islogin", false)) {
             MyApp.setQuanxian(PreferenceManager.getDefaultSharedPreferences(this).getString("quanxian", ""));
             MyApp.setUserToken(PreferenceManager.getDefaultSharedPreferences(this).getString("userToken", ""));
+
+            MyApp.userId = PreferenceManager.getDefaultSharedPreferences(this).getString("userId", "");
             CommonUtil.startActivity(this, MainActivity.class);
             finish();
         }

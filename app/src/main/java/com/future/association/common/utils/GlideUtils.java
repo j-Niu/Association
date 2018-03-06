@@ -11,4 +11,7 @@ public class GlideUtils {
     public static RequestOptions defaultImg(){
         return new RequestOptions().placeholder(R.color.color_e0e0e0).error(R.color.color_e0e0e0);
     }
+    public static RequestOptions defaultImg2(){
+        return new RequestOptions().placeholder(R.drawable.iv_defalut).error(R.drawable.iv_defalut);
+    }
 }

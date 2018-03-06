@@ -162,11 +162,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     }
 
     private boolean isWifi() {
-
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         return networkInfo.isConnected();
-
     }
 
     @Override

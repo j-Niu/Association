@@ -222,9 +222,11 @@ public class CommonUtil {
                 .putBoolean("islogin", true)
                 .putString("userToken", userResponse.userToken)
                 .putString("quanxian", userResponse.quanxian)
+                .putString("userId", userResponse.userId)
                 .apply();
         MyApp.setQuanxian(userResponse.quanxian);
         MyApp.setUserToken(userResponse.userToken);
+        MyApp.userId = userResponse.userId;
     }
 
     public static void clearLoginMsg(Activity activity) {
