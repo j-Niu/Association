@@ -153,7 +153,8 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
                 finish();
                 break;
             case R.id.iv_title_right_img:
-                showPopupWindow();
+                if(isSelfTie || MyApp.isAdministrator())
+                    showPopupWindow();
                 break;
             case R.id.tv_top:
                 popupWindow.dismiss();
