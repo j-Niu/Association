@@ -53,7 +53,7 @@ public class SuperviceViewModel {
         binding.superviceRv.setLayoutManager(new LinearLayoutManager(fragment.getActivity()){
             @Override
             public boolean canScrollVertically() {
-                return false;
+                return true;
             }
         });
         binding.superviceRv.addItemDecoration(new DividerItemDecoration(fragment.getActivity(),LinearLayoutManager.VERTICAL));
