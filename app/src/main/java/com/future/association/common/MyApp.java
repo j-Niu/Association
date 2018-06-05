@@ -12,6 +12,8 @@ import com.future.association.login.util.ActivityManager;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by jniu on 2017/7/3.
  */
@@ -41,6 +43,9 @@ public class MyApp extends Application {
         // 获得activty管理实例
         activityManager = ActivityManager.getInstance();
         super.onCreate();
+
+        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);     		// 初始化 JPush
     }
 
     public static String getQuanxian() {
