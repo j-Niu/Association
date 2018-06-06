@@ -59,7 +59,7 @@ public class PersonalFragment extends MyBaseFragment {
     private CircleImageView header;
     private ActionSheetDialog sheetDialog;
     private LinearLayout myLevel;
-    private RelativeLayout myJianDu, myHuiYing, myTieZi, myWenJuan, myXiaoXi, myTongZhi, myMore;
+    private RelativeLayout myJianDu, myHuiYing, myTieZi, myWenJuan, myXiaoXi, myTongZhi;
     private TextView tvMyShenFen, tvMyAddress, tvMylevel, tvMychenghao, tvMyJifen;
     private String id;
     private List<JDResponse.JDDetail> mDatas = new ArrayList<>();
@@ -99,6 +99,12 @@ public class PersonalFragment extends MyBaseFragment {
     @Override
     protected void initView(View view, @Nullable Bundle savedInstanceState) {
         setTitle("我的");
+        setTitleRight(R.drawable.ic_setting, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(MyMoreActivity.class);
+            }
+        });
         header = (CircleImageView) view.findViewById(R.id.cirimgMy);
         tvMyShenFen = (TextView) view.findViewById(R.id.tvMyShenFen);
         tvMyAddress = (TextView) view.findViewById(R.id.tvMyAddress);
@@ -113,7 +119,7 @@ public class PersonalFragment extends MyBaseFragment {
         myWenJuan = (RelativeLayout) view.findViewById(R.id.myWenJuan);
         myXiaoXi = (RelativeLayout) view.findViewById(R.id.myXiaoXi);
         myTongZhi = (RelativeLayout) view.findViewById(R.id.myTongZhi);
-        myMore = (RelativeLayout) view.findViewById(R.id.myMore);
+//        myMore = (RelativeLayout) view.findViewById(R.id.myMore);
 
         title.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +162,7 @@ public class PersonalFragment extends MyBaseFragment {
                             tvMyShenFen.setText(jdDetail.real_name);
                             tvMyAddress.setText(jdDetail.address);
                             tvMylevel.setText(jdDetail.level);
-                            tvMychenghao.setText(jdDetail.chenghao);
+                            tvMychenghao.setText("("+jdDetail.chenghao+")");
                             tvMyJifen.setText(jdDetail.jifen);
                         }
                     }
@@ -284,12 +290,12 @@ public class PersonalFragment extends MyBaseFragment {
                 startActivity(MyTongZhiActivity.class);
             }
         });
-        myMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(MyMoreActivity.class);
-            }
-        });
+//        myMore.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(MyMoreActivity.class);
+//            }
+//        });
         header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

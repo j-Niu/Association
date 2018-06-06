@@ -1,11 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_f8f8f8"
-    tools:context="com.future.association.personal.ui.fragment.PersonalFragment">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_f8f8f8"
+                tools:context="com.future.association.personal.ui.fragment.PersonalFragment">
 
-    <include layout="@layout/layout_toolbar" />
+    <include layout="@layout/layout_toolbar"/>
 
     <LinearLayout
         android:id="@+id/linearMy1"
@@ -13,44 +13,87 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         android:background="@color/colorPrimary"
-        android:orientation="horizontal"
+        android:gravity="center"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/padding_small_15">
 
-        <com.future.association.personal.CircleImageView
-            android:id="@+id/cirimgMy"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="@dimen/margin_small_15"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_birds" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+            <com.future.association.personal.CircleImageView
+                android:id="@+id/cirimgMy"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/head_bg_shape"
+                android:padding="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_birds"/>
+
+            <TextView
+                android:id="@+id/tvMylevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cirimgMy"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-10dp"
+                android:background="@color/white"
+                android:paddingEnd="4dp"
+                android:paddingStart="4dp"
+                android:text="LV3"
+                android:textColor="@color/basic_color"/>
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/tvMyJifen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_small_14"
+            tools:text="3056"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_small_15"
+            android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvMyShenFen"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="身份认证"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_normal_16" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvMyShenFen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_normal_16"
+                    tools:text="身份认证"/>
+
+                <TextView
+                    android:id="@+id/tvMychenghao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    tools:text="高级督察"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvMyAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_lsmall_10"
-                tools:text="所属区域"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_small_14" />
+                android:textSize="@dimen/text_size_small_14"
+                tools:text="所属区域"/>
 
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/linearMy2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,12 +111,11 @@
             android:paddingTop="@dimen/padding_lsmall_10">
 
             <TextView
-                android:id="@+id/tvMylevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="v1"
                 android:textColor="@color/color_text_black"
-                android:textSize="@dimen/text_size_big_18" />
+                android:textSize="@dimen/text_size_big_18"
+                tools:text="v1"/>
 
             <TextView
 
@@ -82,7 +124,7 @@
                 android:layout_marginTop="13dp"
                 android:text="等级"
                 android:textColor="@color/color_text_gray"
-                android:textSize="@dimen/text_size_normal_16" />
+                android:textSize="@dimen/text_size_normal_16"/>
 
         </LinearLayout>
 
@@ -96,12 +138,11 @@
             android:paddingTop="@dimen/padding_lsmall_10">
 
             <TextView
-                android:id="@+id/tvMychenghao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="高级督察"
                 android:textColor="@color/color_text_black"
-                android:textSize="@dimen/text_size_big_18" />
+                android:textSize="@dimen/text_size_big_18"
+                tools:text="高级督察"/>
 
             <TextView
 
@@ -110,7 +151,7 @@
                 android:layout_marginTop="13dp"
                 android:text="称号"
                 android:textColor="@color/color_text_gray"
-                android:textSize="@dimen/text_size_normal_16" />
+                android:textSize="@dimen/text_size_normal_16"/>
 
         </LinearLayout>
 
@@ -124,13 +165,12 @@
             android:paddingTop="@dimen/padding_lsmall_10">
 
             <TextView
-                android:id="@+id/tvMyJifen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                tools:text="3056"
                 android:textColor="@color/color_text_black"
-                android:textSize="@dimen/text_size_big_18" />
+                android:textSize="@dimen/text_size_big_18"
+                tools:text="3056"/>
 
             <TextView
 
@@ -139,7 +179,7 @@
                 android:layout_marginTop="13dp"
                 android:text="积分"
                 android:textColor="@color/color_text_gray"
-                android:textSize="@dimen/text_size_normal_16" />
+                android:textSize="@dimen/text_size_normal_16"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -163,7 +203,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/divider_line_05"
-                android:background="@color/color_dcdcdc" />
+                android:background="@color/color_dcdcdc"/>
 
             <RelativeLayout
                 android:id="@+id/myJianDu"
@@ -178,20 +218,20 @@
                     android:layout_centerVertical="true"
                     android:text="我的监督"
                     android:textColor="@color/color_333333"
-                    android:textSize="@dimen/text_size_normal_16" />
+                    android:textSize="@dimen/text_size_normal_16"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/right_arrow" />
+                    android:src="@drawable/right_arrow"/>
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/divider_line_05"
-                android:background="@color/color_dcdcdc" />
+                android:background="@color/color_dcdcdc"/>
 
             <RelativeLayout
                 android:id="@+id/myHuiYing"
@@ -206,20 +246,20 @@
                     android:layout_centerVertical="true"
                     android:text="我的回应"
                     android:textColor="@color/color_333333"
-                    android:textSize="@dimen/text_size_normal_16" />
+                    android:textSize="@dimen/text_size_normal_16"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/right_arrow" />
+                    android:src="@drawable/right_arrow"/>
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/divider_line_05"
-                android:background="@color/color_dcdcdc" />
+                android:background="@color/color_dcdcdc"/>
 
             <RelativeLayout
                 android:id="@+id/myTieZi"
@@ -234,20 +274,20 @@
                     android:layout_centerVertical="true"
                     android:text="我的帖子"
                     android:textColor="@color/color_333333"
-                    android:textSize="@dimen/text_size_normal_16" />
+                    android:textSize="@dimen/text_size_normal_16"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/right_arrow" />
+                    android:src="@drawable/right_arrow"/>
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/divider_line_05"
-                android:background="@color/color_dcdcdc" />
+                android:background="@color/color_dcdcdc"/>
 
             <RelativeLayout
                 android:id="@+id/myWenJuan"
@@ -262,20 +302,20 @@
                     android:layout_centerVertical="true"
                     android:text="我的问卷"
                     android:textColor="@color/color_333333"
-                    android:textSize="@dimen/text_size_normal_16" />
+                    android:textSize="@dimen/text_size_normal_16"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/right_arrow" />
+                    android:src="@drawable/right_arrow"/>
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/divider_line_05"
-                android:background="@color/color_dcdcdc" />
+                android:background="@color/color_dcdcdc"/>
 
             <RelativeLayout
                 android:id="@+id/myXiaoXi"
@@ -290,20 +330,20 @@
                     android:layout_centerVertical="true"
                     android:text="我的消息"
                     android:textColor="@color/color_333333"
-                    android:textSize="@dimen/text_size_normal_16" />
+                    android:textSize="@dimen/text_size_normal_16"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/right_arrow" />
+                    android:src="@drawable/right_arrow"/>
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/divider_line_05"
-                android:background="@color/color_dcdcdc" />
+                android:background="@color/color_dcdcdc"/>
 
             <RelativeLayout
                 android:id="@+id/myTongZhi"
@@ -318,44 +358,44 @@
                     android:layout_centerVertical="true"
                     android:text="我的通知"
                     android:textColor="@color/color_333333"
-                    android:textSize="@dimen/text_size_normal_16" />
+                    android:textSize="@dimen/text_size_normal_16"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/right_arrow" />
+                    android:src="@drawable/right_arrow"/>
             </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/divider_line_05"
-                android:background="@color/color_dcdcdc" />
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/divider_line_05"-->
+                <!--android:background="@color/color_dcdcdc"/>-->
 
 
-            <RelativeLayout
-                android:id="@+id/myMore"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_small_15"
-                android:layout_marginTop="@dimen/margin_small_15">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/myMore"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="@dimen/margin_small_15"-->
+                <!--android:layout_marginTop="@dimen/margin_small_15">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="更多"
-                    android:textColor="@color/color_333333"
-                    android:textSize="@dimen/text_size_normal_16" />
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:text="更多"-->
+                    <!--android:textColor="@color/color_333333"-->
+                    <!--android:textSize="@dimen/text_size_normal_16"/>-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/right_arrow" />
-            </RelativeLayout>
+                <!--<ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:src="@drawable/right_arrow"/>-->
+            <!--</RelativeLayout>-->
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
