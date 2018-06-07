@@ -118,4 +118,6 @@
     <dimen name="divider_line_15">1.5dp</dimen>
     <dimen name="divider_line_05">0.5dp</dimen>
     <dimen name="divider_line_03">0.3dp</dimen>
+
+    <dimen name="my_ic_padding">8dp</dimen>
 </resources>

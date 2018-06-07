@@ -217,6 +217,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="我的监督"
+                    android:drawableLeft="@drawable/jiandu"
+                    android:drawablePadding="@dimen/my_ic_padding"
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/text_size_normal_16"/>
 
@@ -245,6 +247,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="我的回应"
+                    android:drawableLeft="@drawable/huiying"
+                    android:drawablePadding="@dimen/my_ic_padding"
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/text_size_normal_16"/>
 
@@ -273,6 +277,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="我的帖子"
+                    android:drawableLeft="@drawable/tiezi"
+                    android:drawablePadding="@dimen/my_ic_padding"
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/text_size_normal_16"/>
 
@@ -301,6 +307,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="我的问卷"
+                    android:drawableLeft="@drawable/wnjuan"
+                    android:drawablePadding="@dimen/my_ic_padding"
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/text_size_normal_16"/>
 
@@ -329,6 +337,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="我的消息"
+                    android:drawableLeft="@drawable/xiaoxi_69"
+                    android:drawablePadding="@dimen/my_ic_padding"
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/text_size_normal_16"/>
 
@@ -357,6 +367,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="我的通知"
+                    android:drawableLeft="@drawable/tongzhi"
+                    android:drawablePadding="@dimen/my_ic_padding"
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/text_size_normal_16"/>
 
