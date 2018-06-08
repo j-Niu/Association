@@ -59,8 +59,8 @@ public class SuperviceViewModel {
         binding.superviceRv.addItemDecoration(new DividerItemDecoration(fragment.getActivity(),LinearLayoutManager.VERTICAL));
         SuperviceAdapter superviceAdapter = new SuperviceAdapter(R.layout.supervice_item, null);
         superviceAdapter.setOnLoadMoreListener(loadMoreListener, binding.superviceRv);
-        View head = getHead();
-        superviceAdapter.addHeaderView(head, 0);
+//        View head = getHead();
+//        superviceAdapter.addHeaderView(head, 0);
         adapter.set(superviceAdapter);
         initListener();
     }
@@ -68,6 +68,12 @@ public class SuperviceViewModel {
     private void initData() {
         getSupericeType();
         getSupericeList();
+    }
+    /*
+    * 发布监督
+    * */
+    public void publish (){
+        fragment.startActivity(new Intent(fragment.getActivity(),SuperviceApplyActivity.class));
     }
 
     private void getSupericeList() {

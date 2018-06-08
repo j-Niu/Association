@@ -1,14 +1,19 @@
 package com.future.association.supervice.viewmodel;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.bigkoo.pickerview.adapter.ArrayWheelAdapter;
+import com.bigkoo.pickerview.listener.OnItemSelectedListener;
 import com.future.association.common.EventCode;
 import com.future.association.common.MyApp;
+import com.future.association.common.view.MainActivity;
 import com.future.association.community.utils.TextUtil;
 import com.future.association.databinding.ActivitySuperviceApplyBinding;
 import com.future.association.login.bean.JsonBean;
@@ -34,6 +39,7 @@ import com.luck.picture.lib.tools.DebugUtil;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -150,9 +156,46 @@ public class SuperviceApplyViewModel {
                     }
                 });
 
+        RxView.clicks(mBindIng.type)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(@NonNull Disposable disposable) throws Exception {
+                        activity.showLoadingDialog();
+//                        getProvinces();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        mBindIng.typeTv.setCyclic(false);
+
+                        mBindIng.typeTv.setAdapter(new ArrayWheelAdapter(Arrays.asList(types)));
+                        mBindIng.typeTv.setOnItemSelectedListener(new OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(int index) {
+                                Toast.makeText(activity, "" + types[index], Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity, "fffffffffff", Toast.LENGTH_SHORT).show();
+                                supericeDetail.get().setType(types[index]);
+                            }
+                        });
+                    }
+                });
+
 
     }
-
+    String[] types = {
+            "网购",
+            "旅游",
+            "家电",
+            "数码产品",
+            "电信",
+            "汽车",
+            "游戏",
+            "快递",
+            "其他",
+    };
     private List<LocalMedia> selectList = new ArrayList<>();
     private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
         @Override
