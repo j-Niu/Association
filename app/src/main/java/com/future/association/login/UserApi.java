@@ -1,15 +1,11 @@
 package com.future.association.login;
 
 import android.app.Activity;
-import android.content.Context;
-import android.util.Log;
 
 import com.future.association.login.bean.CityResponse;
-import com.future.association.login.bean.JsonBean;
 import com.future.association.login.bean.RegisterResponse;
 import com.future.association.login.bean.UserResponse;
 import com.future.association.login.bean.VerifyResponse;
-import com.future.baselib.entity.BaseResponse;
 import com.future.baselib.utils.HttpRequest;
 
 /**
@@ -53,7 +49,8 @@ public class UserApi {
 
 
     //sex 1男 2女
-    public HttpRequest register(Activity activity, String mobile, String code, String loginPass, String real_name, String address, String sex, String schooling, String old) {
+    public HttpRequest register(Activity activity,String mobile, String code, String loginPass, String real_name, String address, String sex, String schooling, String old
+            , String userType,String card) {
         return new HttpRequest<RegisterResponse>()//继承BaseResponse的类
                 .with(activity)
                 .addParam("apiCode", API_CODE_REGISTER)//apiCode  接口文档里的code
@@ -64,6 +61,8 @@ public class UserApi {
                 .addParam("address", address)
                 .addParam("sex", sex)
                 .addParam("old", old)
+                .addParam("user_type", userType)
+                .addParam("card", card)
                 .addParam("schooling", schooling);//请求业务参数
 
     }

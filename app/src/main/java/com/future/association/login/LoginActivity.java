@@ -24,6 +24,7 @@ public class LoginActivity extends UBaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
     }
 
+    @Override
     protected void initLogic() {
         MyApp.getApp().getActivityManager().pushActivity(this);
         StatusUtils.setStatusbarColor(this, ContextCompat.getColor(this, R.color.color_26A16E));

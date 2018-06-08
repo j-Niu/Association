@@ -1,6 +1,5 @@
 package com.future.association.login.viewmodel;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableBoolean;
@@ -9,36 +8,26 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.future.association.R;
-import com.future.association.community.utils.TextUtil;
 import com.future.association.databinding.ActivityPerfectInformationBinding;
 import com.future.association.databinding.DialogSelectSexBinding;
 import com.future.association.login.PerfectInformationActivity;
-import com.future.association.login.RegisterSuccessActivity;
 import com.future.association.login.UserApi;
 import com.future.association.login.bean.CityResponse;
-import com.future.association.login.bean.GetJsonDataUtil;
 import com.future.association.login.bean.JsonBean;
-import com.future.association.login.bean.VerifyResponse;
-import com.future.association.login.util.CommonUtil;
-import com.future.baselib.entity.BaseResponse;
 import com.future.baselib.utils.HttpRequest;
 import com.future.baselib.utils.ToastUtils;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -338,42 +327,42 @@ public class PerfectInformationViewModel {
                         showSexDialog();
                     }
                 });
-
-        RxView
-                .clicks(binding.infomationCommit)
-                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
-                .throttleFirst(1, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Object>() {
-                    @Override
-                    public void accept(@NonNull Object o) throws Exception {
-                        //执行注册，注册成功之后直接跳转到注册页面
-                        //执行null检测
-                        if (!TextUtil.isEmpty(userName.get())
-                                && !TextUtil.isEmpty(userName.get())
-                                && !TextUtil.isEmpty(location.get())
-                                && !TextUtil.isEmpty(education.get())
-                                && !TextUtil.isEmpty(age.get()))
-                            activity.showLoadingDialog();
-                        //执行注册
-                        HttpRequest registerRequest = userApi
-                                .register(activity, phoneNumber, code, password, userName.get(), location.get(), sex.get() ? "1" : "2", education.get(), age.get())
-                                .setListener(new HttpRequest.OnNetworkListener() {
-                                    @Override
-                                    public void onSuccess(BaseResponse response) {
-                                        CommonUtil.startActivity(activity, RegisterSuccessActivity.class);
-                                        activity.dissmissLoadingDialog();
-                                    }
-
-                                    @Override
-                                    public void onFail(String message) {
-                                        activity.toast.show("" + message);
-                                        activity.dissmissLoadingDialog();
-                                    }
-                                });
-                        registerRequest.start(new VerifyResponse());
-                    }
-                });
+//注册已合并为一个页面
+//        RxView
+//                .clicks(binding.infomationCommit)
+//                .compose(activity.bindUntilEvent(ActivityEvent.DESTROY))
+//                .throttleFirst(1, TimeUnit.SECONDS)
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<Object>() {
+//                    @Override
+//                    public void accept(@NonNull Object o) throws Exception {
+//                        //执行22注册，注册成功之后直接跳转到注册页面
+//                        //执行null检测
+//                        if (!TextUtil.isEmpty(userName.get())
+//                                && !TextUtil.isEmpty(userName.get())
+//                                && !TextUtil.isEmpty(location.get())
+//                                && !TextUtil.isEmpty(education.get())
+//                                && !TextUtil.isEmpty(age.get()))
+//                            activity.showLoadingDialog();
+//                        //执行注册
+//                        HttpRequest registerRequest = userApi
+//                                .register(activity, phoneNumber, code, password, userName.get(), location.get(), sex.get() ? "1" : "2", education.get(), age.get())
+//                                .setListener(new HttpRequest.OnNetworkListener() {
+//                                    @Override
+//                                    public void onSuccess(BaseResponse response) {
+//                                        CommonUtil.startActivity(activity, RegisterSuccessActivity.class);
+//                                        activity.dissmissLoadingDialog();
+//                                    }
+//
+//                                    @Override
+//                                    public void onFail(String message) {
+//                                        activity.toast.show("" + message);
+//                                        activity.dissmissLoadingDialog();
+//                                    }
+//                                });
+//                        registerRequest.start(new VerifyResponse());
+//                    }
+//                });
     }
 
     //endregion

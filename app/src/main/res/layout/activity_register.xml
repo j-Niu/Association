@@ -19,38 +19,204 @@
 
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
-            android:layout_height="266px"
+            android:layout_height="wrap_content"
             android:layout_marginTop="30px"
             android:background="#ffffffff"
             android:orientation="vertical"
             android:paddingLeft="30px"
             android:paddingRight="30px">
 
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/guanli"/>
+                <RadioGroup
+                    android:id="@+id/user_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/xfz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:checked="true"
+                        android:text="消费者"/>
+                    <RadioButton
+                        android:id="@+id/zyz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="消费维权志愿者"/>
+                </RadioGroup>
+            </com.zhy.autolayout.AutoLinearLayout>
+
             <com.zhy.autolayout.AutoRelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="88px">
+                android:layout_height="44dp">
+
+                <TextView
+                    android:id="@+id/register_title_name"
+                    android:minWidth="@dimen/width_min_40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="姓名"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/register_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/register_title_name"
+                    android:background="@null"
+                    android:hint="请输入姓名"
+                    android:text="@={registerViewModel.userName}"
+                    android:textColorHint="#999999"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/register_clear_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/login_del"
+                    android:visibility="@{registerViewModel.clearPhonenumberFlag?View.VISIBLE:View.GONE}" />
+            </com.zhy.autolayout.AutoRelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#f3f3f3" />
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/card_layout"
+                android:layout_width="match_parent"
+                android:layout_height="44dp">
+
+                <TextView
+                    android:id="@+id/register_title_card"
+                    android:minWidth="@dimen/width_min_40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="身份证号"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/register_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/register_title_card"
+                    android:background="@null"
+                    android:digits="0123456789Xx"
+                    android:hint="请输入身份证号"
+                    android:maxLength="18"
+                    android:text="@={registerViewModel.idcard}"
+                    android:textColorHint="#999999"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/register_clear_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/login_del"
+                    android:visibility="gone" />
+            </com.zhy.autolayout.AutoRelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#f3f3f3" />
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/information_title_location"
+                    android:minWidth="@dimen/width_min_40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="所在地区"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/information_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/list_more"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center|start"
+                    android:text="@={registerViewModel.location}" />
+            </com.zhy.autolayout.AutoLinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#f3f3f3" />
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:minWidth="@dimen/width_min_40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="学历"
+                    android:textColor="#333333"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/information_education"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/list_more"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center|start"
+                    android:text="@={registerViewModel.education}"/>
+            </com.zhy.autolayout.AutoLinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#f3f3f3" />
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp">
 
                 <TextView
                     android:id="@+id/register_title_phonenumber"
+                    android:minWidth="@dimen/width_min_40"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:text="手机号"
                     android:textColor="#333333"
-                    android:textSize="30px" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/register_phonenumber"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="60px"
+                    android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/register_title_phonenumber"
                     android:background="@null"
                     android:hint="请输入手机号"
+                    android:maxLength="11"
                     android:inputType="number"
                     android:text="@={registerViewModel.phoneNumber}"
                     android:textColorHint="#999999"
-                    android:textSize="30px" />
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/register_clear_phonenumber"
@@ -58,7 +224,7 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:src="@drawable/login_del"
-                    android:visibility="@{registerViewModel.clearPhonenumberFlag?View.VISIBLE:View.GONE}" />
+                    android:visibility="gone" />
             </com.zhy.autolayout.AutoRelativeLayout>
 
             <View
@@ -68,30 +234,31 @@
 
             <com.zhy.autolayout.AutoRelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="88px"
+                android:layout_height="44dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/register_title_verify"
+                    android:minWidth="@dimen/width_min_40"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:text="验证码"
                     android:textColor="#333333"
-                    android:textSize="30px" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/register_verify_code"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="60px"
+                    android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/register_title_verify"
                     android:background="@null"
                     android:inputType="number"
                     android:hint="请输入验证码"
                     android:text="@={registerViewModel.smsCode}"
                     android:textColorHint="#999999"
-                    android:textSize="30px" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/register_send_verify_code"
@@ -101,7 +268,7 @@
                     android:gravity="center"
                     android:text="获取验证码"
                     android:textColor="@color/color_26A16E"
-                    android:textSize="30px" />
+                    android:textSize="14sp" />
             </com.zhy.autolayout.AutoRelativeLayout>
 
             <View
@@ -111,29 +278,30 @@
 
             <com.zhy.autolayout.AutoRelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="88px"
+                android:layout_height="44dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/register_title_password"
+                    android:minWidth="@dimen/width_min_40"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:text="登录密码"
                     android:textColor="#333333"
-                    android:textSize="30px" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/register_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="30px"
+                    android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/register_title_password"
                     android:background="@null"
                     android:hint="请输入6~16位数字和字母密码"
                     android:text="@={registerViewModel.password}"
                     android:textColorHint="#999999"
-                    android:textSize="30px" />
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/register_clear_password"
@@ -165,12 +333,12 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/register_next"
+                android:id="@+id/infomation_commit"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:background="@drawable/login_commit_selector"
                 android:gravity="center"
-                android:text="下一步"
+                android:text="立即注册"
                 android:textColor="#ffffff"
                 android:textSize="34px" />
 
@@ -178,27 +346,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30px"
+                android:gravity="center_vertical"
+                android:layout_below="@id/infomation_commit"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/agreement_title"
+                <CheckBox
+                    android:id="@+id/agreement_cb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@id/login_commit"
-                    android:text="点击下一步即同意"
-                    android:textColor="@color/color_999999"
-                    android:textSize="24px" />
-
+                    android:checked="true"/>
                 <TextView
                     android:id="@+id/agreement_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@id/login_commit"
-                    android:text="《注册服务协议》"
                     android:textColor="#2c80df"
-                    android:textSize="24px" />
+                    android:textSize="12sp"
+                    android:text="《注册服务协议》"/>
             </com.zhy.autolayout.AutoLinearLayout>
 
         </com.zhy.autolayout.AutoLinearLayout>

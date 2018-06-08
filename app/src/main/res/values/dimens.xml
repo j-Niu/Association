@@ -96,6 +96,7 @@
     <dimen name="width_big_55">55dp</dimen>
     <dimen name="width_normal_45">45dp</dimen>
     <dimen name="width_small_40">40dp</dimen>
+    <dimen name="width_min_40">60dp</dimen>
     <dimen name="width_lsmall_35">35dp</dimen>
     <dimen name="width_llsmall_30">30dp</dimen>
     <dimen name="width_xlsmall_20">20dp</dimen>
