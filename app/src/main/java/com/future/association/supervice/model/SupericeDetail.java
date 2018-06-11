@@ -26,6 +26,7 @@ public class SupericeDetail extends BaseBean<SupericeDetail> {
     private String title;
     private String create_time;
     private String type;
+    private String nature;
     private String hangye;//和type是一样的
     private String address;
     private String reason;
@@ -36,6 +37,13 @@ public class SupericeDetail extends BaseBean<SupericeDetail> {
         infoBean = GsonUtils.jsonToBean(content,SupericeDetail.class);
     }
 
+    public String getNature() {
+        return nature;
+    }
+
+    public void setNature(String nature) {
+        this.nature = nature;
+    }
 
     public String getHangye() {
         return hangye;

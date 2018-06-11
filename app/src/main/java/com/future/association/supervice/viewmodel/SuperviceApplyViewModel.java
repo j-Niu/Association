@@ -1,19 +1,15 @@
 package com.future.association.supervice.viewmodel;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
+import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
-import com.bigkoo.pickerview.adapter.ArrayWheelAdapter;
-import com.bigkoo.pickerview.listener.OnItemSelectedListener;
 import com.future.association.common.EventCode;
 import com.future.association.common.MyApp;
-import com.future.association.common.view.MainActivity;
 import com.future.association.community.utils.TextUtil;
 import com.future.association.databinding.ActivitySuperviceApplyBinding;
 import com.future.association.login.bean.JsonBean;
@@ -21,6 +17,7 @@ import com.future.association.supervice.FullyGridLayoutManager;
 import com.future.association.supervice.SupericeApi;
 import com.future.association.supervice.adapter.GridImageAdapter;
 import com.future.association.supervice.model.SupericeDetail;
+import com.future.association.supervice.model.SupericeNature;
 import com.future.association.supervice.view.SuperviceApplyActivity;
 import com.future.baselib.entity.MessageEvent;
 import com.future.baselib.utils.CommonUtils;
@@ -57,7 +54,6 @@ import static android.app.Activity.RESULT_OK;
 public class SuperviceApplyViewModel {
     private final ActivitySuperviceApplyBinding mBindIng;
     private final SuperviceApplyActivity activity;
-    private final String type;
     public ObservableField<SupericeDetail> supericeDetail = new ObservableField<>();
     private List<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
@@ -65,12 +61,12 @@ public class SuperviceApplyViewModel {
     private final SupericeDetail supericeDetailBean = new SupericeDetail();
     private GridImageAdapter adapter;
     private int maxSelectNum = 5;
+    private List<SupericeNature> supericeNatures;
 
 
-    public SuperviceApplyViewModel(SuperviceApplyActivity activity, ActivitySuperviceApplyBinding binding, String type) {
+    public SuperviceApplyViewModel(SuperviceApplyActivity activity, ActivitySuperviceApplyBinding binding) {
         this.activity = activity;
         this.mBindIng = binding;
-        this.type = TextUtil.isEmpty(type) ? "" : type;
         initView();
         initData();
     }
@@ -120,7 +116,7 @@ public class SuperviceApplyViewModel {
                                     .publishSuperice(activity, MyApp.getUserToken(),
                                             supericeDetail.getType(), supericeDetail.getAddress(),
                                             supericeDetail.getTitle(), supericeDetail.getReason(),
-                                            buffer.toString())
+                                            buffer.toString(),supericeDetail.getNature())
                                     .setListener(new HttpRequest.OnNetworkListener<SupericeDetail>() {
                                         @Override
                                         public void onSuccess(SupericeDetail response) {
@@ -156,30 +152,43 @@ public class SuperviceApplyViewModel {
                     }
                 });
 
-        RxView.clicks(mBindIng.type)
+        RxView.clicks(mBindIng.typeTv)
                 .throttleFirst(1, TimeUnit.SECONDS)
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(@NonNull Disposable disposable) throws Exception {
-                        activity.showLoadingDialog();
-//                        getProvinces();
-                    }
-                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Object>() {
+
                     @Override
                     public void accept(Object o) throws Exception {
-                        mBindIng.typeTv.setCyclic(false);
-
-                        mBindIng.typeTv.setAdapter(new ArrayWheelAdapter(Arrays.asList(types)));
-                        mBindIng.typeTv.setOnItemSelectedListener(new OnItemSelectedListener() {
+                        OptionsPickerView optionsPickView = new OptionsPickerView.Builder(activity, new OptionsPickerView.OnOptionsSelectListener() {
                             @Override
-                            public void onItemSelected(int index) {
-                                Toast.makeText(activity, "" + types[index], Toast.LENGTH_SHORT).show();
-                                Toast.makeText(activity, "fffffffffff", Toast.LENGTH_SHORT).show();
-                                supericeDetail.get().setType(types[index]);
+                            public void onOptionsSelect(int i, int i1, int i2, View view) {
+//                                activity.toast(types[i]);
+                                supericeDetail.get().setType(types[i]);
+                                mBindIng.typeTv.setText(types[i]);
                             }
-                        });
+                        }).build();
+                        optionsPickView.setPicker(Arrays.asList(types));
+                        optionsPickView.show();
+                    }
+                });
+
+        RxView.clicks(mBindIng.natureTv)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Object>() {
+
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        OptionsPickerView optionsPickView = new OptionsPickerView.Builder(activity, new OptionsPickerView.OnOptionsSelectListener() {
+                            @Override
+                            public void onOptionsSelect(int i, int i1, int i2, View view) {
+//                                activity.toast(types[i]);
+                                supericeDetail.get().setNature(supericeNatures.get(i).getName());
+                                mBindIng.natureTv.setText(supericeNatures.get(i).getName());
+                            }
+                        }).build();
+                        optionsPickView.setPicker(supericeNatures);
+                        optionsPickView.show();
                     }
                 });
 
@@ -231,7 +240,11 @@ public class SuperviceApplyViewModel {
     private boolean canCommit() {
         SupericeDetail info = supericeDetail.get();
         if (TextUtil.isEmpty(info.getType())) {
-            ToastUtils.shortToast(activity, "请选择类型");
+            ToastUtils.shortToast(activity, "请选择问题类型");
+            return false;
+        }
+        if (TextUtil.isEmpty(info.getNature())) {
+            ToastUtils.shortToast(activity, "请选择问题性质");
             return false;
         }
         if (TextUtil.isEmpty(info.getAddress())) {
@@ -255,9 +268,26 @@ public class SuperviceApplyViewModel {
 
     private void initData() {
 //        getProvinces();//获取三级地址级联
-        supericeDetailBean.setType(type);
+//        supericeDetailBean.setType(type);
         supericeDetail.set(supericeDetailBean);
         mBindIng.setSupericeDetail(supericeDetailBean);
+        getSupericeNature();
+    }
+
+    private void getSupericeNature() {
+        SupericeApi.getInstance().getSupericeNature(activity,MyApp.getUserToken())
+                .setListener(new HttpRequest.OnNetworkListener<SupericeNature>() {
+                    @Override
+                    public void onSuccess(SupericeNature supericeNature) {
+                        Log.d("response",supericeNature.toString());
+                        supericeNatures = supericeNature.getList();
+                    }
+
+                    @Override
+                    public void onFail(String message) {
+                        if (!TextUtil.isEmpty(message)) activity.toast(message);
+                    }
+                }).start(new SupericeNature());
     }
 
     private void getProvinces() {

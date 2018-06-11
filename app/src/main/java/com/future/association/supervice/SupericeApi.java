@@ -18,6 +18,7 @@ public class SupericeApi {
     public static final String SUPERICE_LIST_APICODE = "_jdliebiao_001";
     public static final String SUPERICE_TYPE_DETAIL_APICODE = "_jdxiangqing_001";
     public static final String SUPERICE_TYPE_PUBLISH_APICODE = "_jdfabu_001";//_jdfabu_001
+    public static final String SUPERICE_TYPE_NATURE = "_jdfabunature_001";//监督性质
     public static final String SUPERICE_TYPE_GET_PROVINCE = "_postcity_001";//三级地址获取
 
     private static SupericeApi instance = null;
@@ -63,7 +64,7 @@ public class SupericeApi {
 /*
 * 监督发布
 * */
-    public HttpRequest publishSuperice(Context context,String userToken, String hangye, String address,String title, String reason, String image){
+    public HttpRequest publishSuperice(Context context,String userToken, String hangye, String address,String title, String reason, String image,String nature){
         return new HttpRequest<SupericeDetail>()
                 .with(context)
                 .addParam("apiCode",SUPERICE_TYPE_PUBLISH_APICODE)
@@ -72,7 +73,18 @@ public class SupericeApi {
                 .addParam("address",address)
                 .addParam("title",title)
                 .addParam("reason",reason)
+                .addParam("nature",nature)
                 .addParam("image",image);
+    }
+    /*
+     * 监督性质列表
+     * cf968e0ff0c50eb42d556fabc54f624e
+     * */
+    public HttpRequest getSupericeNature(Context context,String userToken){
+        return new HttpRequest<>()
+                .with(context)
+                .addParam("apiCode",SUPERICE_TYPE_NATURE)
+                .addParam("userToken",userToken);
     }
 
     /*

@@ -22,7 +22,7 @@ public class SuperviceApplyActivity extends BaseActivity {
     protected void initContentView(Bundle savedInstanceState) {
         String type = getIntent().getStringExtra("type");
         ActivitySuperviceApplyBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_supervice_apply);
-        mViewMdel = new SuperviceApplyViewModel(this, binding, type);
+        mViewMdel = new SuperviceApplyViewModel(this, binding);
         binding.setSuperviceApplyViewMdel(mViewMdel);
     }
 

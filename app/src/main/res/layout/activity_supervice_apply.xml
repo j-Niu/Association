@@ -42,15 +42,48 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="监督类别"/>
+                        android:text="问题类别"/>
 
                     <TextView
                         android:id="@+id/type_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/right_arrow"
+                        android:drawablePadding="8dp"
                         android:layout_weight="4"
                         android:gravity="right"
                         android:text="@={supericeDetail.type}"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/normal_padding"
+                    android:background="@color/slide_color_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal_padding"
+                    android:gravity="top"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="问题性质"/>
+
+                    <TextView
+                        android:id="@+id/nature_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/right_arrow"
+                        android:drawablePadding="8dp"
+                        android:layout_weight="4"
+                        android:gravity="right"
+                        android:text="@={supericeDetail.nature}"/>
 
                 </LinearLayout>
 
@@ -201,22 +234,16 @@
 
         </ScrollView>
 
-        <Button
-            android:id="@+id/submit_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/normal_padding"
-            android:background="@drawable/selector_normal_button"
-            android:text="确定发布"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_16"/>
 
-        <com.bigkoo.pickerview.lib.WheelView
-            android:id="@+id/type_view"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_alignParentBottom="true"/>
-
+            <Button
+                android:id="@+id/submit_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/normal_padding"
+                android:background="@drawable/selector_normal_button"
+                android:text="确定发布"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16"/>
     </RelativeLayout>
 </layout>
