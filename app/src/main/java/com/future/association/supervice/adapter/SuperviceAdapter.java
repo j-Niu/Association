@@ -2,7 +2,6 @@ package com.future.association.supervice.adapter;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -35,9 +34,11 @@ public class SuperviceAdapter extends BaseQuickAdapter<SupericeList.SupericeList
 //        } else {
 //            imageView.setVisibility(View.GONE);
 //        }
-            imageView.setVisibility(View.GONE);
+//            imageView.setVisibility(View.GONE);
 
         baseViewHolder.setText(R.id.title, item.getTitle())
-                .setText(R.id.time, item.getTime());
+                .setText(R.id.superice_time, item.getTime())
+        .setText(R.id.superice_nature,item.getNature())
+        .setText(R.id.superice_type,item.getType());
     }
 }

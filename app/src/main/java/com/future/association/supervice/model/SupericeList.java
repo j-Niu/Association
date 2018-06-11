@@ -31,8 +31,33 @@ public class SupericeList extends BaseBean<SupericeList.SupericeListInfo> {
         private String image;
         private String title;
         private String time;
+        private String nature;
+        private String type;
+        private String dead_time;
 
+        public String getNature() {
+            return nature;
+        }
 
+        public void setNature(String nature) {
+            this.nature = nature;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getDead_time() {
+            return dead_time;
+        }
+
+        public void setDead_time(String dead_time) {
+            this.dead_time = dead_time;
+        }
 
         public String getId() {
             return id;

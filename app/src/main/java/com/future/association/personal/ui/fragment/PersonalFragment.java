@@ -99,7 +99,7 @@ public class PersonalFragment extends MyBaseFragment {
     @Override
     protected void initView(View view, @Nullable Bundle savedInstanceState) {
         setTitle("我的");
-        setTitleRight(R.drawable.ic_setting, new View.OnClickListener() {
+        setTitleRight(R.drawable.wode_shezhi, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(MyMoreActivity.class);
