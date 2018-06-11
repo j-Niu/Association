@@ -37,8 +37,8 @@ public class SuperviceAdapter extends BaseQuickAdapter<SupericeList.SupericeList
 //            imageView.setVisibility(View.GONE);
 
         baseViewHolder.setText(R.id.title, item.getTitle())
-                .setText(R.id.superice_time, item.getTime())
-        .setText(R.id.superice_nature,item.getNature())
+                .setText(R.id.superice_time, item.getCreate_time())
+        .setText(R.id.superice_nature,item.getHangye())
         .setText(R.id.superice_type,item.getType());
     }
 }

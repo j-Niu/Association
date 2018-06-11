@@ -81,14 +81,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/gallery_text_gray"
+            android:drawableStart="@drawable/xingzhi"
+            android:drawablePadding="6dp"
             android:text="监督发布时间:"/>
 
         <TextView
             android:id="@+id/superice_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/xingzhi"
-            android:drawablePadding="6dp"
             android:textColor="@color/gallery_text_gray"
             android:text="2012.2.3"/>
 

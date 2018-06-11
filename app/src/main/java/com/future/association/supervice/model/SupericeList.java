@@ -33,7 +33,24 @@ public class SupericeList extends BaseBean<SupericeList.SupericeListInfo> {
         private String time;
         private String nature;
         private String type;
-        private String dead_time;
+        private String hangye;
+        private String create_time;
+
+        public String getCreate_time() {
+            return create_time;
+        }
+
+        public void setCreate_time(String create_time) {
+            this.create_time = create_time;
+        }
+
+        public String getHangye() {
+            return hangye;
+        }
+
+        public void setHangye(String hangye) {
+            this.hangye = hangye;
+        }
 
         public String getNature() {
             return nature;
@@ -51,13 +68,6 @@ public class SupericeList extends BaseBean<SupericeList.SupericeListInfo> {
             this.type = type;
         }
 
-        public String getDead_time() {
-            return dead_time;
-        }
-
-        public void setDead_time(String dead_time) {
-            this.dead_time = dead_time;
-        }
 
         public String getId() {
             return id;
