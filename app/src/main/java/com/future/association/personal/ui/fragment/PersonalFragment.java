@@ -163,7 +163,8 @@ public class PersonalFragment extends MyBaseFragment {
                             tvMyAddress.setText(jdDetail.address);
                             tvMylevel.setText(jdDetail.level);
                             tvMychenghao.setText("("+jdDetail.chenghao+")");
-                            tvMyJifen.setText(jdDetail.jifen);
+                            int i = Integer.valueOf(jdDetail.jifen) + Integer.valueOf(jdDetail.jifencha);
+                            tvMyJifen.setText(jdDetail.jifen+"/"+i);
                         }
                     }
 

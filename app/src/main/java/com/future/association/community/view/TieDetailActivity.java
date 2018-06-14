@@ -11,13 +11,14 @@ import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.future.association.R;
-import com.future.association.common.utils.GlideUtils;
 import com.future.association.common.MyApp;
+import com.future.association.common.utils.GlideUtils;
 import com.future.association.community.adapter.TieReplyAdapter;
 import com.future.association.community.base.BaseActivity;
 import com.future.association.community.contract.TieDetailContract;
 import com.future.association.community.custom.CustomRecyclerView;
 import com.future.association.community.model.TieDetailInfo;
+import com.future.association.community.model.TieInfo;
 import com.future.association.community.model.TieReplyInfo;
 import com.future.association.community.presenter.TieDetailPresenter;
 import com.future.association.community.utils.ActivityUtils;
@@ -71,6 +72,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         String type = getIntent().getStringExtra("type") ;
         jifen = getIntent().getStringExtra("jifen");
         huifu_jf = getIntent().getStringExtra("huifu_jf");
+        TieInfo tieInfo = getIntent().getParcelableExtra("tieInfo");
         tieziId =getIntent().getStringExtra("id");
         if ("1".equals(type)) {
             popupTieBinding.setIsTop("取消置顶");

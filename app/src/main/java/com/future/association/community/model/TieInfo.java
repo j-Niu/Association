@@ -8,12 +8,22 @@ import android.os.Parcelable;
  */
 
 public class TieInfo implements Parcelable {
-
+/*
+*
+* 名字:real_name
+头像:avatar_url
+角色:user_type[1.消费者2.志愿者]
+阅读量:click_num
+* */
     private String id ;//帖子id
     private String title ;//帖子title
     private String create_time ;//发帖时间
     private String huifu_num ;//回复数量
     private String type ;//帖子类型 置顶或者普通
+    private String real_name ;//
+    private String avatar_url ;//
+    private String user_type ;//
+    private String click_num ;//
 
     public TieInfo(String id, String title, String create_time, String huifu_num, String type) {
         this.id = id;
@@ -23,25 +33,38 @@ public class TieInfo implements Parcelable {
         this.type = type;
     }
 
-    protected TieInfo(Parcel in) {
-        id = in.readString();
-        title = in.readString();
-        create_time = in.readString();
-        huifu_num = in.readString();
-        type = in.readString();
+    public String getReal_name() {
+        return real_name;
     }
 
-    public static final Creator<TieInfo> CREATOR = new Creator<TieInfo>() {
-        @Override
-        public TieInfo createFromParcel(Parcel in) {
-            return new TieInfo(in);
-        }
+    public void setReal_name(String real_name) {
+        this.real_name = real_name;
+    }
 
-        @Override
-        public TieInfo[] newArray(int size) {
-            return new TieInfo[size];
-        }
-    };
+    public String getAvatar_url() {
+        return avatar_url;
+    }
+
+    public void setAvatar_url(String avatar_url) {
+        this.avatar_url = avatar_url;
+    }
+
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
+    }
+
+    public String getClick_num() {
+        return click_num;
+    }
+
+    public void setClick_num(String click_num) {
+        this.click_num = click_num;
+    }
+
 
     public String getId() {
         return id;
@@ -83,26 +106,13 @@ public class TieInfo implements Parcelable {
         this.type = type;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeString(title);
-        dest.writeString(create_time);
-        dest.writeString(huifu_num);
-        dest.writeString(type);
-    }
 
     /**
      * 拼接评论格式
      * @return
      */
     public String getReplyFormat(){
-        return huifu_num+"评论" ;
+        return huifu_num+"" ;
     }
 
     /**
@@ -116,4 +126,45 @@ public class TieInfo implements Parcelable {
         return false ;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.title);
+        dest.writeString(this.create_time);
+        dest.writeString(this.huifu_num);
+        dest.writeString(this.type);
+        dest.writeString(this.real_name);
+        dest.writeString(this.avatar_url);
+        dest.writeString(this.user_type);
+        dest.writeString(this.click_num);
+    }
+
+    protected TieInfo(Parcel in) {
+        this.id = in.readString();
+        this.title = in.readString();
+        this.create_time = in.readString();
+        this.huifu_num = in.readString();
+        this.type = in.readString();
+        this.real_name = in.readString();
+        this.avatar_url = in.readString();
+        this.user_type = in.readString();
+        this.click_num = in.readString();
+    }
+
+    public static final Creator<TieInfo> CREATOR = new Creator<TieInfo>() {
+        @Override
+        public TieInfo createFromParcel(Parcel source) {
+            return new TieInfo(source);
+        }
+
+        @Override
+        public TieInfo[] newArray(int size) {
+            return new TieInfo[size];
+        }
+    };
 }

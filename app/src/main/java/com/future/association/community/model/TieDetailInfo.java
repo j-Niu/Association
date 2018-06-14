@@ -1,8 +1,5 @@
 package com.future.association.community.model;
 
-import android.os.Parcelable;
-
-import com.future.association.common.MyApp;
 import com.future.association.community.utils.TextUtil;
 
 /**
@@ -20,6 +17,9 @@ public class TieDetailInfo {
     private String address;//所属区域
     private String content;//帖子内容
     private String type;//帖子类型
+    private String huifu_num ;//回复数量
+    private String click_num ;//阅读数
+    private String plate ;//板块
 
     public String getReal_name() {
         return real_name;
@@ -45,6 +45,30 @@ public class TieDetailInfo {
         }else{
             return level ;
         }
+    }
+
+    public String getHuifu_num() {
+        return huifu_num;
+    }
+
+    public void setHuifu_num(String huifu_num) {
+        this.huifu_num = huifu_num;
+    }
+
+    public String getClick_num() {
+        return click_num;
+    }
+
+    public void setClick_num(String click_num) {
+        this.click_num = click_num;
+    }
+
+    public String getPlate() {
+        return plate;
+    }
+
+    public void setPlate(String plate) {
+        this.plate = plate;
     }
 
     public void setLevel(String level) {

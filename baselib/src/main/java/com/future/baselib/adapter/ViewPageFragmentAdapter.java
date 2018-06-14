@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +20,9 @@ import java.util.ArrayList;
 
 /**
  * Fragment滑动切换适配器
+ * @author chenyu
  */
-public class ViewPageFragmentAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
+public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter implements ViewPager.OnPageChangeListener {
 
 	private final Context mContext;
 	protected PagerSlidingTabStrip mPagerStrip;
@@ -50,8 +51,16 @@ public class ViewPageFragmentAdapter extends FragmentPagerAdapter implements Vie
 		mPagerStrip = pageStrip;
 		mViewPager = pager;
 		mViewPager.setAdapter(this);
-		mViewPager.setOnPageChangeListener(this);
+		mViewPager.addOnPageChangeListener(this);
 		mPagerStrip.setViewPager(mViewPager);
+	}
+
+	public ViewPageFragmentAdapter(FragmentManager fm, ViewPager pager) {
+		super(fm);
+		mContext = pager.getContext();
+		mViewPager = pager;
+		mViewPager.setAdapter(this);
+		mViewPager.addOnPageChangeListener(this);
 	}
 	
 
@@ -71,7 +80,7 @@ public class ViewPageFragmentAdapter extends FragmentPagerAdapter implements Vie
 		for (ViewPageInfo viewPageInfo : mTabs) {
 			TextView v = (TextView) LayoutInflater.from(mContext).inflate(R.layout.sliding_tab_item, null);
 			v.setText(viewPageInfo.title);
-			mPagerStrip.addTab(v);
+			if (mPagerStrip!=null)mPagerStrip.addTab(v);
 		}
 	}
 

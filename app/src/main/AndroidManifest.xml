@@ -207,6 +207,7 @@
                 <category android:name="com.future.association" />
             </intent-filter>
         </activity>
+        <activity android:name=".login.LoginActivity2"/>
 
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->

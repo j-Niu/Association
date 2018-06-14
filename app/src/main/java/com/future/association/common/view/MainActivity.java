@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -19,7 +20,7 @@ import android.widget.RadioGroup;
 
 import com.future.association.R;
 import com.future.association.common.MyApp;
-import com.future.association.community.CommunityFragment;
+import com.future.association.community.CommunitNewFragmnet;
 import com.future.association.news.entity.CheckResponse;
 import com.future.association.news.ui.fragment.NewsFragment;
 import com.future.association.personal.ui.fragment.PersonalFragment;
@@ -52,17 +53,29 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     NoScrollViewPager viewPager;
     @BindView(R.id.rg_bottom)
     RadioGroup rgBottom;
+    @BindView(R.id.rb_zx)
+    RadioButton rbZx;
+    @BindView(R.id.rb_wj)
+    RadioButton rbWj;
+    @BindView(R.id.rb_jd)
+    RadioButton rbJd;
+    @BindView(R.id.rb_sq)
+    RadioButton rbSq;
+    @BindView(R.id.rb_wd)
+    RadioButton rbWd;
 
     private static final String APK_PATH = Environment.getExternalStorageDirectory() + "/Association" + File.separator;
 
     private List<Fragment> fragmentList;
     private FragmentAdapter adapter;
+    private boolean islogin;
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         StatusUtils.setStatusbarColor(this, getResources().getColor(R.color.colorPrimary));
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+         islogin = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("islogin", false);
         MyApp.getApp().registerObserver(0x898, new MyApp.ObserverListener() {
             @Override
             public void notifyChange(Bundle bundle, Object object) {
@@ -80,7 +93,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         fragmentList.add(new NewsFragment());
         fragmentList.add(new QuestionnaireFragment());
         fragmentList.add(new SuperviceFragment());
-        fragmentList.add(new CommunityFragment());
+//        fragmentList.add(new CommunityFragment());
+        fragmentList.add(new CommunitNewFragmnet());
         fragmentList.add(PersonalFragment.newInstance(4));
 
         adapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList);
@@ -186,16 +200,36 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 viewPager.setCurrentItem(0, false);
                 break;
             case R.id.rb_wj:
-                viewPager.setCurrentItem(1, false);
+                if (islogin) {
+                    viewPager.setCurrentItem(1, false);
+                }else {
+                    toast("游客模式禁止访问");
+                    rbWj.setChecked(false);
+                }
                 break;
             case R.id.rb_jd:
-                viewPager.setCurrentItem(2, false);
+                if (islogin) {
+                    viewPager.setCurrentItem(2, false);
+                }else {
+                    toast("游客模式禁止访问");
+                    rbJd.setChecked(false);
+                }
                 break;
             case R.id.rb_sq:
-                viewPager.setCurrentItem(3, false);
+                if (islogin) {
+                    viewPager.setCurrentItem(3, false);
+                }else {
+                    toast("游客模式禁止访问");
+                    rbSq.setChecked(false);
+                }
                 break;
             case R.id.rb_wd:
-                viewPager.setCurrentItem(4, false);
+                if (islogin) {
+                    viewPager.setCurrentItem(4, false);
+                }else {
+                    toast("游客模式禁止访问");
+                    rbWd.setChecked(false);
+                }
                 break;
         }
     }

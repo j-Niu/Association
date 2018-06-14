@@ -32,4 +32,7 @@
     <string name="questionnaire_detail">问卷详情</string>
     <string name="questionnaire_result">问卷结果</string>
     <string name="wuwei">无畏</string>
+    <string name="xfz">消费者</string>
+    <string name="zyz">志愿者</string>
+    <string name="zcxy"><![CDATA[<font color="#999999">登录注册表示同意</font><font color="#666666">《用户协议与隐私条款》</font>]]></string>
 </resources>

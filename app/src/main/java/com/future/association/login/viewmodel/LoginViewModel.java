@@ -17,12 +17,12 @@ import android.widget.LinearLayout;
 
 import com.future.association.R;
 import com.future.association.common.view.MainActivity;
-import com.future.association.databinding.ActivityLoginBinding;
+import com.future.association.databinding.ActivityLogin2Binding;
 import com.future.association.databinding.DialogLoginErrorBinding;
 import com.future.association.databinding.DialogLoginProtectBinding;
 import com.future.association.login.FindPwdResetActivity;
 import com.future.association.login.FindPwdVerifyActivity;
-import com.future.association.login.LoginActivity;
+import com.future.association.login.LoginActivity2;
 import com.future.association.login.RegisterActivity;
 import com.future.association.login.UserApi;
 import com.future.association.login.bean.UserResponse;
@@ -43,7 +43,6 @@ import io.reactivex.functions.Consumer;
 import static com.future.association.login.util.CommonUtil.mobilePattern;
 import static com.future.association.login.util.CommonUtil.passwordPattern;
 import static com.future.association.login.util.CommonUtil.startActivity;
-import static com.future.association.login.util.CommonUtil.verifyPattern;
 
 /**
  * Created by Administrator on 2017/7/3.
@@ -54,14 +53,14 @@ public class LoginViewModel {
     private Dialog errorDialog, protectDialog;
     private DialogLoginErrorBinding errorBinding;
     private DialogLoginProtectBinding protectBinding;
-    private LoginActivity activity;
-    private ActivityLoginBinding binding;
+    private LoginActivity2 activity;
+    private ActivityLogin2Binding binding;
     public ObservableField<String> phoneNumber = new ObservableField<>();
     public ObservableField<String> password = new ObservableField<>();
     public ObservableField<String> errorMessage = new ObservableField<>();
     public ObservableBoolean clearPhonenumberFlag = new ObservableBoolean(false);
 
-    public LoginViewModel(LoginActivity activity, ActivityLoginBinding binding) {
+    public LoginViewModel(LoginActivity2 activity, ActivityLogin2Binding binding) {
         this.activity = activity;
         this.binding = binding;
         errorBinding = DataBindingUtil.inflate(activity.getLayoutInflater(), R.layout.dialog_login_error, null, false);

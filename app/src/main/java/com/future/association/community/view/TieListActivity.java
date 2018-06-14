@@ -1,7 +1,6 @@
 package com.future.association.community.view;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -82,6 +81,7 @@ public class TieListActivity extends BaseActivity<ActivityBannerBinding> impleme
                 bundle.putString("id",tieInfos.get(position).getId());
                 bundle.putString("type",tieInfos.get(position).getType());
                 bundle.putString("jifen", userPlateInfo.getJifen());
+                bundle.putParcelable("tieInfo", tieInfos.get(position));
                 ActivityUtils.startActivityIntent(context, TieDetailActivity.class, bundle);
             }
         });

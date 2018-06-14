@@ -6,11 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.future.association.R;
+import com.future.association.common.utils.GlideUtils;
 import com.future.association.community.model.TieInfo;
 import com.future.association.community.utils.DateUtils;
 import com.future.association.community.utils.ScreenUtils;
 import com.future.association.databinding.ItemTieBinding;
+import com.future.baselib.utils.HttpRequest;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,10 +77,16 @@ public class TieListAdapter extends RecyclerView.Adapter<TieListAdapter.ViewHold
                     }
                 }
             });
+
             binding = DataBindingUtil.bind(itemView) ;
+
         }
         public void setData(int position){
             this.position = position ;
+            Glide.with(context)
+                    .applyDefaultRequestOptions(GlideUtils.defaultImg2())
+                    .load(HttpRequest.BASE_URL + tieInfos.get(position).getAvatar_url())
+                    .into(binding.headImg);
             binding.setTieInfo(tieInfos.get(position));
         }
     }

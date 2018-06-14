@@ -121,4 +121,5 @@
     <dimen name="divider_line_03">0.3dp</dimen>
 
     <dimen name="my_ic_padding">8dp</dimen>
+    <dimen name="divider_height">12dp</dimen>
 </resources>
