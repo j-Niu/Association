@@ -7,8 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.future.association.R;
-import com.future.association.common.utils.GlideUtils;
 import com.future.association.community.model.TieInfo;
 import com.future.association.community.utils.DateUtils;
 import com.future.association.community.utils.ScreenUtils;
@@ -83,10 +84,17 @@ public class TieListAdapter extends RecyclerView.Adapter<TieListAdapter.ViewHold
         }
         public void setData(int position){
             this.position = position ;
+            RequestOptions options = new RequestOptions()
+                    .placeholder(R.drawable.iv_defalut)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL);
             Glide.with(context)
-                    .applyDefaultRequestOptions(GlideUtils.defaultImg2())
                     .load(HttpRequest.BASE_URL + tieInfos.get(position).getAvatar_url())
+                    .apply(options)
                     .into(binding.headImg);
+//            Glide.with(context)
+//                    .applyDefaultRequestOptions(GlideUtils.defaultImg2())
+//                    .load(HttpRequest.BASE_URL + tieInfos.get(position).getAvatar_url())
+//                    .into(binding.headImg);
             binding.setTieInfo(tieInfos.get(position));
         }
     }

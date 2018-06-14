@@ -19,6 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.future.association.R;
 import com.future.association.common.Contants;
 import com.future.association.common.MyApp;
@@ -142,6 +144,9 @@ public class PersonalFragment extends MyBaseFragment {
     }
 
     private void initData() {
+        final RequestOptions options = new RequestOptions()
+                .placeholder(R.drawable.iv_defalut)
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
 //        Log.i("123", "userToken ===  " + MyApp.getUserToken());
         new HttpRequest<JDResponse>()
                 .with(mContext)
@@ -157,6 +162,7 @@ public class PersonalFragment extends MyBaseFragment {
                             Glide.with(getActivity())
                                     .asBitmap()
                                     .load(StringUtils.utf8Encode(jdDetail.avatar_url))
+                                    .apply(options)
                                     .into(header);
 //                            Glide.with(getActivity()).asBitmap().load(myInfos.level_img).into(header);
                             tvMyShenFen.setText(jdDetail.real_name);

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 
 import com.future.association.common.view.SimplePaddingDecoration;
 import com.future.association.community.adapter.TieListAdapter;
+import com.future.association.community.custom.CustomRecyclerView;
 import com.future.association.community.model.PlateInfo;
 import com.future.association.community.model.TieInfo;
 import com.future.association.community.model.UserPlateInfo;
@@ -21,8 +22,10 @@ import java.util.ArrayList;
 public class CommitunitListFragmentVM {
     private final FragmentCommitunitListBinding mBinding;
     private final Fragment mFragment;
-    private int currentPage = 1;
+//    private int currentPage = 1;
     private PlateInfo mPlateInfo;
+    private ArrayList<TieInfo> infos = new ArrayList<>();
+    private TieListAdapter tieListAdapter;
 
     public CommitunitListFragmentVM(FragmentCommitunitListBinding binding, Fragment fragment) {
         this.mBinding = binding;
@@ -33,12 +36,18 @@ public class CommitunitListFragmentVM {
     private void initData() {
         Bundle bundle = mFragment.getArguments();
         mPlateInfo =  bundle.getParcelable("data");
-        String id = mPlateInfo.getId();
-        CommunityRequest.getTieList(mFragment.getActivity(), id,currentPage, new HttpRequest.OnNetworkListener<DataResponse>() {
+//        String id = mPlateInfo.getId();
+        setAdapter();
+        getTieList(1);
+    }
+
+    private void getTieList(int currentPage) {
+        CommunityRequest.getTieList(mFragment.getActivity(), mPlateInfo.getId(),currentPage, new HttpRequest.OnNetworkListener<DataResponse>() {
             @Override
             public void onSuccess(DataResponse response) {
 //                iView.setData(response.infos);
-                setAdapter(response.infos);
+                infos.addAll(response.infos);
+                tieListAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -48,18 +57,24 @@ public class CommitunitListFragmentVM {
         });
     }
 
-    private void setAdapter(final ArrayList<TieInfo> tieInfos) {
-        TieListAdapter tieListAdapter = new TieListAdapter(mFragment.getActivity(), tieInfos);
+    private void setAdapter() {
+         tieListAdapter = new TieListAdapter(mFragment.getActivity(), infos);
         final UserPlateInfo userPlateInfo = mFragment.getArguments().getParcelable("userPlateInfo");
         tieListAdapter.setItemClickListener(new TieListAdapter.OnItemClickListener() {
             @Override
             public void itemClick(int position) {
                 Bundle bundle = new Bundle();
                 bundle.putString("huifu_Jf",mPlateInfo.getHuifu_jf());
-                bundle.putString("id",tieInfos.get(position).getId());
-                bundle.putString("type",tieInfos.get(position).getType());
+                bundle.putString("id",infos.get(position).getId());
+                bundle.putString("type",infos.get(position).getType());
                 bundle.putString("jifen", userPlateInfo.getJifen());
                 ActivityUtils.startActivityIntent(mFragment.getActivity(), TieDetailActivity.class, bundle);
+            }
+        });
+        mBinding.rcvTie.setLoadMoreListener(new CustomRecyclerView.LoadMoreListener() {
+            @Override
+            public void onLoadMore(int currentPage) {
+                getTieList(currentPage);
             }
         });
         mBinding.rcvTie.addItemDecoration(new SimplePaddingDecoration(mFragment.getActivity()));
