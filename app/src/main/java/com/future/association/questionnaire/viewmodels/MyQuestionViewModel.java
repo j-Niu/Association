@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -41,7 +40,7 @@ public class MyQuestionViewModel {
 
     private void initView() {
         mBinding.rv.setLayoutManager(new LinearLayoutManager(activity));
-        mBinding.rv.addItemDecoration(new DividerItemDecoration(activity,LinearLayoutManager.VERTICAL));
+//        mBinding.rv.addItemDecoration(new DividerItemDecoration(activity,LinearLayoutManager.VERTICAL));
         QuestionnaireAdapter adapter = new QuestionnaireAdapter(R.layout.questionnaire_item, null, Contants.MYQUESTIONNAI_REFRAGMENT);
         adapterObservable.set(adapter);
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {

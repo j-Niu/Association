@@ -27,6 +27,7 @@ public class QuestionDetail extends BaseBean<QuestionDetail> {
     private String showurl;
     private String jianjie;
     private String status;
+    private String dead_time;
 
 
     @Override
@@ -36,6 +37,14 @@ public class QuestionDetail extends BaseBean<QuestionDetail> {
         } else {
             list = GsonUtils.jsonToList(content, QuestionDetail.class);
         }
+    }
+
+    public String getDead_time() {
+        return dead_time;
+    }
+
+    public void setDead_time(String dead_time) {
+        this.dead_time = dead_time;
     }
 
     public String getStatus() {

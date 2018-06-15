@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/normal_padding">
+                android:layout_margin="8dp"
+                android:padding="8dp"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/item_title_tv"
@@ -11,6 +13,7 @@
         android:maxWidth="200dp"
         android:text="的发生的故事是个的事公司的事"
         android:lines="1"
+        android:layout_marginStart="12dp"
         android:ellipsize="end"
         android:textSize="@dimen/sp_14"/>
 
@@ -18,8 +21,19 @@
         android:id="@+id/right_top_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="完成问卷 +5积分"
+        android:drawablePadding="6dp"
+        android:drawableStart="@drawable/jifne"
+        android:text="5积分"
+        android:layout_marginEnd="12dp"
         android:layout_alignParentEnd="true"/>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="12dp"
+        android:background="#eeeeee"
+        android:layout_below="@id/item_title_tv"/>
 
     <TextView
         android:id="@+id/time_tv"
@@ -28,16 +42,16 @@
         android:drawableStart="@drawable/time_pic"
         android:drawablePadding="@dimen/dp_4"
         android:text="4小时前"
-        android:layout_below="@id/item_title_tv"
-        android:layout_marginTop="@dimen/normal_padding"/>
+        android:layout_marginStart="12dp"
+        android:layout_below="@id/line"/>
 
     <TextView
         android:id="@+id/right_bottom_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/normal_padding"
-        android:layout_below="@id/item_title_tv"
+        android:layout_below="@id/line"
         android:text="进行中"
+        android:layout_marginEnd="12dp"
         android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>
