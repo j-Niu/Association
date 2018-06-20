@@ -27,11 +27,9 @@ import com.future.baselib.utils.ToastUtils;
 import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.luck.picture.lib.PictureSelector;
-import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.luck.picture.lib.tools.DebugUtil;
 
 import org.json.JSONArray;
 
@@ -216,13 +214,13 @@ public class SuperviceApplyViewModel {
                     .imageSpanCount(4)// 每行显示个数
                     .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选
                     .previewImage(true)// 是否可预览图片
-                    .compressGrade(Luban.THIRD_GEAR)// luban压缩档次，默认3档 Luban.FIRST_GEAR、Luban.CUSTOM_GEAR
+//                    .compressGrade(Luban.THIRD_GEAR)// luban压缩档次，默认3档 Luban.FIRST_GEAR、Luban.CUSTOM_GEAR
                     .isCamera(true)// 是否显示拍照按钮
                     .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
                     //.setOutputCameraPath("/CustomPath")// 自定义拍照保存路径
 //                    .enableCrop(true)// 是否裁剪
                     .compress(true)// 是否压缩
-                    .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
+//                    .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
                     //.sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
                     .glideOverride(160, 160)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
 //                    .withAspectRatio(aspect_ratio_x, aspect_ratio_y)// 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
@@ -420,7 +418,7 @@ public class SuperviceApplyViewModel {
                     // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
                     adapter.setList(selectList);
                     adapter.notifyDataSetChanged();
-                    DebugUtil.i("onActivityResult:", "onActivityResult:" + selectList.toString());
+//                    DebugUtil.i("onActivityResult:", "onActivityResult:" + selectList.toString());
                     break;
             }
         }

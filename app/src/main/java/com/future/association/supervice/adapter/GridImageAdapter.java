@@ -20,7 +20,6 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.tools.DateUtils;
-import com.luck.picture.lib.tools.DebugUtil;
 import com.luck.picture.lib.tools.StringUtils;
 
 import java.io.File;
@@ -42,6 +41,7 @@ public class GridImageAdapter extends
     private List<LocalMedia> list = new ArrayList<>();
     private int selectMax = 5;
     private Context context;
+    RequestOptions options;
     /**
      * 点击添加图片跳转
      */
@@ -55,6 +55,10 @@ public class GridImageAdapter extends
         this.context = context;
         mInflater = LayoutInflater.from(context);
         this.mOnAddPicClickListener = mOnAddPicClickListener;
+         options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.color.color_f6)
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
     }
 
     public void setSelectMax(int selectMax) {
@@ -140,7 +144,7 @@ public class GridImageAdapter extends
                         list.remove(index);
                         notifyItemRemoved(index);
                         notifyItemRangeChanged(index, list.size());
-                        DebugUtil.i("delete position:", index + "--->remove after:" + list.size());
+//                        DebugUtil.i("delete position:", index + "--->remove after:" + list.size());
                     }
                 }
             });
@@ -183,11 +187,8 @@ public class GridImageAdapter extends
             if (mimeType == PictureMimeType.ofAudio()) {
                 viewHolder.mImg.setImageResource(R.drawable.audio_placeholder);
             } else {
-                RequestOptions options = new RequestOptions()
-                        .centerCrop()
-                        .placeholder(R.color.color_f6)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL);
-                Glide.with(viewHolder.itemView.getContext())
+
+                Glide.with(context)
                         .load(path)
                         .apply(options)
                         .into(viewHolder.mImg);

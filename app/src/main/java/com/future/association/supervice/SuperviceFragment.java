@@ -47,7 +47,7 @@ public class SuperviceFragment extends BaseFragment {
         superviceBinding.setViewModel(mViewModel);
         setTitleRight(R.drawable.bianji, new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 mViewModel.publish();
             }
         });

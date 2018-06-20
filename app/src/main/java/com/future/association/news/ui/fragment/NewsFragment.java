@@ -2,13 +2,11 @@ package com.future.association.news.ui.fragment;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +17,11 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.future.association.R;
 import com.future.association.common.Contants;
+import com.future.association.news.adapter.NewsAdapter;
 import com.future.association.news.entity.NewsBannerResponse;
 import com.future.association.news.entity.NewsResponse;
-import com.future.association.news.utils.GlideImageLoader;
-import com.future.association.news.adapter.NewsAdapter;
 import com.future.association.news.ui.activity.NewsActivity;
-import com.future.baselib.entity.BaseResponse;
-import com.future.baselib.utils.DensityUtil;
+import com.future.association.news.utils.GlideImageLoader;
 import com.future.baselib.utils.HttpRequest;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -207,7 +203,9 @@ public class NewsFragment extends Fragment implements OnBannerListener, BaseQuic
 //                        if (response.data.size()<PAGE_SIZE) {
 //                            adapter.loadMoreEnd(true);
 //                        }
-                        adapter.addData(response.data);
+//                        adapter.addData(response.data);
+                        data.addAll(response.data);
+                        adapter.notifyDataSetChanged();
                         adapter.loadMoreComplete();
                     }
 

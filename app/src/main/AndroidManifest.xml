@@ -208,6 +208,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.LoginActivity2"/>
+        <activity android:name=".community.view.NotifyListActivity"/>
 
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->

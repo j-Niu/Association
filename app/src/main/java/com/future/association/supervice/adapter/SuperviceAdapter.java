@@ -39,6 +39,6 @@ public class SuperviceAdapter extends BaseQuickAdapter<SupericeList.SupericeList
         baseViewHolder.setText(R.id.title, item.getTitle())
                 .setText(R.id.superice_time, item.getCreate_time())
         .setText(R.id.superice_nature,item.getHangye())
-        .setText(R.id.superice_type,item.getType());
+        .setText(R.id.superice_type,item.getNature());
     }
 }

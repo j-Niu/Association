@@ -47,6 +47,7 @@
             android:id="@+id/superice_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:textColor="@color/gallery_text_gray"
             android:text="问题类别"/>
 
@@ -69,6 +70,7 @@
             android:id="@+id/superice_nature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:textColor="@color/gallery_text_gray"
             android:text="问题性质"/>
 
@@ -91,6 +93,7 @@
             android:id="@+id/superice_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:textColor="@color/gallery_text_gray"
             android:text="2012.2.3"/>
 

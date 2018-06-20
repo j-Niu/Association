@@ -132,6 +132,7 @@
 
             <Button
                 android:id="@+id/guest_login"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:background="@drawable/guest_login_commit_selector"

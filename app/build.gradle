@@ -26,7 +26,7 @@ android {
         release {
 //加载资源
             Properties properties = new Properties()
-            InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream() ;
+            InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
             properties.load( inputStream )
 
             //读取文件
@@ -35,8 +35,8 @@ android {
 
             //读取字段
             def key_keyAlias = properties.getProperty( 'keyAlias' )
-            def key_keyPassword = properties.getProperty( 'keyPassword' ) ;
-            def key_storePassword = properties.getProperty( 'storePassword' ) ;
+            def key_keyPassword = properties.getProperty( 'keyPassword' )
+            def key_storePassword = properties.getProperty( 'storePassword' )
 
             storePassword key_storePassword
             keyAlias key_keyAlias
@@ -65,8 +65,9 @@ dependencies {
     compile project(':baselib')
     //rxbinding
     //rxjava扩展
-    compile('com.github.LuckSiege.PictureSelector:picture_library:v2.1.0', {
+    compile('com.github.LuckSiege.PictureSelector:picture_library:v2.2.3', {
         exclude module: 'ucrop'//排除ucrop重复依赖
+        exclude module: 'glide'//排除glide重复依赖
     })
     compile 'com.android.support:appcompat-v7:27.1.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -78,7 +79,7 @@ dependencies {
     compile 'com.contrarywind:Android-PickerView:3.2.5'
     compile 'com.youth.banner:banner:1.4.9'
     compile 'com.github.YancyYe:GalleryPick:1.2.1'
-    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support:multidex:1.0.3'
     compile 'com.liulishuo.filedownloader:library:1.6.4'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'

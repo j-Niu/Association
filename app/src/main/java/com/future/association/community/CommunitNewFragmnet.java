@@ -26,6 +26,14 @@ public class CommunitNewFragmnet extends BaseFragment {
     protected void initView(View view, @Nullable Bundle savedInstanceState) {
         setTitle("社区");
         FragmenhtCommitunitNewBinding binding = DataBindingUtil.bind(view);
-        binding.setViewModel(new FragmenhtCommitunitNewVM(binding,this));
+        final FragmenhtCommitunitNewVM viewModel = new FragmenhtCommitunitNewVM(binding, this);
+        binding.setViewModel(viewModel);
+//        setTitleRight(R.drawable.bianji, v -> mViewModel.publish());
+        setTitleRight(R.drawable.bianji, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.publishTie();
+            }
+        });
     }
 }

@@ -24,10 +24,57 @@
         app:tabMode="scrollable"/>
 
     <LinearLayout
+        android:id="@+id/notify_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:background="#eeeeee"
         android:orientation="vertical">
-
+    <TextView
+        android:id="@+id/notify_tv1"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="8dp"
+        android:layout_marginTop="1dp"/>
+        <TextView
+            android:id="@+id/notify_tv2"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:ellipsize="end"
+            android:drawableStart="@drawable/xiaoxi"
+            android:drawablePadding="4dp"
+            android:background="@color/white"
+            android:padding="8dp"
+            android:layout_marginTop="1dp"/>
+        <TextView
+            android:id="@+id/notify_tv3"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:ellipsize="end"
+            android:drawableStart="@drawable/xiaoxi"
+            android:drawablePadding="4dp"
+            android:background="@color/white"
+            android:padding="8dp"
+            android:layout_marginTop="1dp"/>
+        <ImageView
+            android:id="@+id/notify_iv"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:ellipsize="end"
+            android:drawableStart="@drawable/xiaoxi"
+            android:drawablePadding="4dp"
+            android:padding="6dp"
+            android:src="@drawable/xiahuajiantou"
+            android:layout_marginTop="1dp"
+            android:background="@color/white"/>
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
