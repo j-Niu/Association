@@ -62,6 +62,8 @@
                 android:layout_marginLeft="20px"
                 android:layout_below="@id/tv_name"
                 android:id="@+id/tv_class"
+                android:drawableStart="@drawable/time_pic"
+                android:drawablePadding="2dp"
                 android:layout_marginTop="10px"
                 android:textSize="24px"
                 android:textColor="#666666"
