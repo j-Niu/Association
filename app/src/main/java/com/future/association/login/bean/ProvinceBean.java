@@ -1,5 +1,6 @@
 package com.future.association.login.bean;
 
+
 import com.bigkoo.pickerview.model.IPickerViewData;
 
 /**

@@ -7,18 +7,35 @@ import com.future.association.community.utils.TextUtil;
  */
 
 public class TieReplyInfo {
-    private String id ;//回复ID
-    private String uid ;//回复人ID
-    private String real_name ;//回复人昵称
-    private String avatar_url ;//回复人头像
-    private String level ;//回复人等级
-    private String tiezi_id ;//帖子id
-    private String content ;//回复人内容
-    private String create_time ;//回复时间
-    private String address ;//地址
+    private String id;//回复ID
+    private String uid;//回复人ID
+    private String real_name;//回复人昵称
+    private String avatar_url;//回复人头像
+    private String level;//回复人等级
+    private String tiezi_id;//帖子id
+    private String content;//回复人内容
+    private String create_time;//回复时间
+    private String address;//地址
+    private String user_type;//回复人的身份
+
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
+    }
 
     public String getReal_name() {
         return real_name;
+    }
+
+    public String getUserType() {
+        if ("1".equals(this.user_type)) {
+            return "消费者";
+        } else {
+            return "志愿者";
+        }
     }
 
     public void setReal_name(String real_name) {
@@ -38,8 +55,8 @@ public class TieReplyInfo {
             return "V0";
         } else if (!level.toLowerCase().startsWith("v")) {
             return "V" + level;
-        }else{
-            return level ;
+        } else {
+            return level;
         }
     }
 

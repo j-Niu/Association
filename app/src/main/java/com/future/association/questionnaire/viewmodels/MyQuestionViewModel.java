@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -53,10 +54,10 @@ public class MyQuestionViewModel {
         mBinding.rv.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                if (!CommonUtils.isFastDoubleClick()){
-                    Intent intent = new Intent(activity,QuestionnaireWebActivity.class);
+                if (!CommonUtils.isFastDoubleClick()) {
+                    Intent intent = new Intent(activity, QuestionnaireWebActivity.class);
                     QuestionDetail data = (QuestionDetail) baseQuickAdapter.getItem(i);
-                    intent.putExtra("data",data);
+                    intent.putExtra("data", data);
                     activity.startActivity(intent);
                 }
             }
@@ -64,7 +65,11 @@ public class MyQuestionViewModel {
     }
 
     private void initData() {
-        QuestionnaireApi.getInstance().getMyWenjuan(activity, MyApp.getUserToken(),String.valueOf(PAGE))
+        boolean islogin = PreferenceManager.getDefaultSharedPreferences(activity).getBoolean("islogin", false);
+        if (!islogin) {
+            return;
+        }
+        QuestionnaireApi.getInstance().getMyWenjuan(activity, MyApp.getUserToken(), String.valueOf(PAGE))
                 .setListener(new HttpRequest.OnNetworkListener<QuestionDetail>() {
                     @Override
                     public void onSuccess(QuestionDetail response) {
@@ -74,7 +79,7 @@ public class MyQuestionViewModel {
                             if (response.getList().size() < 20) {
                                 adapterObservable.get().loadMoreEnd();
                             }
-                           items.addAll(response.getList());
+                            items.addAll(response.getList());
                         }
                     }
 
@@ -87,7 +92,7 @@ public class MyQuestionViewModel {
 
     //刷新数据
     public void refresh() {
-        PAGE=1;
+        PAGE = 1;
         initData();
     }
 }

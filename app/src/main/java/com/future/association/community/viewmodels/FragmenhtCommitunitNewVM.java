@@ -3,6 +3,7 @@ package com.future.association.community.viewmodels;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -37,7 +38,10 @@ public class FragmenhtCommitunitNewVM implements ViewPager.OnPageChangeListener 
     public FragmenhtCommitunitNewVM(FragmenhtCommitunitNewBinding binding, Fragment fragment) {
         this.mBinding = binding;
         this.mFragment = fragment;
-        initData();
+        boolean islogin = PreferenceManager.getDefaultSharedPreferences(mFragment.getActivity()).getBoolean("islogin", false);
+        if (islogin) {
+            initData();
+        }
         initListener();
     }
 
@@ -162,6 +166,7 @@ public class FragmenhtCommitunitNewVM implements ViewPager.OnPageChangeListener 
         mBinding.tl.setupWithViewPager(mBinding.vp);
         mBinding.vp.setOffscreenPageLimit(3);
         mBinding.vp.addOnPageChangeListener(this);
+       onPageSelected(0);
     }
 
     /*
@@ -169,7 +174,6 @@ public class FragmenhtCommitunitNewVM implements ViewPager.OnPageChangeListener 
      * */
     public void publishTie() {
         if (null == mUserPlateInfo || null == mPlateInfo) return;
-        ;
         if ("2".equals(mPlateInfo.getIspost())) {
             ToastUtils.shortToast(mFragment.getActivity(), "该板块只有版主才能发帖");
         } else if (StringUtils.stringIsInteger(mUserPlateInfo.getJifen()) >

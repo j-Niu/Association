@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,7 +45,10 @@ public class SuperviceViewModel {
         this.fragment = fragment;
         this.binding = binding;
         initView();
-        initData();
+        boolean islogin = PreferenceManager.getDefaultSharedPreferences(fragment.getActivity()).getBoolean("islogin", false);
+        if (islogin) {
+            initData();
+        }
     }
 
 

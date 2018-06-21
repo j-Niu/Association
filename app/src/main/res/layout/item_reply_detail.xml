@@ -37,13 +37,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{replyInfo.real_name}"
-                android:layout_marginTop="10px"
+                android:layout_marginTop="6dp"
                 android:id="@+id/tv_name"
-                android:layout_marginLeft="20px"
-                android:textSize="30px"
+                android:layout_marginLeft="10dp"
+                android:textSize="12sp"
                 android:textColor="#333333"
                 android:layout_toRightOf="@id/civ_head"
                 />
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/tv_name"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="4dp"
+                android:background="#E55902"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:text="@{replyInfo.user_type.equals('1')?@string/empty:@string/zyz}"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

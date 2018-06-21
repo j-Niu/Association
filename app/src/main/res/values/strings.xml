@@ -34,5 +34,6 @@
     <string name="wuwei">无畏</string>
     <string name="xfz">消费者</string>
     <string name="zyz">志愿者</string>
+    <string name="empty"></string>
     <string name="zcxy"><![CDATA[<font color="#999999">登录注册表示同意</font><font color="#666666">《用户协议与隐私条款》</font>]]></string>
 </resources>

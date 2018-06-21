@@ -136,6 +136,12 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
                 presenter.getData(currentPage);
             }
         });
+        headBinding.plateTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         viewBinding.layoutTitle.setViewClickListener(this);
         popupTieBinding.setClickListener(this);
         viewBinding.setClickListener(this);

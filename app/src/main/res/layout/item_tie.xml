@@ -79,6 +79,7 @@
             android:layout_marginTop="20px"
             android:textColor="#999999"
             android:textSize="24px"
+            android:drawableStart="@drawable/time_pic"
             android:text="@{tieInfo.create_time}"
             />
 

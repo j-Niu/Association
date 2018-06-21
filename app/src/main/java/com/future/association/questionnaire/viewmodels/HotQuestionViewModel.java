@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -63,6 +64,10 @@ public class HotQuestionViewModel {
     }
 
     private void initData() {
+        boolean islogin = PreferenceManager.getDefaultSharedPreferences(activity).getBoolean("islogin", false);
+        if (!islogin) {
+            return;
+        }
         QuestionnaireApi.getInstance().getHotWenjuan(activity, MyApp.getUserToken(), String.valueOf(PAGE))
                 .setListener(new HttpRequest.OnNetworkListener<QuestionDetail>() {
                     @Override
@@ -86,7 +91,7 @@ public class HotQuestionViewModel {
 
     //刷新数据
     public void refresh() {
-        PAGE=1;
+        PAGE = 1;
         initData();
     }
 }

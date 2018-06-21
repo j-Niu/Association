@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @SuppressWarnings("unchecked")
     private void checkVersion() {
-        if (isWifi()) {
+        if (isWifi() && islogin) {
             new HttpRequest<CheckResponse>()
                     .with(this)
                     .addParam("apiCode","_app_update_001")

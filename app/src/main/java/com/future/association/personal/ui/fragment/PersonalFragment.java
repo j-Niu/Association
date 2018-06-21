@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -132,7 +133,10 @@ public class PersonalFragment extends MyBaseFragment {
         initGalleyCallBack();
         initGalley();
         initClick();
-        initData();
+        boolean islogin = PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("islogin", false);
+        if (islogin) {
+            initData();
+        }
     }
 
     @Override

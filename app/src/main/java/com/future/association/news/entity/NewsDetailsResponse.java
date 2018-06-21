@@ -33,12 +33,14 @@ public class NewsDetailsResponse extends BaseResponse {
         public String create_time;
         public String content;
         public String info_from;
+        public String url;
 
         public void parse(JSONObject object){
             title = object.optString("title");
             create_time = object.optString("create_time");
             content = object.optString("content");
             info_from = object.optString("info_from");
+            url = object.optString("url");
         }
     }
 }
