@@ -85,7 +85,7 @@ public class TieListAdapter extends RecyclerView.Adapter<TieListAdapter.ViewHold
         public void setData(int position){
             this.position = position ;
             RequestOptions options = new RequestOptions()
-                    .placeholder(R.drawable.iv_defalut)
+                    .placeholder(R.drawable.moren_touxiang)
                     .diskCacheStrategy(DiskCacheStrategy.ALL);
             Glide.with(context)
                     .load(HttpRequest.BASE_URL + tieInfos.get(position).getAvatar_url())

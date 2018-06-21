@@ -145,7 +145,7 @@ public class PersonalFragment extends MyBaseFragment {
 
     private void initData() {
         final RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.iv_defalut)
+                .placeholder(R.drawable.moren_touxiang)
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
 //        Log.i("123", "userToken ===  " + MyApp.getUserToken());
         new HttpRequest<JDResponse>()

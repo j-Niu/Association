@@ -3,6 +3,7 @@ package com.future.association.community.view;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.future.association.community.adapter.TieReplyAdapter;
 import com.future.association.community.base.BaseActivity;
 import com.future.association.community.contract.TieDetailContract;
 import com.future.association.community.custom.CustomRecyclerView;
+import com.future.association.community.model.PlateInfo;
 import com.future.association.community.model.TieDetailInfo;
 import com.future.association.community.model.TieInfo;
 import com.future.association.community.model.TieReplyInfo;
@@ -51,6 +53,8 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     private String tieziId;
     private int flag;
     private String huifu_jf;
+    private PlateInfo mPlateInfo;
+    private TieInfo tieInfo;
 
     @Override
     public int setContentView() {
@@ -69,11 +73,12 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     @Override
     public void initData() {
         flag = getIntent().getFlags();
-        String type = getIntent().getStringExtra("type") ;
+        String type = getIntent().getStringExtra("type");
         jifen = getIntent().getStringExtra("jifen");
         huifu_jf = getIntent().getStringExtra("huifu_jf");
-        TieInfo tieInfo = getIntent().getParcelableExtra("tieInfo");
-        tieziId =getIntent().getStringExtra("id");
+        tieInfo = getIntent().getParcelableExtra("tieInfo");
+        mPlateInfo = getIntent().getParcelableExtra("plateInfo");
+        tieziId = getIntent().getStringExtra("id");
         if ("1".equals(type)) {
             popupTieBinding.setIsTop("取消置顶");
         } else {
@@ -87,6 +92,9 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
         presenter = new TieDetailPresenter(this, context);
         presenter.getData(currentPage);
         presenter.getTieDetail();
+        if (!TextUtils.isEmpty(tieInfo.getHuifu_num()) && !tieInfo.getHuifu_num().equals("0")) {
+            headBinding.replyCount.setText(tieInfo.getHuifu_num()+"个回复");
+        }
     }
 
     private void showPopupWindow() {
@@ -94,7 +102,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
             popupWindow = new PopupWindow(this);
             popupWindow.setContentView(popupView);
 
-            if(isSelfTie){
+            if (isSelfTie) {
                 popupView.findViewById(R.id.tv_top).setVisibility(View.GONE);
                 popupView.findViewById(R.id.tv_weigui).setVisibility(View.GONE);
             }
@@ -155,7 +163,7 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
                 finish();
                 break;
             case R.id.iv_title_right_img:
-                if(isSelfTie || MyApp.isAdministrator())
+                if (isSelfTie || MyApp.isAdministrator())
                     showPopupWindow();
                 break;
             case R.id.tv_top:
@@ -214,21 +222,25 @@ public class TieDetailActivity extends BaseActivity<ActivityTieDetailBinding> im
     }
 
     private boolean isSelfTie;
+
     @Override
     public void setTieDetail(TieDetailInfo detailInfo) {
         if (detailInfo != null) {
+            detailInfo.setPlate(mPlateInfo.getName());
+            detailInfo.setHuifu_num(tieInfo.getHuifu_num());
+            detailInfo.setTieInfo(tieInfo);
             headBinding.setTieDetailInfo(detailInfo);
 
             isSelfTie = detailInfo.getUid().equals(MyApp.userId);
             //自己发的或者管理员
-            if(isSelfTie || MyApp.isAdministrator()){
+            if (isSelfTie || MyApp.isAdministrator()) {
                 viewBinding.layoutTitle.ivTitleRightImg.
                         setImageDrawable(Res.getDrawableRes(R.drawable.ic_more, context));
             }
 
             Glide.with(context)
                     .load(detailInfo.getAvatar_url())
-                    .apply(GlideUtils.defaultImg())
+                    .apply(GlideUtils.defaultImgHead())
                     .into(headBinding.civHead);
         }
     }

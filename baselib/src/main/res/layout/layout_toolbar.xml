@@ -13,7 +13,7 @@
 
         <ImageView
             android:id="@+id/toolbar_iv_left"
-            android:layout_width="35dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:scaleType="center" />
@@ -33,7 +33,7 @@
 
         <ImageView
             android:id="@+id/toolbar_iv_right"
-            android:layout_width="35dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

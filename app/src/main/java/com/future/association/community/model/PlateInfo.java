@@ -3,8 +3,6 @@ package com.future.association.community.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.future.association.community.base.BaseEntity;
-
 import org.json.JSONObject;
 
 /**

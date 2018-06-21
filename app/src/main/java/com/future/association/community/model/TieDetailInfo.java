@@ -17,9 +17,18 @@ public class TieDetailInfo {
     private String address;//所属区域
     private String content;//帖子内容
     private String type;//帖子类型
-    private String huifu_num ;//回复数量
+    private String huifu_num = "0";//回复数量
     private String click_num ;//阅读数
     private String plate ;//板块
+    private TieInfo tieInfo;
+
+    public TieInfo getTieInfo() {
+        return tieInfo;
+    }
+
+    public void setTieInfo(TieInfo tieInfo) {
+        this.tieInfo = tieInfo;
+    }
 
     public String getReal_name() {
         return real_name;

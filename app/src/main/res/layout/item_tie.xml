@@ -51,19 +51,21 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/yanjing"
+                    android:drawablePadding="6dp"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{tieInfo.click_num}"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:drawableStart="@drawable/pinlun"
                     android:textColor="#999999"
                     android:textSize="12sp"
                     android:drawablePadding="6dp"
                     android:text="@{tieInfo.getReplyFormat()}"
                     android:layout_marginEnd="8dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/yanjing"
-                    android:drawablePadding="6dp"
-                    android:textSize="12sp"
-                    android:text="@{tieInfo.click_num}"/>
+
             </LinearLayout>
 
         </LinearLayout>

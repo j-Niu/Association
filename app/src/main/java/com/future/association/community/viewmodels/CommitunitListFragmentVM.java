@@ -68,6 +68,8 @@ public class CommitunitListFragmentVM {
                 bundle.putString("id",infos.get(position).getId());
                 bundle.putString("type",infos.get(position).getType());
                 bundle.putString("jifen", userPlateInfo.getJifen());
+                bundle.putParcelable("plateInfo",mPlateInfo);
+                bundle.putParcelable("tieInfo",infos.get(position));
                 ActivityUtils.startActivityIntent(mFragment.getActivity(), TieDetailActivity.class, bundle);
             }
         });

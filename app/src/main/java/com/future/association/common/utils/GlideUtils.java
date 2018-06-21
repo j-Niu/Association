@@ -14,4 +14,7 @@ public class GlideUtils {
     public static RequestOptions defaultImg2(){
         return new RequestOptions().placeholder(R.drawable.iv_defalut).error(R.drawable.iv_defalut);
     }
+    public static RequestOptions defaultImgHead(){
+        return new RequestOptions().placeholder(R.drawable.moren_touxiang).error(R.drawable.moren_touxiang);
+    }
 }

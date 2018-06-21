@@ -28,9 +28,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-            <com.future.association.community.custom.CircleImageView
-                android:layout_width="90px"
-                android:layout_height="90px"
+            <ImageView
+                android:layout_width="46dp"
+                android:layout_height="46dp"
                 android:id="@+id/civ_head"
                 />
             <TextView
@@ -47,7 +47,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{replyInfo.level}"
+                android:text="@{replyInfo.create_time}"
                 android:layout_marginLeft="20px"
                 android:layout_below="@id/tv_name"
                 android:id="@+id/tv_class"
@@ -71,6 +71,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 android:text="@{replyInfo.address}"
                 android:layout_marginLeft="20px"
                 android:layout_below="@id/tv_name"
