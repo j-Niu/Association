@@ -31,7 +31,7 @@ android {
 
             //读取文件
 //            def sdkDir = properties.getProperty('key.file')
-            storeFile file( './keystore/keystore.jks' )
+            storeFile file( './keystore/future.jks' )
 
             //读取字段
             def key_keyAlias = properties.getProperty( 'keyAlias' )
