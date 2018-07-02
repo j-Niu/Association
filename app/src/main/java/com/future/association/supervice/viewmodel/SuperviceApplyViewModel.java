@@ -19,6 +19,7 @@ import com.future.association.supervice.adapter.GridImageAdapter;
 import com.future.association.supervice.model.SupericeDetail;
 import com.future.association.supervice.model.SupericeNature;
 import com.future.association.supervice.view.SuperviceApplyActivity;
+import com.future.association.supervice.view.SuperviceApplySuccessActivity;
 import com.future.baselib.entity.MessageEvent;
 import com.future.baselib.utils.CommonUtils;
 import com.future.baselib.utils.EventBusUtil;
@@ -118,7 +119,9 @@ public class SuperviceApplyViewModel {
                                     .setListener(new HttpRequest.OnNetworkListener<SupericeDetail>() {
                                         @Override
                                         public void onSuccess(SupericeDetail response) {
-                                            ToastUtils.shortToast(activity, "发布成功");
+//                                            TODO 发布成功
+//                                            ToastUtils.shortToast(activity, "发布成功");
+                                            activity.startActivity(new Intent(activity, SuperviceApplySuccessActivity.class));
                                             EventBusUtil.sendEvent(new MessageEvent(EventCode.SUPERICE_LIST_REFRESH));
                                             activity.dissmissLoadingDialog();
                                             activity.finish();
