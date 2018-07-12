@@ -10,5 +10,8 @@
         <cache-path
             name="cache"
             path="" />
+        <external-path
+            name="camera_photos"
+            path="" />
     </paths>
 </resources>

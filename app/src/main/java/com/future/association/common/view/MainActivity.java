@@ -6,13 +6,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RadioButton;
@@ -156,7 +156,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                                                                 toast("下载完成");
                                                                 Intent install = new Intent();
                                                                 install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);install.setAction(android.content.Intent.ACTION_VIEW);
-                                                                install.setDataAndType(Uri.fromFile(new File(APK_PATH)),"application/vnd.android.package-archive");
+//                                                                install.setDataAndType(Uri.fromFile(new File(APK_PATH)),"application/vnd.android.package-archive");
+                                                                install.setDataAndType(FileProvider.getUriForFile(MainActivity.this,getPackageName()+".fileprovider",new File(APK_PATH)),"application/vnd.android.package-archive");
                                                                 startActivity(install);
                                                             }
 

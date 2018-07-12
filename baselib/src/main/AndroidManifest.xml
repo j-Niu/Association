@@ -2,9 +2,9 @@
 
     package="com.future.baselib">
 
-    <application android:allowBackup="true" android:label="@string/app_name"
-        android:supportsRtl="true">
+    <!--<application android:allowBackup="true" android:label="@string/app_name"-->
+        <!--android:supportsRtl="true">-->
 
-    </application>
+    <!--</application>-->
 
 </manifest>

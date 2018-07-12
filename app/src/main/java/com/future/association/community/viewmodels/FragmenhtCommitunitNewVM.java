@@ -121,17 +121,19 @@ public class FragmenhtCommitunitNewVM implements ViewPager.OnPageChangeListener 
                     int size = notifyInfos.size();
                     if (size >= 1) {
                         mBinding.notifyTv1.setVisibility(View.VISIBLE);
-                        mBinding.notifyTv1.setCompoundDrawablePadding(4);
+                        mBinding.notifyTv1.setCompoundDrawablePadding(10);
                         mBinding.notifyTv1.setCompoundDrawables(drawable,null,null,null);
                         mBinding.notifyTv1.setText(notifyInfos.get(0).getTitle());
-                    } else if (size >= 2) {
+                    }
+                    if (size >= 2) {
                         mBinding.notifyTv2.setVisibility(View.VISIBLE);
-                        mBinding.notifyTv2.setCompoundDrawablePadding(4);
+                        mBinding.notifyTv2.setCompoundDrawablePadding(10);
                         mBinding.notifyTv2.setCompoundDrawables(drawable,null,null,null);
                         mBinding.notifyTv2.setText(notifyInfos.get(1).getTitle());
-                    } else if (size >= 3) {
+                    }
+                    if (size >= 3) {
                         mBinding.notifyTv3.setVisibility(View.VISIBLE);
-                        mBinding.notifyTv3.setCompoundDrawablePadding(4);
+                        mBinding.notifyTv3.setCompoundDrawablePadding(10);
                         mBinding.notifyTv3.setCompoundDrawables(drawable,null,null,null);
                         mBinding.notifyTv3.setText(notifyInfos.get(2).getTitle());
                     }

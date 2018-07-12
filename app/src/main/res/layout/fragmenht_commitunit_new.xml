@@ -46,7 +46,7 @@
             android:lines="1"
             android:ellipsize="end"
             android:drawableStart="@drawable/xiaoxi"
-            android:drawablePadding="4dp"
+            android:drawablePadding="6dp"
             android:background="@color/white"
             android:padding="8dp"
             android:layout_marginTop="1dp"/>
@@ -58,7 +58,7 @@
             android:lines="1"
             android:ellipsize="end"
             android:drawableStart="@drawable/xiaoxi"
-            android:drawablePadding="4dp"
+            android:drawablePadding="6dp"
             android:background="@color/white"
             android:padding="8dp"
             android:layout_marginTop="1dp"/>
