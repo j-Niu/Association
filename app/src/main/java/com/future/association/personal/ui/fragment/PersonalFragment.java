@@ -26,6 +26,7 @@ import com.future.association.R;
 import com.future.association.common.Contants;
 import com.future.association.common.MyApp;
 import com.future.association.community.utils.TextUtil;
+import com.future.association.community.view.NotifyListActivity;
 import com.future.association.personal.CircleImageView;
 import com.future.association.personal.PersonConstant;
 import com.future.association.personal.entity.JDResponse;
@@ -37,7 +38,6 @@ import com.future.association.personal.ui.activity.MyMoreActivity;
 import com.future.association.personal.ui.activity.MyNoticeActivity;
 import com.future.association.personal.ui.activity.MyResponseActivity;
 import com.future.association.personal.ui.activity.MyTieziActivity;
-import com.future.association.personal.ui.activity.MyTongZhiActivity;
 import com.future.association.personal.ui.activity.MyWenJuanActivity;
 import com.future.association.personal.util.BitmapUtils;
 import com.future.association.personal.util.StringUtils;
@@ -298,7 +298,8 @@ public class PersonalFragment extends MyBaseFragment {
         myTongZhi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(MyTongZhiActivity.class);
+//                startActivity(MyTongZhiActivity.class);
+                startActivity(NotifyListActivity.class);
             }
         });
 //        myMore.setOnClickListener(new View.OnClickListener() {

@@ -62,6 +62,7 @@ public class LoginActivity extends UBaseActivity {
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
+                        finish();
                         startActivity(LoginActivity2.class);
                     }
                 });

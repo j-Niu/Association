@@ -49,11 +49,13 @@ public class NewsActivity extends BaseActivity {
     WebView webView;
     private String id;
     private NewsDetailsResponse newsDetail;
+    private OnekeyShare oks;
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_news);
         ButterKnife.bind(this);
+        oks = new OnekeyShare();
     }
 
     @Override
@@ -139,7 +141,7 @@ public class NewsActivity extends BaseActivity {
     }
     public  void showShare(Context context, String shareSummary, String shareUrl, String shareTitle) {
 //        ShareSDK.initSDK(this);
-        OnekeyShare oks = new OnekeyShare();
+//        OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
         oks.disableSSOWhenAuthorize();
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
+import com.future.association.BuildConfig;
 import com.future.association.community.utils.TextUtil;
 import com.future.association.login.util.ActivityManager;
 
@@ -44,7 +45,7 @@ public class MyApp extends Application {
         activityManager = ActivityManager.getInstance();
         super.onCreate();
 
-        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.setDebugMode(BuildConfig.DEBUG); 	// 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);     		// 初始化 JPush
     }
 

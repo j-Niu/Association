@@ -15,6 +15,7 @@ import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
 
+
 /**
  * 自定义接收器
  * 

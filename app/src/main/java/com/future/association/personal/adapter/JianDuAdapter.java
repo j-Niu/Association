@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.future.association.R;
 import com.future.association.personal.entity.MyJianDu;
 import com.future.association.supervice.view.SuperviceDetailActivity;
@@ -36,13 +34,13 @@ public class JianDuAdapter extends BaseListAdapter {
     }
 
     private void initializeViews(final MyJianDu.MyJianDus entity, ViewHolder holder) {
-        Glide.with(mContext).load(entity.getImage()).into(holder.imgMyJD);
+//        Glide.with(mContext).load(entity.getImage()).into(holder.imgMyJD);
 //        holder.imgMyJD.setImageResource(R.drawable.ic_birds);
         holder.tvMyJDTitle.setText(entity.getTitle());
         holder.tvMyJDCreatetime.setText(entity.getCreate_time());
         holder.tvMyJDType.setText(entity.getType());
-        holder.tvMyJDAddress.setText(entity.getAddress());
-        holder.tvMyJDContent.setText(entity.getReason());
+//        holder.tvMyJDAddress.setText(entity.getAddress());
+//        holder.tvMyJDContent.setText(entity.getReason());
         holder.linearJiandu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,21 +56,21 @@ public class JianDuAdapter extends BaseListAdapter {
 
     protected class ViewHolder {
         private LinearLayout linearJiandu;
-        private ImageView imgMyJD;
+//        private ImageView imgMyJD;
         private TextView tvMyJDTitle;
         private TextView tvMyJDCreatetime;
         private TextView tvMyJDType;
-        private TextView tvMyJDAddress;
-        private TextView tvMyJDContent;
+//        private TextView tvMyJDAddress;
+//        private TextView tvMyJDContent;
 
         public ViewHolder(View view) {
             linearJiandu = (LinearLayout) view.findViewById(R.id.linearJiandu);
-            imgMyJD = (ImageView) view.findViewById(R.id.img_myJD);
+//            imgMyJD = (ImageView) view.findViewById(R.id.img_myJD);
             tvMyJDTitle = (TextView) view.findViewById(R.id.tv_myJD_title);
             tvMyJDCreatetime = (TextView) view.findViewById(R.id.tv_myJD_createtime);
             tvMyJDType = (TextView) view.findViewById(R.id.tv_myJD_type);
-            tvMyJDAddress = (TextView) view.findViewById(R.id.tv_myJD_address);
-            tvMyJDContent = (TextView) view.findViewById(R.id.tv_myJD_content);
+//            tvMyJDAddress = (TextView) view.findViewById(R.id.tv_myJD_address);
+//            tvMyJDContent = (TextView) view.findViewById(R.id.tv_myJD_content);
         }
     }
 }

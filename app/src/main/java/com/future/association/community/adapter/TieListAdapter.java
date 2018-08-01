@@ -87,15 +87,17 @@ public class TieListAdapter extends RecyclerView.Adapter<TieListAdapter.ViewHold
             RequestOptions options = new RequestOptions()
                     .placeholder(R.drawable.moren_touxiang)
                     .diskCacheStrategy(DiskCacheStrategy.ALL);
+            TieInfo tieInfo = tieInfos.get(position);
             Glide.with(context)
-                    .load(HttpRequest.BASE_URL + tieInfos.get(position).getAvatar_url())
+                    .load(HttpRequest.BASE_URL + tieInfo.getAvatar_url())
                     .apply(options)
                     .into(binding.headImg);
 //            Glide.with(context)
 //                    .applyDefaultRequestOptions(GlideUtils.defaultImg2())
 //                    .load(HttpRequest.BASE_URL + tieInfos.get(position).getAvatar_url())
 //                    .into(binding.headImg);
-            binding.setTieInfo(tieInfos.get(position));
+            binding.setTieInfo(tieInfo);
+            binding.type.setText(tieInfo.getUser_type().equals("1")?R.string.xfz:R.string.zyz);
         }
     }
 

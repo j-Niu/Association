@@ -1,78 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/linearJiandu"
-    android:orientation="vertical">
+              android:id="@+id/linearJiandu"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="@dimen/normal_padding"
+              android:background="@color/white"
+              android:orientation="vertical"
+              android:padding="10dp">
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:padding="@dimen/padding_small_15">-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/img_myJD"-->
+    <!--android:layout_width="100dp"-->
+    <!--android:layout_height="70dp"-->
+    <!--android:src="@mipmap/ic_launcher" />-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_myJD_title"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/mystr1"-->
+    <!--android:textColor="@color/color_333333"-->
+    <!--android:textSize="@dimen/text_size_normal_16" />-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="@dimen/margin_lsmall_10"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_myJD_createtime"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/mystr2"-->
+    <!--android:textColor="@color/color_999999"-->
+    <!--android:textSize="@dimen/text_size_lsmall_12" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_myJD_type"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="@dimen/margin_small_15"-->
+    <!--android:text="@string/mystr3"-->
+    <!--android:textColor="@color/color_999999"-->
+    <!--android:textSize="@dimen/text_size_lsmall_12" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_myJD_address"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="@dimen/margin_small_15"-->
+    <!--android:text="@string/mystr4"-->
+    <!--android:textColor="@color/color_999999"-->
+    <!--android:textSize="@dimen/text_size_lsmall_12" />-->
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_myJD_content"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:paddingBottom="@dimen/padding_small_15"-->
+    <!--android:paddingLeft="@dimen/padding_small_15"-->
+    <!--android:paddingRight="@dimen/padding_small_15"-->
+    <!--android:text="@string/mystr5"-->
+    <!--android:textColor="@color/color_666666"-->
+    <!--android:textSize="@dimen/text_size_small_14" />-->
+
+
+    <!--<ImageView-->
+    <!--android:id="@+id/iv"-->
+    <!--android:visibility="gone"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:src="@drawable/ic_launcher"/>-->
+    <TextView
+        android:id="@+id/tv_myJD_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="2"
+        android:text="的就是看公司会计当官开始报关金额的开始但是经过思考公司"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_14"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#e7e7e7"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/padding_small_15">
+        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/img_myJD"
-            android:layout_width="100dp"
-            android:layout_height="70dp"
-            android:src="@mipmap/ic_launcher" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:drawablePadding="6dp"
+            android:drawableStart="@drawable/wentileibie"
+            android:text="问题类别:"
+            android:textColor="@color/gallery_text_gray"/>
 
-            <TextView
-                android:id="@+id/tv_myJD_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mystr1"
-                android:textColor="@color/color_333333"
-                android:textSize="@dimen/text_size_normal_16" />
+        <TextView
+            android:id="@+id/tv_myJD_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="问题类别"
+            android:textColor="@color/gallery_text_gray"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_lsmall_10"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_myJD_createtime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mystr2"
-                    android:textColor="@color/color_999999"
-                    android:textSize="@dimen/text_size_lsmall_12" />
-
-                <TextView
-                    android:id="@+id/tv_myJD_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_small_15"
-                    android:text="@string/mystr3"
-                    android:textColor="@color/color_999999"
-                    android:textSize="@dimen/text_size_lsmall_12" />
-
-                <TextView
-                    android:id="@+id/tv_myJD_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_small_15"
-                    android:text="@string/mystr4"
-                    android:textColor="@color/color_999999"
-                    android:textSize="@dimen/text_size_lsmall_12" />
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_myJD_content"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/padding_small_15"
-        android:paddingLeft="@dimen/padding_small_15"
-        android:paddingRight="@dimen/padding_small_15"
-        android:text="@string/mystr5"
-        android:textColor="@color/color_666666"
-        android:textSize="@dimen/text_size_small_14" />
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="6dp"
+            android:drawableStart="@drawable/wentileibie"
+            android:text="问题性质:"
+            android:textColor="@color/gallery_text_gray"/>
+
+        <TextView
+            android:id="@+id/superice_nature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="问题性质"
+            android:textColor="@color/gallery_text_gray"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="6dp"
+            android:drawableStart="@drawable/xingzhi"
+            android:text="监督发布时间:"
+            android:textColor="@color/gallery_text_gray"/>
+
+        <TextView
+            android:id="@+id/tv_myJD_createtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="2012.2.3"
+            android:textColor="@color/gallery_text_gray"/>
+
+    </LinearLayout>
+
 </LinearLayout>
